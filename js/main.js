@@ -225,88 +225,49 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   });
 })();
 
-/* ─── Contact Form ───────────────────────────────────────── */
+/* ─── Contact Form Submission via Web3Forms ───────────────── */
 (function initContactForm() {
-  const form    = $('#contact-form');
-  const success = $('#form-success');
-  const submit  = $('#form-submit');
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+
   if (!form) return;
 
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function validateField(field) {
-    const val = field.value.trim();
-    let ok = true;
-
-    if (field.required && !val) ok = false;
-    if (field.type === 'email' && val && !EMAIL_RE.test(val)) ok = false;
-    if (field.type === 'url' && val) {
-      try { new URL(val); } catch { ok = false; }
-    }
-
-    field.classList.toggle('invalid', !ok);
-    field.setAttribute('aria-invalid', String(!ok));
-    return ok;
-  }
-
-  $$('input, select, textarea', form).forEach(field => {
-    on(field, 'blur', () => validateField(field));
-    on(field, 'input', () => {
-      field.classList.remove('invalid');
-      field.removeAttribute('aria-invalid');
-    });
-  });
-
-  async function submitForm() {
-    const action = form.getAttribute('action');
-    const method = (form.getAttribute('method') || 'POST').toUpperCase();
-
-    if (!action || action === '#') {
-      await new Promise(r => setTimeout(r, 900));
-      return;
-    }
-
-    const res = await fetch(action, {
-      method,
-      body: new FormData(form),
-      headers: { Accept: 'application/json' },
-    });
-
-    if (!res.ok) throw new Error('Form submission failed');
-  }
-
-  on(form, 'submit', async e => {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const fields = $$('input[required], select[required], textarea[required]', form);
-    const allValid = fields.map(validateField).every(Boolean);
-    if (!allValid) {
-      fields.find(f => f.classList.contains('invalid'))?.focus();
-      return;
+    const submitBtn = form.querySelector('[type="submit"]');
+    const formData = new FormData(form);
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
     }
 
-    submit?.classList.add('loading');
-    if (submit) submit.disabled = true;
-
     try {
-      await submitForm();
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData
+      });
 
-      form.style.transition = 'opacity .3s';
-      form.style.opacity = '0';
+      const result = await response.json();
 
-      setTimeout(() => {
-        form.hidden = true;
-        form.style.opacity = '';
-        form.style.transition = '';
+      if (response.ok && result.success) {
+        form.reset();
+
         if (success) {
           success.hidden = false;
           success.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-      }, 280);
-    } catch (err) {
-      submit?.classList.remove('loading');
-      if (submit) submit.disabled = false;
-      alert('Something went wrong sending the enquiry. Please email us directly or try again.');
+      } else {
+        alert(result.message || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again or contact us directly.');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+      }
     }
   });
 })();
