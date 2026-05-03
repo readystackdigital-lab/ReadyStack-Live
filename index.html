@@ -1080,8 +1080,12 @@
         </div>
 
         <div class="contact-form-wrap reveal reveal-delay-1">
-          <form id="contact-form" class="contact-form" novalidate aria-label="ReadyStack Digital enquiry form">
-
+          <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="post" novalidate aria-label="ReadyStack Digital enquiry form">
+            <input type="hidden" name="access_key" value="44f5ac5c-31c8-4019-914b-8426212d137a">
+            <input type="hidden" name="subject" value="New enquiry from ReadyStack Digital website">
+            <input type="hidden" name="from_name" value="ReadyStack Digital Website">
+            <input type="checkbox" name="botcheck" style="display: none;">
+           
             <div class="form-row-2">
               <div class="form-group">
                 <label for="first-name">First Name</label>
