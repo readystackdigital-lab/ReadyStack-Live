@@ -1250,24 +1250,7 @@
 
 /* Mobile (≤ 600px) */
 @media (max-width: 600px) {
-  .hero-headline { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.1; }
-  .hero-headline br { display: none; }
-
-  .hero-ctas {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-
-  .hero-ctas .btn {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .hero-sub {
-    font-size: var(--text-base);
-    max-width: 100%;
-  }
+  .hero-headline { font-size: clamp(2.2rem, 10vw, 3.2rem); }
 
   .dash-body {
     grid-template-columns: 1fr;
