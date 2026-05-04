@@ -3016,9 +3016,10 @@
 @media (max-width: 640px) {
   /* Hero section compact mobile layout */
   #hero {
-    min-height: auto;
-    align-items: flex-start;
-    padding-top: calc(var(--nav-h) + 1rem);
+    flex-direction: column;
+    align-items: center;
+    min-height: 100svh;
+    padding-top: var(--nav-h);
     padding-bottom: 4.5rem;
     overflow: hidden;
   }
@@ -3026,7 +3027,7 @@
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 1.35rem;
-    padding-block: 1.5rem 2rem;
+    padding-block: 1rem 2rem;
   }
 
   .hero-text {
@@ -3145,13 +3146,13 @@
     display: none;
   }
 
-  /* Optional: keep date/time from crowding mobile hero */
+  /* Live strip flows in the column; small gap below nav padding */
   .hero-live-strip {
     position: relative;
     top: auto;
     right: auto;
     left: auto;
-    margin: calc(var(--nav-h) + .65rem) auto 0;
+    margin: .75rem auto 0;
     width: fit-content;
     max-width: calc(100% - 2rem);
     transform: none;
