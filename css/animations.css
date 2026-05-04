@@ -383,6 +383,41 @@ body.loaded .dash-metrics-strip {
   animation-delay: calc(var(--i, 0) * 80ms);
 }
 
+/* ─── Hero CTA Glow Pulse ────────────────────────────────── */
+@keyframes cta-glow {
+  0%, 100% { box-shadow: 0 2px 12px rgba(245,158,11,.3); }
+  50%       { box-shadow: 0 4px 28px rgba(245,158,11,.6), 0 0 36px rgba(245,158,11,.2); }
+}
+
+#hero .btn-amber {
+  animation: cta-glow 2.8s ease-in-out infinite;
+}
+
+/* ─── Aurora Mesh (hero background blobs) ───────────────── */
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0)    scale(1); }
+  25%       { transform: translate(-3%, 5%) scale(1.04); }
+  50%       { transform: translate(4%, -3%) scale(.97); }
+  75%       { transform: translate(-1%, 2%) scale(1.02); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0)    scale(1); }
+  33%       { transform: translate(4%, -3%) scale(1.05); }
+  66%       { transform: translate(-3%, 5%) scale(.96); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0)    scale(1); }
+  40%       { transform: translate(5%, 4%)  scale(1.06); }
+  80%       { transform: translate(-2%, -3%) scale(.98); }
+}
+
+@keyframes aurora-drift-4 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-4%, 4%); }
+}
+
 /* ─── Reduced motion overrides ───────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
@@ -413,6 +448,8 @@ body.loaded .dash-metrics-strip {
     transform: none;
   }
 
+  .hero-video { display: none; }
+  .aurora-blob { animation: none; }
   .orb       { animation: none; }
   .float-badge,
   .float-badge-delayed { animation: none; }
@@ -421,4 +458,6 @@ body.loaded .dash-metrics-strip {
   .magnetic {
     transition: background var(--dur-fast), box-shadow var(--dur-fast);
   }
+
+  #hero .btn-amber { animation: none; }
 }
