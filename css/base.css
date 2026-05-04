@@ -6,9 +6,9 @@
 /* ─── Design Tokens ─────────────────────────────────────── */
 :root {
   /* Palette */
-  --white: #FFFFFF;
-  --off-white: #F8F9FA;
-  --tinted: #F2F4F7;
+  --white: #EEEFF2;
+  --off-white: #E6E8ED;
+  --tinted: #DADDE4;
 
   --amber-50: #FFFBEB;
   --amber-100: #FEF3C7;
@@ -154,9 +154,9 @@ body {
     ),
     linear-gradient(
       to bottom,
-      #ffffff 0%,
-      #f5f9f7 50%,
-      #eef5f2 100%
+      #EEEFF2 0%,
+      #E6EAE8 50%,
+      #DEEAE5 100%
     );
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
