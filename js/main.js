@@ -225,6 +225,88 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   });
 })();
 
+/* ─── FAQ Category Filter ────────────────────────────────── */
+(function initFaqFilter() {
+  const buttons = $$('.faq-filter-btn');
+  const items   = $$('.faq-item[data-cat]');
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach(b => b.classList.toggle('active', b === btn));
+      items.forEach(item => {
+        const show = filter === 'all' || item.dataset.cat === filter;
+        item.style.display = show ? '' : 'none';
+        if (!show) {
+          item.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+          item.querySelector('.faq-a')?.classList.remove('open');
+        }
+      });
+    });
+  });
+})();
+
+/* ─── Multi-step Form ───────────────────────────────────── */
+(function initFormSteps() {
+  const form = $('#contact-form');
+  if (!form) return;
+
+  const steps     = [...form.querySelectorAll('.form-step')];
+  const progDots  = [...document.querySelectorAll('.form-progress-step')];
+  const progLines = [...document.querySelectorAll('.form-progress-connector')];
+  if (!steps.length) return;
+
+  let current = 1;
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function validateStep(n) {
+    const step = form.querySelector(`.form-step[data-step="${n}"]`);
+    if (!step) return true;
+    let allValid = true;
+    step.querySelectorAll('[required]').forEach(field => {
+      let ok = field.value.trim() !== '';
+      if (ok && field.type === 'email') ok = EMAIL_RE.test(field.value.trim());
+      if (ok && field.type === 'url' && field.value.trim()) {
+        try { new URL(field.value.trim()); } catch { ok = false; }
+      }
+      field.classList.toggle('invalid', !ok);
+      field.setAttribute('aria-invalid', String(!ok));
+      if (!ok) allValid = false;
+    });
+    if (!allValid) step.querySelector('.invalid')?.focus();
+    return allValid;
+  }
+
+  function showStep(n, back) {
+    const target = form.querySelector(`.form-step[data-step="${n}"]`);
+    if (!target) return;
+    steps.forEach(s => s.classList.remove('active', 'step-back'));
+    if (back) target.classList.add('step-back');
+    void target.offsetWidth;
+    target.classList.add('active');
+
+    progDots.forEach(d => {
+      d.classList.toggle('active', +d.dataset.step === n);
+      d.classList.toggle('done',   +d.dataset.step < n);
+    });
+    progLines.forEach(l => l.classList.toggle('done', +l.dataset.after < n));
+    current = n;
+    form.closest('.contact-form-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  form.addEventListener('click', e => {
+    const nextBtn = e.target.closest('.form-next');
+    const backBtn = e.target.closest('.form-back');
+    if (nextBtn && validateStep(current)) showStep(+nextBtn.dataset.next, false);
+    if (backBtn) showStep(+backBtn.dataset.back, true);
+  });
+
+  // Remove invalid state on user input
+  form.addEventListener('input',  e => e.target.classList?.remove('invalid'));
+  form.addEventListener('change', e => e.target.classList?.remove('invalid'));
+})();
+
 /* ─── Contact Form ───────────────────────────────────────── */
 (function initContactForm() {
   const form    = $('#contact-form');
@@ -530,17 +612,35 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 /* ─── Process connector ─────────────────────────────────── */
 (function initConnector() {
   const fill = $('#connector-fill');
-  const process = $('#process');
-  if (!fill || !process) return;
+  const steps = $('.process-steps');
+  if (!fill || !steps) return;
 
   const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       fill.style.width = '100%';
       obs.disconnect();
     }
-  }, { threshold: 0.3 });
+  }, { threshold: 0.15 });
 
-  obs.observe(process);
+  obs.observe(steps);
+})();
+
+/* ─── Service Filter Tabs ────────────────────────────────── */
+(function initServiceFilter() {
+  const buttons = $$('.svc-filter-btn');
+  const cards   = $$('.svc-card[data-cat]');
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach(b => b.classList.toggle('active', b === btn));
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.cat === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
 })();
 
 /* ─── Stagger .stagger-children ─────────────────────────── */
@@ -552,23 +652,45 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 
 /* ─── Hero date and time strip ──────────────────────────── */
 (function initHeroDateTime() {
-  const dateEl = $('#live-date');
-  const timeEl = $('#live-time');
-  if (!dateEl || !timeEl) return;
+  const dateEl    = $('#live-date');
+  const timeEl    = $('#live-time');
+  const dashTimeEl = $('.dash-time');
 
   function update() {
     const now = new Date();
-    dateEl.textContent = now.toLocaleDateString('en-AU', {
+    const time = now.toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit' });
+    if (dateEl) dateEl.textContent = now.toLocaleDateString('en-AU', {
       weekday: 'short',
       day: 'numeric',
       month: 'short',
     });
-    timeEl.textContent = now.toLocaleTimeString('en-AU', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+    if (timeEl)     timeEl.textContent     = time;
+    if (dashTimeEl) dashTimeEl.textContent = time;
   }
 
   update();
   setInterval(update, 1000);
+})();
+
+/* ─── Hero video: pause on reduced motion ───────────────── */
+(function initHeroVideo() {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.pause();
+  }
+})();
+
+/* ─── Back to top ────────────────────────────────────────── */
+(function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 })();
