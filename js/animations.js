@@ -69,26 +69,31 @@
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
-  let W = 0;
-  let H = 0;
+  let W = 0, H = 0;
   let particles = [];
   let paused = false;
 
-  const PARTICLE_COUNT = 48;
-  const MAX_DIST = 140;
+  // Three depth tiers: small/fast/near · medium · large/slow/far
+  const TIERS = [
+    { count: 22, rMin: 0.7,  rMax: 1.2,  speed: 0.55, opMin: 0.35, opMax: 0.65 },
+    { count: 18, rMin: 1.3,  rMax: 2.1,  speed: 0.28, opMin: 0.16, opMax: 0.40 },
+    { count:  8, rMin: 2.4,  rMax: 3.5,  speed: 0.12, opMin: 0.05, opMax: 0.14 },
+  ];
+  const MAX_DIST       = 140;
   const PARTICLE_COLOR = '245,158,11';
-  const LINE_COLOR = '180,140,60';
+  const LINE_COLOR     = '180,140,60';
 
   class Particle {
-    constructor() { this.reset(true); }
+    constructor(tier) { this.tier = tier; this.reset(true); }
 
     reset(random = false) {
-      this.x = random ? Math.random() * W : (Math.random() > 0.5 ? -4 : W + 4);
-      this.y = Math.random() * H;
-      this.r = 1 + Math.random() * 2;
-      this.vx = (Math.random() - 0.5) * 0.45;
-      this.vy = (Math.random() - 0.5) * 0.45;
-      this.opacity = 0.18 + Math.random() * 0.45;
+      const t = this.tier;
+      this.x  = random ? Math.random() * W : (Math.random() > 0.5 ? -4 : W + 4);
+      this.y  = Math.random() * H;
+      this.r  = t.rMin + Math.random() * (t.rMax - t.rMin);
+      this.vx = (Math.random() - 0.5) * t.speed;
+      this.vy = (Math.random() - 0.5) * t.speed;
+      this.opacity = t.opMin + Math.random() * (t.opMax - t.opMin);
     }
 
     update() {
@@ -106,35 +111,38 @@
   }
 
   function resize() {
-    const dpr = window.devicePixelRatio || 1;
+    const dpr  = window.devicePixelRatio || 1;
     const rect = canvas.parentElement.getBoundingClientRect();
     W = rect.width;
     H = rect.height;
-    canvas.width = W * dpr;
+    canvas.width  = W * dpr;
     canvas.height = H * dpr;
-    canvas.style.width = W + 'px';
+    canvas.style.width  = W + 'px';
     canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
   function init() {
     resize();
-    particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+    particles = [];
+    TIERS.forEach(tier => {
+      for (let i = 0; i < tier.count; i++) particles.push(new Particle(tier));
+    });
   }
 
   function drawLines() {
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
+        const dx   = particles[i].x - particles[j].x;
+        const dy   = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist > MAX_DIST) continue;
-        const alpha = (1 - dist / MAX_DIST) * 0.16;
+        const alpha = (1 - dist / MAX_DIST) * 0.13;
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
         ctx.strokeStyle = `rgba(${LINE_COLOR},${alpha})`;
-        ctx.lineWidth = 0.8;
+        ctx.lineWidth   = 0.7;
         ctx.stroke();
       }
     }
@@ -195,7 +203,15 @@
   let lineIdx = 0;
   let charIdx = 0;
   let currentEl = null;
-  let started = false;
+  let timerId = null;
+
+  function reset() {
+    if (timerId) { clearTimeout(timerId); timerId = null; }
+    output.innerHTML = '';
+    lineIdx = 0;
+    charIdx = 0;
+    currentEl = null;
+  }
 
   function buildLine(line) {
     const row = document.createElement('div');
@@ -230,19 +246,20 @@
       currentEl.textContent += line.text[charIdx];
       charIdx++;
       output.scrollTop = output.scrollHeight;
-      setTimeout(typeChar, line.type === 'cmd' ? 34 : 7);
+      timerId = setTimeout(typeChar, line.type === 'cmd' ? 34 : 7);
     } else {
       charIdx = 0;
       lineIdx++;
-      setTimeout(typeChar, line.type === 'cmd' ? 240 : 55);
+      timerId = setTimeout(typeChar, line.type === 'cmd' ? 240 : 55);
     }
   }
 
   const obs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !started) {
-      started = true;
-      setTimeout(typeChar, 500);
-      obs.disconnect();
+    if (entries[0].isIntersecting) {
+      reset();
+      timerId = setTimeout(typeChar, 500);
+    } else {
+      reset();
     }
   }, { threshold: 0.4 });
 
@@ -293,6 +310,24 @@
     div.setAttribute('aria-hidden', 'true');
     hero.appendChild(div);
   });
+})();
+
+/* ─── Hero Visual Parallax ──────────────────────────────── */
+(function initHeroParallax() {
+  const visual = document.querySelector('.hero-visual');
+  if (!visual) return;
+
+  // Wait for entrance animation to finish before taking over transform
+  let ready = false;
+  setTimeout(() => { ready = true; }, 1500);
+
+  window.addEventListener('scroll', () => {
+    if (!ready) return;
+    const sy = window.scrollY;
+    if (sy > window.innerHeight) return;
+    // Image drifts at 8% of scroll speed — text stays fixed, creating depth
+    visual.style.transform = sy > 0 ? `scale(1) translateY(${sy * 0.08}px)` : '';
+  }, { passive: true });
 })();
 
 /* ─── Scroll Progress Bar ───────────────────────────────── */
