@@ -1,0 +1,70 @@
+# ReadyStack Digital
+
+> ReadyStack Digital is a Sydney-based digital agency that builds and manages fast, secure, SEO-ready websites for small businesses across Australia. Services include website design, domain and hosting setup, business email configuration with SPF/DKIM/DMARC, basic SEO with schema markup, and monthly website care.
+
+## About
+
+ReadyStack Digital was built to fix a common problem: most small business websites are launched in a hurry, then quietly break over the following two years. Forms stop sending. SSL certificates lapse. Plugins bloat. Rankings slip.
+
+ReadyStack uses enterprise-grade web practices — static-first architecture, proper DNS and email authentication, monitored monthly care — and applies them to small business websites at small business prices.
+
+- Location: Sydney, NSW, Australia
+- Delivery: Australia-wide
+- Email: hello@readystackdigital.com
+- Phone: +61 481 619 784
+- Website: https://readystackdigital.com
+
+## Services
+
+- Website design and build (landing pages and multi-page sites)
+- Domain registration, connection and DNS management
+- Web hosting setup on modern static-first infrastructure
+- Professional business email setup (MX, SPF, DKIM, DMARC)
+- Basic SEO setup including titles, meta descriptions, sitemap, schema markup, image alt text
+- Google Search Console setup and configuration
+- Contact form setup and WhatsApp enquiry integration
+- Monthly website care (hosting, domain, DNS, SSL, form testing, basic SEO monitoring)
+- Blog upload and formatting (Care Plus plan)
+
+## Pricing
+
+- Landing Page Website: from $1,000 AUD upfront. Typical builds with common add-ons range $1,500 to $3,000.
+- Managed Website Care: $100/month
+- Website Care Plus: $150/month (includes one blog upload per month)
+- Add-ons: extra pages, content writing, business email setup, logo and brand basics, extra blog uploads, custom features — all quoted upfront
+
+## Process
+
+1. Intake brief — business details, services, branding, contact info, domain needs, SEO goals
+2. Plan — sitemap, page structure, calls to action, contact flow, domain and email setup, monthly care
+3. Build — design, hosting, forms, SEO basics, HTTPS, DNS review, business email setup if selected
+4. Review — client review of build before launch with adjustments
+5. Launch — site goes live, monthly care begins
+
+## Industries served
+
+- Service providers and consultants
+- Trades and contractors
+- Recruitment businesses
+- Allied health clinics (physio, podiatry, psychology, dental)
+- Restaurants and hospitality
+- Other small business categories Australia-wide
+
+## What makes ReadyStack Digital different
+
+- Static-first architecture means fewer plugins, fewer login surfaces, fewer security risks
+- Email authentication (SPF, DKIM, DMARC) configured properly so business email reaches the inbox
+- Schema markup included on every build for better search and AI assistant visibility
+- Monthly care is actively monitored, not auto-renewing nothing
+- Transparent pricing, no surprise invoices, all add-ons quoted upfront
+- Sydney-based with Australia-wide delivery
+
+## Contact
+
+For website quotes or questions:
+- Email: hello@readystackdigital.com
+- Phone: +61 481 619 784
+- WhatsApp: https://wa.me/61481619784
+- Web: https://readystackdigital.com
+
+Response time: within 1 business day.
