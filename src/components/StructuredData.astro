@@ -1,0 +1,240 @@
+---
+// StructuredData.astro
+// Import and drop inside <head> in BaseLayout.astro:
+//   <StructuredData />
+//
+// This emits three pieces of schema.org JSON-LD:
+//   1. Organization      — who ReadyStack Digital is (business entity)
+//   2. LocalBusiness     — Sydney NSW signal for Google local pack + AI assistants
+//   3. FAQPage           — pulled from the FAQs section, helps with rich results
+//
+// Update phone, email, social URLs, and FAQ entries here when they change.
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://readystackdigital.com/#organization",
+  "name": "ReadyStack Digital",
+  "alternateName": "ReadyStack",
+  "url": "https://readystackdigital.com",
+  "logo": "https://readystackdigital.com/assets/icons/readystack-icon.svg",
+  "image": "https://readystackdigital.com/assets/images/og-readystack.png",
+  "description":
+    "ReadyStack Digital is a Sydney-based digital agency that builds and manages fast, secure, SEO-ready websites for small businesses across Australia. Services include website design, domain and hosting setup, business email configuration, basic SEO, and monthly website care.",
+  "slogan": "Enterprise-grade web practices, priced for small business.",
+  "telephone": "+61481619784",
+  "email": "hello@readystackdigital.com",
+  "priceRange": "$$",
+  "currenciesAccepted": "AUD",
+  "paymentAccepted": "Bank Transfer, Credit Card",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sydney",
+    "addressRegion": "NSW",
+    "addressCountry": "AU",
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Sydney" },
+    { "@type": "State", "name": "New South Wales" },
+    { "@type": "Country", "name": "Australia" },
+  ],
+  "serviceArea": {
+    "@type": "Country",
+    "name": "Australia",
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Website and Care Packages",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Landing Page Website",
+          "description":
+            "A clean, professional one-page website with mobile-friendly design, contact forms, basic SEO setup, HTTPS, domain connection and Google Search Console setup.",
+        },
+        "price": "1000",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "1000",
+          "priceCurrency": "AUD",
+          "minPrice": "1000",
+        },
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Managed Website Care",
+          "description":
+            "Monthly hosting, domain, DNS, SSL, form testing, basic SEO checks and small updates for a managed website.",
+        },
+        "price": "100",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "100",
+          "priceCurrency": "AUD",
+          "unitCode": "MON",
+          "unitText": "month",
+        },
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Website Care Plus",
+          "description":
+            "Everything in Managed Website Care plus extra monthly support, one client-supplied blog upload per month with formatting and basic SEO setup, and priority support.",
+        },
+        "price": "150",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "150",
+          "priceCurrency": "AUD",
+          "unitCode": "MON",
+          "unitText": "month",
+        },
+      },
+    ],
+  },
+  "knowsAbout": [
+    "Website design",
+    "Web hosting",
+    "Search engine optimization",
+    "Domain and DNS setup",
+    "Business email authentication",
+    "SPF DKIM DMARC configuration",
+    "Cloudflare DNS",
+    "Astro static site framework",
+    "Local SEO for Australian small businesses",
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/readystacks",
+    "https://wa.me/61481619784",
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+61481619784",
+      "contactType": "customer service",
+      "areaServed": "AU",
+      "availableLanguage": ["English"],
+      "email": "hello@readystackdigital.com",
+    },
+  ],
+};
+
+const faqPage = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you only work with local businesses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "ReadyStack Digital focuses on small businesses across Australia, including service providers, consultants, trades, recruitment businesses, clinics, restaurants and other businesses that need a professional online presence.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need WordPress?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Not always. Most small businesses only need a fast, professional website with contact forms, SEO setup, secure hosting, domain connection and monthly care. We only recommend WordPress if your business specifically needs full website editing or plugin-heavy features.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Is SEO included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Yes. Every website includes basic SEO setup, including page titles, meta descriptions, sitemap, heading structure, image alt text, schema markup and Google Search Console setup.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Can you manage my domain and hosting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Yes. We can help register or connect your domain, configure DNS, connect hosting, manage SSL and keep the technical setup monitored through monthly care.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Is business email included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Business email is optional. We can help set up professional email such as info@yourdomain.com as an add-on, including support for required records such as MX, SPF, DKIM and DMARC.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Will my website be secure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Yes. We include secure website foundations such as HTTPS, SSL checks, secure hosting setup, DNS checks and form testing. Where suitable, we use lightweight static websites to reduce unnecessary plugin and admin-login risks.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "What does monthly care include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Monthly care includes hosting management, domain and DNS checks, SSL monitoring, contact form testing, basic SEO monitoring, Search Console checks and small updates depending on your plan.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a website cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Landing page websites start from $1,000 AUD. Typical builds with common add-ons such as extra pages, content writing, or business email setup range $1,500 to $3,000. Larger custom projects are quoted based on scope. Monthly care plans start from $100 per month.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Where is ReadyStack Digital based?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "ReadyStack Digital is based in Sydney, NSW, and delivers website services to small businesses Australia-wide.",
+      },
+    },
+  ],
+};
+
+const breadcrumbList = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://readystackdigital.com/",
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organization)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbList)} />
