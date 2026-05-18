@@ -73,6 +73,19 @@ const services: ServiceCard[] = [
     cta: { label: 'View care plans', href: '#pricing' },
     icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M13 8v5l3 3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/></svg>',
   },
+  {
+    id: 'svc-ai-automation',
+    cat: 'automation',
+    hot: true,
+    tier: 'New Service',
+    tierVariant: 'hot',
+    name: 'SMB AI Agents & Automation',
+    desc: 'AI chat agents trained on your business, lead and enquiry automation, Microsoft 365 Copilot setup, and workflow automations that handle repetitive tasks — so your team focuses on the work that matters.',
+    tags: ['AI Chat Agent', 'M365 Copilot', 'Lead Automation', 'Workflows', 'n8n / Make'],
+    metric: { num: 'Custom', lbl: 'contact us for pricing' },
+    cta: { label: 'Explore AI automation', href: '#contact' },
+    icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="4" y="4" width="18" height="18" rx="4" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M9 13h8M13 9v8" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/><circle cx="9" cy="9" r="1.5" fill="#F59E0B"/><circle cx="17" cy="9" r="1.5" fill="#F59E0B"/><circle cx="9" cy="17" r="1.5" fill="#F59E0B"/><circle cx="17" cy="17" r="1.5" fill="#F59E0B"/></svg>',
+  },
 ]
 
 const delayClass = (i: number) =>
@@ -100,6 +113,7 @@ const tierClass = (v?: string) =>
       <button class="svc-filter-btn" data-filter="security">Essential Eight</button>
       <button class="svc-filter-btn" data-filter="email">Email Security</button>
       <button class="svc-filter-btn" data-filter="care">Monthly Care</button>
+      <button class="svc-filter-btn" data-filter="automation">AI &amp; Automation</button>
     </div>
 
     <div class="services-grid">
