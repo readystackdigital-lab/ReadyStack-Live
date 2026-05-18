@@ -1,0 +1,93 @@
+# ReadyStack Digital
+
+> ReadyStack Digital is a Sydney-based agency that builds secure digital foundations for Australian small businesses — website, Microsoft 365, email security (SPF/DKIM/DMARC), and Essential Eight Maturity Level 1 alignment, built and managed properly.
+
+## About
+
+ReadyStack Digital was built to fix a common pattern: most small business websites are launched in a hurry then quietly break over the following two years — forms stop sending, SSL certificates lapse, Microsoft 365 sits insecure with no MFA enforced, email authentication is never configured, and search rankings slip.
+
+ReadyStack combines enterprise-grade web, Microsoft 365, and cyber security practices — static-first website architecture, proper DNS and email authentication, Essential Eight ML1 alignment, and monitored monthly care — and applies them to small businesses at small business prices.
+
+- Location: Sydney, NSW, Australia
+- Delivery: Australia-wide
+- Email: hello@readystackdigital.com
+- Phone: +61 481 619 784
+- Website: https://readystackdigital.com
+
+## Services
+
+### SMB Online Presence
+Fast, mobile-friendly, SEO-ready websites with domain, hosting, SSL, contact forms, WhatsApp/call buttons, schema markup, and Google Search Console setup. Everything a local business needs to look professional online.
+- Price: from $1,000 one-off (typical $1,500–$3,000)
+
+### Microsoft 365 for Small Business
+Professional Microsoft 365 setup — tenant configuration, custom domain, business email with MX/SPF/DKIM/DMARC, Microsoft Teams, OneDrive, SharePoint basics, and MFA enforced from day one.
+- Price: from $750 setup
+
+### Essential Eight Alignment for SMBs
+Practical Essential Eight Maturity Level 1 setup — application control basics, patching baseline, MFA, restricted admin privileges, and configurable Microsoft 365 hardening. Suitable for SMBs needing to demonstrate cyber security maturity for clients, insurance, or government tenders.
+- Price: from $2,500 one-off + optional monthly monitoring
+
+### Email Security & Domain Protection
+SPF, DKIM, DMARC, and MTA-STS records configured for your domain so emails reach the inbox and your domain identity is protected from spoofing. DMARC monitoring and reports included.
+- Price: from $450 one-off + optional monitoring
+
+### Monthly Managed Care
+Ongoing monthly care across website, domain, Microsoft 365, email security, and Essential Eight controls.
+- Website Care: $100/month
+- Website + M365 Care: $300/month
+- Full Stack Care: $600/month
+
+## Packages
+
+### Online Presence Starter — from $1,000 one-off
+One-page website, domain setup, hosting, SSL, contact form, basic SEO, Google Search Console. Best for businesses that just need a professional site.
+
+### Online Presence + M365 — from $1,750 one-off (Most Popular)
+Everything in Starter plus Microsoft 365 Business setup, business email with full SPF/DKIM/DMARC, MFA enforced. Best for businesses that need both a website and professional email/M365 from day one.
+
+### Secure SMB Foundation — from $4,000 one-off
+Everything in Online Presence + M365 plus Essential Eight Maturity Level 1 setup, Intune device baseline, conditional access, hardened M365 tenant. Best for SMBs demonstrating cyber security maturity for clients, insurance, or government tenders.
+
+### Monthly Managed Care — three tiers
+- Website Care: $100/month (website, hosting, domain, DNS, SSL, form testing, basic SEO)
+- Website + M365 Care: $300/month (website + M365 user lifecycle + MFA review + DMARC reports + monthly security review)
+- Full Stack Care: $600/month (website + M365 + Essential Eight monitoring + monthly security report + priority support)
+
+## Process
+
+1. Intake brief — business details, services, branding, domain needs, M365/security requirements
+2. Plan — website structure, Microsoft 365 configuration, email security setup, Essential Eight scope, monthly care tier
+3. Build — website, hosting, forms, SEO basics, M365 tenant, email authentication, security controls
+4. Review — client review before launch with adjustments
+5. Launch — site goes live, M365 and security controls activated, monthly care begins
+
+## Industries served
+
+- Service providers and consultants
+- Trades and contractors
+- Recruitment businesses
+- Allied health clinics (physio, podiatry, psychology, dental)
+- Restaurants and hospitality
+- Professional services firms needing to meet client or insurer security requirements
+- Other small businesses Australia-wide
+
+## What makes ReadyStack Digital different
+
+- Combines website, Microsoft 365, and cyber security into one managed offering
+- Essential Eight Maturity Level 1 alignment practical for SMBs, not just enterprise
+- Email authentication (SPF, DKIM, DMARC, MTA-STS) configured properly on every relevant build
+- Static-first website architecture — fewer plugins, fewer login surfaces, fewer security risks
+- Schema markup included on every website build for better search and AI assistant visibility
+- Monthly care is actively monitored across the full digital stack, not just the website
+- Transparent pricing, all add-ons quoted upfront
+- Sydney-based with Australia-wide delivery
+
+## Contact
+
+- Email: hello@readystackdigital.com
+- Phone: +61 481 619 784
+- WhatsApp: https://wa.me/61481619784
+- Web: https://readystackdigital.com
+
+Response time: within 1 business day.
