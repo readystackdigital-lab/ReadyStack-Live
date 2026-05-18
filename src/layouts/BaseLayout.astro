@@ -1,0 +1,308 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Secure Digital Foundations for Australian Small Businesses | ReadyStack Digital",
+  description = "ReadyStack Digital builds secure digital foundations for Australian SMBs — website, Microsoft 365, Essential Eight alignment and email security, built and managed properly. Sydney-based, Australia-wide.",
+} = Astro.props;
+
+const siteUrl = "https://readystackdigital.com";
+const ogImage = `${siteUrl}/assets/images/hero-dashboard.png`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Search Console verification -->
+  <meta name="google-site-verification" content="TECjncSlTZtlXfk6oxgKHWDX32AKlPycyozLnLFtSxg" />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content="ReadyStack Digital" />
+  <meta name="theme-color" content="#F59E0B" />
+
+  <!-- Geo targeting — Australia -->
+  <meta name="geo.region" content="AU" />
+  <meta name="geo.placename" content="Australia" />
+  <meta name="ICBM" content="-33.8688, 151.2093" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={siteUrl + "/"} />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/icons/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/assets/icons/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="icon" href="/assets/icons/readystack-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180" />
+  <link rel="icon" href="/assets/icons/favicon-192.png" type="image/png" sizes="192x192" />
+  <link rel="icon" href="/assets/icons/favicon-512.png" type="image/png" sizes="512x512" />
+  <meta name="msapplication-TileImage" content="/assets/icons/favicon-192.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_AU" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={siteUrl + "/"} />
+  <meta property="og:site_name" content="ReadyStack Digital" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ReadyStack Digital — Secure digital foundations for Australian small businesses" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content="ReadyStack Digital — Secure digital foundations for Australian small businesses" />
+
+  <!-- Fonts: preconnect + preload critical weight -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/inline-overrides.css" />
+
+  <!-- Schema: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://readystackdigital.com/#business",
+    "name": "ReadyStack Digital",
+    "url": "https://readystackdigital.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://readystackdigital.com/assets/icons/readystack-icon.svg"
+    },
+    "image": "https://readystackdigital.com/assets/images/hero-dashboard.png",
+    "description": "ReadyStack Digital builds secure digital foundations for Australian small businesses — website, Microsoft 365 setup, Essential Eight Maturity Level 1 alignment, email security (SPF/DKIM/DMARC), and monthly managed care across the full digital stack.",
+    "telephone": "+61481619784",
+    "email": "hello@readystackdigital.com",
+    "priceRange": "$$",
+    "currenciesAccepted": "AUD",
+    "paymentAccepted": "Bank Transfer, Credit Card",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Australia"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Sydney",
+      "addressRegion": "NSW",
+      "addressCountry": "AU"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+61481619784",
+      "email": "hello@readystackdigital.com",
+      "contactType": "customer service",
+      "areaServed": "AU",
+      "availableLanguage": "English"
+    },
+    "sameAs": [
+      "https://www.facebook.com/readystackdigital",
+      "https://www.instagram.com/readystackdigital",
+      "https://www.linkedin.com/company/readystackdigital"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Secure Digital Foundation Packages",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Online Presence Starter",
+          "description": "One-page website with domain, hosting, SSL, contact forms, basic SEO and Google Search Console setup.",
+          "price": "1000",
+          "priceCurrency": "AUD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Online Presence + M365",
+          "description": "Website plus Microsoft 365 Business setup, business email with SPF/DKIM/DMARC, and MFA enforced from day one.",
+          "price": "1750",
+          "priceCurrency": "AUD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Secure SMB Foundation",
+          "description": "Website, Microsoft 365 and Essential Eight Maturity Level 1 setup including Intune baseline, conditional access and hardened M365 tenant.",
+          "price": "4000",
+          "priceCurrency": "AUD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Monthly Managed Care",
+          "description": "Ongoing care across website, Microsoft 365, email security and Essential Eight controls. From $100/month (Website Care) to $600/month (Full Stack Care).",
+          "price": "100",
+          "priceCurrency": "AUD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "100",
+            "priceCurrency": "AUD",
+            "unitCode": "MON"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Schema: WebSite (enables Sitelinks Searchbox) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://readystackdigital.com/#website",
+    "url": "https://readystackdigital.com/",
+    "name": "ReadyStack Digital",
+    "description": "Secure digital foundations for Australian small businesses",
+    "publisher": {
+      "@id": "https://readystackdigital.com/#business"
+    },
+    "inLanguage": "en-AU"
+  }
+  </script>
+
+  <!-- Schema: FAQPage (triggers accordion rich results in Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Essential Eight and do I need it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Essential Eight is a set of cyber security mitigation strategies published by the Australian Cyber Security Centre (ACSC). It is not a regulatory requirement for most small businesses, but it is increasingly requested by enterprise clients, government agencies, and insurers as evidence of baseline cyber security maturity. If you are bidding on government work, renewing a cyber insurance policy, or onboarding corporate clients, demonstrating Essential Eight Maturity Level 1 alignment can be a genuine business requirement."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you set up Microsoft 365 from scratch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Our Microsoft 365 for Small Business service covers creating a new tenant, configuring your custom domain, setting up business email with proper MX, SPF, DKIM and DMARC records, enabling Microsoft Teams, OneDrive and SharePoint basics, and enforcing MFA across all accounts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Online Presence + M365 and Secure SMB Foundation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Online Presence + M365 gives you a professional website and a properly configured Microsoft 365 tenant with business email, MFA, Teams and OneDrive. Secure SMB Foundation adds Essential Eight Maturity Level 1 controls — Intune device baseline, conditional access policies, application control basics, restricted admin privileges, and a hardened M365 tenant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need Essential Eight if I am a small business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always — but increasingly yes. The trigger is usually external: a corporate client supplier requirement, a government tender asking for evidence of cyber security posture, or a cyber insurance renewal. If none of those apply, the Online Presence Starter or Online Presence + M365 packages are likely sufficient."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you only work with local businesses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ReadyStack Digital focuses on small businesses across Australia, including service providers, consultants, trades, recruitment businesses, clinics, restaurants and other businesses that need a professional online presence and secure digital foundations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is SEO included?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every website includes basic SEO setup, including page titles, meta descriptions, sitemap, heading structure, image alt text, schema markup and Google Search Console setup."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is business email included?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Business email is included in the Online Presence + M365 and Secure SMB Foundation packages. It is also available as a standalone service. All setups include proper MX, SPF, DKIM and DMARC records."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does monthly care include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Monthly care is available at three tiers. Website Care ($100/month) covers hosting, domain and DNS checks, SSL monitoring, form testing and basic SEO monitoring. Website + M365 Care ($300/month) adds M365 user lifecycle management, MFA review, DMARC reports and a monthly security review. Full Stack Care ($600/month) adds Essential Eight monitoring, a monthly security report and priority support."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my website be secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We include secure website foundations such as HTTPS, SSL checks, secure hosting setup, DNS checks and form testing. Where suitable, we use lightweight static websites to reduce unnecessary plugin and admin-login risks."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://readystackdigital.com/"
+      }
+    ]
+  }
+  </script>
+
+  <slot name="head" />
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- Page loader -->
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <img src="/assets/icons/readystack-icon.svg" alt="" width="36" height="36" />
+        <span>ReadyStack Digital</span>
+      </div>
+      <div class="loader-track"><div class="loader-bar" id="loader-bar"></div></div>
+      <div class="loader-label" id="loader-label">Preparing your website setup…</div>
+    </div>
+  </div>
+
+  <slot />
+
+  <script src="/js/main.js" is:inline></script>
+  <script src="/js/animations.js" is:inline></script>
+  <script src="/js/dashboard.js" is:inline></script>
+</body>
+</html>

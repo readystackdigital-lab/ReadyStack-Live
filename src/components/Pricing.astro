@@ -1,0 +1,193 @@
+---
+interface PricingTier {
+  id: string
+  label: string
+  labelAmber?: boolean
+  name: string
+  priceFrom: string
+  per: string
+  tagline: string
+  features: string[]
+  featured?: boolean
+  cta: { label: string; href: string }
+}
+
+const tiers: PricingTier[] = [
+  {
+    id: 'starter',
+    label: 'Website Build',
+    name: 'Online Presence Starter',
+    priceFrom: '1,000',
+    per: 'upfront',
+    tagline: 'A clean, professional one-page website that explains your services and generates enquiries. Typical builds with add-ons range $1,500–$2,500.',
+    features: [
+      'One-page website design and build',
+      'Mobile-friendly and fast-loading',
+      'Domain setup and hosting connection',
+      'SSL and HTTPS setup',
+      'Contact form setup',
+      'Phone, email and WhatsApp buttons',
+      'Basic SEO setup with schema markup',
+      'Google Search Console setup',
+      'Launch support',
+    ],
+    cta: { label: 'Start a website build', href: '#contact' },
+  },
+  {
+    id: 'm365-bundle',
+    label: 'Most Popular',
+    labelAmber: true,
+    name: 'Online Presence + M365',
+    priceFrom: '1,750',
+    per: 'upfront',
+    tagline: 'Everything in Starter plus Microsoft 365 Business setup, business email with full SPF/DKIM/DMARC, and MFA enforced from day one.',
+    features: [
+      'Everything in Online Presence Starter',
+      'Microsoft 365 Business tenant setup',
+      'Custom domain business email',
+      'SPF, DKIM and DMARC configured',
+      'MFA enforced from day one',
+      'Microsoft Teams and OneDrive setup',
+      'SharePoint basics',
+    ],
+    featured: true,
+    cta: { label: 'Start Online Presence + M365', href: '#contact' },
+  },
+  {
+    id: 'website-care',
+    label: 'Monthly Care',
+    name: 'Website Care',
+    priceFrom: '100',
+    per: '/mo',
+    tagline: 'Ongoing monthly care for your website — hosting, domain, DNS, SSL, forms and basic SEO checks. Set and forget.',
+    features: [
+      'Website hosting management',
+      'Domain and DNS checks',
+      'SSL monitoring',
+      'Contact form testing',
+      'WhatsApp, phone and email link checks',
+      'Basic SEO monitoring',
+      'Google Search Console checks',
+      'Small monthly updates',
+    ],
+    cta: { label: 'View Website Care', href: '#contact' },
+  },
+  {
+    id: 'm365-care',
+    label: 'Monthly Care',
+    name: 'Website + M365 Care',
+    priceFrom: '300',
+    per: '/mo',
+    tagline: 'Everything in Website Care plus ongoing Microsoft 365 management, MFA review, DMARC reports and a monthly security review.',
+    features: [
+      'Everything in Website Care',
+      'M365 user lifecycle management',
+      'MFA review and enforcement checks',
+      'DMARC report analysis',
+      'Monthly security review',
+      'Priority email support',
+    ],
+    cta: { label: 'View Website + M365 Care', href: '#contact' },
+  },
+]
+---
+
+<section id="pricing" class="section section-tinted" aria-labelledby="pricing-heading">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <div class="eyebrow">Packages</div>
+      <h2 id="pricing-heading" class="section-h2">
+        Transparent packages for websites<br>
+        <span class="text-amber">and Microsoft 365.</span>
+      </h2>
+      <p class="section-subline">Start with a one-time build package, then keep everything managed with a monthly care plan. All packages priced upfront — no hidden fees, no surprise invoices. Add-ons available and quoted before any work begins.</p>
+    </div>
+
+    <div class="pricing-phase-row reveal" aria-hidden="true">
+      <div class="pricing-phase pricing-phase-once">
+        <span class="pricing-phase-num">01</span>
+        <span class="pricing-phase-lbl">One-time build package</span>
+      </div>
+      <div class="pricing-phase-arrow">→ then choose</div>
+      <div class="pricing-phase pricing-phase-monthly">
+        <span class="pricing-phase-num">02</span>
+        <span class="pricing-phase-lbl">Monthly care plan</span>
+      </div>
+    </div>
+
+    <div class="pricing-grid pricing-grid-4">
+      {tiers.map((tier, i) => (
+        <div
+          class={`pricing-card${tier.featured ? ' pricing-featured' : ''} reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}
+          data-tier={tier.id}
+        >
+          {tier.featured && <div class="featured-crown">Most Popular</div>}
+          <div class="tier-top">
+            <div class={`tier-label${tier.labelAmber ? ' tier-label-amber' : ''}`}>{tier.label}</div>
+            <h3 class="tier-name">{tier.name}</h3>
+            <div class="tier-price">
+              <span class="price-sign">from $</span>
+              <span class="price-num">{tier.priceFrom}</span>
+              <span class="price-per">{tier.per}</span>
+            </div>
+            <p class="tier-line">{tier.tagline}</p>
+          </div>
+          <ul class="tier-feats" role="list">
+            {tier.features.map(feat => (
+              <li>
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                  <path d="M2.5 7.5l3.5 3.5 6.5-6.5" stroke={tier.featured ? '#F59E0B' : '#10B981'} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {feat}
+              </li>
+            ))}
+          </ul>
+          <a href={tier.cta.href} class={`btn ${tier.featured ? 'btn-amber' : 'btn-outline'} btn-full`}>
+            {tier.cta.label}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <div class="addons-divider" aria-hidden="true">
+      <div class="addons-divider-line"></div>
+      <span class="addons-divider-label">Add-ons &amp; Extras</span>
+      <div class="addons-divider-line"></div>
+    </div>
+
+    <div class="offer-grid reveal reveal-delay-2" aria-label="ReadyStack Digital add-ons">
+      <div class="offer-card">
+        <div class="offer-kicker">Add-on</div>
+        <h3 class="svc-name">Extra pages</h3>
+        <p class="svc-desc">Additional service, about, location or industry-specific pages. Quoted per page based on scope and content.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-kicker">Add-on</div>
+        <h3 class="svc-name">Essential Eight alignment</h3>
+        <p class="svc-desc">Essential Eight Maturity Level 1 setup including Intune device baseline, conditional access, hardened M365 tenant and application control. Quoted based on scope.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-kicker">Add-on</div>
+        <h3 class="svc-name">Content writing</h3>
+        <p class="svc-desc">Page copy written for your services and audience, structured for clear messaging and basic SEO. Quoted per page.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-kicker">Add-on</div>
+        <h3 class="svc-name">Logo and brand basics</h3>
+        <p class="svc-desc">A simple logo, colour palette and font pairing if you don't already have a visual identity. Quoted as a fixed package.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-kicker">Add-on</div>
+        <h3 class="svc-name">DMARC monitoring</h3>
+        <p class="svc-desc">Ongoing DMARC report analysis and domain protection monitoring — included in Website + M365 Care or available as a standalone add-on.</p>
+      </div>
+      <div class="offer-card">
+        <div class="offer-kicker">Quoted separately</div>
+        <h3 class="svc-name">Custom features</h3>
+        <p class="svc-desc">Booking systems, advanced SEO campaigns, automations, integrations and other custom requirements quoted upfront based on scope.</p>
+      </div>
+    </div>
+
+  </div>
+</section>

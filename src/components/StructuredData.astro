@@ -1,0 +1,260 @@
+---
+// StructuredData.astro
+// Import and drop inside <head> in BaseLayout.astro:
+//   <StructuredData />
+//
+// Emits three pieces of schema.org JSON-LD:
+//   1. Organization / ProfessionalService — who ReadyStack Digital is
+//   2. FAQPage — pulled from the FAQs section, helps with rich results
+//   3. BreadcrumbList — home page breadcrumb
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://readystackdigital.com/#organization",
+  "name": "ReadyStack Digital",
+  "alternateName": "ReadyStack",
+  "url": "https://readystackdigital.com",
+  "logo": "https://readystackdigital.com/assets/icons/readystack-icon.svg",
+  "image": "https://readystackdigital.com/assets/images/og-readystack.png",
+  "description":
+    "ReadyStack Digital is a Sydney-based agency that builds secure digital foundations for Australian small businesses. Services include website design, Microsoft 365 setup, Essential Eight Maturity Level 1 alignment, email security (SPF/DKIM/DMARC/MTA-STS), and monthly managed care across the full digital stack.",
+  "slogan": "Enterprise-grade web, Microsoft 365 and security practices, priced for small business.",
+  "telephone": "+61481619784",
+  "email": "hello@readystackdigital.com",
+  "priceRange": "$$",
+  "currenciesAccepted": "AUD",
+  "paymentAccepted": "Bank Transfer, Credit Card",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sydney",
+    "addressRegion": "NSW",
+    "addressCountry": "AU",
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -33.8688,
+    "longitude": 151.2093,
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Sydney" },
+    { "@type": "State", "name": "New South Wales" },
+    { "@type": "Country", "name": "Australia" },
+  ],
+  "serviceArea": {
+    "@type": "Country",
+    "name": "Australia",
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Secure Digital Foundation Packages",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Online Presence Starter",
+          "description":
+            "A clean, professional one-page website with mobile-friendly design, contact forms, basic SEO setup, HTTPS, domain connection and Google Search Console setup.",
+        },
+        "price": "1000",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "1000",
+          "priceCurrency": "AUD",
+          "minPrice": "1000",
+        },
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Online Presence + M365",
+          "description":
+            "Website build plus Microsoft 365 Business tenant setup, custom domain business email with SPF/DKIM/DMARC, MFA enforced, Microsoft Teams and OneDrive setup.",
+        },
+        "price": "1750",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "1750",
+          "priceCurrency": "AUD",
+          "minPrice": "1750",
+        },
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Secure SMB Foundation",
+          "description":
+            "Full stack setup including website, Microsoft 365, and Essential Eight Maturity Level 1 alignment — Intune device baseline, conditional access, hardened M365 tenant, application control, and restricted admin privileges.",
+        },
+        "price": "4000",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "4000",
+          "priceCurrency": "AUD",
+          "minPrice": "4000",
+        },
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Monthly Managed Care",
+          "description":
+            "Ongoing monthly care across website, domain, Microsoft 365, email security (DMARC monitoring), and Essential Eight controls. Available at three tiers: Website Care ($100/mo), Website + M365 Care ($300/mo), Full Stack Care ($600/mo).",
+        },
+        "price": "100",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "100",
+          "priceCurrency": "AUD",
+          "unitCode": "MON",
+          "unitText": "month",
+        },
+      },
+    ],
+  },
+  "knowsAbout": [
+    "Website design",
+    "Web hosting",
+    "Search engine optimisation",
+    "Domain and DNS setup",
+    "Business email authentication",
+    "SPF DKIM DMARC MTA-STS configuration",
+    "Microsoft 365 for small business",
+    "Microsoft Intune device management",
+    "Essential Eight Maturity Level 1",
+    "ACSC cyber security guidelines",
+    "Conditional access policies",
+    "Multi-factor authentication",
+    "Cloudflare DNS",
+    "Astro static site framework",
+    "Local SEO for Australian small businesses",
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/readystacks",
+    "https://wa.me/61481619784",
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+61481619784",
+      "contactType": "customer service",
+      "areaServed": "AU",
+      "availableLanguage": ["English"],
+      "email": "hello@readystackdigital.com",
+    },
+  ],
+};
+
+const faqPage = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Essential Eight and do I need it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "The Essential Eight is a set of cyber security mitigation strategies published by the Australian Cyber Security Centre (ACSC). It is not a regulatory requirement for most small businesses, but it is increasingly requested by enterprise clients, government agencies, and insurers as evidence of baseline cyber security maturity. If you are bidding on government work, renewing a cyber insurance policy, or onboarding corporate clients, demonstrating Essential Eight Maturity Level 1 alignment can be a genuine business requirement.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Can you set up Microsoft 365 from scratch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Yes. Our Microsoft 365 for Small Business service covers creating a new tenant, configuring your custom domain, setting up business email with proper MX, SPF, DKIM and DMARC records, enabling Microsoft Teams, OneDrive and SharePoint basics, and enforcing MFA across all accounts.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Online Presence + M365 and Secure SMB Foundation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Online Presence + M365 gives you a professional website and a properly configured Microsoft 365 tenant with business email, MFA, Teams and OneDrive. Secure SMB Foundation builds on that by adding Essential Eight Maturity Level 1 controls — Intune device baseline, conditional access policies, application control basics, restricted admin privileges, and a hardened M365 tenant. Choose Secure SMB Foundation if you need to demonstrate formal cyber security maturity.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need Essential Eight if I am a small business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Not always — but increasingly yes. The trigger is usually external: a corporate client supplier requirement, a government tender asking for evidence of cyber security posture, or a cyber insurance renewal. If none of those apply, the Online Presence Starter or Online Presence + M365 packages are likely sufficient, with the option to uplift later.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Do you only work with local businesses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "ReadyStack Digital focuses on small businesses across Australia, including service providers, consultants, trades, recruitment businesses, clinics, restaurants and other businesses that need a professional online presence and secure digital foundations.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Is SEO included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Yes. Every website includes basic SEO setup, including page titles, meta descriptions, sitemap, heading structure, image alt text, schema markup and Google Search Console setup.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Is business email included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Business email is included in the Online Presence + M365 and Secure SMB Foundation packages. It is also available as a standalone service through our Microsoft 365 for Small Business or Email Security and Domain Protection offerings. All setups include proper MX, SPF, DKIM and DMARC records.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "What does monthly care include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Monthly care is available at three tiers. Website Care ($100/month) covers hosting, domain and DNS checks, SSL monitoring, form testing and basic SEO monitoring. Website + M365 Care ($300/month) adds M365 user lifecycle management, MFA review, DMARC reports and a monthly security review. Full Stack Care ($600/month) adds Essential Eight monitoring, a monthly security report and priority support.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Where is ReadyStack Digital based?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "ReadyStack Digital is based in Sydney, NSW, and delivers services to small businesses Australia-wide.",
+      },
+    },
+  ],
+};
+
+const breadcrumbList = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://readystackdigital.com/",
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organization)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqPage)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbList)} />

@@ -1,0 +1,135 @@
+---
+interface ServiceCard {
+  id: string
+  cat: string
+  hot?: boolean
+  tier: string
+  tierVariant?: 'hot' | 'premium'
+  name: string
+  desc: string
+  tags: string[]
+  metric: { num: string; lbl: string }
+  cta: { label: string; href: string }
+  icon: string
+}
+
+const services: ServiceCard[] = [
+  {
+    id: 'svc-online-presence',
+    cat: 'presence',
+    tier: 'Online Presence',
+    name: 'SMB Online Presence',
+    desc: 'Fast, mobile-friendly, SEO-ready websites with domain, hosting, SSL, contact forms, WhatsApp/call buttons, schema markup, and Google Search Console setup — everything a local business needs to look professional online.',
+    tags: ['Website', 'Domain', 'Hosting', 'SSL', 'SEO', 'Forms', 'WhatsApp'],
+    metric: { num: '$1k+', lbl: 'website builds from' },
+    cta: { label: 'Start a website build', href: '#contact' },
+    icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  },
+  {
+    id: 'svc-m365',
+    cat: 'm365',
+    hot: true,
+    tier: 'New Service',
+    tierVariant: 'hot',
+    name: 'Microsoft 365 for Small Business',
+    desc: 'Professional Microsoft 365 setup for your business — tenant configuration, custom domain, business email with proper MX/SPF/DKIM/DMARC records, Microsoft Teams, OneDrive, SharePoint basics, and MFA enforced from day one.',
+    tags: ['Microsoft 365', 'Business Email', 'MFA', 'Teams', 'OneDrive'],
+    metric: { num: '$750+', lbl: 'setup from' },
+    cta: { label: 'Set up Microsoft 365', href: '#contact' },
+    icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="6" r="3" fill="rgba(245,158,11,.14)" stroke="#F59E0B" stroke-width="1.2"/></svg>',
+  },
+  {
+    id: 'svc-essential-eight',
+    cat: 'security',
+    tier: 'Cyber Security',
+    tierVariant: 'premium',
+    name: 'Essential Eight Alignment for SMBs',
+    desc: 'Practical Essential Eight Maturity Level 1 setup for Australian small businesses — application control basics, patching, MFA, restrict admin privileges, and configurable Microsoft 365 hardening. Suitable for SMBs needing to demonstrate cyber security maturity for clients, insurance, or government tenders.',
+    tags: ['Essential Eight', 'ML1', 'MFA', 'Patching', 'Hardening', 'ACSC-aligned'],
+    metric: { num: '$2.5k+', lbl: 'one-off setup from' },
+    cta: { label: 'Plan Essential Eight setup', href: '#contact' },
+    icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2L3 7v6C3 18.75 7.5 24 13 25.5 18.5 24 23 18.75 23 13V7L13 2z" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M9.5 13l2.5 2.5 4.5-4.5" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  },
+  {
+    id: 'svc-email-security',
+    cat: 'email',
+    tier: 'Email Security',
+    name: 'Email Security & Domain Protection',
+    desc: 'Proper SPF, DKIM, DMARC, and MTA-STS records configured for your domain so your emails reach the inbox and your domain identity is protected from spoofing. DMARC monitoring and reports included.',
+    tags: ['SPF', 'DKIM', 'DMARC', 'MTA-STS', 'DMARC reports'],
+    metric: { num: '$450+', lbl: 'one-off setup from' },
+    cta: { label: 'Protect my domain', href: '#contact' },
+    icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 11.5v2.5m0 2v.5" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  },
+  {
+    id: 'svc-monthly-care',
+    cat: 'care',
+    tier: 'Monthly Care',
+    tierVariant: 'premium',
+    name: 'Monthly Managed Care',
+    desc: 'Ongoing monthly care across your website, domain, Microsoft 365, email security, and Essential Eight controls. SSL monitoring, DNS health checks, form testing, M365 user lifecycle, MFA review, DMARC reports, and basic security checks.',
+    tags: ['Website Care', 'M365 Care', 'Security Monitoring', 'DNS', 'SSL'],
+    metric: { num: '$100+', lbl: 'monthly care from' },
+    cta: { label: 'View care plans', href: '#pricing' },
+    icon: '<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M13 8v5l3 3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  },
+]
+
+const delayClass = (i: number) =>
+  i % 3 === 0 ? 'reveal' : i % 3 === 1 ? 'reveal reveal-delay-1' : 'reveal reveal-delay-2'
+
+const tierClass = (v?: string) =>
+  v === 'hot' ? 'svc-tier svc-tier-hot' : v === 'premium' ? 'svc-tier svc-tier-premium' : 'svc-tier'
+---
+
+<section id="services" class="section section-tinted" aria-labelledby="services-heading">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2 id="services-heading" class="section-h2">
+        Secure digital foundations for<br><span class="text-amber">Australian small businesses.</span>
+      </h2>
+      <p class="section-subline">ReadyStack Digital combines enterprise-grade web, Microsoft 365, and cyber security practices into one simple offering — website, business email, Essential Eight alignment, and ongoing managed care, all priced for small business.</p>
+    </div>
+
+    <div class="svc-filter-wrap" role="group" aria-label="Filter services by category">
+      <button class="svc-filter-btn active" data-filter="all">All Services</button>
+      <button class="svc-filter-btn" data-filter="presence">Website &amp; SEO</button>
+      <button class="svc-filter-btn" data-filter="m365">Microsoft 365</button>
+      <button class="svc-filter-btn" data-filter="security">Essential Eight</button>
+      <button class="svc-filter-btn" data-filter="email">Email Security</button>
+      <button class="svc-filter-btn" data-filter="care">Monthly Care</button>
+    </div>
+
+    <div class="services-grid">
+      {services.map((svc, i) => (
+        <article
+          class={`svc-card${svc.hot ? ' svc-card-hot' : ''} ${delayClass(i)}`}
+          data-cat={svc.cat}
+          aria-labelledby={svc.id}
+        >
+          <div class="svc-top">
+            <div class="svc-icon" aria-hidden="true" set:html={svc.icon} />
+            <span class={tierClass(svc.tierVariant)}>{svc.tier}</span>
+          </div>
+          <h3 id={svc.id} class="svc-name">{svc.name}</h3>
+          <p class="svc-desc">{svc.desc}</p>
+          <div class="svc-tags">{svc.tags.map(t => <span>{t}</span>)}</div>
+          <div class="svc-metric">
+            <span class="svc-metric-num">{svc.metric.num}</span>
+            <span class="svc-metric-lbl">{svc.metric.lbl}</span>
+          </div>
+          <div class="svc-actions">
+            <a href={svc.cta.href} class="btn btn-outline btn-full">{svc.cta.label}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="service-index-cta reveal">
+      <a href="#contact" class="btn btn-amber btn-lg">Get a Quote</a>
+      <a href="#pricing" class="btn btn-ghost btn-lg">View Packages</a>
+    </div>
+  </div>
+</section>
