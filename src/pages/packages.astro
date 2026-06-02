@@ -1,0 +1,278 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const packages = [
+  {
+    name: "Landing Page Website",
+    tag: "Website build",
+    price: "1,000",
+    per: "upfront",
+    featured: false,
+    blurb: "A clean, professional one-page website to explain your services and generate enquiries.",
+    cta: "Start a website build",
+    feats: [
+      "Custom landing page website",
+      "Mobile-friendly design",
+      "Contact form + WhatsApp, phone & email buttons",
+      "Basic SEO setup",
+      "Secure HTTPS setup",
+      "Hosting setup & domain connection",
+      "Google Search Console setup",
+      "Launch support",
+    ],
+  },
+  {
+    name: "Managed Website Care",
+    tag: "Most popular",
+    price: "100",
+    per: "/mo",
+    featured: true,
+    blurb: "Keep your website, hosting, domain, forms, SSL and basic SEO managed every month.",
+    cta: "Choose Managed Care",
+    feats: [
+      "Website hosting management",
+      "Domain & DNS checks",
+      "SSL monitoring",
+      "Contact form testing",
+      "WhatsApp, phone & email link checks",
+      "Basic SEO monitoring",
+      "Google Search Console checks",
+      "Small monthly updates",
+      "Basic security checks",
+    ],
+  },
+  {
+    name: "Website Care Plus",
+    tag: "Care + content",
+    price: "150",
+    per: "/mo",
+    featured: false,
+    blurb: "Everything in Managed Care, plus blog uploads and the option to add social content.",
+    cta: "Ask about Care Plus",
+    feats: [
+      "Everything in Managed Website Care",
+      "Extra monthly support",
+      "One client-supplied blog upload / month",
+      "Blog formatting",
+      "SEO title & meta setup for blog posts",
+      "Priority support",
+      "Option to add professional business email",
+      "Optional social media content add-on",
+    ],
+  },
+];
+
+const compare = [
+  { f: "Plan type", v: ["One-time build", "Monthly", "Monthly"] },
+  { f: "Custom website build", v: [true, false, false] },
+  { f: "Mobile-friendly + contact forms", v: [true, false, false] },
+  { f: "Hosting & SSL monitoring", v: ["Setup", true, true] },
+  { f: "Domain & DNS checks", v: ["Setup", true, true] },
+  { f: "Basic SEO + Search Console", v: [true, true, true] },
+  { f: "Small monthly updates", v: [false, true, true] },
+  { f: "Monthly blog upload", v: [false, false, true] },
+  { f: "SEO meta for blog posts", v: [false, false, true] },
+  { f: "Priority support", v: [false, false, true] },
+  { f: "Business email", v: ["Add-on", "Add-on", true] },
+  { f: "Social media content", v: ["Add-on", "Add-on", "Add-on"] },
+];
+
+const faqs = [
+  { q: "How does the one-time build and monthly care work?", a: "The website build is a one-time cost (from $1,000). After launch, a monthly care plan (from $100/month) keeps everything managed, secure and online. You can start with a build and add a care plan when you’re ready." },
+  { q: "Is the pricing fixed?", a: "Prices shown are indicative starting points. Final pricing depends on the number of pages and the scope of work. We always give you a clear, fixed quote before any work begins." },
+  { q: "Can I change plans later?", a: "Yes. You can move between Managed Website Care and Website Care Plus as your needs change. There are no lock-in contracts." },
+  { q: "Is social media content included?", a: "Social and blog content is available as an optional add-on on any plan, and blog uploads are included on Website Care Plus. We tailor the content mix to your business and the platforms your customers use." },
+  { q: "Do you write the blog and social content?", a: "Yes. We plan topics, design posts and write captions aligned to your services. You review and approve before anything is published." },
+];
+---
+
+<BaseLayout
+  title="Packages & Pricing | Website Build & Monthly Care — ReadyStack Digital"
+  description="Simple, transparent packages for small businesses: a one-time website build from $1,000, then Managed Website Care from $100/month. Optional SEO, blog and social media content add-ons."
+>
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Packages"
+      title='Simple, transparent <span class="text-amber">website &amp; care</span> packages'
+      sub="Start with a one-time website build from $1,000, then keep everything secure and managed with a monthly care plan from $100/month. Add SEO, blog and social content whenever you’re ready."
+      primaryLabel="Get a Quote"
+      primaryHref="/contact"
+      secondaryLabel="Compare plans"
+      secondaryHref="#compare"
+    />
+
+    <section class="section section-tinted" aria-labelledby="pkg-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Choose your plan</div>
+          <h2 id="pkg-heading" class="section-h2">Three plans. One trusted partner.</h2>
+          <p class="section-subline">No lock-in contracts. Move between plans anytime as your business grows.</p>
+        </div>
+
+        <div class="pkg-grid">
+          {packages.map((p, i) => (
+            <div class={`pkg-card reveal ${p.featured ? "pkg-featured" : ""} ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
+              {p.featured && <div class="pkg-badge">★ Recommended</div>}
+              <div class="pkg-tag">{p.tag}</div>
+              <h3 class="pkg-name">{p.name}</h3>
+              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{p.price}</span><span class="pkg-per">{p.per}</span></div>
+              <p class="pkg-blurb">{p.blurb}</p>
+              <ul class="feat-list pkg-feats">
+                {p.feats.map((f) => (
+                  <li>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke={p.featured ? "#F59E0B" : "#10B981"} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="/contact" class={`btn btn-full ${p.featured ? "btn-amber" : "btn-outline"}`}>{p.cta}</a>
+            </div>
+          ))}
+        </div>
+        <p class="pkg-note reveal">Indicative pricing. Every quote is tailored to your business — you’ll always get a clear, fixed price before we start.</p>
+      </div>
+    </section>
+
+    <section id="compare" class="section" aria-labelledby="compare-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Compare</div>
+          <h2 id="compare-heading" class="section-h2">What’s included in each plan</h2>
+        </div>
+        <div class="compare-wrap reveal">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Landing Page</th>
+                <th scope="col" class="col-featured">Managed Care</th>
+                <th scope="col">Care Plus</th>
+              </tr>
+            </thead>
+            <tbody>
+              {compare.map((row) => (
+                <tr>
+                  <th scope="row">{row.f}</th>
+                  {row.v.map((cell, ci) => (
+                    <td class={ci === 1 ? "col-featured" : ""}>
+                      {cell === true ? (
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-label="Included"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      ) : cell === false ? (
+                        <span class="cell-no" aria-label="Not included">—</span>
+                      ) : (
+                        <span class="cell-text">{cell}</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" aria-labelledby="pkg-faq-heading">
+      <div class="container-sm">
+        <div class="section-head reveal">
+          <div class="eyebrow">Packages FAQ</div>
+          <h2 id="pkg-faq-heading" class="section-h2">Pricing questions, answered</h2>
+        </div>
+        <div class="faq-wrap reveal">
+          <div class="faq-list">
+            {faqs.map((f) => (
+              <div class="faq-item">
+                <button type="button" class="faq-q" aria-expanded="false">
+                  <span>{f.q}</span>
+                  <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="faq-a"><p>{f.a}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      heading='Ready to pick a plan? <span class="text-amber">Get your tailored quote.</span>'
+      sub="Tell us where your business is now and we’ll recommend the right plan — with a clear, fixed price and no pressure."
+      primaryLabel="Get a Quote"
+      secondaryLabel="Book a Call"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .pkg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+    align-items: start;
+  }
+  .pkg-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-6) var(--space-6);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+  }
+  .pkg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(245,158,11,.34); }
+  .pkg-featured {
+    border-color: rgba(245, 158, 11, 0.45);
+    box-shadow: 0 24px 60px rgba(245, 158, 11, 0.14), var(--shadow-md);
+    background: linear-gradient(160deg, var(--amber-50) 0%, var(--white) 55%);
+  }
+  .pkg-badge {
+    position: absolute;
+    top: -13px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, #FCD34D, var(--amber));
+    color: #0B0D10;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-xs);
+    letter-spacing: .03em;
+    padding: .35rem .9rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+  }
+  .pkg-tag { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .1em; color: var(--amber-600); }
+  .pkg-name { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--charcoal-900); letter-spacing: -.02em; }
+  .pkg-price { display: flex; align-items: baseline; gap: 2px; color: var(--charcoal-900); }
+  .pkg-from { font-size: var(--text-xs); color: var(--charcoal-500); margin-right: 4px; }
+  .pkg-sign { font-size: var(--text-lg); font-weight: var(--weight-semibold); }
+  .pkg-num { font-family: var(--font-display); font-size: 2.6rem; font-weight: var(--weight-bold); line-height: 1; letter-spacing: -.03em; }
+  .pkg-per { font-size: var(--text-sm); color: var(--charcoal-500); }
+  .pkg-blurb { font-size: var(--text-sm); color: var(--charcoal-500); line-height: 1.6; }
+  .pkg-feats { margin: var(--space-2) 0 var(--space-2); }
+  .pkg-card .btn { margin-top: auto; }
+  .pkg-note { text-align: center; max-width: 60ch; margin: var(--space-8) auto 0; font-size: var(--text-sm); color: var(--charcoal-500); }
+
+  /* Comparison table */
+  .compare-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--charcoal-200); }
+  .compare-table { width: 100%; border-collapse: collapse; min-width: 640px; background: var(--white); }
+  .compare-table th, .compare-table td { padding: var(--space-4) var(--space-4); text-align: center; border-bottom: 1px solid var(--charcoal-100); font-size: var(--text-sm); }
+  .compare-table thead th { font-family: var(--font-display); font-weight: var(--weight-bold); color: var(--charcoal-900); font-size: var(--text-base); background: var(--charcoal-50); }
+  .compare-table tbody th[scope="row"] { text-align: left; font-weight: var(--weight-medium); color: var(--charcoal-700); }
+  .compare-table .col-featured { background: rgba(245, 158, 11, 0.06); }
+  .compare-table thead .col-featured { color: var(--amber-600); }
+  .compare-table td svg { display: inline-block; vertical-align: middle; }
+  .cell-no { color: var(--charcoal-300); }
+  .cell-text { font-weight: var(--weight-medium); color: var(--charcoal-700); }
+
+  @media (max-width: 900px) {
+    .pkg-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; }
+  }
+</style>

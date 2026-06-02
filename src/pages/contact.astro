@@ -1,0 +1,310 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+
+const WHATSAPP_NUMBER = "9779840318084"; // +977 9840318084
+const CAL_EMBED = "https://cal.com/readystack-digital-yyfaab/free-website-strategy-call?embed=true&theme=dark&layout=month_view";
+const services = [
+  "Website Design & Development",
+  "Business Email Setup",
+  "SEO Services",
+  "Website Care & Maintenance",
+  "Social Media Content",
+  "A full package (website build + monthly care)",
+  "Not sure yet — need advice",
+];
+---
+
+<BaseLayout
+  title="Contact | Get a Quote or Book a Call — ReadyStack Digital"
+  description="Contact ReadyStack Digital for websites, business email, SEO, care and social media content. Send an enquiry straight to WhatsApp or book a free strategy call. Nationwide support."
+>
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Contact"
+      title='Let’s build your <span class="text-amber">online presence</span>'
+      sub="Tell us a little about your business and we’ll get straight back to you. Prefer to talk? Book a free, no-pressure strategy call."
+      primaryLabel="Book a Free Call"
+      primaryHref="#book"
+      secondaryLabel="Call us"
+      secondaryHref="tel:+9779840318084"
+      bookCta={false}
+    />
+
+    <section class="section section-tinted" aria-labelledby="contact-heading">
+      <div class="container">
+        <h2 id="contact-heading" class="sr-only">Contact ReadyStack Digital</h2>
+        <div class="contact-layout">
+
+          <!-- Form -->
+          <div class="contact-card reveal">
+            <div class="eyebrow">Send an enquiry</div>
+            <h3 class="contact-card-title">Get a quote via WhatsApp</h3>
+            <p class="contact-card-sub">Fill this in and we’ll open WhatsApp with your details ready to send — the fastest way to reach us.</p>
+
+            <form id="wa-form" class="wa-form" novalidate>
+              <div class="wa-row">
+                <div class="wa-field">
+                  <label for="wa-name">Name<span aria-hidden="true">*</span></label>
+                  <input type="text" id="wa-name" name="name" required autocomplete="name" placeholder="Your name" />
+                </div>
+                <div class="wa-field">
+                  <label for="wa-business">Business name</label>
+                  <input type="text" id="wa-business" name="business" autocomplete="organization" placeholder="Your Business Pty Ltd" />
+                </div>
+              </div>
+
+              <div class="wa-row">
+                <div class="wa-field">
+                  <label for="wa-email">Email<span aria-hidden="true">*</span></label>
+                  <input type="email" id="wa-email" name="email" required autocomplete="email" placeholder="you@yourbusiness.com.au" />
+                </div>
+                <div class="wa-field">
+                  <label for="wa-phone">Phone</label>
+                  <input type="tel" id="wa-phone" name="phone" autocomplete="tel" placeholder="0400 000 000" />
+                </div>
+              </div>
+
+              <div class="wa-field">
+                <label for="wa-service">Service interested in<span aria-hidden="true">*</span></label>
+                <select id="wa-service" name="service" required>
+                  <option value="" selected disabled>Choose a service…</option>
+                  {services.map((s) => <option value={s}>{s}</option>)}
+                </select>
+              </div>
+
+              <div class="wa-field">
+                <label for="wa-message">Message</label>
+                <textarea id="wa-message" name="message" rows="4" placeholder="What do you do, who do you serve, and what do you need help with?"></textarea>
+              </div>
+
+              <p class="wa-error" id="wa-error" role="alert" hidden></p>
+
+              <button type="submit" class="btn btn-amber btn-lg btn-full wa-submit">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+                <span>Send via WhatsApp</span>
+              </button>
+              <p class="wa-fineprint">Opens WhatsApp with your enquiry pre-filled. No data is stored on this site.</p>
+            </form>
+          </div>
+
+          <!-- Sidebar: book a call + info -->
+          <aside class="contact-aside">
+            <div class="info-card book-card reveal">
+              <div class="eyebrow eyebrow-light">Prefer to talk?</div>
+              <h3 class="info-title">Book a free 30-min strategy call</h3>
+              <p class="info-text">A relaxed, no-pressure chat about your business and how we can help you grow online.</p>
+              <a href="#book" class="btn btn-amber btn-full">Book a Call</a>
+            </div>
+
+            <div class="info-card reveal reveal-delay-1">
+              <h3 class="info-title">Business information</h3>
+              <ul class="info-list">
+                <li>
+                  <span class="info-ico" aria-hidden="true">✉</span>
+                  <a href="mailto:hello@readystackdigital.com">hello@readystackdigital.com</a>
+                </li>
+                <li>
+                  <span class="info-ico" aria-hidden="true">☎</span>
+                  <a href="tel:+9779840318084">+977 9840318084</a>
+                </li>
+                <li>
+                  <span class="info-ico" aria-hidden="true">⏱</span>
+                  <span>Mon–Fri, 9am–5pm</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="info-card area-card reveal reveal-delay-2">
+              <h3 class="info-title">Service area</h3>
+              <p class="info-text"><strong class="text-amber">Nationwide.</strong> We support small businesses right across the whole country — remotely and reliably.</p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Book a Call — Cal.com embedded in-site (no new tab) -->
+    <section id="book" class="section section-darker" aria-labelledby="book-heading">
+      <div class="container-sm">
+        <div class="section-head reveal">
+          <div class="eyebrow eyebrow-light">Book a Call</div>
+          <h2 id="book-heading" class="section-h2 section-h2-light">Pick a time that suits you</h2>
+          <p class="section-subline" style="color:rgba(255,255,255,.6)">A free 30-minute strategy call — no pitch, just a clear plan for your online presence.</p>
+        </div>
+        <div class="cal-embed-wrap reveal">
+          <iframe
+            src={CAL_EMBED}
+            title="Book a free strategy call with ReadyStack Digital"
+            loading="lazy"
+            class="cal-embed"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script define:vars={{ WHATSAPP_NUMBER }}>
+  (function () {
+    const form = document.getElementById("wa-form");
+    if (!form) return;
+    const errorEl = document.getElementById("wa-error");
+
+    function val(id) {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = val("wa-name");
+      const business = val("wa-business");
+      const email = val("wa-email");
+      const phone = val("wa-phone");
+      const service = val("wa-service");
+      const message = val("wa-message");
+
+      const missing = [];
+      if (!name) missing.push("name");
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) missing.push("a valid email");
+      if (!service) missing.push("a service");
+
+      if (missing.length) {
+        if (errorEl) {
+          errorEl.textContent = "Please add " + missing.join(", ") + " so we can help you properly.";
+          errorEl.hidden = false;
+        }
+        return;
+      }
+      if (errorEl) errorEl.hidden = true;
+
+      const lines = [
+        "New enquiry from the ReadyStack Digital website",
+        "",
+        "Name: " + name,
+        business ? "Business: " + business : null,
+        "Email: " + email,
+        phone ? "Phone: " + phone : null,
+        "Interested in: " + service,
+        message ? "Message: " + message : null,
+      ].filter(Boolean);
+
+      const url =
+        "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+
+      const win = window.open(url, "_blank", "noopener");
+      if (!win) window.location.href = url; // popup-blocked fallback
+    });
+  })();
+</script>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .contact-card {
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-xl);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow-md);
+  }
+  .contact-card-title { font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--charcoal-900); letter-spacing: -.02em; margin: var(--space-1) 0 var(--space-2); }
+  .contact-card-sub { font-size: var(--text-sm); color: var(--charcoal-500); line-height: 1.6; margin-bottom: var(--space-6); }
+
+  .wa-form { display: flex; flex-direction: column; gap: var(--space-4); }
+  .wa-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .wa-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .wa-field label { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--charcoal-700); }
+  .wa-field label span { color: var(--amber-600); margin-left: 2px; }
+  .wa-field input,
+  .wa-field select,
+  .wa-field textarea {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--charcoal-900);
+    background: var(--charcoal-50);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 0.9rem;
+    width: 100%;
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+  }
+  .wa-field textarea { resize: vertical; min-height: 110px; }
+  .wa-field input:focus,
+  .wa-field select:focus,
+  .wa-field textarea:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--amber);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+  }
+  .wa-submit { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: var(--space-2); }
+  .wa-error { color: var(--red); font-size: var(--text-sm); background: var(--red-dim); border: 1px solid rgba(239,68,68,.25); border-radius: var(--radius-md); padding: 0.6rem 0.8rem; }
+  .wa-fineprint { font-size: var(--text-xs); color: var(--charcoal-400); text-align: center; }
+
+  .contact-aside { display: flex; flex-direction: column; gap: var(--space-5); }
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+  }
+  .book-card {
+    background: linear-gradient(160deg, #14171d, #0B0D10);
+    border-color: rgba(245, 158, 11, 0.28);
+    color: #fff;
+  }
+  .book-card .info-title { color: #fff; }
+  .book-card .info-text { color: rgba(255, 255, 255, 0.66); }
+  .info-title { font-family: var(--font-display); font-size: var(--text-lg); font-weight: var(--weight-bold); color: var(--charcoal-900); letter-spacing: -.02em; margin-bottom: var(--space-2); }
+  .info-text { font-size: var(--text-sm); line-height: 1.65; color: var(--charcoal-500); margin-bottom: var(--space-4); }
+  .area-card .info-text { margin-bottom: 0; }
+  .info-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+  .info-list li { display: flex; align-items: center; gap: 0.7rem; font-size: var(--text-sm); color: var(--charcoal-700); }
+  .info-list a { color: var(--charcoal-800); text-decoration: none; }
+  .info-list a:hover { color: var(--amber-600); }
+  .info-ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--amber-50); color: var(--amber-600);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    flex-shrink: 0;
+  }
+
+  /* Cal.com inline embed */
+  .cal-embed-wrap {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  }
+  .cal-embed {
+    width: 100%;
+    height: 680px;
+    border: 0;
+    display: block;
+  }
+  @media (max-width: 600px) { .cal-embed { height: 560px; } }
+
+  @media (max-width: 880px) {
+    .contact-layout { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .wa-row { grid-template-columns: 1fr; }
+  }
+</style>

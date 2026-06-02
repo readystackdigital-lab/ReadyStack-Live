@@ -1,0 +1,75 @@
+---
+// Lightweight cookie/storage notice. The site sets no tracking cookies — only
+// the chat widget's localStorage session id — so this is a dismissible notice
+// (not a blocking opt-in), which suits Australian requirements.
+---
+
+<div id="rs-cookie" class="rs-cookie" role="region" aria-label="Cookie and storage notice" hidden>
+  <p class="rs-cookie-text">
+    We use minimal browser storage to keep your chat connected — no cross-site tracking or
+    advertising cookies. See our <a href="/privacy">Privacy &amp; Cookie Policy</a>.
+  </p>
+  <button type="button" id="rs-cookie-ok" class="rs-cookie-btn">Got it</button>
+</div>
+
+<style>
+  .rs-cookie {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 2147482000; /* just below the chat widget */
+    max-width: 380px;
+    background: var(--charcoal-900, #1C1C1E);
+    color: var(--white, #EEEFF2);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-xl, 0 24px 60px rgba(0, 0, 0, .3));
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+    font-size: .85rem;
+    line-height: 1.5;
+  }
+  .rs-cookie[hidden] { display: none; }
+  .rs-cookie-text { margin: 0; color: var(--charcoal-200, #E5E7EB); }
+  .rs-cookie-text a { color: var(--amber, #F59E0B); }
+  .rs-cookie-btn {
+    align-self: flex-start;
+    background: var(--amber, #F59E0B);
+    color: var(--charcoal-900, #1C1C1E);
+    border: none;
+    border-radius: var(--radius-full, 999px);
+    padding: .45rem 1.15rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .rs-cookie-btn:hover { background: var(--amber-600, #D97706); color: #fff; }
+  .rs-cookie-btn:focus-visible { outline: 2px solid var(--white, #EEEFF2); outline-offset: 2px; }
+
+  @media (max-width: 480px) {
+    /* Sit above the bottom-right chat bubble on small screens. */
+    .rs-cookie { left: .75rem; right: .75rem; bottom: 5.5rem; max-width: none; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var KEY = "rs_cookie_ack";
+    var bar = document.getElementById("rs-cookie");
+    if (!bar) return;
+    var acked = null;
+    try { acked = localStorage.getItem(KEY); } catch (e) {}
+    if (!acked) bar.hidden = false;
+    var btn = document.getElementById("rs-cookie-ok");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        try { localStorage.setItem(KEY, "1"); } catch (e) {}
+        bar.hidden = true;
+      });
+    }
+  })();
+</script>

@@ -1,0 +1,259 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const cats = [
+  { id: "general", label: "General" },
+  { id: "website", label: "Website" },
+  { id: "seo", label: "SEO" },
+  { id: "email", label: "Email" },
+  { id: "social", label: "Social Media" },
+  { id: "support", label: "Support" },
+];
+
+const faqs = [
+  { cat: "general", q: "What is ReadyStack Digital?", a: "ReadyStack Digital is an online-presence partner for small businesses. We build and manage your website, business email, SEO, monthly care and branded social media content — all in one place." },
+  { cat: "general", q: "Who do you work with?", a: "Small businesses everywhere: service providers, consultants, trades, clinics, restaurants, recruitment and more — any business that needs a professional, trustworthy online presence." },
+  { cat: "general", q: "Are there lock-in contracts?", a: "No. Our monthly plans are month-to-month. You stay because the work is good, not because you’re locked in." },
+
+  { cat: "website", q: "How long does a website take?", a: "A typical small-business website is ready to review within 1–3 weeks, depending on the number of pages and how quickly we receive your content and feedback." },
+  { cat: "website", q: "Do I need WordPress?", a: "Not always. Most local businesses only need a fast, professional website with contact forms, SEO and secure hosting. We recommend WordPress only when you specifically need heavy editing or plugins." },
+  { cat: "website", q: "Will my website be mobile-friendly and fast?", a: "Yes. Every site is built mobile-first, optimised for performance, and tested across devices so it loads quickly and looks great everywhere." },
+  { cat: "website", q: "Can you redesign my existing website?", a: "Yes. We can rebuild or refresh an existing site, keep what’s working, improve the rest, and connect your domain, email and SEO cleanly." },
+
+  { cat: "seo", q: "Is SEO included?", a: "Every website includes SEO foundations: page titles, meta descriptions, sitemap, heading structure, image alt text and Google Search Console setup. Ongoing on-page and local SEO are included on Growth and Premium plans." },
+  { cat: "seo", q: "Do you do local SEO and Google Business Profile?", a: "Yes. We optimise your Google Business Profile and local signals so nearby customers can find you in search and maps." },
+  { cat: "seo", q: "How long until I see SEO results?", a: "SEO is a steady build. Foundational improvements help immediately, while local ranking gains typically appear over a few months of consistent on-page work and content." },
+
+  { cat: "email", q: "Can you set up business email?", a: "Yes. We set up professional, domain-based email such as info@yourbusiness.com.au and configure it so it’s reliable and secure." },
+  { cat: "email", q: "Do you support Microsoft 365 or Google Workspace?", a: "Yes. We can set up and connect Microsoft 365 or Google Workspace, or a simpler mailbox option if that suits your business better." },
+  { cat: "email", q: "What about email deliverability (SPF, DKIM, DMARC)?", a: "We configure the required DNS records — MX, SPF, DKIM and DMARC — so your email is authenticated and lands in inboxes, not spam." },
+
+  { cat: "social", q: "Which platforms do you cover?", a: "Instagram, Facebook, TikTok and LinkedIn, plus SEO blog posts. We focus on the platforms where your customers actually spend time." },
+  { cat: "social", q: "Do you write the captions and design the posts?", a: "Yes. We plan topics, design branded posts and write clear, on-brand captions aligned with your services and goals." },
+  { cat: "social", q: "How many posts do I get per month?", a: "It depends on your plan — typically 8 posts/month on Growth and 16 on Premium, plus blog content. We tailor the mix to your business." },
+  { cat: "social", q: "Do I approve content before it’s published?", a: "Always. You review everything in one place and approve before anything goes live. Nothing is posted without your sign-off." },
+
+  { cat: "support", q: "What does monthly care include?", a: "Hosting management, domain and DNS checks, SSL monitoring, backups, contact-form testing, basic SEO monitoring, Search Console checks and small updates — with more included on higher plans." },
+  { cat: "support", q: "How do I request changes?", a: "Just email us. Small updates are included in your plan; larger work is quoted clearly up front before anything begins." },
+  { cat: "support", q: "What are your support response times?", a: "We aim to respond within one business day, with priority response for Growth and Premium plans." },
+  { cat: "support", q: "Can I cancel anytime?", a: "Yes. Plans are month-to-month with no lock-in. You own your domain and content." },
+];
+---
+
+<BaseLayout
+  title="FAQs | Common Questions — ReadyStack Digital"
+  description="Answers to common questions about ReadyStack Digital's websites, SEO, business email, social media content, pricing and monthly support for small businesses."
+>
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="FAQs"
+      title='Questions? <span class="text-amber">We’ve got answers.</span>'
+      sub="Everything you might want to know about working with ReadyStack Digital. Search, filter by topic, or just browse."
+      primaryLabel="Still have a question? Ask us"
+      primaryHref="/contact"
+      secondaryLabel="Book a Call"
+      secondaryHref="/contact"
+      bookCta={false}
+    />
+
+    <section class="section section-tinted" aria-labelledby="faq-heading">
+      <div class="container-sm">
+        <h2 id="faq-heading" class="sr-only">Frequently asked questions</h2>
+
+        <div class="qa-search reveal">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M13 13l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input type="search" id="qa-input" placeholder="Search questions…" aria-label="Search frequently asked questions" autocomplete="off" />
+        </div>
+
+        <div class="qa-filters reveal" role="group" aria-label="Filter questions by category">
+          <button class="qa-filter active" data-cat="all">All</button>
+          {cats.map((c) => <button class="qa-filter" data-cat={c.id}>{c.label}</button>)}
+        </div>
+
+        <div class="qa-list" id="qa-list">
+          {faqs.map((f) => (
+            <div class="qa-item" data-cat={f.cat}>
+              <button type="button" class="qa-q" aria-expanded="false">
+                <span>{f.q}</span>
+                <svg class="qa-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="qa-a"><p>{f.a}</p></div>
+            </div>
+          ))}
+        </div>
+        <p class="qa-empty" id="qa-empty" hidden>No questions match your search. Try a different term or <a href="/contact">ask us directly</a>.</p>
+      </div>
+    </section>
+
+    <CtaBand
+      heading='Didn’t find your answer? <span class="text-amber">Just ask.</span>'
+      sub="Send us your question and we’ll get back to you within one business day."
+      primaryLabel="Contact Us"
+      secondaryLabel="Book a Call"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  (function () {
+    const input = document.getElementById("qa-input");
+    const filters = Array.from(document.querySelectorAll(".qa-filter"));
+    const items = Array.from(document.querySelectorAll(".qa-item"));
+    const empty = document.getElementById("qa-empty");
+    if (!items.length) return;
+
+    let activeCat = "all";
+    let query = "";
+
+    function apply() {
+      let shown = 0;
+      items.forEach((item) => {
+        const cat = item.getAttribute("data-cat");
+        const text = (item.textContent || "").toLowerCase();
+        const matchCat = activeCat === "all" || cat === activeCat;
+        const matchText = !query || text.includes(query);
+        const show = matchCat && matchText;
+        item.style.display = show ? "" : "none";
+        if (show) shown++;
+        if (!show) {
+          item.querySelector(".qa-q")?.setAttribute("aria-expanded", "false");
+          item.querySelector(".qa-a")?.classList.remove("open");
+        }
+      });
+      if (empty) empty.hidden = shown !== 0;
+    }
+
+    // Accordion
+    items.forEach((item) => {
+      const trigger = item.querySelector(".qa-q");
+      const answer = item.querySelector(".qa-a");
+      if (!trigger || !answer) return;
+      trigger.addEventListener("click", () => {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+        items.forEach((o) => {
+          o.querySelector(".qa-q")?.setAttribute("aria-expanded", "false");
+          o.querySelector(".qa-a")?.classList.remove("open");
+        });
+        if (!isOpen) {
+          trigger.setAttribute("aria-expanded", "true");
+          answer.classList.add("open");
+        }
+      });
+    });
+
+    // Filters
+    filters.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filters.forEach((b) => b.classList.toggle("active", b === btn));
+        activeCat = btn.getAttribute("data-cat") || "all";
+        apply();
+      });
+    });
+
+    // Search
+    if (input) {
+      input.addEventListener("input", () => {
+        query = input.value.trim().toLowerCase();
+        apply();
+      });
+    }
+  })();
+</script>
+
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  .qa-search {
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto var(--space-5);
+    color: var(--charcoal-400);
+  }
+  .qa-search svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .qa-search input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--charcoal-900);
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-full);
+    padding: 0.85rem 1.1rem 0.85rem 2.7rem;
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .qa-search input:focus {
+    outline: none;
+    border-color: var(--amber);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+  }
+
+  .qa-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-8);
+  }
+  .qa-filter {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--charcoal-600);
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-full);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all var(--dur-fast);
+  }
+  .qa-filter:hover { border-color: var(--amber); color: var(--charcoal-900); }
+  .qa-filter.active { background: var(--amber); border-color: var(--amber); color: #0B0D10; }
+
+  .qa-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .qa-item {
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .qa-item:hover { border-color: rgba(245, 158, 11, 0.34); box-shadow: var(--shadow-sm); }
+  .qa-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    text-align: left;
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    font-weight: var(--weight-semibold);
+    color: var(--charcoal-900);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-5) var(--space-6);
+  }
+  .qa-arrow { color: var(--amber-600); flex-shrink: 0; transition: transform var(--dur-base) var(--ease-out); }
+  .qa-q[aria-expanded="true"] .qa-arrow { transform: rotate(180deg); }
+  .qa-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--dur-base) var(--ease-out);
+  }
+  .qa-a.open { max-height: 320px; }
+  .qa-a p {
+    padding: 0 var(--space-6) var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--charcoal-600);
+    line-height: 1.7;
+  }
+  .qa-empty { text-align: center; color: var(--charcoal-500); margin-top: var(--space-6); }
+  .qa-empty a { color: var(--amber-600); }
+</style>

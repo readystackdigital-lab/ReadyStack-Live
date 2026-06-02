@@ -1,0 +1,283 @@
+---
+import CookieConsent from "../components/CookieConsent.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  breadcrumb?: { name: string; path: string }[];
+}
+
+const {
+  title = "ReadyStack Digital | Websites, Email, SEO & Social Content for Small Businesses",
+  description = "ReadyStack Digital helps small businesses with websites, business email, SEO, website care, and social media content to build and grow a professional online presence — nationwide.",
+  ogImage: ogImageProp,
+  breadcrumb,
+} = Astro.props;
+
+const siteUrl = "https://readystackdigital.com";
+const ogImage = ogImageProp
+  ? (ogImageProp.startsWith("http") ? ogImageProp : `${siteUrl}${ogImageProp}`)
+  : `${siteUrl}/assets/images/hero-dashboard.png`;
+
+// Per-page canonical + OG URL derived from the current route
+const pathname = Astro.url.pathname.replace(/\/index\.html$/, "/");
+const canonicalURL = new URL(pathname, siteUrl).href;
+const isHome = pathname === "/" || pathname === "";
+
+// Breadcrumb: explicit prop, else auto from path (Home + current segment)
+const crumbs =
+  breadcrumb ??
+  (isHome
+    ? [{ name: "Home", path: "/" }]
+    : [
+        { name: "Home", path: "/" },
+        {
+          name: pathname
+            .replace(/\//g, " ")
+            .trim()
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase()),
+          path: pathname,
+        },
+      ]);
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: crumbs.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    item: new URL(c.path, siteUrl).href,
+  })),
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "Do you only work with local businesses?", acceptedAnswer: { "@type": "Answer", text: "ReadyStack Digital works with small businesses everywhere, including service providers, consultants, trades, recruitment businesses, clinics, restaurants and other businesses that need a professional online presence." } },
+    { "@type": "Question", name: "Do I need WordPress?", acceptedAnswer: { "@type": "Answer", text: "Not always. Most local businesses only need a fast, professional website with contact forms, SEO setup, secure hosting, domain connection and monthly care. We only recommend WordPress if your business specifically needs full website editing or plugin-heavy features." } },
+    { "@type": "Question", name: "Is SEO included?", acceptedAnswer: { "@type": "Answer", text: "Yes. Every website includes basic SEO setup, including page titles, meta descriptions, sitemap, heading structure, image alt text and Google Search Console setup." } },
+    { "@type": "Question", name: "Can you manage my domain and hosting?", acceptedAnswer: { "@type": "Answer", text: "Yes. We can help register or connect your domain, configure DNS, connect hosting, manage SSL and keep the technical setup monitored through monthly care." } },
+    { "@type": "Question", name: "Is business email included?", acceptedAnswer: { "@type": "Answer", text: "Business email is optional. We can help set up professional email such as info@yourdomain.com as an add-on, including support for required records such as MX, SPF, DKIM and DMARC." } },
+    { "@type": "Question", name: "Do you create social media content?", acceptedAnswer: { "@type": "Answer", text: "Yes. We offer optional monthly social media and blog content for Instagram, Facebook, TikTok and LinkedIn — branded posts and captions aligned with your website and business goals to support search and social visibility." } },
+    { "@type": "Question", name: "What does monthly care include?", acceptedAnswer: { "@type": "Answer", text: "Monthly care includes hosting management, domain and DNS checks, SSL monitoring, contact form testing, basic SEO monitoring, Search Console checks and small updates depending on your plan." } },
+    { "@type": "Question", name: "Will my website be secure?", acceptedAnswer: { "@type": "Answer", text: "Yes. We include secure website foundations such as HTTPS, SSL checks, secure hosting setup, DNS checks and form testing. Where suitable, we use lightweight static websites to reduce unnecessary plugin and admin-login risks." } },
+    { "@type": "Question", name: "Do you offer unlimited edits?", acceptedAnswer: { "@type": "Answer", text: "No. Monthly care includes small updates only. Larger design changes, new pages, copywriting, SEO campaigns or custom features are quoted separately." } }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Theme bootstrap (no flash): default dark, honours saved choice -->
+  <script is:inline>
+    (function () {
+      try {
+        var t = localStorage.getItem("rsd-theme");
+        if (t === "light" || t === "dark") {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Search Console verification -->
+  <meta name="google-site-verification" content="TECjncSlTZtlXfk6oxgKHWDX32AKlPycyozLnLFtSxg" />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content="ReadyStack Digital" />
+  <meta name="theme-color" content="#F59E0B" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/icons/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/assets/icons/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="icon" href="/assets/icons/readystack-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180" />
+  <link rel="icon" href="/assets/icons/favicon-192.png" type="image/png" sizes="192x192" />
+  <link rel="icon" href="/assets/icons/favicon-512.png" type="image/png" sizes="512x512" />
+  <meta name="msapplication-TileImage" content="/assets/icons/favicon-192.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="ReadyStack Digital" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ReadyStack Digital — Websites, SEO and social content for small businesses" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content="ReadyStack Digital — Websites, SEO and social content for small businesses" />
+
+  <!-- Fonts: preconnect + preload critical weight -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/inline-overrides.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+  <link rel="stylesheet" href="/css/theme.css" />
+
+  <!-- Schema: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://readystackdigital.com/#business",
+    "name": "ReadyStack Digital",
+    "url": "https://readystackdigital.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://readystackdigital.com/assets/icons/readystack-icon.svg"
+    },
+    "image": "https://readystackdigital.com/assets/images/hero-dashboard.png",
+    "description": "ReadyStack Digital helps small businesses build, manage and grow a professional online presence — websites, domain setup, hosting, business email, SEO, monthly website care, and social media and blog content for Instagram, Facebook, TikTok and LinkedIn. Nationwide support.",
+    "telephone": "+9779840318084",
+    "email": "hello@readystackdigital.com",
+    "priceRange": "$$",
+    "paymentAccepted": "Bank Transfer, Credit Card",
+    "areaServed": {
+      "@type": "Place",
+      "name": "Nationwide"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+9779840318084",
+      "email": "hello@readystackdigital.com",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    },
+    "sameAs": [
+      "https://www.facebook.com/readystackdigital",
+      "https://www.instagram.com/readystackdigital",
+      "https://www.linkedin.com/company/readystackdigital"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Website and Digital Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Landing Page Website",
+          "description": "One-page website build for local businesses. Fast, mobile-friendly, SEO-ready.",
+          "price": "1000",
+          "priceCurrency": "AUD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Managed Website Care",
+          "description": "Monthly website care including hosting, domain, SSL, forms and basic SEO checks.",
+          "price": "100",
+          "priceCurrency": "AUD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "100",
+            "priceCurrency": "AUD",
+            "unitCode": "MON"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Website Care Plus",
+          "description": "Monthly website care plus extra support and blog upload support.",
+          "price": "150",
+          "priceCurrency": "AUD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "150",
+            "priceCurrency": "AUD",
+            "unitCode": "MON"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Social Media & Content",
+          "description": "Optional monthly social media and blog content for small businesses, with branded posts and captions for Instagram, Facebook, TikTok and LinkedIn to support search and social visibility.",
+          "priceCurrency": "AUD"
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Schema: WebSite (enables Sitelinks Searchbox) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://readystackdigital.com/#website",
+    "url": "https://readystackdigital.com/",
+    "name": "ReadyStack Digital",
+    "description": "Websites, business email, SEO, website care and social media content for small businesses — nationwide",
+    "publisher": {
+      "@id": "https://readystackdigital.com/#business"
+    },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <!-- Schema: FAQPage — home only (avoids duplicate FAQ markup across routes) -->
+  {isHome && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+  )}
+
+  <!-- Schema: BreadcrumbList (per-page) -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
+
+  <slot name="head" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Custom cursor -->
+  <div id="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+  </div>
+
+  <!-- Page loader -->
+  <div id="page-loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <img src="/assets/icons/readystack-icon.svg" alt="" width="36" height="36" />
+        <span>ReadyStack Digital</span>
+      </div>
+      <div class="loader-track"><div class="loader-bar" id="loader-bar"></div></div>
+      <div class="loader-label" id="loader-label">Preparing your website setup…</div>
+    </div>
+  </div>
+
+  <slot />
+
+  <CookieConsent />
+
+  <script src="/js/main.js" is:inline></script>
+  <script src="/js/animations.js" is:inline></script>
+  <script src="/js/dashboard.js" is:inline></script>
+  <script src="https://agent.readystackdigital.com/widget.js" async></script>
+ </body>
+</html>

@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import SocialContent from "../components/SocialContent.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+// Official brand glyphs (single-path SVG logos, viewBox 0 0 24 24)
+const platforms = [
+  {
+    name: "Instagram",
+    brand: "#E1306C",
+    purpose: "Build a visual, trustworthy brand presence locals recognise.",
+    type: "Posts, Reels, Stories, carousels",
+    examples: ["Service highlights & before/after", "Customer testimonials", "Behind-the-scenes & team", "Offers and announcements"],
+    icon: `M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z`,
+  },
+  {
+    name: "Facebook",
+    brand: "#1877F2",
+    purpose: "Reach your local community and build day-to-day trust.",
+    type: "Posts, events, updates, reviews",
+    examples: ["Local community updates", "Service posts & promotions", "Customer reviews & trust", "Business announcements"],
+    icon: `M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z`,
+  },
+  {
+    name: "TikTok",
+    brand: "#25F4EE",
+    purpose: "Get discovered with short, engaging clips that spread awareness.",
+    type: "Short-form video, trends, tips",
+    examples: ["Quick how-to & tips", "Product / service demos", "Promotional short clips", "Trend-based brand content"],
+    icon: `M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z`,
+  },
+  {
+    name: "LinkedIn",
+    brand: "#0A66C2",
+    purpose: "Build professional credibility and B2B trust.",
+    type: "Company updates, articles, thought leadership",
+    examples: ["Business & hiring updates", "Founder / team content", "Case studies & wins", "Industry insights"],
+    icon: `M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z`,
+  },
+  {
+    name: "Blog Posts",
+    brand: "#10B981",
+    purpose: "Support Google visibility and educate customers.",
+    type: "SEO articles, guides, FAQs",
+    examples: ["How-to & buyer guides", "Local SEO articles", "Service explainers", "Common customer questions"],
+    icon: `M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1zm3 5h10v2H7V8zm0 4h10v2H7v-2zm0 4h6v2H7v-2z`,
+  },
+];
+
+const workflow = [
+  { n: "1", t: "Plan", d: "We build a monthly content plan around your services, offers and audience." },
+  { n: "2", t: "Create", d: "We design branded posts and write clear, on-brand captions and blog topics." },
+  { n: "3", t: "Review", d: "You review everything in one place and approve before anything goes live." },
+  { n: "4", t: "Publish", d: "We schedule and publish across your platforms at the right times." },
+  { n: "5", t: "Improve", d: "We track what resonates and refine the plan to keep momentum." },
+];
+
+const sampleWeek = [
+  { day: "Mon", platform: "Instagram", piece: "Service highlight reel" },
+  { day: "Tue", platform: "LinkedIn", piece: "Business / team update" },
+  { day: "Wed", platform: "Facebook", piece: "Customer review post" },
+  { day: "Thu", platform: "TikTok", piece: "Quick tip short clip" },
+  { day: "Fri", platform: "Instagram", piece: "Offer / promotion" },
+  { day: "Monthly", platform: "Blog", piece: "SEO article + reshare" },
+];
+---
+
+<BaseLayout
+  title="Social Media Content | Instagram, Facebook, TikTok, LinkedIn & Blog — ReadyStack Digital"
+  description="ReadyStack Digital creates consistent, branded social media and blog content for small businesses across Instagram, Facebook, TikTok, LinkedIn and blog posts."
+>
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Social Media & Content"
+      title='Stay visible <span class="text-amber">long after launch</span>'
+      sub="A website gives your business a home online. Consistent, branded social and blog content keeps people seeing, trusting and remembering your brand."
+      primaryLabel="Add Social Support"
+      primaryHref="/contact"
+      secondaryLabel="View Packages"
+      secondaryHref="/packages"
+    />
+
+    <!-- One content system across every platform — official icons -->
+    <section class="section section-darker" aria-labelledby="platforms-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow eyebrow-light">Every Platform</div>
+          <h2 id="platforms-heading" class="section-h2 section-h2-light">One content system across every platform</h2>
+          <p class="section-subline" style="color:rgba(255,255,255,.6)">Your brand stays consistent everywhere your customers are — with content tailored to how each platform actually works.</p>
+        </div>
+
+        <div class="plat-grid">
+          {platforms.map((p, i) => (
+            <article class={`plat-card reveal ${i ? `reveal-delay-${Math.min(i, 4)}` : ""}`} style={`--brand:${p.brand}`}>
+              <div class="plat-ico" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d={p.icon}></path></svg>
+              </div>
+              <h3 class="plat-name">{p.name}</h3>
+              <p class="plat-purpose">{p.purpose}</p>
+              <div class="plat-meta">
+                <span class="plat-meta-label">Content type</span>
+                <span class="plat-meta-val">{p.type}</span>
+              </div>
+              <ul class="feat-list plat-examples">
+                {p.examples.map((e) => (
+                  <li>
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {e}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Reuse the premium animated content dashboard showcase -->
+    <SocialContent />
+
+    <!-- Content workflow -->
+    <section class="section section-tinted" aria-labelledby="workflow-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">How content support works</div>
+          <h2 id="workflow-heading" class="section-h2">A simple, repeatable content workflow</h2>
+          <p class="section-subline">You stay in control and approve everything — we handle the heavy lifting.</p>
+        </div>
+        <div class="wf-grid">
+          {workflow.map((w, i) => (
+            <div class={`wf-card reveal ${i ? `reveal-delay-${Math.min(i, 4)}` : ""}`}>
+              <span class="wf-num">{w.n}</span>
+              <h3 class="wf-title">{w.t}</h3>
+              <p class="wf-desc">{w.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample content strategy -->
+    <section class="section" aria-labelledby="sample-heading">
+      <div class="container-sm">
+        <div class="section-head reveal">
+          <div class="eyebrow">Sample Strategy</div>
+          <h2 id="sample-heading" class="section-h2">An example weekly content mix</h2>
+          <p class="section-subline">A starting rhythm we tailor to your business, capacity and goals.</p>
+        </div>
+        <div class="sample-wrap reveal">
+          <table class="sample-table">
+            <thead><tr><th scope="col">When</th><th scope="col">Platform</th><th scope="col">Content</th></tr></thead>
+            <tbody>
+              {sampleWeek.map((s) => (
+                <tr>
+                  <th scope="row">{s.day}</th>
+                  <td>{s.platform}</td>
+                  <td>{s.piece}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      heading='Keep your business <span class="text-amber">active and visible.</span>'
+      sub="Add branded social and blog content to your plan — aligned with your website, services and goals."
+      primaryLabel="Add Social Support"
+      secondaryLabel="Book a Call"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Platform cards (official icons) */
+  .plat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-4);
+  }
+  .plat-card {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base), background var(--dur-base);
+  }
+  .plat-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+    background: color-mix(in srgb, var(--brand) 8%, rgba(255,255,255,.03));
+  }
+  .plat-ico {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand);
+    background: color-mix(in srgb, var(--brand) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+  }
+  .plat-name { font-family: var(--font-display); font-size: var(--text-md); font-weight: var(--weight-bold); color: #fff; }
+  .plat-purpose { font-size: var(--text-sm); color: rgba(255, 255, 255, 0.62); line-height: 1.55; }
+  .plat-meta { display: flex; flex-direction: column; gap: 2px; padding: .55rem 0; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); }
+  .plat-meta-label { font-family: var(--font-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); }
+  .plat-meta-val { font-size: var(--text-xs); color: rgba(255,255,255,.78); }
+  .plat-examples { gap: .45rem; }
+  .plat-examples li { color: rgba(255, 255, 255, 0.72); font-size: var(--text-xs); }
+  .plat-examples li svg { color: var(--brand); }
+
+  /* Workflow */
+  .wf-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); }
+  .wf-card { background: var(--white); border: 1px solid var(--charcoal-200); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center; transition: transform var(--dur-base), border-color var(--dur-base); }
+  .wf-card:hover { transform: translateY(-3px); border-color: rgba(245,158,11,.34); }
+  .wf-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--amber-50); border: 1px solid rgba(245,158,11,.35); color: var(--amber-600); font-family: var(--font-display); font-weight: var(--weight-bold); margin-bottom: var(--space-2); }
+  .wf-title { font-family: var(--font-display); font-size: var(--text-md); font-weight: var(--weight-bold); color: var(--charcoal-900); }
+  .wf-desc { margin-top: 4px; font-size: var(--text-xs); color: var(--charcoal-500); line-height: 1.55; }
+
+  /* Sample table */
+  .sample-wrap { overflow-x: auto; border: 1px solid var(--charcoal-200); border-radius: var(--radius-lg); }
+  .sample-table { width: 100%; border-collapse: collapse; min-width: 420px; background: var(--white); }
+  .sample-table th, .sample-table td { padding: var(--space-3) var(--space-4); text-align: left; border-bottom: 1px solid var(--charcoal-100); font-size: var(--text-sm); color: var(--charcoal-600); }
+  .sample-table thead th { font-family: var(--font-display); font-weight: var(--weight-bold); color: var(--charcoal-900); background: var(--charcoal-50); }
+  .sample-table tbody th[scope="row"] { color: var(--amber-600); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .05em; }
+
+  @media (max-width: 1000px) {
+    .plat-grid, .wf-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .plat-grid, .wf-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 460px) {
+    .plat-grid, .wf-grid { grid-template-columns: 1fr; }
+  }
+</style>

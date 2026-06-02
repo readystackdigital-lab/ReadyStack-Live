@@ -1,0 +1,87 @@
+---
+// Shared shell for legal pages (Privacy, Terms, Acceptable Use). Self-contained
+// <head> (correct canonical, no homepage-only schema/JS) reusing the site's
+// design tokens via /css/base.css + /css/layout.css + /css/legal.css.
+import CookieConsent from "../components/CookieConsent.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string; // canonical path, e.g. "/terms"
+  heading: string; // h1 text
+  updated: string; // e.g. "30 May 2026"
+}
+
+const { title, description, path, heading, updated } = Astro.props;
+const siteUrl = "https://readystackdigital.com";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ReadyStack Digital" />
+  <meta name="theme-color" content="#F59E0B" />
+  <link rel="canonical" href={siteUrl + path} />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/icons/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="/assets/icons/readystack-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" sizes="180x180" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_AU" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={siteUrl + path} />
+  <meta property="og:site_name" content="ReadyStack Digital" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Shared design tokens + legal styles -->
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/legal.css" />
+</head>
+<body class="legal-body">
+
+  <header class="legal-header">
+    <a href="/" class="legal-logo" aria-label="ReadyStack Digital — home">
+      <img src="/assets/icons/readystack-icon.svg" alt="" width="30" height="30" />
+      <span>ReadyStack Digital</span>
+    </a>
+    <a href="/" class="legal-back">← Back to home</a>
+  </header>
+
+  <main class="legal-wrap" id="main-content">
+    <p class="legal-eyebrow">Legal</p>
+    <h1>{heading}</h1>
+    <p class="legal-updated">Last updated: {updated}</p>
+    <slot />
+  </main>
+
+  <footer class="legal-footer">
+    <p>© 2026 ReadyStack Digital. All rights reserved.</p>
+    <nav aria-label="Legal">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy &amp; Cookies</a>
+      <a href="/terms">Terms</a>
+      <a href="/acceptable-use">Acceptable Use</a>
+    </nav>
+  </footer>
+
+  <CookieConsent />
+
+  <!-- ReadyStack AI assistant -->
+  <script src="https://agent.readystackdigital.com/widget.js" async></script>
+</body>
+</html>

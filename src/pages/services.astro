@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const categories = [
+  {
+    tier: "Build",
+    title: "Website Design & Development",
+    desc: "Fast, mobile-friendly websites that explain your services, build trust and generate enquiries.",
+    items: ["Business websites", "Landing pages", "Local business sites", "Performance optimization"],
+    icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>`,
+  },
+  {
+    tier: "Email",
+    title: "Business Email Setup",
+    desc: "Professional, domain-based email that makes your business look established and trustworthy.",
+    items: ["Professional email (info@yourdomain.com)", "Domain email & Microsoft 365", "MX, SPF, DKIM & DMARC setup", "Ongoing setup & support"],
+    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
+    tier: "SEO",
+    title: "SEO Services",
+    desc: "Practical search optimization that helps the right local customers find your business.",
+    items: ["Local SEO", "On-page SEO", "Technical SEO", "Google Business Profile optimization"],
+    icon: `<path d="M4 19V7a2 2 0 012-2h14a2 2 0 012 2v12" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/><path d="M7 15l3-3 3 2 5-6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h20" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>`,
+  },
+  {
+    tier: "Care",
+    title: "Website Care & Maintenance",
+    desc: "Keep your website secure, fast and online with hands-off monthly management.",
+    items: ["Security updates", "Backups", "Uptime & SSL monitoring", "Performance checks"],
+    icon: `<path d="M13 2L3 7v6C3 18.75 7.5 24 13 25.5 18.5 24 23 18.75 23 13V7L13 2z" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M9.5 13l2.5 2.5 4.5-4.5" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
+    tier: "Social",
+    title: "Social Media Content",
+    desc: "Consistent, branded content that keeps your business visible and professional online.",
+    items: ["Facebook content", "Instagram content", "TikTok content", "LinkedIn content", "Content strategy & planning"],
+    icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>`,
+  },
+];
+
+const whyChoose = [
+  { t: "One partner, every piece", d: "Website, email, SEO, care and content handled in one place — no juggling multiple vendors." },
+  { t: "Built for small business", d: "Practical scope and clear pricing designed for small businesses, not enterprise budgets." },
+  { t: "Secure by default", d: "HTTPS, SSL, DNS checks and lightweight setups that reduce plugin and login risk." },
+  { t: "No lock-in contracts", d: "Stay because the work is good, not because you're trapped in a long contract." },
+  { t: "Nationwide support", d: "Friendly, jargon-free support for businesses across the whole country." },
+  { t: "SEO from day one", d: "Every website ships with proper SEO foundations and Search Console setup." },
+];
+---
+
+<BaseLayout
+  title="Services | Websites, Email, SEO, Care & Social Content — ReadyStack Digital"
+  description="ReadyStack Digital services for small businesses: website design & development, business email setup, SEO, website care & maintenance, and social media content."
+>
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Our Services"
+      title='Everything your business needs to <span class="text-amber">grow online</span>'
+      sub="From your website and business email to SEO, monthly care and branded social content — ReadyStack Digital handles the full online presence so you can focus on your business."
+      primaryLabel="Get a Quote"
+      primaryHref="/contact"
+      secondaryLabel="View Packages"
+      secondaryHref="/packages"
+    />
+
+    <section class="section section-tinted" aria-labelledby="svc-cats-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">What We Do</div>
+          <h2 id="svc-cats-heading" class="section-h2">Five service areas, one joined-up online presence</h2>
+          <p class="section-subline">Pick what you need now and add the rest as you grow. Everything is designed to work together.</p>
+        </div>
+
+        <div class="svc-detail-grid">
+          {categories.map((c) => (
+            <article class="svc-detail reveal">
+              <div class="svc-top">
+                <div class="svc-icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" set:html={c.icon}></svg>
+                </div>
+                <span class="svc-tier">{c.tier}</span>
+              </div>
+              <h3 class="svc-name">{c.title}</h3>
+              <p class="svc-desc">{c.desc}</p>
+              <ul class="feat-list">
+                {c.items.map((i) => (
+                  <li>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {i}
+                  </li>
+                ))}
+              </ul>
+              <a href="/contact" class="btn btn-outline btn-full svc-detail-cta">Enquire about {c.tier.toLowerCase()}</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Why ReadyStack</div>
+          <h2 id="why-heading" class="section-h2">Why local businesses choose ReadyStack Digital</h2>
+          <p class="section-subline">Premium results without the agency overhead — practical, secure and built around your goals.</p>
+        </div>
+        <div class="why-grid">
+          {whyChoose.map((w, i) => (
+            <div class={`offer-card reveal ${i % 3 === 1 ? "reveal-delay-1" : i % 3 === 2 ? "reveal-delay-2" : ""}`}>
+              <div class="offer-kicker">0{i + 1}</div>
+              <h3 class="svc-name">{w.t}</h3>
+              <p class="svc-desc">{w.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      heading='Not sure which services you need? <span class="text-amber">Let’s map it out.</span>'
+      sub="Tell us about your business and we’ll recommend the right mix of website, email, SEO, care and content — with clear, honest pricing."
+      primaryLabel="Get a Quote"
+      secondaryLabel="Book a Call"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .svc-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+  .svc-detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background: var(--white);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .svc-detail:hover {
+    border-color: var(--amber);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.06), var(--shadow-md);
+    transform: translateY(-3px);
+  }
+  .svc-detail .feat-list { margin-top: var(--space-1); }
+  .svc-detail-cta { margin-top: auto; }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  @media (max-width: 980px) {
+    .svc-detail-grid,
+    .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .svc-detail-grid,
+    .why-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,1467 @@
+---
+---
+
+<section id="hero" aria-label="Hero — ReadyStack Digital website, domain, email, SEO and care">
+  <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="/assets/images/hero-dashboard.png" aria-hidden="true">
+    <source src="/assets/video/hero-video1.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-video-overlay" aria-hidden="true"></div>
+
+  <!-- Animated aurora blobs -->
+  <div class="hero-aurora" aria-hidden="true">
+    <div class="aurora-blob aurora-b1"></div>
+    <div class="aurora-blob aurora-b2"></div>
+    <div class="aurora-blob aurora-b3"></div>
+    <div class="aurora-blob aurora-b4"></div>
+  </div>
+
+  <!-- Subtle grid mesh for peripheral depth -->
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <canvas id="hero-particles" aria-hidden="true"></canvas>
+
+  <div class="hero-inner">
+
+    <!-- ── LEFT: text content ──────────────────────────── -->
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-pill">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Website • Email • SEO • Care • Social &amp; Content
+        </span>
+        <span class="eyebrow-pill eyebrow-pill-ghost">Nationwide online presence support</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Your website, email, SEO, and social content —<br>
+        <span class="headline-amber">built, managed, and kept visible</span><br>
+        <span class="headline-outline">without the stress.</span>
+      </h1>
+
+      <p class="hero-sub">
+        ReadyStack Digital helps small businesses build a professional online presence — websites, business email, SEO, and secure monthly care, plus branded social media content that keeps your brand active and visible.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="/contact" class="btn btn-amber btn-lg magnetic">
+          <span>Get a Quote</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/packages" class="btn btn-hero-ghost btn-lg">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 6.5l4 2.5-4 2.5V6.5z" fill="currentColor"/>
+          </svg>
+          <span>View Packages</span>
+        </a>
+      </div>
+
+      <div class="hero-book-link">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3.75 3.75h2.625L7.5 6.563 6.094 7.406a8.25 8.25 0 0 0 4.5 4.5L11.438 10.5l2.813 1.125-.75 2.625a1.125 1.125 0 0 1-1.125 1.125A11.25 11.25 0 0 1 2.625 4.875 1.125 1.125 0 0 1 3.75 3.75z" stroke="currentColor" stroke-width="1.3" fill="none"/>
+        </svg>
+        Prefer to talk first?&nbsp;<a href="/contact#book" class="hero-book-link__anchor">Book a free 30-min strategy call</a>&nbsp;— no commitment
+      </div>
+
+      <div class="hero-proof">
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          SEO-ready websites
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Professional email options
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Secure hosting setup
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Domain and DNS managed
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Monthly website care
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Social &amp; blog content
+        </div>
+      </div>
+
+      <p class="hero-trust">Websites from $1,000. Managed care from $100/month.</p>
+    </div><!-- /hero-text -->
+
+    <!-- ── RIGHT: 3D visual column ────────────────────── -->
+    <div class="hero-visual" aria-hidden="true">
+
+      <!--
+        Three.js WebGL globe — amber wireframe sphere with Fibonacci-distributed
+        surface dots and cursor-reactive tilt.
+
+        TO USE A SPLINE SCENE INSTEAD:
+        1. Browse app.spline.design/discover, pick a scene
+        2. Export → Public URL → copy the scene.splinecode URL
+        3. Replace the <canvas id="hero-globe"> block with:
+              <spline-viewer
+                url="https://prod.spline.design/YOUR_ID/scene.splinecode"
+                events-target="global"
+              ></spline-viewer>
+        4. Add to <head> (BaseLayout.astro):
+              <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.95/build/spline-viewer.js" is:inline></script>
+      -->
+      <canvas id="hero-globe"></canvas>
+
+      <!-- Live date / time badge -->
+      <div class="hero-live-badge" aria-label="Current date and time">
+        <span class="live-badge-dot" aria-hidden="true"></span>
+        <span id="live-date">--</span>
+        <span class="live-sep" aria-hidden="true">•</span>
+        <span id="live-time">--:--</span>
+      </div>
+    </div><!-- /hero-visual -->
+
+  </div><!-- /hero-inner -->
+
+  <div class="scroll-nudge" aria-hidden="true">
+    <div class="scroll-line-wrap"><div class="scroll-line-inner"></div></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Three.js globe — desktop-only dynamic import with reduced-motion guard -->
+<script type="module" is:inline>
+(function () {
+  const canvas = document.getElementById('hero-globe');
+  const visual = canvas?.closest('.hero-visual');
+
+  /* ── Live badge ─────────────────────────────────────────── */
+  function updateLiveBadge() {
+    const dateEl = document.getElementById('live-date');
+    const timeEl = document.getElementById('live-time');
+    if (!dateEl || !timeEl) return;
+    const dateFmt = new Intl.DateTimeFormat('en-GB', {
+      weekday: 'short', day: '2-digit', month: 'short'
+    });
+    const timeFmt = new Intl.DateTimeFormat('en-GB', {
+      hour: 'numeric', minute: '2-digit', hour12: true
+    });
+    function tick() {
+      const now = new Date();
+      dateEl.textContent = dateFmt.format(now).replace('.', '');
+      timeEl.textContent = timeFmt.format(now).replace(' ', '').toLowerCase();
+    }
+    tick();
+    window.setInterval(tick, 30000);
+  }
+  updateLiveBadge();
+
+  if (!canvas || !visual) return;
+
+  const isMobile    = window.matchMedia('(max-width: 900px)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isMobile || reduceMotion) { visual.classList.add('hero-visual--static'); return; }
+
+  async function initGlobe() {
+    let THREE;
+    try {
+      THREE = await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js');
+    } catch (err) {
+      console.warn('ReadyStack hero globe failed to load:', err);
+      visual.classList.add('hero-visual--static');
+      return;
+    }
+
+    const width  = Math.max(visual.clientWidth, 320);
+    const height = Math.max(visual.clientHeight, 360);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas, antialias: true, alpha: true, powerPreference: 'high-performance'
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.setClearColor(0x000000, 0);
+    renderer.setSize(width, height);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    const scene  = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(46, width / height, 0.1, 100);
+    camera.position.z = 4.75;
+
+    const group      = new THREE.Group();
+    const outerGroup = new THREE.Group();
+    group.add(outerGroup);
+    scene.add(group);
+
+    /* ── Wireframe sphere ──────────────────────────────── */
+    const sphereGeo = new THREE.SphereGeometry(1.5, 34, 22);
+    const edges     = new THREE.EdgesGeometry(sphereGeo, 3);
+    const wireMat   = new THREE.LineBasicMaterial({ color: 0xF59E0B, transparent: true, opacity: 0.20 });
+    outerGroup.add(new THREE.LineSegments(edges, wireMat));
+
+    /* ── Inner glow ────────────────────────────────────── */
+    const innerGlow = new THREE.Mesh(
+      new THREE.SphereGeometry(1.44, 30, 18),
+      new THREE.MeshBasicMaterial({ color: 0xF59E0B, transparent: true, opacity: 0.042, side: THREE.BackSide })
+    );
+    outerGroup.add(innerGlow);
+
+    /* ── Outer atmosphere haze ─────────────────────────── */
+    outerGroup.add(new THREE.Mesh(
+      new THREE.SphereGeometry(1.82, 24, 16),
+      new THREE.MeshBasicMaterial({ color: 0xF59E0B, transparent: true, opacity: 0.022, side: THREE.BackSide })
+    ));
+
+    /* ── Rings ─────────────────────────────────────────── */
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(1.52, 0.007, 6, 160),
+      new THREE.MeshBasicMaterial({ color: 0xF59E0B, transparent: true, opacity: 0.58 })
+    );
+    ring.rotation.x = Math.PI / 2;
+    outerGroup.add(ring);
+
+    const ring2 = new THREE.Mesh(
+      new THREE.TorusGeometry(1.58, 0.004, 6, 160),
+      new THREE.MeshBasicMaterial({ color: 0xFCD34D, transparent: true, opacity: 0.30 })
+    );
+    ring2.rotation.x = Math.PI / 3.1;
+    ring2.rotation.z = Math.PI / 5.8;
+    outerGroup.add(ring2);
+
+    const ring3 = new THREE.Mesh(
+      new THREE.TorusGeometry(1.64, 0.003, 6, 160),
+      new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true, opacity: 0.12 })
+    );
+    ring3.rotation.x = Math.PI / 2.55;
+    ring3.rotation.y = Math.PI / 4.4;
+    outerGroup.add(ring3);
+
+    /* ── Surface dots (Fibonacci distribution) ─────────── */
+    const DOT_COUNT   = 112;
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    const dotPos      = new Float32Array(DOT_COUNT * 3);
+    for (let i = 0; i < DOT_COUNT; i++) {
+      const y = 1 - (i / (DOT_COUNT - 1)) * 2;
+      const r = Math.sqrt(Math.max(0, 1 - y * y));
+      const theta = goldenAngle * i;
+      const s = 1.535;
+      dotPos[i*3]   = Math.cos(theta) * r * s;
+      dotPos[i*3+1] = y * s;
+      dotPos[i*3+2] = Math.sin(theta) * r * s;
+    }
+    const dotGeo = new THREE.BufferGeometry();
+    dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPos, 3));
+    const dots = new THREE.Points(dotGeo,
+      new THREE.PointsMaterial({ color: 0xF59E0B, size: 0.052, transparent: true, opacity: 0.84, sizeAttenuation: true })
+    );
+    outerGroup.add(dots);
+
+    /* ── Accent dots (white nodes) ─────────────────────── */
+    const ACC_COUNT = 20;
+    const accPos    = new Float32Array(ACC_COUNT * 3);
+    for (let i = 0; i < ACC_COUNT; i++) {
+      const phi   = Math.acos(-1 + (2 * i) / ACC_COUNT);
+      const theta = Math.sqrt(ACC_COUNT * Math.PI) * phi;
+      const s = 1.56;
+      accPos[i*3]   = s * Math.sin(phi) * Math.cos(theta);
+      accPos[i*3+1] = s * Math.cos(phi);
+      accPos[i*3+2] = s * Math.sin(phi) * Math.sin(theta);
+    }
+    const accGeo = new THREE.BufferGeometry();
+    accGeo.setAttribute('position', new THREE.BufferAttribute(accPos, 3));
+    const accents = new THREE.Points(accGeo,
+      new THREE.PointsMaterial({ color: 0xFFFFFF, size: 0.086, transparent: true, opacity: 0.54, sizeAttenuation: true })
+    );
+    outerGroup.add(accents);
+
+    /* ── Connection lines ──────────────────────────────── */
+    const lineMat = new THREE.LineBasicMaterial({ color: 0xF59E0B, transparent: true, opacity: 0.22 });
+    const pairs   = [
+      [0,8],[3,14],[7,21],[12,5],[17,28],
+      [22,11],[30,4],[25,18],[35,9],[40,2],
+      [48,61],[54,33],[70,43],[80,66]
+    ];
+    const lineGroup = new THREE.Group();
+    outerGroup.add(lineGroup);
+    pairs.forEach(([a, b]) => {
+      if (a >= DOT_COUNT || b >= DOT_COUNT) return;
+      const pa = new THREE.Vector3(dotPos[a*3], dotPos[a*3+1], dotPos[a*3+2]);
+      const pb = new THREE.Vector3(dotPos[b*3], dotPos[b*3+1], dotPos[b*3+2]);
+      lineGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([pa, pb]), lineMat));
+    });
+
+    /* ── Orbiting satellites ───────────────────────────── */
+    const SAT_CONFIGS = [
+      { angle: 0,            speed:  0.44, incl: 0,            r: 1.70, size: 0.055, color: 0xF59E0B },
+      { angle: Math.PI*0.7,  speed: -0.28, incl: Math.PI/4.2,  r: 1.74, size: 0.040, color: 0xFCD34D },
+      { angle: Math.PI*1.4,  speed:  0.35, incl: Math.PI/3.0,  r: 1.72, size: 0.044, color: 0xFFFFFF },
+    ];
+    const satellites = SAT_CONFIGS.map(cfg => {
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(cfg.size, 8, 6),
+        new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 0.95 })
+      );
+      outerGroup.add(mesh);
+      return { mesh, ...cfg };
+    });
+
+    /* ── Data pulses (travel along connection lines) ────── */
+    const PULSE_PAIRS = [[0,8],[7,21],[22,11],[48,61]];
+    const pulses = PULSE_PAIRS.map((pair, i) => {
+      if (pair[0] >= DOT_COUNT || pair[1] >= DOT_COUNT) return null;
+      const from = new THREE.Vector3(dotPos[pair[0]*3], dotPos[pair[0]*3+1], dotPos[pair[0]*3+2]);
+      const to   = new THREE.Vector3(dotPos[pair[1]*3], dotPos[pair[1]*3+1], dotPos[pair[1]*3+2]);
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(0.034, 6, 6),
+        new THREE.MeshBasicMaterial({ color: 0xFFFDE8, transparent: true, opacity: 0 })
+      );
+      outerGroup.add(mesh);
+      return { mesh, from, to, progress: i * 0.27, speed: 0.34 + Math.random() * 0.14 };
+    }).filter(Boolean);
+
+    /* ── Resize + cursor ───────────────────────────────── */
+    let mx = 0, my = 0, tiltX = 0, tiltZ = 0, raf = 0, disposed = false;
+
+    function onResize() {
+      if (disposed) return;
+      const w = Math.max(visual.clientWidth, 320);
+      const h = Math.max(visual.clientHeight, 360);
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    function onMouseMove(e) {
+      mx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+    }
+    window.addEventListener('resize',    onResize,    { passive: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+    /* ── Animation loop ────────────────────────────────── */
+    const clock = new THREE.Clock();
+    let prevT   = 0;
+
+    function animate() {
+      if (disposed) return;
+      raf = requestAnimationFrame(animate);
+      const t     = clock.getElapsedTime();
+      const delta = Math.min(t - prevT, 0.05); // cap spike frames
+      prevT = t;
+
+      /* Auto-rotate */
+      group.rotation.y = t * 0.095;
+
+      /* Smooth cursor tilt */
+      tiltX += (my * 0.20 - tiltX) * 0.045;
+      tiltZ += (-mx * 0.11 - tiltZ) * 0.045;
+      group.rotation.x = tiltX;
+      group.rotation.z = tiltZ;
+
+      /* Subtle inner wobble */
+      outerGroup.rotation.y = Math.sin(t * 0.23) * 0.035;
+
+      /* Pulse opacities */
+      ring.material.opacity   = 0.44 + Math.sin(t * 1.55) * 0.14;
+      ring2.material.opacity  = 0.22 + Math.sin(t * 1.05 + 1) * 0.09;
+      ring3.material.opacity  = 0.09 + Math.sin(t * 0.9  + 2) * 0.04;
+      dots.material.opacity   = 0.74 + Math.sin(t * 0.80) * 0.10;
+      accents.material.opacity= 0.46 + Math.sin(t * 1.20) * 0.08;
+
+      /* Orbit satellites */
+      satellites.forEach(sat => {
+        sat.angle += sat.speed * delta;
+        const x = sat.r * Math.cos(sat.angle);
+        const z = sat.r * Math.sin(sat.angle);
+        // Tilt orbit plane around X axis by inclination
+        sat.mesh.position.set(
+          x,
+          -z * Math.sin(sat.incl),
+           z * Math.cos(sat.incl)
+        );
+        // Subtle scale pulse to simulate glow
+        sat.mesh.scale.setScalar(1 + Math.sin(t * 3.5 + sat.angle) * 0.15);
+      });
+
+      /* Data pulses along connection lines */
+      pulses.forEach(p => {
+        p.progress += p.speed * delta;
+        if (p.progress > 1.3) p.progress = -0.3;
+        const tp = Math.max(0, Math.min(1, p.progress));
+        p.mesh.position.lerpVectors(p.from, p.to, tp);
+        // Fade in/out at endpoints
+        p.mesh.material.opacity = Math.sin(tp * Math.PI) * 0.96;
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    /* ── Cleanup ───────────────────────────────────────── */
+    function cleanup() {
+      disposed = true;
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize',    onResize);
+      window.removeEventListener('mousemove', onMouseMove);
+      [sphereGeo, edges, wireMat, dotGeo, accGeo, lineMat].forEach(r => r?.dispose?.());
+      [ring, ring2, ring3, innerGlow].forEach(m => { m.geometry.dispose(); m.material.dispose(); });
+      satellites.forEach(s => { s.mesh.geometry.dispose(); s.mesh.material.dispose(); });
+      pulses.forEach(p => { p.mesh.geometry.dispose(); p.mesh.material.dispose(); });
+      renderer.dispose();
+    }
+    window.addEventListener('pagehide', cleanup, { once: true });
+
+    onResize();
+    animate();
+  }
+
+  initGlobe();
+})();
+</script>
+
+<style>
+  /* ──────────────────────────────────────────────────────
+     Hero final polish — layout, width, spacing, visual balance
+  ────────────────────────────────────────────────────── */
+
+  #hero {
+    min-height: clamp(720px, 100svh, 900px);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  #hero .hero-inner {
+    width: min(1180px, calc(100% - 48px));
+    min-height: clamp(680px, 100svh, 860px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(410px, 0.94fr);
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4.75rem);
+    padding: clamp(7rem, 11vh, 9rem) 0 clamp(5rem, 8vh, 7rem);
+    position: relative;
+    z-index: 4;
+  }
+
+  #hero .hero-text {
+    max-width: 705px;
+    align-self: center;
+  }
+
+  #hero .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: clamp(1.2rem, 2.2vw, 1.7rem);
+  }
+
+  #hero .eyebrow-pill {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  #hero .hero-headline {
+    max-width: 720px;
+    margin: 0;
+    font-size: clamp(2.75remrem, 3.5vw, 3.5rem);
+    line-height: 0.93;
+    letter-spacing: -0.058em;
+    text-wrap: balance;
+  }
+
+  #hero .hero-sub {
+    max-width: 650px;
+    margin-top: clamp(1.15rem, 2vw, 1.45rem);
+    font-size: clamp(1.02rem, 1.18vw, 1.16rem);
+    line-height: 1.72;
+    color: rgba(255,255,255,.66);
+  }
+
+  #hero .hero-ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: clamp(1.65rem, 2.6vw, 2.05rem);
+  }
+
+  #hero .hero-ctas .btn {
+    min-height: 48px;
+  }
+
+  .hero-book-link {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    max-width: 640px;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,.46);
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,.07);
+    margin-top: 0.85rem;
+    flex-wrap: wrap;
+    line-height: 1.5;
+  }
+
+  .hero-book-link svg {
+    flex-shrink: 0;
+    color: rgba(255,255,255,.46);
+  }
+
+  .hero-book-link__anchor {
+    color: #F59E0B;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .hero-book-link__anchor:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #hero .hero-proof {
+    max-width: 690px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.65rem;
+    margin-top: clamp(1.4rem, 2.4vw, 1.9rem);
+  }
+
+  #hero .proof-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    min-height: 32px;
+    padding: 0.38rem 0.62rem;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 999px;
+    background: rgba(255,255,255,.035);
+    color: rgba(255,255,255,.68);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    line-height: 1.2;
+  }
+
+  #hero .proof-item svg {
+    flex: 0 0 auto;
+  }
+
+  #hero .hero-trust {
+    margin-top: 1.05rem;
+    color: rgba(255,255,255,.48);
+  }
+
+  .btn-hero-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-md);
+    padding: .85rem 1.85rem;
+    min-height: 48px;
+    background: rgba(255,255,255,.035);
+    color: rgba(255,255,255,.78);
+    border: 1.5px solid rgba(255,255,255,.18);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .18s, color .18s, border-color .18s, transform .18s;
+  }
+
+  .btn-hero-ghost:hover {
+    background: rgba(255,255,255,.08);
+    color: #EEEFF2;
+    border-color: rgba(255,255,255,.34);
+    transform: translateY(-1px);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px);
+    background-size: 54px 54px;
+    opacity: 0.86;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, transparent 24%, black 74%);
+    mask-image: radial-gradient(ellipse at 50% 50%, transparent 24%, black 74%);
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(100%, 560px);
+    min-height: clamp(450px, 48vw, 580px);
+    justify-self: center;
+    z-index: 3;
+    isolation: isolate;
+  }
+
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 6% 2% 0;
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 50% 45%, rgba(245,158,11,.24), transparent 35%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,.055), transparent 46%);
+    filter: blur(18px);
+    opacity: 0.95;
+    z-index: -2;
+  }
+
+  .hero-visual::after {
+    content: "";
+    position: absolute;
+    width: min(84%, 455px);
+    aspect-ratio: 1;
+    border-radius: 999px;
+    border: 1px solid rgba(245,158,11,.16);
+    box-shadow:
+      inset 0 0 45px rgba(245,158,11,.05),
+      0 0 80px rgba(245,158,11,.08);
+    opacity: 0.9;
+    z-index: -1;
+  }
+
+  .hero-visual--static::after {
+    opacity: 0.35;
+  }
+
+  #hero-globe {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    pointer-events: none;
+    filter: drop-shadow(0 28px 70px rgba(245,158,11,.16));
+  }
+
+  .hero-live-badge {
+    position: absolute;
+    bottom: clamp(1.05rem, 3vw, 1.65rem);
+    left: 50%;
+    translate: -50% 0;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .34rem .9rem;
+    background: rgba(15,18,26,.58);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    color: rgba(255,255,255,.56);
+    letter-spacing: .07em;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 14px 35px rgba(0,0,0,.18);
+  }
+
+  .live-badge-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 7px var(--green);
+    animation: pulse-dot 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .live-sep {
+    opacity: .42;
+  }
+
+  @media (max-width: 1180px) {
+    #hero .hero-inner {
+      width: min(1080px, calc(100% - 40px));
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+      gap: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    #hero .hero-headline {
+      font-size: clamp(2.75rem, 5.1vw, 4.75rem);
+    }
+
+    .hero-visual {
+      min-height: clamp(420px, 46vw, 530px);
+    }
+  }
+
+  @media (max-width: 900px) {
+    #hero {
+      min-height: auto;
+    }
+
+    #hero .hero-inner {
+      width: min(760px, calc(100% - 32px));
+      min-height: auto;
+      display: block;
+      padding: clamp(7.25rem, 15vh, 9rem) 0 clamp(4rem, 8vh, 5.5rem);
+    }
+
+    #hero .hero-text {
+      max-width: 720px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    #hero .hero-eyebrow,
+    #hero .hero-ctas,
+    #hero .hero-proof,
+    .hero-book-link {
+      justify-content: center;
+    }
+
+    #hero .hero-sub,
+    .hero-book-link,
+    #hero .hero-proof {
+      margin-inline: auto;
+    }
+
+    #hero .hero-visual {
+      display: none;
+    }
+
+    .hero-grid {
+      opacity: .56;
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, transparent 12%, black 82%);
+      mask-image: radial-gradient(ellipse at 50% 50%, transparent 12%, black 82%);
+    }
+  }
+
+  @media (max-width: 640px) {
+    #hero .hero-inner {
+      width: min(calc(100% - 28px), 560px);
+      padding-top: clamp(6.4rem, 13vh, 7.5rem);
+      padding-bottom: 4rem;
+    }
+
+    #hero .hero-headline {
+      font-size: clamp(2.35rem, 10vw, 3.15rem);
+      line-height: .98;
+      letter-spacing: -0.052em;
+    }
+
+    #hero .hero-headline br {
+      display: none;
+    }
+
+    #hero .hero-sub {
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-top: 1rem;
+    }
+
+    #hero .hero-ctas {
+      margin-top: 1.45rem;
+      gap: .65rem;
+    }
+
+    #hero .hero-ctas .btn,
+    #hero .btn-hero-ghost {
+      width: 100%;
+      max-width: 330px;
+    }
+
+    .hero-book-link {
+      max-width: 340px;
+      margin-top: .85rem;
+      font-size: .78rem;
+    }
+
+    #hero .hero-proof {
+      max-width: 360px;
+      gap: .45rem;
+      margin-top: 1.25rem;
+    }
+
+    #hero .proof-item {
+      font-size: .76rem;
+      padding: .34rem .55rem;
+    }
+
+    #hero .scroll-nudge {
+      display: none;
+    }
+  }
+
+  @media (max-width: 430px) {
+    #hero .eyebrow-pill-ghost {
+      display: none;
+    }
+
+    #hero .hero-proof {
+      justify-content: center;
+    }
+
+    #hero .proof-item {
+      max-width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-aurora,
+    .aurora-blob,
+    #hero-globe,
+    .scroll-line-inner {
+      animation: none !important;
+    }
+
+    #hero-globe {
+      opacity: .35;
+    }
+  }
+  /* ──────────────────────────────────────────────────────
+   FINAL HERO BALANCE PATCH
+   Fixes navbar overlap, headline scale, globe scale,
+   column width, spacing, and mobile rhythm.
+────────────────────────────────────────────────────── */
+
+#hero {
+  min-height: clamp(760px, 100svh, 900px) !important;
+}
+
+#hero .hero-inner {
+  width: min(1320px, calc(100% - 80px)) !important;
+  min-height: clamp(740px, 100svh, 880px) !important;
+  grid-template-columns: minmax(0, 1.12fr) minmax(420px, 0.88fr) !important;
+  gap: clamp(2.25rem, 3.4vw, 4.25rem) !important;
+  align-items: center !important;
+
+  /* Main fix: push hero content below the floating navbar */
+  padding-top: clamp(8.8rem, 13vh, 10.4rem) !important;
+  padding-bottom: clamp(4.8rem, 7vh, 6.2rem) !important;
+}
+
+#hero .hero-text {
+  max-width: 760px !important;
+  align-self: center !important;
+  transform: translateY(-0.15rem);
+}
+
+#hero .hero-eyebrow {
+  margin-bottom: clamp(1rem, 1.7vw, 1.35rem) !important;
+}
+
+#hero .hero-headline {
+  max-width: 760px !important;
+
+  /* Main fix: reduce headline scale so it stops wrapping awkwardly */
+  font-size: clamp(3rem, 4vw, 4.35rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.052em !important;
+  text-wrap: balance;
+}
+
+#hero .headline-amber {
+  display: inline-block;
+  line-height: 0.98 !important;
+}
+
+#hero .headline-outline {
+  display: inline-block;
+  font-size: 0.82em !important;
+  line-height: 1 !important;
+  margin-top: 0.08em;
+  opacity: 0.9;
+}
+
+#hero .hero-sub {
+  max-width: 640px !important;
+  margin-top: clamp(1rem, 1.6vw, 1.28rem) !important;
+  font-size: clamp(0.98rem, 1.05vw, 1.08rem) !important;
+  line-height: 1.68 !important;
+  color: rgba(255, 255, 255, 0.64) !important;
+}
+
+#hero .hero-ctas {
+  margin-top: clamp(1.35rem, 2vw, 1.75rem) !important;
+  gap: 0.75rem !important;
+}
+
+#hero .hero-ctas .btn,
+#hero .btn-hero-ghost {
+  min-height: 46px !important;
+  padding-top: 0.78rem !important;
+  padding-bottom: 0.78rem !important;
+}
+
+.hero-book-link {
+  max-width: 620px !important;
+  margin-top: 0.7rem !important;
+  padding-top: 0.72rem !important;
+  font-size: 0.79rem !important;
+}
+
+#hero .hero-proof {
+  max-width: 700px !important;
+  margin-top: clamp(1.1rem, 1.8vw, 1.45rem) !important;
+  gap: 0.46rem 0.52rem !important;
+}
+
+#hero .proof-item {
+  min-height: 30px !important;
+  padding: 0.34rem 0.56rem !important;
+  font-size: 0.78rem !important;
+  color: rgba(255, 255, 255, 0.66) !important;
+}
+
+#hero .hero-trust {
+  margin-top: 0.85rem !important;
+  font-size: 0.82rem !important;
+}
+
+/* Globe: keep it premium, but scale it into the column */
+#hero .hero-visual {
+  width: min(100%, 510px) !important;
+  min-height: clamp(420px, 44vw, 520px) !important;
+  justify-self: center !important;
+  transform: translate(0.35rem, 0.2rem);
+}
+
+#hero .hero-visual::before {
+  inset: 8% 4% 2% !important;
+  opacity: 0.75 !important;
+  filter: blur(22px) !important;
+}
+
+#hero .hero-visual::after {
+  width: min(78%, 420px) !important;
+  opacity: 0.72 !important;
+}
+
+#hero-globe {
+  transform: scale(0.9) translateY(-0.15rem);
+  transform-origin: center;
+  filter: drop-shadow(0 22px 58px rgba(245, 158, 11, 0.14)) !important;
+}
+
+.hero-live-badge {
+  bottom: clamp(1rem, 2.4vw, 1.35rem) !important;
+  font-size: 0.58rem !important;
+  opacity: 0.88;
+}
+
+/* Reduce background competition behind the text */
+.hero-video-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 8, 16, 0.86) 0%,
+      rgba(5, 8, 16, 0.74) 36%,
+      rgba(5, 8, 16, 0.52) 62%,
+      rgba(5, 8, 16, 0.42) 100%
+    ) !important;
+}
+
+.hero-grid {
+  opacity: 0.58 !important;
+}
+
+/* Laptop tightening */
+@media (max-width: 1280px) {
+  #hero .hero-inner {
+    width: min(1180px, calc(100% - 56px)) !important;
+    grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr) !important;
+    gap: clamp(1.7rem, 2.7vw, 3.2rem) !important;
+  }
+
+  #hero .hero-headline {
+    font-size: clamp(2.8rem, 4.15vw, 3.95rem) !important;
+    max-width: 690px !important;
+  }
+
+  #hero .hero-sub {
+    max-width: 590px !important;
+  }
+
+  #hero .hero-visual {
+    width: min(100%, 465px) !important;
+    min-height: 455px !important;
+  }
+
+  #hero-globe {
+    transform: scale(0.88) translateY(-0.1rem);
+  }
+}
+
+/* Tablet/mobile: remove globe and rebalance text */
+@media (max-width: 900px) {
+  #hero {
+    min-height: auto !important;
+  }
+
+  #hero .hero-inner {
+    width: min(760px, calc(100% - 32px)) !important;
+    min-height: auto !important;
+    display: block !important;
+    padding-top: clamp(7.4rem, 14vh, 8.8rem) !important;
+    padding-bottom: clamp(4rem, 7vh, 5.2rem) !important;
+  }
+
+  #hero .hero-text {
+    max-width: 720px !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+    transform: none;
+  }
+
+  #hero .hero-headline {
+    max-width: 720px !important;
+    font-size: clamp(2.7rem, 8vw, 4rem) !important;
+    line-height: 1 !important;
+  }
+
+  #hero .hero-sub {
+    margin-inline: auto !important;
+    max-width: 620px !important;
+  }
+
+  #hero .hero-eyebrow,
+  #hero .hero-ctas,
+  #hero .hero-proof,
+  .hero-book-link {
+    justify-content: center !important;
+  }
+
+  .hero-book-link {
+    margin-inline: auto !important;
+  }
+
+  #hero .hero-proof {
+    margin-inline: auto !important;
+  }
+
+  #hero .hero-visual {
+    display: none !important;
+  }
+}
+
+/* Mobile polish */
+@media (max-width: 640px) {
+  #hero .hero-inner {
+    width: min(100% - 28px, 560px) !important;
+    padding-top: clamp(6.7rem, 13vh, 7.6rem) !important;
+    padding-bottom: 4.2rem !important;
+  }
+
+  #hero .hero-headline {
+    font-size: clamp(2.28rem, 9.6vw, 3.05rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.048em !important;
+  }
+
+  #hero .hero-headline br {
+    display: none !important;
+  }
+
+  #hero .headline-outline {
+    font-size: 0.9em !important;
+  }
+
+  #hero .hero-sub {
+    font-size: 0.98rem !important;
+    line-height: 1.62 !important;
+  }
+
+  #hero .hero-ctas .btn,
+  #hero .btn-hero-ghost {
+    width: 100% !important;
+    max-width: 330px !important;
+  }
+
+  .hero-book-link {
+    max-width: 340px !important;
+    font-size: 0.76rem !important;
+  }
+
+  #hero .hero-proof {
+    max-width: 355px !important;
+  }
+
+  #hero .proof-item {
+    font-size: 0.74rem !important;
+    padding: 0.32rem 0.5rem !important;
+  }
+}
+
+@media (max-width: 430px) {
+  #hero .eyebrow-pill-ghost {
+    display: none !important;
+  }
+
+  #hero .hero-proof {
+    justify-content: center !important;
+  }
+}
+/* ──────────────────────────────────────────────────────
+   HERO HEIGHT + GLOBE PRESENCE ADJUSTMENT
+   Shorter hero, stronger globe, tighter visual balance.
+────────────────────────────────────────────────────── */
+
+#hero {
+  min-height: clamp(680px, 88svh, 800px) !important;
+}
+
+#hero .hero-inner {
+  min-height: clamp(660px, 88svh, 790px) !important;
+
+  /* Reduce vertical height */
+  padding-top: clamp(7.4rem, 10.5vh, 8.6rem) !important;
+  padding-bottom: clamp(3.4rem, 5.5vh, 4.6rem) !important;
+
+  /* Slightly stronger right column presence */
+  grid-template-columns: minmax(0, 1.03fr) minmax(450px, 0.97fr) !important;
+  gap: clamp(2rem, 3.2vw, 4rem) !important;
+}
+
+/* Keep text premium, not oversized */
+#hero .hero-headline {
+  font-size: clamp(2.95rem, 3.85vw, 4.2rem) !important;
+  line-height: 0.98 !important;
+}
+
+/* Make the globe stronger without overwhelming the text */
+#hero .hero-visual {
+  width: min(100%, 570px) !important;
+  min-height: clamp(455px, 48vw, 585px) !important;
+  transform: translate(0.8rem, 0.1rem) !important;
+}
+
+#hero .hero-visual::before {
+  inset: 4% 0 0 !important;
+  opacity: 0.88 !important;
+  filter: blur(24px) !important;
+}
+
+#hero .hero-visual::after {
+  width: min(86%, 475px) !important;
+  opacity: 0.86 !important;
+}
+
+#hero-globe {
+  transform: scale(1.02) translateY(-0.05rem) !important;
+  transform-origin: center !important;
+  filter: drop-shadow(0 28px 72px rgba(245, 158, 11, 0.18)) !important;
+}
+
+.hero-live-badge {
+  bottom: clamp(0.75rem, 1.9vw, 1.1rem) !important;
+}
+
+/* Laptop balance */
+@media (max-width: 1280px) {
+  #hero {
+    min-height: clamp(660px, 88svh, 780px) !important;
+  }
+
+  #hero .hero-inner {
+    width: min(1200px, calc(100% - 56px)) !important;
+    min-height: clamp(640px, 88svh, 760px) !important;
+    padding-top: clamp(7.1rem, 10vh, 8.2rem) !important;
+    padding-bottom: clamp(3.2rem, 5vh, 4.2rem) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(410px, 0.98fr) !important;
+  }
+
+  #hero .hero-visual {
+    width: min(100%, 535px) !important;
+    min-height: clamp(430px, 46vw, 545px) !important;
+    transform: translate(0.45rem, 0.05rem) !important;
+  }
+
+  #hero-globe {
+    transform: scale(1) translateY(-0.05rem) !important;
+  }
+}
+
+/* Tablet/mobile remains shorter and clean */
+@media (max-width: 900px) {
+  #hero {
+    min-height: auto !important;
+  }
+
+  #hero .hero-inner {
+    min-height: auto !important;
+    padding-top: clamp(6.6rem, 12vh, 7.8rem) !important;
+    padding-bottom: clamp(3.4rem, 6vh, 4.4rem) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #hero .hero-inner {
+    padding-top: clamp(6.2rem, 11vh, 7rem) !important;
+    padding-bottom: 3.6rem !important;
+  }
+}
+/* ──────────────────────────────────────────────────────
+   HERO VIDEO REDUCTION PATCH
+   Keeps the video, but turns it into a subtle atmospheric layer
+   so the globe and headline become the main focus.
+────────────────────────────────────────────────────── */
+
+#hero .hero-video {
+  opacity: 0.22 !important;
+  filter: blur(2px) saturate(0.72) brightness(0.58) contrast(0.92) !important;
+  transform: scale(1.04) !important;
+}
+
+/* Stronger cinematic overlay so text and globe stay dominant */
+#hero .hero-video-overlay {
+  background:
+    radial-gradient(
+      circle at 72% 46%,
+      rgba(245, 158, 11, 0.12) 0%,
+      rgba(245, 158, 11, 0.06) 24%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 24% 28%,
+      rgba(255, 255, 255, 0.045) 0%,
+      transparent 34%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(5, 8, 16, 0.94) 0%,
+      rgba(5, 8, 16, 0.86) 34%,
+      rgba(5, 8, 16, 0.76) 58%,
+      rgba(5, 8, 16, 0.88) 100%
+    ) !important;
+}
+
+/* Reduce competing decorative movement behind the main content */
+#hero .hero-aurora {
+  opacity: 0.32 !important;
+}
+
+#hero .aurora-blob {
+  filter: blur(56px) !important;
+}
+
+#hero .hero-grid {
+  opacity: 0.12 !important;
+}
+
+/* Make text side calmer and more readable */
+#hero .hero-text {
+  text-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+}
+
+/* Keep the globe strong against the quieter background */
+#hero .hero-visual::before {
+  opacity: 0.96 !important;
+}
+
+#hero-globe {
+  filter: drop-shadow(0 32px 76px rgba(245, 158, 11, 0.22)) !important;
+}
+
+/* Mobile: keep the background even quieter since the globe is hidden */
+@media (max-width: 900px) {
+  #hero .hero-video {
+    opacity: 0.12 !important;
+    filter: blur(2.5px) saturate(0.65) brightness(0.52) contrast(0.9) !important;
+  }
+
+  #hero .hero-video-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(5, 8, 16, 0.94) 0%,
+        rgba(5, 8, 16, 0.88) 44%,
+        rgba(5, 8, 16, 0.94) 100%
+      ) !important;
+  }
+
+  #hero .hero-aurora {
+    opacity: 0.32 !important;
+  }
+
+  #hero .hero-grid {
+    opacity: 0.32 !important;
+  }
+}
+/* ──────────────────────────────────────────────────────
+   FINAL HERO HEIGHT CONTROL
+   Adjust only these values to tune hero height.
+────────────────────────────────────────────────────── */
+
+#hero {
+  min-height: clamp(600px, 76svh, 700px)  !important;
+}
+
+#hero .hero-inner {
+  min-height: clamp(600px, 76svh, 700px) !important;
+  padding-top: clamp(6.8rem, 9.5vh, 8rem) !important;
+  padding-bottom: clamp(2.8rem, 4.5vh, 3.8rem) !important;
+}
+
+/* Keep globe balanced inside the shorter hero */
+#hero .hero-visual {
+  min-height: clamp(520px, 43vw, 580px) !important;
+}
+
+/* Laptop */
+@media (max-width: 1280px) {
+  #hero {
+    min-height: clamp(600px, 76svh, 700px) !important;
+  }
+
+  #hero .hero-inner {
+    min-height: clamp(600px, 82svh, 720px) !important;
+    padding-top: clamp(6.5rem, 9vh, 7.6rem) !important;
+    padding-bottom: clamp(2.6rem, 4vh, 3.5rem) !important;
+  }
+
+  #hero .hero-visual {
+    min-height: clamp(400px, 42vw, 500px) !important;
+  }
+}
+
+/* Tablet/mobile */
+@media (max-width: 900px) {
+  #hero {
+    min-height: auto !important;
+  }
+
+  #hero .hero-inner {
+    min-height: auto !important;
+    padding-top: clamp(6.2rem, 11vh, 7.2rem) !important;
+    padding-bottom: clamp(3rem, 5.5vh, 3.8rem) !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 640px) {
+  #hero .hero-inner {
+    padding-top: clamp(5.8rem, 10vh, 6.8rem) !important;
+    padding-bottom: 3.2rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM HERO LAYER — Entrance · Glow · Shimmer · Motion
+═══════════════════════════════════════════════════════════ */
+
+/* ── Cinematic element entrance ──────────────────────────── */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Stagger: each text block rises in sequence */
+#hero .hero-eyebrow   { animation: hero-rise .82s cubic-bezier(.16,1,.3,1) .18s both; }
+#hero .hero-headline  { animation: hero-rise .90s cubic-bezier(.16,1,.3,1) .34s both; }
+#hero .hero-sub       { animation: hero-rise .90s cubic-bezier(.16,1,.3,1) .50s both; }
+#hero .hero-ctas      { animation: hero-rise .82s cubic-bezier(.16,1,.3,1) .65s both; }
+#hero .hero-book-link { animation: hero-rise .82s cubic-bezier(.16,1,.3,1) .78s both; }
+#hero .hero-proof     { animation: hero-rise .82s cubic-bezier(.16,1,.3,1) .89s both; }
+#hero .hero-trust     { animation: hero-rise .82s cubic-bezier(.16,1,.3,1) .98s both; }
+
+/* Globe column fades + scales in a beat after text starts */
+#hero .hero-visual {
+  animation: hero-rise 1.15s cubic-bezier(.16,1,.3,1) .42s both !important;
+  /* override the transform translations from previous patches */
+  transform-origin: center !important;
+}
+
+/* Scroll nudge appears last */
+#hero .scroll-nudge {
+  animation: hero-rise .8s cubic-bezier(.16,1,.3,1) 1.4s both;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  #hero .hero-eyebrow,  #hero .hero-headline, #hero .hero-sub,
+  #hero .hero-ctas,     #hero .hero-book-link,
+  #hero .hero-proof,    #hero .hero-trust,
+  #hero .hero-visual,   #hero .scroll-nudge {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* ── Headline amber glow ─────────────────────────────────── */
+#hero .headline-amber {
+  text-shadow:
+    0 0 48px rgba(245,158,11,.40),
+    0 0 96px rgba(245,158,11,.18),
+    0 0 160px rgba(245,158,11,.08);
+}
+
+/* ── "Without the stress." outline — premium ghost ───────── */
+#hero .headline-outline {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,.22) !important;
+}
+
+/* ── CTA button — gleam sweep ────────────────────────────── */
+#hero .hero-ctas .btn-amber {
+  position: relative;
+  overflow: hidden;
+}
+#hero .hero-ctas .btn-amber::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    108deg,
+    transparent 30%,
+    rgba(255,255,255,.26) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: btn-gleam 3.4s ease-in-out 2.2s infinite;
+}
+
+@keyframes btn-gleam {
+  0%   { background-position: 180% center; opacity: 0; }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { background-position: -80%  center; opacity: 0; }
+}
+
+/* ── Proof items — amber highlight on hover ──────────────── */
+#hero .proof-item {
+  transition: border-color .22s, background .22s, color .22s;
+}
+#hero .proof-item:hover {
+  border-color: rgba(245,158,11,.30) !important;
+  background: rgba(245,158,11,.065) !important;
+  color: rgba(255,255,255,.88) !important;
+}
+
+/* ── Live badge — subtle entrance ────────────────────────── */
+#hero .hero-live-badge {
+  animation: hero-rise .8s cubic-bezier(.16,1,.3,1) 1.2s both;
+}
+
+/* ── Ghost CTA — hover lift ──────────────────────────────── */
+.btn-hero-ghost:active {
+  transform: scale(.97);
+}
+</style>

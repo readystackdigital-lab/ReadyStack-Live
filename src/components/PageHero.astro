@@ -1,0 +1,148 @@
+---
+export interface Props {
+  eyebrow?: string;
+  title: string;          // may contain inline HTML (e.g. <span class="text-amber">)
+  sub?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  bookCta?: boolean;      // render secondary as Cal.com "Book a Call" deep-link
+}
+
+const {
+  eyebrow,
+  title,
+  sub,
+  primaryLabel = "Get a Quote",
+  primaryHref = "/contact",
+  secondaryLabel,
+  secondaryHref,
+  bookCta = false,
+} = Astro.props;
+---
+
+<section class="page-hero" aria-labelledby="page-hero-title">
+  <div class="page-hero-glow" aria-hidden="true"></div>
+  <div class="page-hero-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="page-hero-inner reveal">
+      {eyebrow && (
+        <div class="eyebrow eyebrow-light page-hero-eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>{eyebrow}
+        </div>
+      )}
+      <h1 id="page-hero-title" class="page-hero-title" set:html={title}></h1>
+      {sub && <p class="page-hero-sub">{sub}</p>}
+
+      {(primaryLabel || secondaryLabel) && (
+        <div class="page-hero-ctas">
+          {primaryLabel && (
+            <a href={primaryHref} class="btn btn-amber btn-lg">{primaryLabel}</a>
+          )}
+          {secondaryLabel && (
+            <a href={secondaryHref ?? "/contact"} class="btn btn-page-ghost btn-lg">{secondaryLabel}</a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 78% 18%, #15110a 0%, transparent 48%),
+      radial-gradient(circle at 10% 90%, #0a1410 0%, transparent 42%),
+      #0B0D10;
+    color: var(--white);
+    padding-top: calc(var(--nav-h) + clamp(4.5rem, 9vw, 7rem));
+    padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+  }
+
+  .page-hero-glow {
+    position: absolute;
+    top: -10%;
+    right: -6%;
+    width: 620px;
+    height: 620px;
+    max-width: 80vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 64%);
+    filter: blur(36px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black, transparent 78%);
+    mask-image: radial-gradient(ellipse at 50% 40%, black, transparent 78%);
+    opacity: 0.5;
+  }
+
+  .page-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+  }
+
+  .page-hero-eyebrow { margin-bottom: var(--space-4); }
+
+  .page-hero-title {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: clamp(2.3rem, 1.4rem + 3.4vw, 3.9rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: #fff;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .page-hero-sub {
+    margin-top: clamp(1.1rem, 2vw, 1.5rem);
+    max-width: 60ch;
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.66);
+  }
+
+  .page-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: clamp(1.6rem, 3vw, 2.1rem);
+  }
+
+  .btn-page-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
+  }
+  .btn-page-ghost:hover {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: var(--amber);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+</style>

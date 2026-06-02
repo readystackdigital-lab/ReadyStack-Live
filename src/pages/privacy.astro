@@ -1,0 +1,121 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+const contactEmail = "hello@readystackdigital.com";
+---
+
+<LegalLayout
+  title="Privacy & Cookie Policy | ReadyStack Digital"
+  description="How ReadyStack Digital handles your information, including our AI assistant, cookies and browser storage, subprocessors, data retention and your privacy rights."
+  path="/privacy"
+  heading="Privacy & Cookie Policy"
+  updated="30 May 2026"
+>
+  <p class="legal-lead">
+    ReadyStack Digital ("we", "us", "our") builds and manages websites and digital
+    services for businesses across Australia. This policy explains what information we
+    collect, how we use it, who helps us process it, and your rights. We handle personal
+    information in line with the Australian Privacy Act 1988 and the Australian Privacy
+    Principles (APPs).
+  </p>
+
+  <h2>Information we collect</h2>
+  <ul>
+    <li><strong>Enquiries you send us</strong> — when you use our contact form, chat
+      assistant or message us on WhatsApp, we collect the details you provide (such as
+      your name, email, phone number and what you're interested in).</li>
+    <li><strong>Conversation content</strong> — the messages (and voice notes, if you
+      send them) you exchange with our AI assistant.</li>
+    <li><strong>Basic technical information</strong> — such as your IP address and, on
+      the website, the page an enquiry was started from. We use this for delivery,
+      security and abuse prevention.</li>
+  </ul>
+  <p>
+    We do <strong>not</strong> ask for or store payment card details, banking
+    information, government identifiers or other sensitive information. Please don't
+    share these with us through the website or chat.
+  </p>
+
+  <h2>Our AI assistant ("Stack")</h2>
+  <p>
+    We offer an AI assistant called <strong>Stack</strong> on our website and via
+    WhatsApp. Stack answers questions about our services, provides indicative ("from")
+    pricing, captures enquiries and helps you book a call.
+    <strong>Stack is an automated AI assistant, not a human.</strong> You're told this up
+    front, and you can reach a real person at any time by typing <strong>"human"</strong>
+    — we'll have our team follow up. Conversations are processed to generate replies and
+    may be reviewed to improve the service and investigate misuse.
+  </p>
+
+  <h2>How we use your information</h2>
+  <p>
+    To answer your questions, generate AI replies, capture and follow up on enquiries,
+    book calls, send you the information you ask for, keep the service secure and prevent
+    abuse, and to review and improve our website and assistant.
+  </p>
+
+  <h2>Who processes your data (subprocessors)</h2>
+  <p>To run our website and assistant we share the minimum necessary data with:</p>
+  <div class="legal-table-wrap">
+    <table class="legal-table">
+      <thead><tr><th>Provider</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Google (Gemini)</td><td>Generates the AI assistant's replies</td></tr>
+        <tr><td>Cloudflare</td><td>Hosting, database, AI fallback model and bot protection</td></tr>
+        <tr><td>Meta Platforms (WhatsApp)</td><td>Delivers and receives WhatsApp messages</td></tr>
+        <tr><td>Cal.com</td><td>Discovery-call booking</td></tr>
+        <tr><td>Resend</td><td>Sends enquiry notification emails to our team</td></tr>
+        <tr><td>Web3Forms</td><td>Delivers website contact-form submissions to us</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Overseas processing</h2>
+  <p>
+    Some of these providers process data on servers <strong>outside Australia</strong>
+    (for example, in the United States). By using our website and assistant you
+    acknowledge that your information may be processed overseas, consistent with
+    Australian Privacy Principle 8.
+  </p>
+
+  <h2>Cookies &amp; browser storage</h2>
+  <p>
+    Our website does not use advertising or cross-site tracking cookies. Our chat widget
+    stores a single <strong>session identifier</strong> in your browser's
+    <strong>local storage</strong> (key: <code>rs_session_id</code>) so your conversation
+    stays connected as you navigate or return later. This is not shared with third
+    parties. If we detect suspicious activity, the widget may load
+    <strong>Cloudflare Turnstile</strong>, an invisible bot-protection check that only
+    confirms you're human and does not track you across websites. You can clear this any
+    time by clearing your browser's site data for readystackdigital.com.
+  </p>
+
+  <h2>How long we keep it</h2>
+  <ul>
+    <li><strong>Conversation transcripts:</strong> retained for <strong>30 days</strong>, then deleted.</li>
+    <li><strong>Abuse and security logs:</strong> retained for <strong>90 days</strong>, then deleted.</li>
+    <li><strong>Enquiry details</strong> you provide are kept for as long as needed to respond to and manage your enquiry.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>
+    You can stop using the assistant at any time. Under the Australian Privacy Act 1988
+    you may request <strong>access to, correction of, or deletion of</strong> your
+    personal information, and you may make a privacy complaint. Contact us at
+    <a href={"mailto:" + contactEmail}>{contactEmail}</a>. If you're not satisfied with
+    our response, you can contact the Office of the Australian Information Commissioner
+    (OAIC) at <a href="https://www.oaic.gov.au" target="_blank" rel="noopener">oaic.gov.au</a>.
+  </p>
+
+  <h2>WhatsApp</h2>
+  <p>
+    If you message us on WhatsApp, your messages are also handled by WhatsApp/Meta under
+    their own terms and privacy policy. We can only reply within WhatsApp's standard
+    24-hour customer-service window after your most recent message.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy or your information? Email
+    <a href={"mailto:" + contactEmail}>{contactEmail}</a>.
+  </p>
+</LegalLayout>

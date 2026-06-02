@@ -1,0 +1,77 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+const contactEmail = "hello@readystackdigital.com";
+---
+
+<LegalLayout
+  title="Acceptable Use Policy | ReadyStack Digital"
+  description="Rules for using the ReadyStack Digital website, AI assistant and WhatsApp channel fairly and lawfully."
+  path="/acceptable-use"
+  heading="Acceptable Use Policy"
+  updated="30 May 2026"
+>
+  <p class="legal-lead">
+    This policy explains how you may use the ReadyStack Digital website, our AI assistant
+    ("Stack"), and our WhatsApp channel. It exists to keep these services safe, reliable
+    and useful for everyone. By using them, you agree to this policy. It works alongside
+    our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy &amp; Cookie Policy</a>.
+  </p>
+
+  <h2>What you may do</h2>
+  <p>
+    Use the website and assistant to learn about our services, ask genuine questions, get
+    indicative pricing, capture an enquiry, and book a call.
+  </p>
+
+  <h2>What you must not do</h2>
+  <ul>
+    <li>Use the services for anything unlawful, fraudulent, harmful or misleading.</li>
+    <li>Send abusive, harassing, threatening, hateful, obscene or defamatory content.</li>
+    <li>Spam, flood, or send repetitive or automated messages, or otherwise disrupt the service.</li>
+    <li>Attempt to gain unauthorised access, probe, scan or test the security of our systems, or interfere with their normal operation.</li>
+    <li>Reverse engineer, scrape, or use bots to harvest content or overload the service.</li>
+    <li>Impersonate any person or organisation, or misrepresent your affiliation.</li>
+    <li>Upload or transmit malware, or anything designed to harm or disrupt.</li>
+    <li>Submit other people's personal or sensitive information without authority.</li>
+  </ul>
+
+  <h2>Using the AI assistant responsibly</h2>
+  <ul>
+    <li>Don't attempt to manipulate the assistant with prompt-injection or jailbreak techniques, or try to extract its underlying instructions.</li>
+    <li>Don't rely on the assistant for professional, legal, financial, medical or security advice — it provides general information only and may be inaccurate.</li>
+    <li>Don't submit payment card details, passwords, government identifiers or other sensitive information through the chat.</li>
+  </ul>
+
+  <h2>Fair use and rate limits</h2>
+  <p>
+    We apply rate limits and automated abuse protection (including, where needed, an
+    invisible Cloudflare Turnstile check) to keep the service available for everyone. If
+    you hit a limit, please slow down and try again shortly.
+  </p>
+
+  <h2>Consequences of misuse</h2>
+  <p>
+    If you breach this policy, we may rate-limit, block or restrict your access, remove
+    content, and where appropriate report unlawful activity to the relevant authorities.
+    We log activity for security and abuse-investigation purposes as described in our
+    <a href="/privacy">Privacy &amp; Cookie Policy</a>.
+  </p>
+
+  <h2>Reporting misuse</h2>
+  <p>
+    If you notice abuse, a security issue or anything that looks wrong, please let us know
+    at <a href={"mailto:" + contactEmail}>{contactEmail}</a>.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    We may update this policy from time to time. The current version will always be
+    available on this page, with the "last updated" date shown above.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about acceptable use? Email
+    <a href={"mailto:" + contactEmail}>{contactEmail}</a>.
+  </p>
+</LegalLayout>
