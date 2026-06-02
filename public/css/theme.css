@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════════
+   theme.css — Dark theme (DEFAULT) overrides.
+   Light mode = original stylesheets (data-theme="light").
+   Loaded LAST. The navbar is dark glass in both themes.
+═══════════════════════════════════════════════════════════ */
+
+:root { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
+
+/* ─── Base surface + text ─────────────────────────────────── */
+[data-theme="dark"] body {
+  color: rgba(255, 255, 255, 0.82);
+  background:
+    radial-gradient(1100px 650px at 15% -8%, rgba(16, 185, 129, 0.10), transparent 60%),
+    radial-gradient(950px 560px at 85% 0%, rgba(245, 158, 11, 0.09), transparent 64%),
+    linear-gradient(to bottom, #0B0D10 0%, #0c1015 55%, #0a0d11 100%) !important;
+}
+[data-theme="dark"] body::after { opacity: 0.4; }
+
+/* Section backgrounds */
+[data-theme="dark"] .section-tinted { background: #0e1218 !important; }
+[data-theme="dark"] .section-alt    { background: #0b0e13 !important; }
+/* .section (transparent) shows the dark body; .section-dark / .section-darker already dark */
+
+/* ─── Headings & body text (dark-on-light → light) ────────── */
+[data-theme="dark"] .section-h2,
+[data-theme="dark"] .svc-name,
+[data-theme="dark"] .pkg-name,
+[data-theme="dark"] .tl-title,
+[data-theme="dark"] .wf-title,
+[data-theme="dark"] .platform-head-title,
+[data-theme="dark"] .contact-card-title,
+[data-theme="dark"] .info-title,
+[data-theme="dark"] .about-stat-num,
+[data-theme="dark"] .pricing-phase-lbl,
+[data-theme="dark"] .tier-name,
+[data-theme="dark"] .price-num,
+[data-theme="dark"] .tier-price { color: #fff !important; }
+
+[data-theme="dark"] .section-subline,
+[data-theme="dark"] .svc-desc,
+[data-theme="dark"] .tl-desc,
+[data-theme="dark"] .pkg-blurb,
+[data-theme="dark"] .wf-desc,
+[data-theme="dark"] .platform-head-sub,
+[data-theme="dark"] .contact-card-sub,
+[data-theme="dark"] .info-text,
+[data-theme="dark"] .pkg-note,
+[data-theme="dark"] .tier-line,
+[data-theme="dark"] .about-stat-lbl,
+[data-theme="dark"] .body-copy,
+[data-theme="dark"] .qa-empty { color: rgba(255, 255, 255, 0.60) !important; }
+
+/* ─── Cards & surfaces ────────────────────────────────────── */
+[data-theme="dark"] .svc-card,
+[data-theme="dark"] .svc-detail,
+[data-theme="dark"] .offer-card,
+[data-theme="dark"] .pricing-card,
+[data-theme="dark"] .pkg-card,
+[data-theme="dark"] .faq-item,
+[data-theme="dark"] .qa-item,
+[data-theme="dark"] .tl-card,
+[data-theme="dark"] .info-card,
+[data-theme="dark"] .contact-card,
+[data-theme="dark"] .wf-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35) !important;
+}
+[data-theme="dark"] .svc-card-hot,
+[data-theme="dark"] .pkg-featured {
+  background: linear-gradient(160deg, rgba(245, 158, 11, 0.10), rgba(255, 255, 255, 0.03)) !important;
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+[data-theme="dark"] .offer-card::after { background: rgba(245, 158, 11, 0.10); }
+
+/* Icon tiles / chips / tiers */
+[data-theme="dark"] .svc-icon { background: rgba(255, 255, 255, 0.05) !important; border-color: rgba(255, 255, 255, 0.12) !important; }
+[data-theme="dark"] .svc-tags span { background: rgba(255, 255, 255, 0.05) !important; border-color: rgba(255, 255, 255, 0.12) !important; color: rgba(255, 255, 255, 0.72) !important; }
+[data-theme="dark"] .svc-tier { color: rgba(255, 255, 255, 0.5) !important; border-color: rgba(255, 255, 255, 0.14) !important; }
+[data-theme="dark"] .svc-metric { border-color: rgba(255, 255, 255, 0.1) !important; }
+[data-theme="dark"] .svc-metric-lbl { color: rgba(255, 255, 255, 0.5) !important; }
+
+/* Filters / pills */
+[data-theme="dark"] .svc-filter-btn,
+[data-theme="dark"] .faq-filter-btn {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.66) !important;
+}
+[data-theme="dark"] .svc-filter-btn.active,
+[data-theme="dark"] .faq-filter-btn.active {
+  background: var(--amber) !important;
+  border-color: var(--amber) !important;
+  color: #0B0D10 !important;
+}
+
+/* FAQ / accordion text */
+[data-theme="dark"] .faq-q { color: #fff !important; }
+[data-theme="dark"] .faq-a p { color: rgba(255, 255, 255, 0.62) !important; }
+
+/* Pricing extras */
+[data-theme="dark"] .pricing-phase { background: rgba(255, 255, 255, 0.04) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
+[data-theme="dark"] .price-per,
+[data-theme="dark"] .price-sign,
+[data-theme="dark"] .pkg-per,
+[data-theme="dark"] .pkg-sign { color: rgba(255, 255, 255, 0.55) !important; }
+[data-theme="dark"] .addons-divider-line { background: rgba(255, 255, 255, 0.12) !important; }
+[data-theme="dark"] .tier-feats li { color: rgba(255, 255, 255, 0.74) !important; }
+
+/* Tables */
+[data-theme="dark"] .compare-table,
+[data-theme="dark"] .sample-table { background: rgba(255, 255, 255, 0.02) !important; }
+[data-theme="dark"] .compare-wrap,
+[data-theme="dark"] .sample-wrap { border-color: rgba(255, 255, 255, 0.1) !important; }
+[data-theme="dark"] .compare-table th,
+[data-theme="dark"] .compare-table td,
+[data-theme="dark"] .sample-table th,
+[data-theme="dark"] .sample-table td { border-color: rgba(255, 255, 255, 0.08) !important; color: rgba(255, 255, 255, 0.7) !important; }
+[data-theme="dark"] .compare-table thead th,
+[data-theme="dark"] .sample-table thead th { background: rgba(255, 255, 255, 0.04) !important; color: #fff !important; }
+[data-theme="dark"] .compare-table tbody th[scope="row"] { color: rgba(255, 255, 255, 0.85) !important; }
+[data-theme="dark"] .cell-text { color: rgba(255, 255, 255, 0.8) !important; }
+
+/* Timeline node */
+[data-theme="dark"] .tl-node { background: rgba(245, 158, 11, 0.12) !important; box-shadow: 0 0 0 6px #0B0D10 !important; }
+
+/* Inputs */
+[data-theme="dark"] .qa-search input,
+[data-theme="dark"] .wa-field input,
+[data-theme="dark"] .wa-field select,
+[data-theme="dark"] .wa-field textarea {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .wa-field label { color: rgba(255, 255, 255, 0.78) !important; }
+[data-theme="dark"] .wa-fineprint { color: rgba(255, 255, 255, 0.4) !important; }
+[data-theme="dark"] .info-list li,
+[data-theme="dark"] .info-list a { color: rgba(255, 255, 255, 0.8) !important; }
+[data-theme="dark"] .info-list a:hover { color: var(--amber-300) !important; }
+
+/* Buttons that were dark-on-light */
+[data-theme="dark"] .btn-outline { border-color: rgba(255, 255, 255, 0.22) !important; color: rgba(255, 255, 255, 0.88) !important; }
+[data-theme="dark"] .btn-outline:hover { border-color: var(--amber) !important; color: #fff !important; background: rgba(245, 158, 11, 0.08) !important; }
+[data-theme="dark"] .btn-ghost { color: rgba(255, 255, 255, 0.85) !important; }
+
+/* Section heads that weren't already -light */
+[data-theme="dark"] .section-head .section-h2 { color: #fff !important; }
+
+/* About / Security / Trust strip generic light text */
+[data-theme="dark"] .trust-strip,
+[data-theme="dark"] .about-card,
+[data-theme="dark"] .pillar {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Light-mode: ensure the dark-section text stays light (no change needed),
+   and keep the page heroes/cta bands dark in BOTH themes (already hard dark). */

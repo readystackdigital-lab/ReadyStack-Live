@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /dist/
+Disallow: /.astro/
+Disallow: /node_modules/
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+Sitemap: https://readystackdigital.com/sitemap.xml
