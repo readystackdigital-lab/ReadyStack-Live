@@ -102,7 +102,6 @@ function lerp(a, b, t) { return a + (b - a) * t; }
     ticking = true;
     requestAnimationFrame(() => {
       nav.classList.toggle('nav-scrolled', window.scrollY > 20);
-      updateActiveLink();
       ticking = false;
     });
   }
@@ -137,24 +136,6 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   on(document, 'keydown', e => {
     if (e.key === 'Escape' && menuOpen) closeMenu();
   });
-
-  const navLinks = $$('.nav-link[data-nav]');
-  const sections = $$('section[id]');
-
-  function updateActiveLink() {
-    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
-    const y = window.scrollY + navH + 48;
-    let active = 'hero';
-
-    sections.forEach(sec => {
-      if (sec.offsetTop <= y) active = sec.id;
-    });
-
-    navLinks.forEach(link => {
-      const target = link.dataset.nav;
-      link.classList.toggle('active', target === active);
-    });
-  }
 
   on(window, 'scroll', updateScrollState, { passive: true });
   updateScrollState();
@@ -247,170 +228,8 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   });
 })();
 
-/* ─── Multi-step Form ───────────────────────────────────── */
-(function initFormSteps() {
-  const form = $('#contact-form');
-  if (!form) return;
-
-  const steps     = [...form.querySelectorAll('.form-step')];
-  const progDots  = [...document.querySelectorAll('.form-progress-step')];
-  const progLines = [...document.querySelectorAll('.form-progress-connector')];
-  if (!steps.length) return;
-
-  let current = 1;
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function validateStep(n) {
-    const step = form.querySelector(`.form-step[data-step="${n}"]`);
-    if (!step) return true;
-    let allValid = true;
-    step.querySelectorAll('[required]').forEach(field => {
-      let ok = field.value.trim() !== '';
-      if (ok && field.type === 'email') ok = EMAIL_RE.test(field.value.trim());
-      if (ok && field.type === 'url' && field.value.trim()) {
-        try { new URL(field.value.trim()); } catch { ok = false; }
-      }
-      field.classList.toggle('invalid', !ok);
-      field.setAttribute('aria-invalid', String(!ok));
-      if (!ok) allValid = false;
-    });
-    if (!allValid) step.querySelector('.invalid')?.focus();
-    return allValid;
-  }
-
-  function showStep(n, back) {
-    const target = form.querySelector(`.form-step[data-step="${n}"]`);
-    if (!target) return;
-    steps.forEach(s => s.classList.remove('active', 'step-back'));
-    if (back) target.classList.add('step-back');
-    void target.offsetWidth;
-    target.classList.add('active');
-
-    progDots.forEach(d => {
-      d.classList.toggle('active', +d.dataset.step === n);
-      d.classList.toggle('done',   +d.dataset.step < n);
-    });
-    progLines.forEach(l => l.classList.toggle('done', +l.dataset.after < n));
-    current = n;
-    form.closest('.contact-form-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  form.addEventListener('click', e => {
-    const nextBtn = e.target.closest('.form-next');
-    const backBtn = e.target.closest('.form-back');
-    if (nextBtn && validateStep(current)) showStep(+nextBtn.dataset.next, false);
-    if (backBtn) showStep(+backBtn.dataset.back, true);
-  });
-
-  // Remove invalid state on user input
-  form.addEventListener('input',  e => e.target.classList?.remove('invalid'));
-  form.addEventListener('change', e => e.target.classList?.remove('invalid'));
-})();
-
-/* ─── Contact Form ───────────────────────────────────────── */
-(function initContactForm() {
-  const form    = $('#contact-form');
-  const success = $('#form-success');
-  const submit  = $('#form-submit');
-  if (!form) return;
-
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  function validateField(field) {
-    const val = field.value.trim();
-    let ok = true;
-
-    if (field.required && !val) ok = false;
-    if (field.type === 'email' && val && !EMAIL_RE.test(val)) ok = false;
-    if (field.type === 'url' && val) {
-      try { new URL(val); } catch { ok = false; }
-    }
-
-    field.classList.toggle('invalid', !ok);
-    field.setAttribute('aria-invalid', String(!ok));
-    return ok;
-  }
-
-  $$('input, select, textarea', form).forEach(field => {
-    on(field, 'blur', () => validateField(field));
-    on(field, 'input', () => {
-      field.classList.remove('invalid');
-      field.removeAttribute('aria-invalid');
-    });
-  });
-
-  async function submitForm() {
-    const action = form.getAttribute('action');
-    const method = (form.getAttribute('method') || 'POST').toUpperCase();
-
-    if (!action || action === '#') {
-      await new Promise(r => setTimeout(r, 900));
-      return { success: true };
-    }
-
-    const res = await fetch(action, {
-      method,
-      body: new FormData(form),
-      headers: { Accept: 'application/json' },
-    });
-
-    const data = await res.json().catch(() => ({}));
-
-    if (!res.ok || data.success === false) {
-      throw new Error(data.message || 'Form submission failed');
-    }
-
-    return data;
-  }
-
-  on(form, 'submit', async e => {
-    e.preventDefault();
-
-    const fields = $$('input[required], select[required], textarea[required]', form);
-    const allValid = fields.map(validateField).every(Boolean);
-
-    if (!allValid) {
-      fields.find(f => f.classList.contains('invalid'))?.focus();
-      return;
-    }
-
-    if (submit) {
-      submit.classList.add('loading');
-      submit.disabled = true;
-    }
-
-    try {
-      await submitForm();
-
-      if (submit) {
-        submit.classList.remove('loading');
-        submit.disabled = false;
-      }
-
-      form.style.transition = 'opacity .3s';
-      form.style.opacity = '0';
-
-      setTimeout(() => {
-        form.hidden = true;
-        form.style.opacity = '';
-        form.style.transition = '';
-
-        if (success) {
-          success.hidden = false;
-          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 280);
-    } catch (err) {
-      if (submit) {
-        submit.classList.remove('loading');
-        submit.disabled = false;
-      }
-
-      alert('Something went wrong sending the enquiry. Please email us directly or try again.');
-    }
-  });
-})();
-
+/* Multi-step + web3forms contact form modules removed — their #contact-form
+   markup was only in the unused Contact.astro component. */
 
 /* ─── Hover tilt on current cards ────────────────────────── */
 (function initTilt() {

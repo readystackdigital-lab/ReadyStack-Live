@@ -35,6 +35,7 @@
 [data-theme="dark"] .pricing-phase-lbl,
 [data-theme="dark"] .tier-name,
 [data-theme="dark"] .price-num,
+[data-theme="dark"] .pkg-num,
 [data-theme="dark"] .tier-price { color: #fff !important; }
 
 [data-theme="dark"] .section-subline,
@@ -104,6 +105,7 @@
 [data-theme="dark"] .price-per,
 [data-theme="dark"] .price-sign,
 [data-theme="dark"] .pkg-per,
+[data-theme="dark"] .pkg-from,
 [data-theme="dark"] .pkg-sign { color: rgba(255, 255, 255, 0.55) !important; }
 [data-theme="dark"] .addons-divider-line { background: rgba(255, 255, 255, 0.12) !important; }
 [data-theme="dark"] .tier-feats li { color: rgba(255, 255, 255, 0.74) !important; }
