@@ -463,7 +463,7 @@
 .metric-lbl {
   font-family: var(--font-mono);
   font-size: .55rem;
-  color: rgba(255,255,255,.3);
+  color: rgba(255,255,255,.5);
   letter-spacing: .06em;
   white-space: nowrap;
 }
@@ -1770,12 +1770,12 @@
 
 .footer-copy {
   font-size: var(--text-xs);
-  color: rgba(255,255,255,.25);
+  color: rgba(255,255,255,.45);
 }
 
 .footer-legal a {
   font-size: var(--text-xs);
-  color: rgba(255,255,255,.25);
+  color: rgba(255,255,255,.45);
   transition: color var(--dur-fast);
 }
 

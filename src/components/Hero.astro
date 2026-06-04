@@ -1196,12 +1196,13 @@
 ────────────────────────────────────────────────────── */
 
 #hero .hero-video {
-  opacity: 0.22 !important;
-  filter: blur(2px) saturate(0.72) brightness(0.58) contrast(0.92) !important;
+  opacity: 0.42 !important;
+  filter: blur(1px) saturate(0.9) brightness(0.86) contrast(0.96) !important;
   transform: scale(1.04) !important;
 }
 
-/* Stronger cinematic overlay so text and globe stay dominant */
+/* Cinematic overlay: stays dark on the left behind the headline,
+   lifts on the right so the falling social icons read through */
 #hero .hero-video-overlay {
   background:
     radial-gradient(
@@ -1217,10 +1218,10 @@
     ),
     linear-gradient(
       90deg,
-      rgba(5, 8, 16, 0.94) 0%,
-      rgba(5, 8, 16, 0.86) 34%,
-      rgba(5, 8, 16, 0.76) 58%,
-      rgba(5, 8, 16, 0.88) 100%
+      rgba(5, 8, 16, 0.90) 0%,
+      rgba(5, 8, 16, 0.76) 34%,
+      rgba(5, 8, 16, 0.48) 62%,
+      rgba(5, 8, 16, 0.38) 100%
     ) !important;
 }
 
@@ -1254,17 +1255,17 @@
 /* Mobile: keep the background even quieter since the globe is hidden */
 @media (max-width: 900px) {
   #hero .hero-video {
-    opacity: 0.12 !important;
-    filter: blur(2.5px) saturate(0.65) brightness(0.52) contrast(0.9) !important;
+    opacity: 0.22 !important;
+    filter: blur(1.5px) saturate(0.78) brightness(0.7) contrast(0.94) !important;
   }
 
   #hero .hero-video-overlay {
     background:
       linear-gradient(
         180deg,
-        rgba(5, 8, 16, 0.94) 0%,
-        rgba(5, 8, 16, 0.88) 44%,
-        rgba(5, 8, 16, 0.94) 100%
+        rgba(5, 8, 16, 0.88) 0%,
+        rgba(5, 8, 16, 0.74) 44%,
+        rgba(5, 8, 16, 0.88) 100%
       ) !important;
   }
 

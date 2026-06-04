@@ -150,13 +150,36 @@
 /* Section heads that weren't already -light */
 [data-theme="dark"] .section-head .section-h2 { color: #fff !important; }
 
-/* About / Security / Trust strip generic light text */
-[data-theme="dark"] .trust-strip,
+/* About / Security cards generic light surface */
 [data-theme="dark"] .about-card,
 [data-theme="dark"] .pillar {
   background: rgba(255, 255, 255, 0.04) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
+
+/* Trust strip band (section id="trust") was a light band in dark mode */
+[data-theme="dark"] #trust { background: #0e1218 !important; border-color: rgba(255, 255, 255, 0.08) !important; }
+[data-theme="dark"] .trust-label { color: rgba(255, 255, 255, 0.55) !important; }
+
+/* About pillars — feature titles were charcoal-900 (invisible on dark) */
+[data-theme="dark"] .pillar h3 { color: #fff !important; }
+[data-theme="dark"] .pillar p  { color: rgba(255, 255, 255, 0.62) !important; }
+
+/* About stat grid — light cards stranded the numbers/labels */
+[data-theme="dark"] .about-stat-grid { background: rgba(255, 255, 255, 0.08) !important; border-color: rgba(255, 255, 255, 0.10) !important; }
+[data-theme="dark"] .about-stat      { background: rgba(255, 255, 255, 0.04) !important; }
+[data-theme="dark"] .about-stat-num  { color: var(--amber) !important; }
+
+/* Pricing tier badges — light pills that inherited light text in dark mode */
+[data-theme="dark"] .svc-tier-hot     { background: rgba(245, 158, 11, 0.14) !important; color: var(--amber-300) !important; border-color: rgba(245, 158, 11, 0.34) !important; }
+[data-theme="dark"] .svc-tier-premium { background: rgba(139, 92, 246, 0.16) !important; color: #c4b5fd !important;        border-color: rgba(139, 92, 246, 0.34) !important; }
+
+/* Feature lists inside service/package cards (charcoal text on dark cards) */
+[data-theme="dark"] .feat-list li { color: rgba(255, 255, 255, 0.78) !important; }
+
+/* FAQs page Q&A — page-scoped styles use charcoal-900/600 */
+[data-theme="dark"] .qa-q      { color: #fff !important; }
+[data-theme="dark"] .qa-a p    { color: rgba(255, 255, 255, 0.7) !important; }
 
 /* Light-mode: ensure the dark-section text stays light (no change needed),
    and keep the page heroes/cta bands dark in BOTH themes (already hard dark). */

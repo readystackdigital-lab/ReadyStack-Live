@@ -29,17 +29,27 @@
 
       <!-- ── Founder ─────────────────────────────────────────── -->
       <div class="footer-founder">
-        <div class="founder-orb" aria-hidden="true">
-          <span class="orb-ring orb-ring-1"></span>
-          <span class="orb-ring orb-ring-2"></span>
-          <span class="orb-ring orb-ring-3"></span>
-          <span class="orb-core"><span class="orb-monogram">MS</span></span>
-          <span class="orb-spark"></span>
-          <span class="orb-glow"></span>
+        <div class="founder-photo-wrap">
+          <span class="founder-ring" aria-hidden="true"></span>
+          <img
+            class="founder-photo"
+            src="/assets/images/founder-image.jpeg"
+            alt="Mandip Sapkota, founder of ReadyStack Digital"
+            width="104"
+            height="104"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div class="founder-text">
           <span class="founder-kicker">Founder</span>
           <span class="founder-name">Mandip Sapkota</span>
+          <p class="founder-bio">
+            “I started ReadyStack Digital to give small businesses the fast, secure, well-managed
+            website that bigger companies pay agencies for. I handle every build and monthly check
+            personally, so you always deal with the person who knows your site best.”
+          </p>
+          <span class="founder-meta">Personally manages every ReadyStack account</span>
         </div>
       </div>
 
@@ -158,7 +168,7 @@
     text-align: center;
     align-self: center;
   }
-  .founder-text { display: flex; flex-direction: column; gap: 0.15rem; }
+  .founder-text { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
   .founder-kicker {
     font-family: var(--font-mono);
     font-size: 0.66rem;
@@ -174,71 +184,85 @@
     color: #fff;
   }
 
-  /* ── 3D animated orb (no photo/icon) — size via --orb-size ─ */
-  .founder-orb {
+  /* ── Founder photo — size via --orb-size ─ */
+  .founder-photo-wrap {
     position: relative;
     width: var(--orb-size);
     height: var(--orb-size);
     flex-shrink: 0;
-    perspective: 600px;
-    transform-style: preserve-3d;
     animation: orb-float 6s ease-in-out infinite;
   }
-  @keyframes orb-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+  @keyframes orb-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-  .orb-core {
-    position: absolute;
-    inset: 17%;
+  .founder-photo {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.22), transparent 42%),
-      radial-gradient(circle at 68% 72%, rgba(245,158,11,0.35), transparent 55%),
-      linear-gradient(150deg, #1b2027, #0d1014);
-    border: 1px solid rgba(245,158,11,0.3);
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid rgba(245,158,11,0.55);
     box-shadow:
-      inset 0 2px 10px rgba(255,255,255,0.12),
-      inset 0 -8px 18px rgba(0,0,0,0.5),
-      0 18px 40px rgba(0,0,0,0.35);
-    animation: orb-tilt 7s ease-in-out infinite;
-  }
-  @keyframes orb-tilt {
-    0%,100% { transform: rotateX(8deg) rotateY(-12deg); }
-    50%     { transform: rotateX(-6deg) rotateY(12deg); }
-  }
-  .orb-monogram {
-    font-family: var(--font-display);
-    font-weight: var(--weight-bold);
-    font-size: calc(var(--orb-size) * 0.26);
-    letter-spacing: -0.03em;
-    background: linear-gradient(135deg, #FCD34D, #F59E0B);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 24px rgba(245,158,11,0.4);
+      0 18px 40px rgba(0,0,0,0.45),
+      inset 0 0 0 1px rgba(255,255,255,0.06);
   }
 
-  .orb-ring { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid transparent; }
-  .orb-ring-1 { border-top-color: rgba(245,158,11,0.85); border-right-color: rgba(245,158,11,0.25); animation: orb-spin 4.5s linear infinite; }
-  .orb-ring-2 { inset: 8px; border-bottom-color: rgba(16,185,129,0.7); border-left-color: rgba(16,185,129,0.2); animation: orb-spin 6.5s linear infinite reverse; }
-  .orb-ring-3 { inset: -7px; border-top-color: rgba(255,255,255,0.5); border-left-color: rgba(255,255,255,0.12); animation: orb-spin 9s linear infinite; }
+  /* Rotating amber gradient ring behind the photo */
+  .founder-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    z-index: 0;
+    background: conic-gradient(from 0deg, #F59E0B, #FCD34D, rgba(245,158,11,0.12), #F59E0B);
+    filter: blur(2px);
+    opacity: 0.6;
+    animation: orb-spin 9s linear infinite;
+  }
   @keyframes orb-spin { to { transform: rotate(360deg); } }
 
-  .orb-spark { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%,-50%); animation: orb-spin 5.5s linear infinite; }
-  .orb-spark::before {
-    content: ""; position: absolute; top: -3px; left: 50%;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #FCD34D; box-shadow: 0 0 12px 2px rgba(245,158,11,0.8);
-    transform: translateX(-50%);
-  }
-  .orb-glow {
-    position: absolute; inset: -20%; border-radius: 50%; z-index: -1;
-    background: radial-gradient(circle, rgba(245,158,11,0.22), transparent 60%);
+  /* Soft amber glow */
+  .founder-photo-wrap::after {
+    content: "";
+    position: absolute;
+    inset: -22%;
+    border-radius: 50%;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(245,158,11,0.22), transparent 62%);
     filter: blur(14px);
     animation: orb-pulse 4s ease-in-out infinite;
   }
-  @keyframes orb-pulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+  @keyframes orb-pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+  /* ── Credibility copy ─────────────────────────────────── */
+  .founder-name { margin-bottom: 0.15rem; }
+  .founder-bio {
+    margin: 0.5rem 0 0;
+    max-width: 32ch;
+    font-size: 0.82rem;
+    line-height: 1.62;
+    font-style: italic;
+    color: rgba(255,255,255,0.64);
+  }
+  .founder-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    margin-top: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.52);
+  }
+  .founder-meta::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green, #10B981);
+    box-shadow: 0 0 8px var(--green, #10B981);
+    flex-shrink: 0;
+  }
 
   /* Stacked footer (≤900px): keep founder centred, a touch smaller */
   @media (max-width: 900px) {
@@ -246,7 +270,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .founder-orb, .orb-core, .orb-ring, .orb-spark, .orb-glow { animation: none !important; }
-    .orb-core { transform: rotateX(6deg) rotateY(-10deg); }
+    .founder-photo-wrap,
+    .founder-ring,
+    .founder-photo-wrap::after { animation: none !important; }
   }
 </style>
