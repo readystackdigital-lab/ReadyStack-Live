@@ -1,0 +1,188 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+const posts = (await getCollection("posts", ({ data }) => data.draft === false))
+  .sort(
+    (a, b) =>
+      new Date(b.data.publishedDate).valueOf() -
+      new Date(a.data.publishedDate).valueOf(),
+  );
+
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<BaseLayout
+  title="Blog | ReadyStack Digital"
+  description="Practical guides on websites, SEO, business email, security and social content for small businesses, from the ReadyStack Digital team."
+>
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Blog"
+      title='Insights to grow your <span class="text-amber">online presence</span>'
+      sub="Practical, jargon-free guides on websites, SEO, business email, security and social content for small businesses."
+      primaryLabel="Book a Discovery Call"
+      primaryHref="/contact"
+      secondaryLabel="View Packages"
+      secondaryHref="/packages"
+    />
+
+    <section class="section" aria-labelledby="blog-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Latest Articles</div>
+          <h2 id="blog-heading" class="section-h2">From the ReadyStack journal</h2>
+          <p class="section-subline">Tips, walkthroughs and updates to help your business stay visible and secure online.</p>
+        </div>
+
+        {posts.length === 0 ? (
+          <p class="blog-empty">No posts published yet, check back soon.</p>
+        ) : (
+          <ul class="blog-grid">
+            {posts.map((post, i) => (
+              <li class={`blog-card reveal ${i % 3 === 1 ? "reveal-delay-1" : i % 3 === 2 ? "reveal-delay-2" : ""}`}>
+                <a class="blog-card-link" href={`/blog/${post.id}`}>
+                  {post.data.coverImage && (
+                    <div class="blog-card-media">
+                      <img src={post.data.coverImage} alt="" loading="lazy" />
+                    </div>
+                  )}
+                  <div class="blog-card-body">
+                    <time class="blog-card-date" datetime={post.data.publishedDate}>
+                      {fmtDate(post.data.publishedDate)}
+                    </time>
+                    <h3 class="blog-card-title">{post.data.title}</h3>
+                    {post.data.excerpt && (
+                      <p class="blog-card-excerpt">{post.data.excerpt}</p>
+                    )}
+                    <span class="blog-card-cta">
+                      Read article
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+
+    <CtaBand
+      heading='Ready to grow your <span class="text-amber">online presence</span>?'
+      sub="Let's build a fast, secure website and a content plan that keeps your business visible."
+      primaryLabel="Book a Discovery Call"
+      primaryHref="/contact"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: var(--text-md);
+    padding: var(--space-16) 0;
+  }
+
+  .blog-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: clamp(1.2rem, 2.4vw, 1.8rem);
+  }
+
+  .blog-card {
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .blog-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245, 158, 11, 0.35);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .blog-card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card-media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .blog-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .blog-card:hover .blog-card-media img { transform: scale(1.04); }
+
+  .blog-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: clamp(1.2rem, 2.4vw, 1.6rem);
+    flex: 1;
+  }
+
+  .blog-card-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .blog-card-title {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-lg);
+    line-height: 1.25;
+    color: #fff;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .blog-card-excerpt {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+
+  .blog-card-cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    color: var(--amber);
+  }
+  .blog-card:hover .blog-card-cta svg { transform: translateX(3px); }
+  .blog-card-cta svg { transition: transform 0.2s ease; }
+</style>

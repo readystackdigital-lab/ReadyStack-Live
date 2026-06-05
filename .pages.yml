@@ -1,0 +1,52 @@
+# Pages CMS configuration — https://pagescms.org
+# Log in at https://app.pagescms.org with GitHub, install the Pages CMS app on
+# this repo, and it reads this file to power the editor. No env vars, no secrets,
+# no server code: edits are committed straight to the repo, which triggers a
+# Cloudflare Pages rebuild. The site stays 100% static.
+
+# Where uploaded images are stored (input) and the URL written into content (output).
+media:
+  input: public/images/posts
+  output: /images/posts
+
+content:
+  - name: posts
+    label: Blog Posts
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, publishedDate, draft]
+      primary: title
+      sort: [publishedDate, title]
+      default:
+        sort: publishedDate
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: publishedDate
+        label: Published date
+        type: date
+        options:
+          format: yyyy-MM-dd
+        default: ""
+      - name: excerpt
+        label: Excerpt
+        type: text
+        description: Short summary shown on the blog listing and used as the meta description.
+      - name: coverImage
+        label: Cover image
+        type: image
+        description: Optional. Shown on the listing and at the top of the post.
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+        description: Drafts are hidden from the live site until this is unchecked.
+      - name: body
+        label: Content
+        type: rich-text

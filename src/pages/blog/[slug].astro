@@ -1,0 +1,248 @@
+---
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import CtaBand from "../../components/CtaBand.astro";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("posts", ({ data }) => data.draft === false);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmtDate = (d: string) =>
+  new Date(d).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<BaseLayout
+  title={`${post.data.title} | ReadyStack Digital`}
+  description={post.data.excerpt ??
+    "Insights on websites, SEO and online growth for small businesses from ReadyStack Digital."}
+  ogImage={post.data.coverImage}
+  breadcrumb={[
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.data.title, path: `/blog/${post.id}` },
+  ]}
+>
+  <Header />
+  <main id="main-content">
+    <article class="post">
+      <header class="post-hero">
+        <div class="post-hero-glow" aria-hidden="true"></div>
+        <div class="post-hero-grid" aria-hidden="true"></div>
+        <div class="container">
+          <div class="post-hero-inner reveal">
+            <a class="post-back" href="/blog">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              All articles
+            </a>
+            <time class="post-date" datetime={post.data.publishedDate}>
+              {fmtDate(post.data.publishedDate)}
+            </time>
+            <h1 class="post-title">{post.data.title}</h1>
+            {post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
+          </div>
+        </div>
+      </header>
+
+      {post.data.coverImage && (
+        <div class="container">
+          <div class="post-cover reveal">
+            <img src={post.data.coverImage} alt={post.data.title} />
+          </div>
+        </div>
+      )}
+
+      <div class="container">
+        <div class="post-body reveal">
+          <Content />
+        </div>
+      </div>
+    </article>
+
+    <CtaBand
+      heading='Want results like this for <span class="text-amber">your business</span>?'
+      sub="Book a free discovery call and we'll map the right website, SEO and content plan for you."
+      primaryLabel="Book a Discovery Call"
+      primaryHref="/contact"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .post-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      radial-gradient(circle at 78% 18%, #15110a 0%, transparent 48%),
+      radial-gradient(circle at 10% 90%, #0a1410 0%, transparent 42%),
+      #0B0D10;
+    color: var(--white);
+    padding-top: calc(var(--nav-h) + clamp(3.5rem, 7vw, 5.5rem));
+    padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .post-hero-glow {
+    position: absolute;
+    top: -10%;
+    right: -6%;
+    width: 620px;
+    height: 620px;
+    max-width: 80vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 64%);
+    filter: blur(36px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .post-hero-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black, transparent 78%);
+    mask-image: radial-gradient(ellipse at 50% 40%, black, transparent 78%);
+    opacity: 0.5;
+  }
+  .post-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+  }
+
+  .post-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: var(--weight-medium);
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .post-back:hover { color: var(--amber); }
+
+  .post-date {
+    display: block;
+    margin-top: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+
+  .post-title {
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: clamp(2rem, 1.3rem + 2.8vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .post-excerpt {
+    margin: var(--space-5) 0 0;
+    max-width: 60ch;
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.66);
+  }
+
+  .post-cover {
+    margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+    max-width: 860px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+  }
+  .post-cover img { display: block; width: 100%; height: auto; }
+
+  .post-body {
+    max-width: 720px;
+    margin: clamp(2.5rem, 5vw, 4rem) auto clamp(3rem, 6vw, 5rem);
+    font-size: var(--text-md);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.78);
+  }
+</style>
+
+<style is:global>
+  .post-body h2 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 2.4em 0 0.7em;
+  }
+  .post-body h3 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-xl);
+    color: #fff;
+    margin: 1.8em 0 0.6em;
+  }
+  .post-body p { margin: 0 0 1.2em; }
+  .post-body a {
+    color: var(--amber);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .post-body ul,
+  .post-body ol { margin: 0 0 1.2em; padding-left: 1.4em; }
+  .post-body li { margin: 0.4em 0; }
+  .post-body strong { color: #fff; font-weight: var(--weight-semibold); }
+  .post-body blockquote {
+    margin: 1.6em 0;
+    padding: 0.6em 1.2em;
+    border-left: 3px solid var(--amber);
+    background: rgba(245, 158, 11, 0.06);
+    border-radius: var(--radius-sm);
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .post-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin: 1.6em 0;
+  }
+  .post-body code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-sm);
+  }
+  .post-body pre {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+    padding: 1.1em 1.3em;
+    overflow-x: auto;
+    margin: 1.6em 0;
+  }
+  .post-body pre code { background: none; padding: 0; }
+</style>
