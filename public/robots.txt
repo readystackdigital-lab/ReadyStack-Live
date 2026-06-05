@@ -14,4 +14,4 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
-Sitemap: https://readystackdigital.com/sitemap.xml
+Sitemap: https://readystackdigital.com/sitemap-index.xml

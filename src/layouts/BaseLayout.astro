@@ -5,6 +5,7 @@ export interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogType?: string;
   breadcrumb?: { name: string; path: string }[];
 }
 
@@ -12,6 +13,7 @@ const {
   title = "ReadyStack Digital | Websites, Email, SEO & Social Content for Small Businesses",
   description = "ReadyStack Digital helps small businesses with websites, business email, SEO, website care, and social media content to build and grow a professional online presence, nationwide.",
   ogImage: ogImageProp,
+  ogType = "website",
   breadcrumb,
 } = Astro.props;
 
@@ -109,7 +111,7 @@ const faqSchema = {
   <meta name="msapplication-TileImage" content="/assets/icons/favicon-192.png" />
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:locale" content="en" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
