@@ -6,9 +6,9 @@ const navItems = [
   { label: "Packages", href: "/packages" },
   { label: "How It Works", href: "/how-it-works" },
   { label: "Social", href: "/social" },
-  { label: "Blog", href: "/blog" },
   { label: "FAQs", href: "/faqs" },
   { label: "Contact", href: "/contact" },
+  { label: "Blog", href: "/blog" },
 ];
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
@@ -41,11 +41,6 @@ const isActive = (href: string) =>
       </ul>
 
       <div class="nav-actions">
-        <div class="nav-status" title="Nationwide support">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span class="status-text">Nationwide</span>
-        </div>
-
         <!-- Light / Dark mode toggle (animated switch, 21st.dev pattern) -->
         <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="true" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
           <span class="theme-toggle-track" aria-hidden="true">
