@@ -8,6 +8,7 @@ export interface Props {
   secondaryLabel?: string;
   secondaryHref?: string;
   bookCta?: boolean;      // render secondary as Cal.com "Book a Call" deep-link
+  banner?: string;        // path to a background banner image (e.g. /assets/banners/banner-faq-page.jpeg)
 }
 
 const {
@@ -19,10 +20,22 @@ const {
   secondaryLabel,
   secondaryHref,
   bookCta = false,
+  banner,
 } = Astro.props;
 ---
 
-<section class="page-hero" aria-labelledby="page-hero-title">
+<section
+  class:list={["page-hero", { "has-banner": banner }]}
+  aria-labelledby="page-hero-title"
+>
+  {banner && (
+    <div
+      class="page-hero-banner"
+      style={`background-image: url('${banner}')`}
+      aria-hidden="true"
+    ></div>
+  )}
+  {banner && <div class="page-hero-banner-overlay" aria-hidden="true"></div>}
   <div class="page-hero-glow" aria-hidden="true"></div>
   <div class="page-hero-grid" aria-hidden="true"></div>
   <div class="container">
@@ -61,6 +74,52 @@ const {
     color: var(--white);
     padding-top: calc(var(--nav-h) + clamp(4.5rem, 9vw, 7rem));
     padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+  }
+
+  /* Banner image — pushed right, dimmed + blurred into an ambient backdrop
+     so the image's own baked-in text never competes with the HTML heading. */
+  .page-hero-banner {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+    transform: scale(1.04);
+    opacity: 0.82;
+    filter: blur(0.5px) saturate(1.05);
+    pointer-events: none;
+    /* Only the right-hand graphic reads through; the left (text) region fades out. */
+    -webkit-mask-image: radial-gradient(120% 135% at 90% 32%, black 22%, transparent 80%);
+    mask-image: radial-gradient(120% 135% at 90% 32%, black 22%, transparent 80%);
+  }
+
+  .page-hero-banner-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(11, 13, 16, 1) 0%,
+        rgba(11, 13, 16, 0.99) 50%,
+        rgba(11, 13, 16, 0.7) 76%,
+        rgba(11, 13, 16, 0.8) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgba(11, 13, 16, 0.9) 0%,
+        rgba(11, 13, 16, 0.3) 52%,
+        rgba(11, 13, 16, 0.5) 100%
+      );
+  }
+
+  /* On narrow screens the heading spans full width, so hide the banner image
+     entirely and fall back to the original gradient/glow backdrop. */
+  @media (max-width: 640px) {
+    .page-hero-banner { display: none; }
+    .page-hero-banner-overlay { display: none; }
   }
 
   .page-hero-glow {

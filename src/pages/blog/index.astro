@@ -28,6 +28,7 @@ const fmtDate = (d: string) =>
   <Header />
   <main id="main-content">
     <PageHero
+      banner="/assets/banners/banner-blog-page.png"
       eyebrow="Blog"
       title='Insights to grow your <span class="text-amber">online presence</span>'
       sub="Practical, jargon-free guides on websites, SEO, business email, security and social content for small businesses."
@@ -91,7 +92,7 @@ const fmtDate = (d: string) =>
 <style>
   .blog-empty {
     text-align: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--charcoal-500);
     font-size: var(--text-md);
     padding: var(--space-16) 0;
   }
@@ -106,17 +107,17 @@ const fmtDate = (d: string) =>
   }
 
   .blog-card {
-    border: 1px solid var(--border-dark);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(15, 15, 16, 0.08);
     overflow: hidden;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .blog-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(245, 158, 11, 0.35);
-    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+    border-color: rgba(245, 158, 11, 0.45);
+    box-shadow: 0 20px 44px rgba(15, 15, 16, 0.14);
   }
 
   .blog-card-link {
@@ -130,7 +131,7 @@ const fmtDate = (d: string) =>
   .blog-card-media {
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--charcoal-100);
   }
   .blog-card-media img {
     width: 100%;
@@ -161,7 +162,7 @@ const fmtDate = (d: string) =>
     font-weight: var(--weight-semibold);
     font-size: var(--text-lg);
     line-height: 1.25;
-    color: #fff;
+    color: var(--charcoal-900);
     margin: 0;
     text-wrap: balance;
   }
@@ -169,7 +170,7 @@ const fmtDate = (d: string) =>
   .blog-card-excerpt {
     font-size: var(--text-base);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--charcoal-600);
     margin: 0;
   }
 
@@ -185,4 +186,21 @@ const fmtDate = (d: string) =>
   }
   .blog-card:hover .blog-card-cta svg { transform: translateX(3px); }
   .blog-card-cta svg { transition: transform 0.2s ease; }
+
+  /* Dark-mode overrides (base styles above are the light theme). */
+  :global([data-theme="dark"]) .blog-empty { color: rgba(255, 255, 255, 0.6); }
+
+  :global([data-theme="dark"]) .blog-card {
+    border-color: var(--border-dark);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+  }
+  :global([data-theme="dark"]) .blog-card:hover {
+    border-color: rgba(245, 158, 11, 0.35);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  :global([data-theme="dark"]) .blog-card-media { background: rgba(255, 255, 255, 0.04); }
+  :global([data-theme="dark"]) .blog-card-title { color: #fff; }
+  :global([data-theme="dark"]) .blog-card-excerpt { color: rgba(255, 255, 255, 0.6); }
 </style>

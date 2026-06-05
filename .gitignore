@@ -2,6 +2,8 @@
 dist/
 # generated types
 .astro/
+# cloudflare local state
+.wrangler/
 
 # dependencies
 node_modules/
@@ -25,3 +27,6 @@ pnpm-debug.log*
 
 # superpowers brainstorm sessions
 .superpowers/
+
+# editor/agent tooling
+.claude/
