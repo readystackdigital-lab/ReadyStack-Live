@@ -27,7 +27,7 @@
       <div class="hero-eyebrow">
         <span class="eyebrow-pill">
           <span class="eyebrow-dot" aria-hidden="true"></span>
-          Website • Email • SEO • Care • Social &amp; Content
+          Website • Email • SEO • Care • Social • AI Agent
         </span>
         <span class="eyebrow-pill eyebrow-pill-ghost">Nationwide online presence support</span>
       </div>
@@ -39,7 +39,7 @@
       </h1>
 
       <p class="hero-sub">
-        ReadyStack Digital helps small businesses build a professional online presence: websites, business email, SEO, and secure monthly care, plus branded social media content that keeps your brand active and visible.
+        ReadyStack Digital helps small businesses build a professional online presence: websites, business email, AI Agent, SEO, and secure monthly care, plus branded social media content that keeps your brand active and visible.
       </p>
 
       <div class="hero-ctas">
@@ -57,6 +57,12 @@
           <span>View Packages</span>
         </a>
       </div>
+
+      <a href="#ai-agent" class="hero-ai-badge">
+        <span class="hero-ai-spark" aria-hidden="true">✦</span>
+        <span class="hero-ai-label"><strong>New — AI Agent &amp; Reception</strong></span>
+        <span class="hero-ai-price">from $1,500 setup + $600/mo</span>
+      </a>
 
       <div class="hero-book-link">
         <svg width="13" height="13" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -89,6 +95,10 @@
         <div class="proof-item">
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Social &amp; blog content
+        </div>
+        <div class="proof-item">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 7.5l4 4 7-7" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          24/7 AI agent &amp; reception
         </div>
       </div>
 
@@ -471,6 +481,27 @@
   #hero .hero-ctas .btn {
     min-height: 48px;
   }
+
+  .hero-ai-badge {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    background: linear-gradient(120deg, rgba(245,158,11,0.16), rgba(255,255,255,0.04));
+    border: 1px solid rgba(245,158,11,0.4);
+    color: #fff;
+    font-size: 0.82rem;
+    transition: border-color .2s, transform .2s, background .2s;
+  }
+  .hero-ai-badge:hover { border-color: var(--amber); transform: translateY(-1px); background: linear-gradient(120deg, rgba(245,158,11,0.24), rgba(255,255,255,0.05)); }
+  .hero-ai-spark { color: var(--amber-300); font-size: 0.9rem; line-height: 1; animation: hero-ai-twinkle 2.6s ease-in-out infinite; }
+  @keyframes hero-ai-twinkle { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.82); } }
+  .hero-ai-label strong { color: #fff; font-weight: var(--weight-semibold); }
+  .hero-ai-price { color: var(--amber-300); font-weight: var(--weight-semibold); }
 
   .hero-book-link {
     display: flex;
