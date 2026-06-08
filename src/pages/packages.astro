@@ -64,6 +64,23 @@ const packages = [
       "Optional social media content add-on",
     ],
   },
+  {
+    name: "AI Agent & Reception",
+    tag: "New · AI",
+    price: "1,500",
+    per: "setup",
+    featured: false,
+    blurb: "A 24/7 AI receptionist on your website that answers questions, captures leads and books calls — trained on your business.",
+    cta: "Add an AI Agent",
+    feats: [
+      "Custom-trained on your services & FAQs",
+      "24/7 instant replies & lead capture",
+      "Qualifies enquiries & books calls",
+      "Lives on your website",
+      "Ongoing training, hosting & monitoring",
+      "$600 / month management",
+    ],
+  },
 ];
 
 const compare = [
@@ -87,6 +104,7 @@ const faqs = [
   { q: "Can I change plans later?", a: "Yes. You can move between Managed Website Care and Website Care Plus as your needs change. There are no lock-in contracts." },
   { q: "Is social media content included?", a: "Social and blog content is available as an optional add-on on any plan, and blog uploads are included on Website Care Plus. We tailor the content mix to your business and the platforms your customers use." },
   { q: "Do you write the blog and social content?", a: "Yes. We plan topics, design posts and write captions aligned to your services. You review and approve before anything is published." },
+  { q: "What is the AI Agent and how is it priced?", a: "The AI Agent is a 24/7 AI receptionist built into your website. It answers customer questions instantly, captures leads, qualifies enquiries and books calls — trained on your business. It's a one-time setup from $1,500 plus $600/month for management, training and hosting." },
 ];
 ---
 
@@ -213,9 +231,12 @@ const faqs = [
 <style>
   .pkg-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-6);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-5);
     align-items: start;
+  }
+  @media (max-width: 1100px) {
+    .pkg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
   }
   .pkg-card {
     position: relative;
