@@ -1,13 +1,18 @@
 ---
 const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
-const navItems = [
-  { label: "Home", href: "/" },
+// Primary nav: trimmed to 5 high-intent items (desktop). The logo covers
+// "Home"; Social + Blog stay reachable via the mobile menu and footer.
+const primaryNav = [
   { label: "Services", href: "/services" },
-  { label: "Packages", href: "/packages" },
+  { label: "Pricing", href: "/packages" },
   { label: "How It Works", href: "/how-it-works" },
-  { label: "Social", href: "/social" },
   { label: "FAQs", href: "/faqs" },
   { label: "Contact", href: "/contact" },
+];
+const mobileNav = [
+  { label: "Home", href: "/" },
+  ...primaryNav,
+  { label: "Social", href: "/social" },
   { label: "Blog", href: "/blog" },
 ];
 const isActive = (href: string) =>
@@ -29,7 +34,7 @@ const isActive = (href: string) =>
       </a>
 
       <ul class="nav-links" role="list">
-        {navItems.map((item) => (
+        {primaryNav.map((item) => (
           <li>
             <a
               href={item.href}
@@ -41,6 +46,9 @@ const isActive = (href: string) =>
       </ul>
 
       <div class="nav-actions">
+        <!-- Persistent primary CTA (desktop) -->
+        <a href="/contact" class="btn btn-amber nav-cta">Get a Quote</a>
+
         <!-- Light / Dark mode toggle (animated switch, 21st.dev pattern) -->
         <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="true" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
           <span class="theme-toggle-track" aria-hidden="true">
@@ -69,7 +77,7 @@ const isActive = (href: string) =>
     <div class="mobile-menu-inner">
       <nav aria-label="Mobile navigation links">
         <ul role="list">
-          {navItems.map((item) => (
+          {mobileNav.map((item) => (
             <li>
               <a
                 href={item.href}
@@ -80,7 +88,7 @@ const isActive = (href: string) =>
           ))}
         </ul>
       </nav>
-      <a href="/contact" class="btn btn-amber btn-full">Contact Us</a>
+      <a href="/contact" class="btn btn-amber btn-full">Get a Quote</a>
     </div>
   </div>
 </header>
@@ -425,6 +433,19 @@ const isActive = (href: string) =>
     30%  { opacity: 1; }
     44%  { background-position: -80% center; opacity: 0; }
     100% { background-position: -80% center; opacity: 0; }
+  }
+
+  /* ── Persistent desktop CTA ────────────────────────────────── */
+  .nav-cta {
+    padding: 0.55rem 1.15rem;
+    min-height: 0;
+    font-size: 0.875rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  /* Hidden below the nav breakpoint — the mobile menu CTA takes over */
+  @media (max-width: 900px) {
+    #site-header .nav-cta { display: none; }
   }
 
   /* ── Hamburger — amber on active/hover ─────────────────────── */

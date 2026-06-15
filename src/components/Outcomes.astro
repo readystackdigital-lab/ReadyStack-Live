@@ -1,0 +1,96 @@
+---
+/*
+  Outcomes — outcome-first band directly under the hero.
+  One idea: what a ReadyStack presence DOES for the business
+  (get found · look credible · never miss an enquiry).
+*/
+---
+<section id="outcomes" class="section" aria-labelledby="outcomes-heading">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why it matters</div>
+      <h2 id="outcomes-heading" class="section-h2">
+        What a ReadyStack presence<br>
+        <span class="text-amber">actually does for your business.</span>
+      </h2>
+    </div>
+
+    <div class="outcomes-grid">
+      <article class="outcome reveal">
+        <div class="outcome-ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="#F59E0B" stroke-width="1.6"/>
+            <path d="m16 16 4 4" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Get found by the right customers</h3>
+        <p>SEO foundations, a fast website and Google Search Console, set up from day one so local customers find you when they search.</p>
+      </article>
+
+      <article class="outcome reveal reveal-delay-1">
+        <div class="outcome-ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3 4 6.2v5.1C4 16.4 7.4 20.6 12 22c4.6-1.4 8-5.6 8-10.7V6.2L12 3Z" stroke="#F59E0B" stroke-width="1.6" fill="rgba(245,158,11,.08)"/>
+            <path d="m8.7 11.6 2.3 2.3 4.3-4.3" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Look established and trusted</h3>
+        <p>A clean, secure website and professional email make a small business look like one customers feel safe choosing.</p>
+      </article>
+
+      <article class="outcome reveal reveal-delay-2">
+        <div class="outcome-ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M5 6h14v9H9l-4 4V6Z" stroke="#F59E0B" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M8.5 10.5h7M8.5 13h4" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Never miss an enquiry</h3>
+        <p>Contact forms, WhatsApp, call buttons and a 24/7 AI receptionist capture and answer leads instantly, even after hours.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  #outcomes { padding-block: clamp(4rem, 8vw, 7rem); }
+  #outcomes .section-head { max-width: 720px; margin: 0 auto clamp(2.5rem, 5vw, 3.75rem); text-align: center; }
+  #outcomes .eyebrow { justify-content: center; }
+
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2.4vw, 1.75rem);
+  }
+  .outcome {
+    padding: clamp(1.6rem, 2.6vw, 2.25rem);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    background: rgba(255,255,255,.035);
+    transition: border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .outcome:hover { border-color: rgba(245,158,11,.3); transform: translateY(-3px); background: rgba(245,158,11,.04); }
+  .outcome-ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 52px; height: 52px; border-radius: 14px;
+    background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.22);
+    margin-bottom: 1.25rem;
+  }
+  .outcome h3 {
+    font-family: var(--font-display); font-weight: var(--weight-semibold);
+    font-size: clamp(1.15rem, 1.4vw, 1.35rem); line-height: 1.25; letter-spacing: -0.02em;
+    color: #fff; margin: 0 0 .6rem;
+  }
+  .outcome p { margin: 0; font-size: .96rem; line-height: 1.7; color: rgba(255,255,255,.66); }
+
+  @media (max-width: 880px) { .outcomes-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } }
+
+  /* ── Light mode (dark text on light surfaces). :global() keeps
+     Astro from scoping the html-level [data-theme] ancestor. ──── */
+  :global([data-theme="light"]) #outcomes .outcome {
+    background: #fff; border-color: rgba(0,0,0,.08); box-shadow: 0 10px 30px rgba(0,0,0,.05);
+  }
+  :global([data-theme="light"]) #outcomes .outcome:hover { background: #FFFBF2; border-color: rgba(245,158,11,.4); }
+  :global([data-theme="light"]) #outcomes .outcome h3 { color: var(--charcoal-900); }
+  :global([data-theme="light"]) #outcomes .outcome p { color: var(--charcoal-600); }
+</style>

@@ -1,0 +1,138 @@
+---
+/*
+  ServicesOverview — de-cluttered homepage services. The 5 core
+  services, one outcome line each, single shared CTA to /services.
+  Replaces the heavy 8-card + filter grid. One idea: the full stack,
+  simply listed. (Full depth lives on /services.)
+*/
+const services = [
+  {
+    name: "AI Receptionist",
+    line: "A 24/7 agent on your site that answers questions, captures leads and books calls.",
+    href: "/packages#ai-agent",
+    icon: `<rect x="4" y="6" width="18" height="13" rx="4" stroke="#F59E0B" stroke-width="1.5"/><path d="M9 19l-2 3 5-3" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12.5" r="1.3" fill="#F59E0B"/><circle cx="16" cy="12.5" r="1.3" fill="#F59E0B"/>`,
+    tag: "New",
+  },
+  {
+    name: "Website Development",
+    line: "Fast, mobile-friendly websites built to explain your services and generate enquiries.",
+    href: "/services",
+    icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.5"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>`,
+  },
+  {
+    name: "Business Email",
+    line: "Professional email at your domain, configured with SPF, DKIM and DMARC done right.",
+    href: "/services",
+    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.5"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
+    name: "SEO Foundations",
+    line: "Titles, meta, sitemap, structure and Search Console, set up to help Google find you.",
+    href: "/services",
+    icon: `<path d="M4 19V7a2 2 0 012-2h14a2 2 0 012 2v12" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/><path d="M7 15l3-3 3 2 5-6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h20" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>`,
+  },
+  {
+    name: "Social Content",
+    line: "Consistent, branded posts and blogs for Instagram, Facebook, TikTok and LinkedIn.",
+    href: "/social",
+    icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.5"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.5"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>`,
+  },
+];
+---
+<section id="services" class="section section-tinted" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Everything you need, in one place</div>
+      <h2 id="services-heading" class="section-h2">
+        One specialist for your<br>
+        <span class="text-amber">whole online presence.</span>
+      </h2>
+    </div>
+
+    <div class="svc-overview-grid">
+      {services.map((s) => (
+        <a href={s.href} class="svc-tile reveal">
+          <div class="svc-tile-ico" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" set:html={s.icon}></svg>
+          </div>
+          <div class="svc-tile-body">
+            <h3>{s.name}{s.tag && <span class="svc-tile-tag">{s.tag}</span>}</h3>
+            <p>{s.line}</p>
+          </div>
+          <span class="svc-tile-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      ))}
+    </div>
+
+    <p class="svc-overview-note reveal">
+      Plus domain &amp; hosting setup, contact forms and secure monthly care.
+      <a href="/services">See all services →</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  #services { padding-block: clamp(4rem, 8vw, 7rem); }
+  #services .section-head { max-width: 720px; margin: 0 auto clamp(2.5rem, 5vw, 3.5rem); text-align: center; }
+  #services .eyebrow { justify-content: center; }
+
+  .svc-overview-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(.8rem, 1.8vw, 1.1rem); }
+  /* First tile (AI Receptionist) spans full width as the lead service */
+  .svc-overview-grid > :first-child { grid-column: 1 / -1; }
+
+  .svc-tile {
+    display: flex; align-items: center; gap: 1.1rem;
+    padding: clamp(1.25rem, 2vw, 1.6rem);
+    border: 1px solid rgba(255,255,255,.1); border-radius: 18px;
+    background: rgba(255,255,255,.035); text-decoration: none;
+    transition: border-color .25s ease, transform .25s ease, background .25s ease;
+  }
+  .svc-tile:hover { border-color: rgba(245,158,11,.35); transform: translateY(-2px); background: rgba(245,158,11,.05); }
+  .svc-tile-ico {
+    flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.22);
+  }
+  .svc-tile-body { flex: 1 1 auto; }
+  .svc-tile h3 {
+    display: flex; align-items: center; gap: .5rem;
+    font-family: var(--font-display); font-weight: var(--weight-semibold);
+    font-size: 1.1rem; letter-spacing: -0.01em; color: #fff; margin: 0 0 .25rem;
+  }
+  .svc-tile-tag {
+    font-family: var(--font-mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--amber-300); background: rgba(245,158,11,.14); border: 1px solid rgba(245,158,11,.3);
+    padding: .12rem .42rem; border-radius: 999px;
+  }
+  .svc-tile p { margin: 0; font-size: .9rem; line-height: 1.55; color: rgba(255,255,255,.64); }
+  .svc-tile-arrow {
+    flex: 0 0 auto; color: rgba(255,255,255,.4);
+    transition: color .25s ease, transform .25s ease;
+  }
+  .svc-tile:hover .svc-tile-arrow { color: var(--amber); transform: translateX(3px); }
+
+  .svc-overview-note {
+    margin-top: clamp(1.5rem, 3vw, 2rem); text-align: center;
+    font-size: .92rem; color: rgba(255,255,255,.55);
+  }
+  .svc-overview-note a { color: var(--amber); text-decoration: none; font-weight: 600; }
+  .svc-overview-note a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 720px) {
+    .svc-overview-grid { grid-template-columns: 1fr; }
+    .svc-overview-grid > :first-child { grid-column: auto; }
+    .svc-tile-arrow { display: none; }
+  }
+
+  /* ── Light mode (:global keeps the html-level [data-theme] unscoped) ── */
+  :global([data-theme="light"]) #services .svc-tile {
+    background: #fff; border-color: rgba(0,0,0,.08); box-shadow: 0 8px 24px rgba(0,0,0,.05);
+  }
+  :global([data-theme="light"]) #services .svc-tile:hover { background: #FFFBF2; border-color: rgba(245,158,11,.4); }
+  :global([data-theme="light"]) #services .svc-tile h3 { color: var(--charcoal-900); }
+  :global([data-theme="light"]) #services .svc-tile p { color: var(--charcoal-600); }
+  :global([data-theme="light"]) #services .svc-tile-arrow { color: var(--charcoal-400); }
+  :global([data-theme="light"]) #services .svc-overview-note { color: var(--charcoal-600); }
+</style>
