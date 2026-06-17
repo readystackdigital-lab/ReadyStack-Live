@@ -22,8 +22,17 @@
 
 <section id="hero" aria-label="Hero: ReadyStack Digital website, domain, email, SEO and care">
 
-  <!-- Background: gradient mesh + faint grain (flat, behind the 3D plane) -->
+  <!-- Background: video + gradient mesh + faint grain (flat, behind the 3D plane) -->
   <div class="hero-bg" aria-hidden="true">
+    <video
+      class="hero-video-bg"
+      src="/assets/video/hero-video.mp4"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="none"
+    ></video>
     <div class="bg-mesh"></div>
     <div class="bg-grain"></div>
   </div>
@@ -152,13 +161,27 @@
       linear-gradient(160deg, #15171d 0%, #0d0f13 55%, #0a0c0f 100%);
   }
 
-  /* ── Background mesh + grain (flat, behind the 3D plane) ──── */
+  /* ── Background video + mesh + grain (flat, behind the 3D plane) ──── */
   .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* Looping blurred video — sits at the very bottom of .hero-bg */
+  .hero-video-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    /* scale past edges so blur doesn't expose transparent fringe */
+    transform: scale(1.06);
+    transform-origin: center center;
+    /* light blur + darken to blend with the dark amber theme */
+    filter: blur(6px) brightness(0.3);
+    pointer-events: none;
+  }
+
   .bg-mesh {
     position: absolute; inset: -10%;
     background:
-      radial-gradient(38% 50% at 72% 30%, rgba(245,158,11,.14), transparent 70%),
-      radial-gradient(30% 40% at 20% 70%, rgba(252,211,77,.05), transparent 70%);
+      radial-gradient(38% 50% at 72% 30%, rgba(245,158,11,.18), transparent 70%),
+      radial-gradient(30% 40% at 20% 70%, rgba(252,211,77,.07), transparent 70%);
     filter: blur(20px);
   }
   .bg-grain {
@@ -174,6 +197,8 @@
     perspective: 1500px;
     perspective-origin: 50% 38%;
     min-height: inherit;
+    /* own compositing layer — prevents video filter from collapsing preserve-3d */
+    will-change: transform;
   }
   .hero-scroll { transform-style: preserve-3d; min-height: inherit; }
   .hero-panel {
@@ -406,6 +431,8 @@
     .hero-scroll, .hero-panel { transform: none !important; }
     #hero .hero-headline { clip-path: none !important; }
     #hero .hero-text > *, .orb { opacity: 1 !important; }
+    /* pause/hide the background video for users who prefer no motion */
+    .hero-video-bg { display: none; }
   }
 </style>
 
