@@ -1,19 +1,18 @@
 ---
 const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
-// Primary nav: trimmed to 5 high-intent items (desktop). The logo covers
-// "Home"; Social + Blog stay reachable via the mobile menu and footer.
+// Primary nav (desktop). The logo covers "Home".
 const primaryNav = [
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/packages" },
   { label: "How It Works", href: "/how-it-works" },
   { label: "FAQs", href: "/faqs" },
   { label: "Contact", href: "/contact" },
+  { label: "Social", href: "/social" },
+  { label: "Blog", href: "/blog" },
 ];
 const mobileNav = [
   { label: "Home", href: "/" },
   ...primaryNav,
-  { label: "Social", href: "/social" },
-  { label: "Blog", href: "/blog" },
 ];
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
@@ -435,19 +434,6 @@ const isActive = (href: string) =>
     100% { background-position: -80% center; opacity: 0; }
   }
 
-  /* ── Persistent desktop CTA ────────────────────────────────── */
-  .nav-cta {
-    padding: 0.55rem 1.15rem;
-    min-height: 0;
-    font-size: 0.875rem;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  /* Hidden below the nav breakpoint — the mobile menu CTA takes over */
-  @media (max-width: 900px) {
-    #site-header .nav-cta { display: none; }
-  }
-
   /* ── Hamburger — amber on active/hover ─────────────────────── */
   #site-header :global(.nav-hamburger:hover span) { background: #B45309; }
   #site-header :global(.nav-hamburger.open span) { background: #F59E0B; }
@@ -462,5 +448,18 @@ const isActive = (href: string) =>
   /* ── Mobile: hide the desktop-only progress affordance subtly ─ */
   @media (max-width: 768px) {
     .nav-progress { left: 16px; right: 16px; bottom: 5px; }
+  }
+
+  /* ── Persistent desktop CTA ────────────────────────────────── */
+  .nav-cta {
+    padding: 0.55rem 1.15rem;
+    min-height: 0;
+    font-size: 0.875rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  /* Hidden below the nav breakpoint — the mobile menu CTA takes over */
+  @media (max-width: 900px) {
+    #site-header .nav-cta { display: none; }
   }
 </style>
