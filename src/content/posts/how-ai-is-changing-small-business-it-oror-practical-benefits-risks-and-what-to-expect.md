@@ -6,7 +6,7 @@ excerpt: In this article, we'll explore how AI is transforming small business
   IT, where it delivers the greatest value, the risks to consider, and how
   businesses can prepare for an AI-driven future.
 coverImage: /images/posts/How AI is Changing Businesses.png
-draft: true
+draft: false
 ---
 # ++How AI Is Changing Small Business IT: Practical Benefits, Risks & What to Expect?++
 
