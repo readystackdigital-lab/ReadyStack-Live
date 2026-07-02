@@ -31,7 +31,7 @@ Examples include:
 
 Platforms like Microsoft 365, customer relationship management (CRM) systems, accounting software, and helpdesk solutions increasingly include built-in AI capabilities.
 
-The result is not fewer employees—it is employees spending less time on repetitive work and more time on tasks that require judgement, creativity, and customer interaction.
+The result is not fewer employees, it is employees spending less time on repetitive work and more time on tasks that require judgement, creativity, and customer interaction.
 
 ---
 
