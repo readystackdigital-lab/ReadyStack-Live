@@ -3,7 +3,7 @@ title: Welcome to the ReadyStack blog
 publishedDate: 2026-06-05
 excerpt: A quick hello and a look at what we'll be covering, practical guides on
   websites, SEO, email and security for small businesses.
-coverImage: /images/posts/blog-banner.png
+coverImage: /images/posts/blog-banner.jpg
 draft: false
 ---
 We're kicking off the ReadyStack Digital blog with a simple goal: help small

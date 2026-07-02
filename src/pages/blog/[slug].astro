@@ -34,7 +34,7 @@ const ogImageAbs = post.data.coverImage
   ? (post.data.coverImage.startsWith("http")
       ? post.data.coverImage
       : `${siteUrl}${post.data.coverImage}`)
-  : `${siteUrl}/assets/images/hero-dashboard.png`;
+  : `${siteUrl}/assets/images/hero-dashboard.jpg`;
 
 const blogPostingSchema = {
   "@context": "https://schema.org",
@@ -258,6 +258,13 @@ const blogPostingSchema = {
   }
   .post-body ul,
   .post-body ol { margin: 0 0 1.2em; padding-left: 1.4em; }
+  .post-body ul { list-style: disc; }
+  .post-body ol { list-style: decimal; }
+  .post-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.4em 0;
+  }
   .post-body li { margin: 0.4em 0; }
   .post-body strong { color: var(--charcoal-900); font-weight: var(--weight-semibold); }
   .post-body blockquote {

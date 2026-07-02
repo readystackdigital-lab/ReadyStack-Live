@@ -42,16 +42,31 @@ const faqs = [
   { cat: "support", q: "What are your support response times?", a: "We aim to respond within one business day, with priority response for Growth and Premium plans." },
   { cat: "support", q: "Can I cancel anytime?", a: "Yes. Plans are month-to-month with no lock-in. You own your domain and content." },
 ];
+
+// FAQPage structured data, generated from the questions rendered on this page
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 ---
 
 <BaseLayout
   title="FAQs: Common Questions | ReadyStack Digital"
   description="Answers to common questions about ReadyStack Digital's websites, SEO, business email, social media content, pricing and monthly support for small businesses."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+  </Fragment>
+
   <Header />
   <main id="main-content">
     <PageHero
-      banner="/assets/banners/banner-faq-page.jpeg"
+      banner="/assets/banners/banner-faq-page.webp"
       eyebrow="FAQs"
       title='Questions? <span class="text-amber">We’ve got answers.</span>'
       sub="Everything you might want to know about working with ReadyStack Digital. Search, filter by topic, or just browse."

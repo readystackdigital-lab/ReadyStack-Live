@@ -1,0 +1,13 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), geolocation=(), payment=(), usb=(), microphone=(self)
+  Content-Security-Policy: frame-ancestors 'self'; object-src 'none'; base-uri 'self'
+
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/images/*
+  Cache-Control: public, max-age=86400

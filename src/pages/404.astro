@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout
+  title="Page Not Found | ReadyStack Digital"
+  description="The page you're looking for doesn't exist or has moved. Head back to the ReadyStack Digital homepage or browse our services."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <Header />
+  <main id="main-content">
+    <section class="nf-hero">
+      <div class="nf-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="nf-inner">
+          <div class="nf-code" aria-hidden="true">404</div>
+          <h1 class="nf-title">This page doesn't exist</h1>
+          <p class="nf-sub">
+            The link may be old, or the page has moved. Let's get you back on track.
+          </p>
+          <div class="nf-actions">
+            <a class="btn btn-amber btn-lg" href="/">Back to Home</a>
+            <a class="btn btn-page-ghost btn-lg" href="/blog">Read the Blog</a>
+          </div>
+          <p class="nf-help">
+            Looking for something specific? <a href="/contact">Contact us</a> and we'll point you the right way.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .nf-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    background:
+      radial-gradient(circle at 78% 18%, #15110a 0%, transparent 48%),
+      radial-gradient(circle at 10% 90%, #0a1410 0%, transparent 42%),
+      #0B0D10;
+    color: var(--white);
+    padding-top: calc(var(--nav-h) + clamp(3rem, 6vw, 5rem));
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+  .nf-glow {
+    position: absolute;
+    top: -12%;
+    right: -8%;
+    width: 560px;
+    height: 560px;
+    max-width: 80vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.16), transparent 64%);
+    filter: blur(36px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .nf-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .nf-code {
+    font-family: var(--font-mono);
+    font-size: clamp(4.5rem, 12vw, 8rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--amber);
+    opacity: 0.9;
+  }
+  .nf-title {
+    margin: var(--space-4) 0 0;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: clamp(1.8rem, 1.2rem + 2.4vw, 2.8rem);
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+  .nf-sub {
+    margin: var(--space-4) auto 0;
+    max-width: 44ch;
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.66);
+  }
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .nf-help {
+    margin-top: var(--space-8);
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .nf-help a { color: var(--amber); }
+</style>

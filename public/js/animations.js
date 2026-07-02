@@ -11,19 +11,35 @@
   const targets = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
   if (!targets.length) return;
 
-  const observer = new IntersectionObserver(entries => {
+  const onIntersect = (observer) => (entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
         observer.unobserve(entry.target);
       }
     });
+  };
+
+  const observer = new IntersectionObserver(function (entries) {
+    onIntersect(observer)(entries);
   }, {
     threshold: 0.12,
     rootMargin: '0px 0px -40px 0px',
   });
 
-  targets.forEach(el => observer.observe(el));
+  /* Elements taller than the viewport can never reach the 0.12 ratio,
+     so they get a zero-threshold observer instead. */
+  const tallObserver = new IntersectionObserver(function (entries) {
+    onIntersect(tallObserver)(entries);
+  }, {
+    threshold: 0,
+    rootMargin: '0px 0px -40px 0px',
+  });
+
+  targets.forEach(el => {
+    const tooTall = el.getBoundingClientRect().height > window.innerHeight * 0.8;
+    (tooTall ? tallObserver : observer).observe(el);
+  });
 })();
 
 /* ─── Stat Counters ──────────────────────────────────────── */
