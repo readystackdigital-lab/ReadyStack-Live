@@ -50,6 +50,7 @@ const marqueeItems = [
     <div class="bg-grain"></div>
   </div>
 
+  <div class="hero-body">
   <div class="hero-wrap">
     <div class="hero-inner">
 
@@ -110,11 +111,16 @@ const marqueeItems = [
         </div>
       </div><!-- /hero-text -->
 
-      <!-- ══════════════════════════════════════════════════════
-           VISUAL — video panel (organic blob mask) + floating
-           service card + hand-drawn connector arrow
-      ══════════════════════════════════════════════════════ -->
-      <div class="hero-visual">
+    </div><!-- /hero-inner -->
+  </div><!-- /hero-wrap -->
+
+  <!-- ══════════════════════════════════════════════════════
+       VISUAL — full-height video panel, flush to the hero's
+       right edge, one huge sweeping curve on the top-left
+       (reference-matched framing) + floating service card
+       + hand-drawn connector arrow
+  ══════════════════════════════════════════════════════ -->
+  <div class="hero-visual">
         <!-- .visual-scroll is the GSAP scroll-parallax target: kept
              separate from .hero-visual because a stale global rule
              (`.hero-visual { transform: none !important }` at ≤1024px
@@ -143,22 +149,22 @@ const marqueeItems = [
             <path d="M100 106l10 8-2-13" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
 
-          <a href="#ai-agent" class="floating-card">
+          <a href="/services" class="floating-card">
             <span class="floating-card-icon" aria-hidden="true">
               <svg width="19" height="19" viewBox="0 0 18 18" fill="none">
-                <path d="M8 2v2M4 6h8a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zM6 9h.01M10 9h.01" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="2" y="3.5" width="14" height="11" rx="1.6" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M2 6.5h14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                <circle cx="4.2" cy="5" r=".55" fill="currentColor"/>
+                <circle cx="6" cy="5" r=".55" fill="currentColor"/>
               </svg>
             </span>
             <span class="floating-card-copy">
-              <strong>AI Agent &amp;<br>Reception</strong>
-              <span class="floating-card-sub">New — from $1,500 setup</span>
+              <strong>Web &amp; Brand<br>Solutions</strong>
             </span>
           </a>
         </div><!-- /visual-scroll -->
       </div><!-- /hero-visual -->
-
-    </div><!-- /hero-inner -->
-  </div><!-- /hero-wrap -->
+  </div><!-- /hero-body -->
 
   <!-- ══════════════════════════════════════════════════════
        Bottom marquee strip — reuses the site's existing
@@ -204,6 +210,13 @@ const marqueeItems = [
     --accent: var(--amber, #F59E0B);
     --accent-2: var(--amber-300, #FCD34D);
     --cream: #FAF6EF;
+    /* single source of truth for the text-column width + the gap
+       before the video panel, so the panel's left edge is always
+       derived from where the text actually ends (see .hero-visual
+       `left` below) instead of two independent guesses that can
+       drift apart into an awkward gap on wide viewports. */
+    --hero-text-w: 500px;
+    --hero-gap: 56px;
     position: relative;
     /* beat stale global `#hero` rules (display:flex + padding-top) */
     display: block;
@@ -245,21 +258,22 @@ const marqueeItems = [
   /* ═══════════════════════════════════════════════════════════
      LAYOUT — editorial left, video panel right
   ═══════════════════════════════════════════════════════════ */
-  .hero-wrap {
+  /* .hero-body hosts the absolute right-bleed video panel; text
+     flows in .hero-wrap on the left ~46% */
+  .hero-body {
     position: relative; z-index: 1;
+    min-height: clamp(600px, 88svh, 860px);
+    padding-top: calc(var(--nav-h, 72px) + clamp(1rem, 2.5vh, 2rem));
+    display: flex; align-items: center;
+  }
+  .hero-wrap {
+    position: relative; z-index: 2;
     width: min(1280px, calc(100% - 56px));
     margin-inline: auto;
-    display: flex; align-items: center;
-    padding: calc(var(--nav-h, 72px) + clamp(2rem, 4.5vh, 3.4rem)) 0 clamp(2.6rem, 5vh, 3.6rem);
+    padding: clamp(1.5rem, 3vh, 2.5rem) 0;
   }
-  #hero .hero-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
-    align-items: center;
-    gap: clamp(2rem, 4.5vw, 4.5rem);
-    width: 100%;
-  }
-  .hero-text { position: relative; max-width: 600px; text-align: left; }
+  #hero .hero-inner { display: block; width: 100%; padding: 0; max-width: none; }
+  .hero-text { position: relative; max-width: var(--hero-text-w); text-align: left; }
 
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: .55rem;
@@ -344,37 +358,62 @@ const marqueeItems = [
   /* explicit `display: block` + reset cancels a stale global
      `.hero-visual { display: flex; align-items: center }` rule
      (components.css) that otherwise flex-shrinks .video-frame to
-     near-zero, since it has no intrinsic content to size from. */
+     near-zero, since it has no intrinsic content to size from.
+     Reference framing: the panel is absolute, FULL HEIGHT of the
+     hero body, flush against the hero's right edge (no right
+     margin), ending at the marquee strip below. */
   .hero-visual {
     display: block;
-    position: relative; width: 100%; max-width: 480px; margin-inline: auto;
+    position: absolute;
+    /* +4.25rem on top and bottom = ~136px combined, a ~15% height
+       cut from the previous full-bleed-vertical size, split evenly
+       so the panel stays centered in the same vertical envelope. */
+    top: calc(var(--nav-h, 72px) + clamp(2rem, 6vh, 4rem) + 4.25rem);
+    /* left edge = hero-wrap's own left inset (mirrors its
+       `min(1280px, 100% - 56px)` width via max(28px, ...)) + the
+       text column's width + one deliberate gap. right:0 with no
+       explicit width lets the browser compute width as exactly
+       "fill to the hero's right edge" — no independent guess to
+       drift out of sync with the text column. */
+    left: calc(max(28px, (100% - 1280px) / 2) + var(--hero-text-w) + var(--hero-gap));
+    right: 0; bottom: calc(clamp(2rem, 6vh, 4rem) + 4.25rem);
+    /* explicit `auto` beats a stale global `.hero-visual { width:100% }`
+       rule (components.css, an older hero version) that otherwise wins
+       by default once this rule stops declaring `width` itself — it
+       would force full width and ignore the left/right math above. */
+    width: auto;
     justify-content: normal; align-items: normal;
   }
-  .visual-scroll { position: relative; width: 100%; }
+  .visual-scroll { position: relative; width: 100%; height: 100%; }
 
   .visual-glow {
-    position: absolute; inset: -12%;
-    background: radial-gradient(60% 55% at 60% 35%, rgba(245,158,11,.22), transparent 70%);
+    position: absolute; inset: -6% -2% -6% -14%;
+    background: radial-gradient(55% 50% at 30% 40%, rgba(245,158,11,.18), transparent 70%);
     filter: blur(30px);
     pointer-events: none;
   }
 
-  /* organic single-corner blob mask — the signature shape */
+  /* the signature mask: one giant sweeping curve on the top-left,
+     a softer curve on the bottom-left, square on the right where
+     the panel bleeds off the hero's edge (reference-matched) */
   .video-frame {
     position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 4.35;
-    border-radius: 28px 28px 46% 28px;
+    width: 100%; height: 100%;
+    border-radius: clamp(150px, 17vw, 250px) 0 0 clamp(70px, 8vw, 120px);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.14);
-    box-shadow: 0 40px 90px -30px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.12);
+    border-right: none;
+    box-shadow: -30px 40px 90px -30px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
     will-change: transform;
   }
   .video-el {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    transform: scale(1.08);
+    object-position: 50% 42%;
+    /* no baseline zoom — widest natural crop (both monitors + desk),
+       matching the reference's spacious framing. GSAP only zooms in
+       gently on scroll (see script below). */
     filter: saturate(.92) brightness(.86) contrast(1.04);
   }
   .video-sheen {
@@ -385,17 +424,20 @@ const marqueeItems = [
   }
 
   /* hand-drawn connector arrow, text-column → floating card */
+  /* squiggle sits in the dark gap left of the panel's lower curve,
+     pointing at the floating card (as in the reference) */
   .connector-arrow {
-    position: absolute; left: -13%; bottom: 6%;
-    width: 34%; height: auto;
+    position: absolute; left: -17%; bottom: 12%;
+    width: 22%; height: auto;
     overflow: visible;
     pointer-events: none;
   }
   .connector-path { stroke-dashoffset: 0; }
 
   /* floating cream service card — the one deliberate light accent */
+  /* card rides ON the panel near its lower-left curve (reference) */
   .floating-card {
-    position: absolute; left: -9%; bottom: -8%;
+    position: absolute; left: 4%; bottom: 9%;
     display: flex; align-items: center; gap: .8rem;
     max-width: 232px;
     padding: 1rem 1.15rem;
@@ -461,23 +503,29 @@ const marqueeItems = [
      RESPONSIVE
   ═══════════════════════════════════════════════════════════ */
   @media (max-width: 1100px) {
-    #hero .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, .82fr); gap: 2.2rem; }
+    #hero { --hero-text-w: 380px; --hero-gap: 36px; }
     .floating-card { max-width: 200px; padding: .85rem 1rem; }
   }
   @media (max-width: 900px) {
-    .hero-wrap { padding-top: calc(var(--nav-h, 72px) + clamp(1.8rem, 5vh, 2.6rem)); }
-    #hero .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 2.6rem; }
+    .hero-body { display: block; min-height: 0; }
     .hero-text { max-width: 620px; min-width: 0; }
-    .hero-visual { order: 2; max-width: 380px; margin-top: .5rem; }
+    /* panel returns to flow: full-width-ish, still bleeding to the
+       right viewport edge, keeping the big top-left sweep */
+    .hero-visual {
+      position: relative; top: auto; right: auto; bottom: auto;
+      width: calc(100% - 60px);
+      height: clamp(204px, 32vw, 289px);
+      margin: 2.2rem 0 2.4rem auto;
+    }
+    .video-frame { border-radius: clamp(90px, 22vw, 140px) 0 0 clamp(40px, 10vw, 64px); }
     .connector-arrow { display: none; }
-    .floating-card { left: 4%; bottom: -6%; }
+    .floating-card { left: 5%; bottom: 8%; }
     #hero .hero-headline br { display: none; }
   }
   @media (max-width: 560px) {
     #hero .hero-headline { font-size: clamp(2.1rem, 8.6vw, 2.8rem); letter-spacing: -.04em; }
     .hero-ctas .btn, .btn-hero-ghost { width: 100%; max-width: 320px; }
-    .floating-card { position: static; margin: 1.3rem auto 0; max-width: 280px; }
-    .video-frame { border-radius: 24px 24px 34% 24px; }
+    .floating-card { position: absolute; max-width: 220px; padding: .8rem .95rem; }
     .hero-marquee { padding: .8rem 0; }
     .marquee-item { font-size: .72rem; }
   }
@@ -537,7 +585,10 @@ const marqueeItems = [
       .to(visual, { autoAlpha: .5, ease: 'power1.in' }, 0.45);
 
     if (video) {
-      gsap.to(video, { scale: 1.16, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
+      /* starts at the CSS baseline (no zoom, widest crop) and only
+         eases in gently — the resting frame is what matters for
+         matching the reference's wider framing */
+      gsap.to(video, { scale: 1.08, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1 } });
     }
 
     /* ── Cursor parallax tilt on the video panel ── */
@@ -555,7 +606,7 @@ const marqueeItems = [
     };
     hero.addEventListener('pointermove', onMove, { passive: true });
     frame.style.transformStyle = 'preserve-3d';
-    (hero.querySelector('.hero-inner') as HTMLElement).style.perspective = '1200px';
+    (hero.querySelector('.hero-body') as HTMLElement).style.perspective = '1200px';
     raf = requestAnimationFrame(tick);
 
     window.addEventListener('pagehide', () => {
