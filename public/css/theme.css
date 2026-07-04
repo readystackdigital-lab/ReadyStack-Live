@@ -1,7 +1,9 @@
 /* ═══════════════════════════════════════════════════════════
    theme.css — Dark theme (DEFAULT) overrides.
    Light mode = original stylesheets (data-theme="light").
-   Loaded LAST. The navbar is dark glass in both themes.
+   Loaded LAST. The navbar is dark glass floating pill in dark
+   theme; in light theme it becomes a full-width sticky light bar
+   (see "Light theme: full-width sticky nav" section below).
 ═══════════════════════════════════════════════════════════ */
 
 :root { color-scheme: dark; }
@@ -183,3 +185,54 @@
 
 /* Light-mode: ensure the dark-section text stays light (no change needed),
    and keep the page heroes/cta bands dark in BOTH themes (already hard dark). */
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME — nav color
+   The nav's shape (full-width, sticky at top, flat, border-bottom
+   only) is universal — see #site-header/#nav in layout.css, shared
+   by both themes. pages.css supplies the DEFAULT dark glass color;
+   this block swaps that to light glass only when data-theme="light".
+═══════════════════════════════════════════════════════════ */
+[data-theme="light"] #nav {
+  border-bottom-color: rgba(28, 28, 30, 0.08) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  box-shadow: 0 1px 0 rgba(28, 28, 30, 0.04) !important;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+[data-theme="light"] #nav.nav-scrolled {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-bottom-color: rgba(245, 158, 11, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(28, 28, 30, 0.08) !important;
+}
+[data-theme="light"] .nav-progress { background: rgba(28, 28, 30, 0.08) !important; }
+
+/* text/icon colors → dark-on-light (pages.css assumes dark glass) */
+[data-theme="light"] #nav .logo-adc  { color: var(--charcoal-900) !important; }
+[data-theme="light"] #nav .logo-full { color: var(--charcoal-500) !important; }
+[data-theme="light"] .nav-link { color: var(--charcoal-600) !important; }
+[data-theme="light"] .nav-link:hover,
+[data-theme="light"] .nav-link.active { color: var(--charcoal-900) !important; }
+[data-theme="light"] #site-header .nav-link::before        { background: var(--charcoal-100) !important; }
+[data-theme="light"] #site-header .nav-link.active::before { background: rgba(245, 158, 11, 0.12) !important; }
+[data-theme="light"] #site-header .nav-logo:hover .logo-adc { color: var(--amber-600) !important; }
+
+[data-theme="light"] .nav-status { color: var(--charcoal-500); }
+[data-theme="light"] .nav-hamburger { border-color: var(--charcoal-200); background: var(--charcoal-50); }
+[data-theme="light"] .nav-hamburger:hover,
+[data-theme="light"] .nav-hamburger.open { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.4); }
+[data-theme="light"] .nav-hamburger span { background: var(--charcoal-800); }
+
+[data-theme="light"] .theme-toggle-track { background: var(--charcoal-100); border-color: var(--charcoal-200); }
+
+/* Mobile dropdown: light glass (position/offset is universal, see layout.css) */
+[data-theme="light"] .mobile-menu {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border: 1px solid rgba(28, 28, 30, 0.08) !important;
+  box-shadow: 0 16px 48px rgba(28, 28, 30, 0.16) !important;
+}
+[data-theme="light"] .mobile-link {
+  color: var(--charcoal-700);
+  border-bottom: 1px solid var(--charcoal-100);
+}
+[data-theme="light"] .mobile-link:hover { color: var(--amber); }

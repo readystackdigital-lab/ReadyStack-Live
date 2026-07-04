@@ -1,0 +1,76 @@
+---
+/*
+  ──────────────────────────────────────────────────────────────
+  SiteMotion — homepage scroll motion graphics (GSAP island)
+  ──────────────────────────────────────────────────────────────
+  Layers on top of the existing IntersectionObserver .reveal
+  system (public/js/animations.js), which owns section entrances.
+  This island adds scrubbed, scroll-linked motion only:
+
+    · Steps: an amber progress line draws across the grid
+    · Security: the dashboard mock drifts on parallax
+    · CTA band: the glow drifts with scroll
+
+  Desktop + no-reduced-motion only. Nothing here gates content:
+  every effect is additive over fully-visible-at-rest markup.
+*/
+---
+
+<style is:global>
+  /* progress line under the How-it-works steps — scaleX driven by --line */
+  @media (min-width: 901px) {
+    #how .steps-grid { position: relative; --line: 0; }
+    #how .steps-grid::before {
+      content: '';
+      position: absolute; top: -14px; left: 2%; width: 96%; height: 2px;
+      background: linear-gradient(90deg, var(--amber, #F59E0B), rgba(245,158,11,.25));
+      border-radius: 2px;
+      transform: scaleX(var(--line));
+      transform-origin: left center;
+      opacity: .8;
+      pointer-events: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #how .steps-grid::before { display: none; }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  const fine   = window.matchMedia('(pointer: fine) and (min-width: 901px)');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (fine.matches && !reduce.matches) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* Steps — amber progress line draws as the section scrolls through */
+    const steps = document.querySelector<HTMLElement>('#how .steps-grid');
+    if (steps) {
+      gsap.fromTo(steps, { '--line': 0 }, {
+        '--line': 1, ease: 'none',
+        scrollTrigger: { trigger: steps, start: 'top 78%', end: 'bottom 55%', scrub: 1 },
+      });
+    }
+
+    /* Security — dashboard mock parallax drift */
+    const dash = document.querySelector<HTMLElement>('.compliance-dashboard');
+    if (dash) {
+      gsap.fromTo(dash, { y: 44 }, {
+        y: -44, ease: 'none',
+        scrollTrigger: { trigger: dash, start: 'top bottom', end: 'bottom top', scrub: 1.2 },
+      });
+    }
+
+    /* CTA band — glow drifts against scroll for gentle depth */
+    const glow = document.querySelector<HTMLElement>('.cta-band-glow');
+    if (glow) {
+      gsap.fromTo(glow, { yPercent: 18 }, {
+        yPercent: -18, ease: 'none',
+        scrollTrigger: { trigger: '.cta-band', start: 'top bottom', end: 'bottom top', scrub: 1.4 },
+      });
+    }
+  }
+</script>

@@ -304,12 +304,12 @@ const isActive = (href: string) =>
       0 1px 0 rgba(255, 255, 255, 0.6) inset;
   }
 
-  /* ── Living scroll-progress hugging the pill's lower edge ──── */
+  /* ── Living scroll-progress hugging the bar's lower edge ────── */
   .nav-progress {
     position: absolute;
-    left: 22px;
-    right: 22px;
-    bottom: 6px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: 2px;
     border-radius: 2px;
     background: rgba(28, 28, 30, 0.06);
@@ -445,9 +445,9 @@ const isActive = (href: string) =>
     #site-header :global(.btn-amber)::after { animation: none !important; }
   }
 
-  /* ── Mobile: hide the desktop-only progress affordance subtly ─ */
+  /* ── Mobile: progress line still hugs the bar's bottom edge ─── */
   @media (max-width: 768px) {
-    .nav-progress { left: 16px; right: 16px; bottom: 5px; }
+    .nav-progress { left: 0; right: 0; bottom: 0; }
   }
 
   /* ── Persistent desktop CTA ────────────────────────────────── */
