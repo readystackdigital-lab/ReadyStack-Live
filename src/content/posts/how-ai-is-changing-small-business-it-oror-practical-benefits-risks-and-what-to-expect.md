@@ -5,7 +5,7 @@ publishedDate: 2026-07-03
 excerpt: In this article, we'll explore how AI is transforming small business
   IT, where it delivers the greatest value, the risks to consider, and how
   businesses can prepare for an AI-driven future.
-coverImage: /images/posts/how-ai-is-changing-businesses.jpg
+coverImage: /images/posts/How AI is Changing Businesses.png
 draft: false
 ---
 Artificial intelligence (AI) is no longer reserved for large enterprises with dedicated technology teams. Today, businesses of all sizes are using AI-powered tools to improve productivity, strengthen cybersecurity, automate repetitive tasks, and make more informed decisions.
@@ -31,7 +31,7 @@ Examples include:
 
 Platforms like Microsoft 365, customer relationship management (CRM) systems, accounting software, and helpdesk solutions increasingly include built-in AI capabilities.
 
-The result is not fewer employees—it is employees spending less time on repetitive work and more time on tasks that require judgement, creativity, and customer interaction.
+The result is not fewer employees, it is employees spending less time on repetitive work and more time on tasks that require judgement, creativity, and customer interaction.
 
 ---
 
@@ -234,7 +234,7 @@ Businesses that embrace AI responsibly will likely gain a competitive advantage 
 
 ---
 
-## Final Thoughts
+# Final Thoughts
 
 Artificial intelligence is reshaping how small businesses manage technology. From improving productivity and enhancing cybersecurity to automating routine IT tasks and delivering valuable business insights, AI is becoming an essential part of modern operations.
 
