@@ -1,0 +1,720 @@
+---
+/* ═══════════════════════════════════════════════════════════
+   CostCalculator.astro — "Project Scoper"
+   Interactive website cost estimator. Vanilla JS + scoped CSS.
+   ALL pricing lives in the PRICING object below — single source
+   of truth. Nothing is hardcoded elsewhere.
+═══════════════════════════════════════════════════════════ */
+
+const PRICING = {
+  pages: [
+    { id: 'landing',  label: '1 page (landing page)', min: 1000, max: 1400 },
+    { id: 'business', label: 'Up to 5 pages',         min: 1900, max: 2600 },
+    { id: 'growth',   label: '6–10 pages',            min: 2900, max: 3900 },
+    { id: 'custom',   label: '10+ pages',             consult: true }
+  ],
+  addons: [
+    { id: 'booking', label: 'Booking system',            price: 300 },
+    { id: 'blog',    label: 'Blog (CMS setup)',          price: 400 },
+    { id: 'seo',     label: 'SEO setup',                 price: 450 },
+    { id: 'ai',      label: 'AI chatbot & reception',    price: 1500, monthly: 149 },
+    { id: 'ecom',    label: 'Online store (e-commerce)', consult: true },
+    { id: 'email',   label: 'Business email (M365/Google)', flagOnly: true }
+  ],
+  care: [
+    { id: 'care',     label: 'Managed Website Care', monthly: 100, recommended: true },
+    { id: 'careplus', label: 'Website Care Plus',    monthly: 150 }
+  ]
+};
+
+// Contact endpoints. WHATSAPP_NUMBER matches the site footer's existing
+// WhatsApp line — swap here if lead routing should change.
+const WHATSAPP_NUMBER = '9779840318084';
+const CAL_URL = 'https://cal.com/readystack-digital-yyfaab/free-website-strategy-call';
+const ENDPOINT = 'https://agent.readystackdigital.com/estimate';
+
+const tierHints = {
+  landing:  'One focused page to explain your offer and capture enquiries.',
+  business: 'Home, services, about, contact and one more: the classic small-business site.',
+  growth:   'Room for detailed service pages, locations or a small resource section.',
+  custom:   'Larger sites, portals or anything bespoke, priced after a quick chat.'
+};
+
+const addonHints = {
+  booking: 'Let customers pick a time and book online.',
+  blog:    'A tidy, editable blog with an easy admin.',
+  seo:     'On-page SEO, search-engine setup and indexing.',
+  ai:      'A 24/7 assistant that answers and captures leads.',
+  ecom:    'Sell products online with a full store.',
+  email:   'Professional inboxes on your own domain.'
+};
+---
+
+<div class="calc" data-view="desktop" data-step="1" data-mode="estimate" data-care="care">
+  <form class="calc-form" novalidate>
+    <!-- Honeypot: hidden from humans, tempting to bots -->
+    <div class="calc-hp" aria-hidden="true">
+      <label>Leave this field empty
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <!-- Mobile progress -->
+    <div class="calc-progress" aria-hidden="true">
+      <span class="calc-dot" data-dot="1"></span>
+      <span class="calc-dot" data-dot="2"></span>
+      <span class="calc-dot" data-dot="3"></span>
+    </div>
+
+    <div class="calc-body">
+      <!-- ─── OPTIONS (steps 1 + 2 on mobile; left column on desktop) ─── -->
+      <div class="calc-options">
+
+        <!-- Step 1 — page count -->
+        <fieldset class="calc-step" data-step="1">
+          <legend class="calc-legend">
+            <span class="calc-legend-k">Step 1</span>
+            How many pages does your site need?
+          </legend>
+          <div class="calc-cards" role="radiogroup" aria-label="Number of pages">
+            {PRICING.pages.map((p) => (
+              <label class="calc-card calc-tier" data-tier={p.id}>
+                <input type="radio" name="page_tier" value={p.id} />
+                <span class="calc-card-main">
+                  <span class="calc-card-label">{p.label}</span>
+                  <span class="calc-card-hint">{tierHints[p.id]}</span>
+                </span>
+                <span class="calc-card-meta">
+                  {p.consult
+                    ? <span class="calc-card-price calc-card-consult">Let’s talk</span>
+                    : <span class="calc-card-price">${p.min.toLocaleString('en-AU')}–{p.max.toLocaleString('en-AU')}</span>}
+                </span>
+                <span class="calc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <!-- Step 2 — features -->
+        <fieldset class="calc-step" data-step="2">
+          <legend class="calc-legend">
+            <span class="calc-legend-k">Step 2</span>
+            Add the features you need
+          </legend>
+          <p class="calc-step-sub">Pick any that apply. You can change these anytime.</p>
+          <div class="calc-cards">
+            {PRICING.addons.map((a) => (
+              <button type="button" class="calc-card calc-addon" data-addon={a.id} aria-pressed="false">
+                <span class="calc-card-main">
+                  <span class="calc-card-label">{a.label}</span>
+                  <span class="calc-card-hint">{addonHints[a.id]}</span>
+                </span>
+                <span class="calc-card-meta">
+                  {a.price != null && <span class="calc-card-price">+${a.price.toLocaleString('en-AU')}</span>}
+                  {a.monthly != null && <span class="calc-card-sub">+${a.monthly}/mo</span>}
+                  {a.consult && <span class="calc-card-price calc-card-consult">Let’s talk</span>}
+                  {a.flagOnly && <span class="calc-card-sub">included in quote</span>}
+                </span>
+                <span class="calc-check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </button>
+            ))}
+          </div>
+          <p class="calc-flag" data-flag="email" hidden>We’ll include email options in your quote.</p>
+
+          <!-- Mobile-only nav -->
+          <div class="calc-nav">
+            <button type="button" class="calc-back" data-goto="1">Back</button>
+            <button type="button" class="btn btn-amber calc-next" data-goto="3">See my estimate</button>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ─── ESTIMATE (step 3 on mobile; sticky right on desktop) ─── -->
+      <aside class="calc-estimate" data-step="3" aria-live="polite">
+        <div class="calc-estimate-inner">
+
+          <button type="button" class="calc-back calc-back-result" data-goto="2">Back</button>
+
+          <div class="calc-est-head">
+            <span class="calc-est-kicker">Your estimate</span>
+          </div>
+
+          <!-- Estimate (bracket) view -->
+          <div class="calc-bracket-wrap" data-when="estimate">
+            <div class="calc-bracket" data-role="bracket">$1,000 – $1,400</div>
+            <p class="calc-bracket-note">Typical range. Your exact fixed quote is free within 24 hours.</p>
+          </div>
+
+          <!-- Consult view -->
+          <div class="calc-consult" data-when="consult" hidden>
+            <div class="calc-consult-title">This scope deserves a proper conversation.</div>
+            <p class="calc-consult-note">Bigger builds and online stores are priced after a short call, so you get an accurate number, not a guess.</p>
+          </div>
+
+          <!-- Monthly line (both views) -->
+          <div class="calc-monthly" data-role="monthly-wrap">
+            <span class="calc-monthly-plus">+</span>
+            <span class="calc-monthly-val" data-role="monthly">$100</span>
+            <span class="calc-monthly-lbl">/mo ongoing</span>
+          </div>
+
+          <!-- Care plan toggle -->
+          <div class="calc-care">
+            <div class="calc-care-head">Ongoing website care</div>
+            <div class="calc-care-opts">
+              {PRICING.care.map((c) => (
+                <button type="button" class="calc-care-btn" data-care={c.id} aria-pressed={c.id === 'care' ? 'true' : 'false'}>
+                  <span class="calc-care-name">{c.label}</span>
+                  <span class="calc-care-price">${c.monthly}/mo</span>
+                  {c.recommended && <span class="calc-care-tag">Recommended</span>}
+                </button>
+              ))}
+            </div>
+            <button type="button" class="calc-care-none" data-care="none" aria-pressed="false">No care plan for now</button>
+          </div>
+
+          <!-- CTAs -->
+          <div class="calc-ctas">
+            <!-- Primary: email me this estimate -->
+            <div class="calc-email" data-role="email-block">
+              <button type="button" class="btn btn-amber btn-full calc-email-open" data-role="email-open">Email me this estimate + full breakdown</button>
+
+              <div class="calc-email-form" hidden>
+                <label class="calc-field">
+                  <span>Your name</span>
+                  <input type="text" name="name" autocomplete="name" placeholder="Jane Smith" />
+                </label>
+                <label class="calc-field">
+                  <span>Email address</span>
+                  <input type="email" name="email" autocomplete="email" placeholder="jane@business.com.au" />
+                </label>
+                <p class="calc-email-error" data-role="email-error" hidden></p>
+                <button type="submit" class="btn btn-amber btn-full calc-email-send" data-role="email-send">Send my estimate</button>
+              </div>
+
+              <p class="calc-email-ok" data-role="email-ok" hidden>Sent! Check your inbox.</p>
+            </div>
+
+            <!-- Book a call (primary in consult mode) -->
+            <a href={CAL_URL} target="_blank" rel="noopener" class="btn btn-outline btn-full calc-book" data-role="book">Book a free strategy call</a>
+
+            <!-- WhatsApp -->
+            <a href="#" target="_blank" rel="noopener" class="btn btn-outline btn-full calc-wa" data-role="whatsapp">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.35 2.14 11.7c0 1.92.58 3.7 1.57 5.2L2 22l5.28-1.64a10.1 10.1 0 0 0 4.76 1.2c5.46 0 9.9-4.35 9.9-9.7S17.5 2 12.04 2Zm5.44 11.87c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.23-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.37-1.95-1.18-.72-.63-1.2-1.42-1.34-1.66-.14-.23-.02-.36.1-.48.11-.1.24-.27.36-.4.12-.14.16-.23.24-.39.08-.16.04-.29-.02-.41-.06-.12-.54-1.28-.74-1.75-.2-.46-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.29-.22.23-.84.8-.84 1.96 0 1.15.86 2.27.98 2.43.12.16 1.7 2.55 4.12 3.58.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.43-.57 1.63-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+              Ask on WhatsApp
+            </a>
+          </div>
+
+          <p class="calc-fineprint">No obligation. Estimates are indicative. Your fixed quote is always free.</p>
+        </div>
+      </aside>
+    </div>
+  </form>
+</div>
+
+<script define:vars={{ PRICING, WHATSAPP_NUMBER, CAL_URL, ENDPOINT }}>
+  (function () {
+    const root = document.currentScript.previousElementSibling
+      || document.querySelector('.calc');
+    if (!root) return;
+
+    const form = root.querySelector('.calc-form');
+    const q = (s) => root.querySelector(s);
+    const qa = (s) => Array.from(root.querySelectorAll(s));
+
+    const state = {
+      tier: null,          // page tier id
+      addons: new Set(),   // addon ids
+      care: 'care'         // 'care' | 'careplus' | 'none'
+    };
+
+    const round50 = (n) => Math.round(n / 50) * 50;
+    const money = (n) => '$' + n.toLocaleString('en-AU');
+
+    function tierById(id) { return PRICING.pages.find((p) => p.id === id); }
+    function addonById(id) { return PRICING.addons.find((a) => a.id === id); }
+    function careById(id) { return PRICING.care.find((c) => c.id === id); }
+
+    function isConsult() {
+      const t = tierById(state.tier);
+      if (t && t.consult) return true;
+      for (const id of state.addons) {
+        const a = addonById(id);
+        if (a && a.consult) return true;
+      }
+      return false;
+    }
+
+    function compute() {
+      const t = tierById(state.tier);
+      let addonSum = 0;
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (a && typeof a.price === 'number') addonSum += a.price;
+      });
+      let monthly = 0;
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (a && typeof a.monthly === 'number') monthly += a.monthly;
+      });
+      const c = careById(state.care);
+      if (c) monthly += c.monthly;
+
+      let min = null, max = null;
+      if (t && !t.consult) {
+        min = round50(t.min + addonSum);
+        max = round50(t.max + addonSum);
+      }
+      return { min, max, monthly, consult: isConsult() };
+    }
+
+    // ─── Render ───────────────────────────────────────────────
+    function render() {
+      const r = compute();
+      root.setAttribute('data-mode', r.consult ? 'consult' : 'estimate');
+      root.setAttribute('data-care', state.care);
+
+      // Estimate vs consult view (authoritative — overrides initial `hidden`)
+      q('[data-when="estimate"]').hidden = r.consult;
+      q('[data-when="consult"]').hidden = !r.consult;
+
+      // Bracket
+      if (r.min != null) {
+        q('[data-role="bracket"]').textContent = money(r.min) + ' – ' + money(r.max);
+      }
+
+      // Monthly line
+      const monthlyWrap = q('[data-role="monthly-wrap"]');
+      if (r.monthly > 0) {
+        monthlyWrap.hidden = false;
+        q('[data-role="monthly"]').textContent = money(r.monthly);
+      } else {
+        monthlyWrap.hidden = true;
+      }
+
+      // Email flag microcopy
+      const flag = q('[data-flag="email"]');
+      if (flag) flag.hidden = !state.addons.has('email');
+
+      // WhatsApp link
+      q('[data-role="whatsapp"]').setAttribute('href', waLink(r));
+    }
+
+    function selectionSummary() {
+      const t = tierById(state.tier);
+      const feats = [];
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (a) feats.push(a.label.toLowerCase());
+      });
+      const tierLabel = t ? t.label.toLowerCase() : 'a website';
+      const featText = feats.length ? ' with ' + feats.join(', ') : '';
+      return { tierLabel, featText };
+    }
+
+    function waLink(r) {
+      const { tierLabel, featText } = selectionSummary();
+      let msg;
+      if (r.consult || r.min == null) {
+        msg = 'Hi ReadyStack, I’d like to scope ' + tierLabel + featText +
+          '. Can we set up a quick call for an exact quote?';
+      } else {
+        msg = 'Hi ReadyStack, I scoped ' + tierLabel + featText +
+          ', estimated ' + money(r.min) + '–' + money(r.max) +
+          (r.monthly > 0 ? ' plus ' + money(r.monthly) + '/mo ongoing' : '') +
+          '. Can I get an exact quote?';
+      }
+      return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+    }
+
+    // ─── Step navigation (mobile) ─────────────────────────────
+    function goto(step) {
+      root.setAttribute('data-step', String(step));
+      qa('.calc-dot').forEach((d) => {
+        d.classList.toggle('is-on', Number(d.dataset.dot) <= Number(step));
+      });
+      // Move focus to the newly shown step for a11y
+      const target = step === 3
+        ? q('.calc-estimate')
+        : q('.calc-step[data-step="' + step + '"]');
+      if (target) {
+        const legend = target.querySelector('.calc-legend, .calc-est-kicker');
+        (legend || target).scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    // ─── Events ───────────────────────────────────────────────
+    // Page tier (radio) — auto-advance on mobile
+    qa('input[name="page_tier"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        state.tier = input.value;
+        render();
+        if (window.matchMedia('(max-width: 767px)').matches) goto(2);
+      });
+    });
+
+    // Addon toggles
+    qa('.calc-addon').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.addon;
+        const on = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', on ? 'false' : 'true');
+        if (on) state.addons.delete(id); else state.addons.add(id);
+        render();
+      });
+    });
+
+    // Care plan toggle (care / careplus / none)
+    function setCare(id) {
+      state.care = id;
+      qa('.calc-care-btn, .calc-care-none').forEach((b) => {
+        b.setAttribute('aria-pressed', b.dataset.care === id ? 'true' : 'false');
+      });
+      render();
+    }
+    qa('.calc-care-btn, .calc-care-none').forEach((b) => {
+      b.addEventListener('click', () => {
+        // Clicking the active plan deselects it (falls back to "none")
+        if (b.dataset.care === state.care && b.dataset.care !== 'none') {
+          setCare('none');
+        } else {
+          setCare(b.dataset.care);
+        }
+      });
+    });
+
+    // Step buttons
+    qa('[data-goto]').forEach((b) => {
+      b.addEventListener('click', () => goto(Number(b.dataset.goto)));
+    });
+
+    // Email CTA — reveal inline fields
+    const emailOpen = q('[data-role="email-open"]');
+    const emailForm = q('.calc-email-form');
+    emailOpen.addEventListener('click', () => {
+      emailForm.hidden = false;
+      emailOpen.hidden = true;
+      const nameInput = emailForm.querySelector('input[name="name"]');
+      if (nameInput) nameInput.focus();
+    });
+
+    // Submit
+    let sending = false;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (sending) return;
+
+      const errEl = q('[data-role="email-error"]');
+      const okEl = q('[data-role="email-ok"]');
+      const sendBtn = q('[data-role="email-send"]');
+      const showErr = (m) => { errEl.textContent = m; errEl.hidden = false; };
+      errEl.hidden = true;
+
+      // Honeypot: if filled, silently succeed (drop)
+      const hp = form.querySelector('input[name="company_website"]');
+      if (hp && hp.value.trim() !== '') { emailForm.hidden = true; okEl.hidden = false; return; }
+
+      const name = (form.querySelector('input[name="name"]').value || '').trim();
+      const email = (form.querySelector('input[name="email"]').value || '').trim();
+      if (!name) return showErr('Please add your name.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr('Please enter a valid email address.');
+
+      const r = compute();
+
+      // Display-ready line items (keeps all pricing on the client / PRICING).
+      const items = [];
+      const t = tierById(state.tier);
+      if (t) items.push({ label: t.label, value: t.consult ? 'Custom scope' : money(t.min) + '–' + money(t.max) });
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (!a) return;
+        const value = a.consult ? 'Custom scope'
+          : a.flagOnly ? 'Included in quote'
+          : (typeof a.price === 'number' ? '+' + money(a.price) : '');
+        items.push({ label: a.label, value: value });
+      });
+      const monthlyItems = [];
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (a && typeof a.monthly === 'number') monthlyItems.push({ label: a.label, value: '$' + a.monthly + '/mo' });
+      });
+      const cc = careById(state.care);
+      if (cc) monthlyItems.push({ label: cc.label, value: '$' + cc.monthly + '/mo' });
+
+      const payload = {
+        name: name,
+        email: email,
+        company_website: hp ? hp.value : '',
+        tierLabel: t ? t.label : null,
+        items: items,
+        monthlyItems: monthlyItems,
+        bracket: r.min != null ? money(r.min) + ' – ' + money(r.max) : null,
+        consult: r.consult,
+        monthly: r.monthly > 0 ? money(r.monthly) : null,
+        whatsappUrl: waLink(r),
+        timestamp: new Date().toISOString(),
+        pageUrl: window.location.href
+      };
+
+      // Rate limit: lock the button for 10s after each submit.
+      sending = true;
+      sendBtn.disabled = true;
+      setTimeout(() => { sending = false; sendBtn.disabled = false; }, 10000);
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then((res) => { if (!res.ok) throw new Error('send failed'); return res.json(); })
+        .then(() => { emailForm.hidden = true; okEl.hidden = false; })
+        .catch(() => {
+          errEl.innerHTML = 'Sorry, that didn’t send. Please try again, or <a href="' + waLink(r) + '" target="_blank" rel="noopener">message us on WhatsApp</a>.';
+          errEl.hidden = false;
+        });
+    });
+
+    // ─── Responsive view flag ─────────────────────────────────
+    const mq = window.matchMedia('(max-width: 767px)');
+    function syncView() {
+      root.setAttribute('data-view', mq.matches ? 'mobile' : 'desktop');
+      if (!mq.matches) root.setAttribute('data-step', '3'); // desktop shows all
+      else if (root.getAttribute('data-step') === '3' && !state.tier) {
+        root.setAttribute('data-step', '1');
+      }
+    }
+    mq.addEventListener('change', syncView);
+    syncView();
+    render();
+  })();
+</script>
+
+<style>
+  .calc {
+    --calc-radius: var(--radius-lg);
+    --calc-border: var(--charcoal-200);
+    --calc-surface: var(--white);
+    --calc-surface-2: var(--charcoal-50);
+    --calc-ink: var(--charcoal-900);
+    --calc-ink-soft: var(--charcoal-500);
+    max-width: var(--container);
+    margin-inline: auto;
+  }
+  .calc-form { margin: 0; }
+  /* The [hidden] attr must win over the display rules below */
+  .calc [hidden] { display: none !important; }
+
+  /* Honeypot */
+  .calc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* Progress dots (mobile only) */
+  .calc-progress { display: none; gap: .5rem; justify-content: center; margin-bottom: var(--space-6); }
+  .calc-dot { width: 30px; height: 5px; border-radius: 999px; background: var(--charcoal-200); transition: background var(--dur-base) var(--ease-out); }
+  .calc-dot.is-on { background: var(--amber); }
+
+  /* Layout: options + estimate */
+  .calc-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(320px, .95fr); gap: var(--space-8); align-items: start; }
+
+  fieldset.calc-step { border: 0; padding: 0; margin: 0 0 var(--space-8); }
+  fieldset.calc-step:last-child { margin-bottom: 0; }
+  .calc-legend {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .6rem;
+    font-family: var(--font-display); font-weight: var(--weight-bold);
+    font-size: var(--text-xl); color: var(--calc-ink); letter-spacing: -.02em;
+    margin-bottom: var(--space-4); padding: 0;
+  }
+  .calc-legend-k {
+    font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase;
+    letter-spacing: .12em; color: var(--amber-600);
+    background: var(--amber-dim); padding: .2rem .55rem; border-radius: 999px;
+  }
+  .calc-step-sub { font-size: var(--text-sm); color: var(--calc-ink-soft); margin: -.5rem 0 var(--space-4); }
+
+  /* Cards */
+  .calc-cards { display: grid; gap: var(--space-3); }
+  .calc-card {
+    position: relative; display: flex; align-items: center; gap: var(--space-4);
+    width: 100%; text-align: left; cursor: pointer;
+    background: var(--calc-surface); border: 1.5px solid var(--calc-border);
+    border-radius: var(--radius-md); padding: var(--space-4) var(--space-5);
+    transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+    font: inherit; color: var(--calc-ink);
+  }
+  .calc-card:hover { border-color: rgba(245,158,11,.5); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .calc-card input { position: absolute; opacity: 0; pointer-events: none; }
+  .calc-card-main { display: flex; flex-direction: column; gap: .15rem; flex: 1; min-width: 0; }
+  .calc-card-label { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-base); color: var(--calc-ink); }
+  .calc-card-hint { font-size: var(--text-sm); color: var(--calc-ink-soft); line-height: 1.45; }
+  .calc-card-meta { display: flex; flex-direction: column; align-items: flex-end; gap: .1rem; flex-shrink: 0; text-align: right; }
+  .calc-card-price { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-base); color: var(--calc-ink); white-space: nowrap; }
+  .calc-card-consult { color: var(--amber-600); }
+  .calc-card-sub { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--calc-ink-soft); white-space: nowrap; }
+
+  /* Check indicator */
+  .calc-check {
+    display: grid; place-items: center; flex-shrink: 0;
+    width: 22px; height: 22px; border-radius: 999px;
+    border: 1.5px solid var(--calc-border); color: transparent;
+    transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast), transform var(--dur-fast);
+  }
+  /* Selected states */
+  .calc-tier input:checked ~ .calc-check,
+  .calc-addon[aria-pressed="true"] .calc-check {
+    background: var(--amber); border-color: var(--amber); color: #17181A; transform: scale(1.05);
+  }
+  .calc-tier:has(input:checked),
+  .calc-addon[aria-pressed="true"] {
+    border-color: var(--amber); background: var(--amber-50);
+    box-shadow: 0 0 0 1px var(--amber) inset;
+  }
+  /* Focus */
+  .calc-card input:focus-visible ~ .calc-card-main,
+  .calc-addon:focus-visible { outline: none; }
+  .calc-tier:has(input:focus-visible),
+  .calc-addon:focus-visible,
+  .calc-care-btn:focus-visible,
+  .calc-care-none:focus-visible,
+  .btn:focus-visible {
+    outline: 3px solid rgba(245,158,11,.45); outline-offset: 2px;
+  }
+
+  .calc-flag { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--amber-600); font-weight: var(--weight-medium); }
+
+  /* Mobile nav */
+  .calc-nav { display: none; gap: var(--space-3); margin-top: var(--space-6); }
+  .calc-nav .calc-next { flex: 1; }
+  .calc-back {
+    font: inherit; font-family: var(--font-display); font-weight: var(--weight-semibold);
+    background: transparent; border: 1.5px solid var(--calc-border); color: var(--calc-ink);
+    border-radius: var(--radius-full); padding: .7rem 1.3rem; cursor: pointer;
+    transition: border-color var(--dur-fast), background var(--dur-fast);
+  }
+  .calc-back:hover { border-color: var(--amber); }
+  .calc-back-result { display: none; margin-bottom: var(--space-4); align-self: flex-start; }
+
+  /* ─── Estimate panel ─── */
+  .calc-estimate { position: sticky; top: calc(var(--nav-h) + 1.5rem); }
+  .calc-estimate-inner {
+    display: flex; flex-direction: column;
+    background: var(--calc-surface); border: 1.5px solid var(--calc-border);
+    border-radius: var(--calc-radius); padding: var(--space-6);
+    box-shadow: var(--shadow-md);
+  }
+  .calc-est-kicker { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .14em; color: var(--amber-600); }
+  .calc-est-head { margin-bottom: var(--space-3); }
+
+  .calc-bracket { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: clamp(1.9rem, 1.3rem + 2.4vw, 2.7rem); line-height: 1.05; letter-spacing: -.03em; color: var(--calc-ink); }
+  .calc-bracket-note { margin-top: var(--space-2); font-size: var(--text-sm); color: var(--calc-ink-soft); line-height: 1.55; }
+
+  .calc-consult-title { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: clamp(1.4rem, 1rem + 1.6vw, 1.8rem); line-height: 1.15; letter-spacing: -.02em; color: var(--calc-ink); }
+  .calc-consult-note { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--calc-ink-soft); line-height: 1.6; }
+
+  /* data-mode switches views */
+  .calc[data-mode="consult"] [data-when="estimate"] { display: none; }
+  .calc[data-mode="estimate"] [data-when="consult"] { display: none; }
+
+  .calc-monthly { display: flex; align-items: baseline; gap: .3rem; margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px dashed var(--calc-border); }
+  .calc-monthly-plus { color: var(--amber-600); font-weight: var(--weight-bold); }
+  .calc-monthly-val { font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-lg); color: var(--calc-ink); }
+  .calc-monthly-lbl { font-size: var(--text-sm); color: var(--calc-ink-soft); }
+
+  /* Care */
+  .calc-care { margin-top: var(--space-5); }
+  .calc-care-head { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .1em; color: var(--calc-ink-soft); margin-bottom: var(--space-3); }
+  .calc-care-opts { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+  .calc-care-btn {
+    position: relative; display: flex; flex-direction: column; gap: .15rem; text-align: left;
+    background: var(--calc-surface-2); border: 1.5px solid var(--calc-border); border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4); cursor: pointer; font: inherit; color: var(--calc-ink);
+    transition: border-color var(--dur-fast), background var(--dur-fast);
+  }
+  .calc-care-btn:hover { border-color: rgba(245,158,11,.5); }
+  .calc-care-btn[aria-pressed="true"] { border-color: var(--amber); background: var(--amber-50); box-shadow: 0 0 0 1px var(--amber) inset; }
+  .calc-care-name { font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-sm); }
+  .calc-care-price { font-size: var(--text-xs); color: var(--calc-ink-soft); }
+  .calc-care-tag { position: absolute; top: -9px; right: 8px; font-family: var(--font-mono); font-size: .58rem; text-transform: uppercase; letter-spacing: .06em; background: var(--amber); color: #17181A; padding: .12rem .4rem; border-radius: 999px; font-weight: var(--weight-bold); }
+  .calc-care-none { margin-top: var(--space-2); width: 100%; text-align: left; font: inherit; font-size: var(--text-sm); color: var(--calc-ink-soft); background: transparent; border: 0; cursor: pointer; padding: .35rem .2rem; }
+  .calc-care-none[aria-pressed="true"] { color: var(--amber-600); font-weight: var(--weight-medium); }
+  .calc-care-none:hover { color: var(--amber-600); }
+
+  /* CTAs */
+  .calc-ctas { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-6); }
+  .calc-wa, .calc-book { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; }
+  .btn-full { width: 100%; }
+  .calc-email-form { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-3); }
+  .calc-field { display: flex; flex-direction: column; gap: .35rem; }
+  .calc-field span { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--calc-ink); }
+  .calc-field input {
+    font: inherit; font-size: var(--text-base); color: var(--calc-ink);
+    background: var(--calc-surface-2); border: 1.5px solid var(--calc-border); border-radius: var(--radius-md);
+    padding: .7rem .85rem; transition: border-color var(--dur-fast);
+  }
+  .calc-field input:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(245,158,11,.18); }
+  .calc-email-error { font-size: var(--text-sm); color: var(--red); font-weight: var(--weight-medium); }
+  .calc-email-ok {
+    margin-top: var(--space-2); font-family: var(--font-display); font-weight: var(--weight-semibold);
+    color: var(--green); font-size: var(--text-base); display: flex; align-items: center; gap: .4rem;
+  }
+  .calc-email-ok::before { content: "✓"; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 999px; background: var(--green); color: #fff; font-size: .8rem; }
+
+  /* Consult mode: promote Book a call to primary, demote email */
+  .calc[data-mode="consult"] .calc-book { order: -1; }
+  .calc[data-mode="consult"] .calc-book { background: var(--amber); border-color: var(--amber); color: #17181A; }
+  .calc[data-mode="consult"] .calc-email { order: 1; }
+
+  .calc-fineprint { margin-top: var(--space-4); font-size: var(--text-xs); color: var(--calc-ink-soft); line-height: 1.5; }
+
+  /* ══════════ Mobile wizard (<768px) ══════════ */
+  @media (max-width: 767px) {
+    .calc-progress { display: flex; }
+    .calc-body { grid-template-columns: 1fr; gap: 0; }
+    .calc-estimate { position: static; }
+    .calc-nav { display: flex; }
+    .calc-back-result { display: inline-block; }
+
+    /* Show only the active step */
+    .calc-step, .calc-estimate { display: none; }
+    .calc[data-step="1"] .calc-step[data-step="1"],
+    .calc[data-step="2"] .calc-step[data-step="2"],
+    .calc[data-step="3"] .calc-estimate { display: block; }
+
+    .calc-care-opts { grid-template-columns: 1fr; }
+  }
+
+  /* Desktop: hide mobile back-in-result + nav (already default), keep all visible */
+  @media (min-width: 768px) {
+    .calc-back-result, .calc-nav { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .calc-card, .calc-check, .calc-dot { transition: none; }
+  }
+
+  /* ══════════ Dark theme overrides (site default) ══════════ */
+  :global([data-theme="dark"]) .calc {
+    --calc-border: rgba(255,255,255,.12);
+    --calc-surface: rgba(255,255,255,.04);
+    --calc-surface-2: rgba(255,255,255,.03);
+    --calc-ink: #fff;
+    --calc-ink-soft: rgba(255,255,255,.62);
+  }
+  :global([data-theme="dark"]) .calc-estimate-inner { box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+  :global([data-theme="dark"]) .calc-tier:has(input:checked),
+  :global([data-theme="dark"]) .calc-addon[aria-pressed="true"],
+  :global([data-theme="dark"]) .calc-care-btn[aria-pressed="true"] {
+    background: rgba(245,158,11,.12);
+  }
+  :global([data-theme="dark"]) .calc-dot { background: rgba(255,255,255,.16); }
+  :global([data-theme="dark"]) .calc-dot.is-on { background: var(--amber); }
+  :global([data-theme="dark"]) .calc-field input { background: rgba(255,255,255,.05); }
+  :global([data-theme="dark"]) .calc-legend-k { color: var(--amber-300); }
+  :global([data-theme="dark"]) .calc-card-consult,
+  :global([data-theme="dark"]) .calc-flag,
+  :global([data-theme="dark"]) .calc-est-kicker,
+  :global([data-theme="dark"]) .calc-care-none[aria-pressed="true"],
+  :global([data-theme="dark"]) .calc-monthly-plus { color: var(--amber-300); }
+</style>

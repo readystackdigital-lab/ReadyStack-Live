@@ -1,0 +1,155 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import CtaBand from "../components/CtaBand.astro";
+import CostCalculator from "../components/CostCalculator.astro";
+
+const CAL_URL = "https://cal.com/readystack-digital-yyfaab/free-website-strategy-call";
+
+const faqs = [
+  {
+    q: "Why a range and not a fixed price?",
+    a: "Every business is different, so the honest answer up front is a range rather than a single number. It reflects the real spread we see for a build of that size once we know your exact pages, content and features. The moment we understand your specifics, we lock in one fixed price, in writing, before any work starts. No creep, no surprises.",
+  },
+  {
+    q: "What's included in every build?",
+    a: "Every ReadyStack website comes with a mobile-first responsive design, secure HTTPS hosting setup, your domain connected, contact forms with WhatsApp, phone and email buttons, on-page SEO foundations and Google Search Console setup. You're launch-ready from day one, not handed a half-finished site.",
+  },
+  {
+    q: "How fast can you deliver?",
+    a: "Most small-business sites are ready to review within 1 to 3 weeks. A single landing page can be quicker; larger sites with more pages or custom features take a little longer. The biggest factor is how fast you can get us your content and feedback, and we'll give you a clear timeline with your quote.",
+  },
+  {
+    q: "What are the ongoing costs?",
+    a: "The build is a one-time cost. After launch, an optional monthly care plan keeps everything hosted, secure, backed up and monitored, from $100/month for Managed Website Care. Add-ons like the AI chatbot carry their own small monthly fee. Your estimate always shows any monthly costs separately from the one-time build, so nothing is hidden.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://readystackdigital.com/estimate#service",
+  serviceType: "Website design and development",
+  name: "Small Business Website Design",
+  description:
+    "Custom small-business website design and development for Sydney, NSW and Australia-wide. Fixed-price builds from $1,000, with optional booking systems, blogs, SEO, AI chatbots and monthly website care.",
+  url: "https://readystackdigital.com/estimate",
+  provider: { "@id": "https://readystackdigital.com/#business" },
+  areaServed: {
+    "@type": "City",
+    name: "Sydney",
+    containedInPlace: { "@type": "AdministrativeArea", name: "New South Wales" },
+  },
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Landing page website",
+      priceCurrency: "AUD",
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 1000, maxPrice: 1400 },
+    },
+    {
+      "@type": "Offer",
+      name: "Up to 5 pages website",
+      priceCurrency: "AUD",
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 1900, maxPrice: 2600 },
+    },
+    {
+      "@type": "Offer",
+      name: "6 to 10 pages website",
+      priceCurrency: "AUD",
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 2900, maxPrice: 3900 },
+    },
+    {
+      "@type": "AggregateOffer",
+      priceCurrency: "AUD",
+      lowPrice: 1000,
+      highPrice: 3900,
+      offerCount: 3,
+    },
+  ],
+  priceRange: "A$1,000–A$3,900+",
+};
+---
+
+<BaseLayout
+  title="Website Cost Calculator: Instant Estimate | ReadyStack Digital"
+  description="Get an instant website cost estimate for your small business in seconds. Transparent ranges from $1,000 for Sydney, NSW and Australia-wide. Your exact fixed quote is free within 24 hours."
+>
+  <Fragment slot="head">
+    <meta name="geo.region" content="AU-NSW" />
+    <meta name="geo.placename" content="Sydney" />
+    <meta name="geo.position" content="-33.8688;151.2093" />
+    <meta name="ICBM" content="-33.8688, 151.2093" />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+  </Fragment>
+
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Instant estimate"
+      title='What will your <span class="text-amber">website cost?</span>'
+      sub="Answer two quick questions and get a transparent price range in seconds. No forms, no waiting. Built for small businesses in Sydney, NSW and right across Australia. Your exact fixed quote is always free."
+      primaryLabel="Start your estimate"
+      primaryHref="#scoper"
+      secondaryLabel="Book a Call"
+      secondaryHref={CAL_URL}
+    />
+
+    <section id="scoper" class="section" aria-labelledby="scoper-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Project Scoper</div>
+          <h2 id="scoper-heading" class="section-h2">Scope your site, see the range</h2>
+          <p class="section-subline">Pick your page count and the features you need. We'll show a typical price range instantly. Monthly costs are always kept separate from the one-time build.</p>
+        </div>
+        <div class="reveal">
+          <CostCalculator />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" aria-labelledby="est-faq-heading">
+      <div class="container-sm">
+        <div class="section-head reveal">
+          <div class="eyebrow">Good to know</div>
+          <h2 id="est-faq-heading" class="section-h2">Estimate questions, answered</h2>
+        </div>
+        <div class="faq-wrap reveal">
+          <div class="faq-list">
+            {faqs.map((f) => (
+              <div class="faq-item">
+                <button type="button" class="faq-q" aria-expanded="false">
+                  <span>{f.q}</span>
+                  <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M5 7l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="faq-a"><p>{f.a}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      heading='Prefer to talk it through? <span class="text-amber">Book a free strategy call.</span>'
+      sub="Tell us about your business and we'll turn your estimate into a clear, fixed quote, with no pressure and no obligation."
+      primaryLabel="Get a Quote"
+      primaryHref="#scoper"
+      secondaryLabel="Book a Call"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
