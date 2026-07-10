@@ -424,29 +424,58 @@ const addonHints = {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showErr('Please enter a valid email address.');
 
       const r = compute();
+
+      // Display-ready line items (keeps all pricing on the client / PRICING).
+      const items = [];
+      const t = tierById(state.tier);
+      if (t) items.push({ label: t.label, value: t.consult ? 'Custom scope' : money(t.min) + '–' + money(t.max) });
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (!a) return;
+        const value = a.consult ? 'Custom scope'
+          : a.flagOnly ? 'Included in quote'
+          : (typeof a.price === 'number' ? '+' + money(a.price) : '');
+        items.push({ label: a.label, value: value });
+      });
+      const monthlyItems = [];
+      state.addons.forEach((id) => {
+        const a = addonById(id);
+        if (a && typeof a.monthly === 'number') monthlyItems.push({ label: a.label, value: '$' + a.monthly + '/mo' });
+      });
+      const cc = careById(state.care);
+      if (cc) monthlyItems.push({ label: cc.label, value: '$' + cc.monthly + '/mo' });
+
       const payload = {
         name: name,
         email: email,
-        tier: state.tier,
-        tierLabel: tierById(state.tier) ? tierById(state.tier).label : null,
-        addons: Array.from(state.addons),
-        care: state.care,
-        bracket: r.min != null ? { min: r.min, max: r.max } : null,
+        company_website: hp ? hp.value : '',
+        tierLabel: t ? t.label : null,
+        items: items,
+        monthlyItems: monthlyItems,
+        bracket: r.min != null ? money(r.min) + ' – ' + money(r.max) : null,
         consult: r.consult,
-        monthly: r.monthly,
+        monthly: r.monthly > 0 ? money(r.monthly) : null,
+        whatsappUrl: waLink(r),
         timestamp: new Date().toISOString(),
         pageUrl: window.location.href
       };
 
-      // Rate limit: lock the button for 10s
+      // Rate limit: lock the button for 10s after each submit.
       sending = true;
       sendBtn.disabled = true;
       setTimeout(() => { sending = false; sendBtn.disabled = false; }, 10000);
 
-      // ── Phase A stub: log payload. Phase C wires this to ENDPOINT. ──
-      console.log('[CostCalculator] estimate payload →', ENDPOINT, payload);
-      emailForm.hidden = true;
-      okEl.hidden = false;
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then((res) => { if (!res.ok) throw new Error('send failed'); return res.json(); })
+        .then(() => { emailForm.hidden = true; okEl.hidden = false; })
+        .catch(() => {
+          errEl.innerHTML = 'Sorry, that didn’t send. Please try again, or <a href="' + waLink(r) + '" target="_blank" rel="noopener">message us on WhatsApp</a>.';
+          errEl.hidden = false;
+        });
     });
 
     // ─── Responsive view flag ─────────────────────────────────
