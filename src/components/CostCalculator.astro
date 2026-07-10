@@ -476,6 +476,8 @@ const addonHints = {
     margin-inline: auto;
   }
   .calc-form { margin: 0; }
+  /* The [hidden] attr must win over the display rules below */
+  .calc [hidden] { display: none !important; }
 
   /* Honeypot */
   .calc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

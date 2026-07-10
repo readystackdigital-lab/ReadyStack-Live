@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaBand from "../components/CtaBand.astro";
+import CostCalculator from "../components/CostCalculator.astro";
 
 const categories = [
   {
@@ -126,6 +127,19 @@ const whyChoose = [
               <p class="svc-desc">{w.d}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" aria-labelledby="svc-estimate-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Instant estimate</div>
+          <h2 id="svc-estimate-heading" class="section-h2">Get an instant estimate</h2>
+          <p class="section-subline">Pick your pages and features to see a transparent price range in seconds. Prefer the full experience? <a href="/estimate" class="text-amber">Open the estimate page</a>.</p>
+        </div>
+        <div class="reveal">
+          <CostCalculator />
         </div>
       </div>
     </section>
