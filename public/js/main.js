@@ -284,41 +284,18 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   });
 })();
 
-/* ─── Stagger .stagger-children ─────────────────────────── */
-(function initStagger() {
-  $$('.stagger-children').forEach(parent => {
-    [...parent.children].forEach((child, i) => child.style.setProperty('--i', i));
-  });
-})();
-
-/* ─── Hero date and time strip ──────────────────────────── */
-(function initHeroDateTime() {
-  const dateEl    = $('#live-date');
-  const timeEl    = $('#live-time');
-  const dashTimeEl = $('.dash-time');
-
-  function update() {
-    const now = new Date();
-    const time = now.toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit' });
-    if (dateEl) dateEl.textContent = now.toLocaleDateString('en-AU', {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'short',
-    });
-    if (timeEl)     timeEl.textContent     = time;
-    if (dashTimeEl) dashTimeEl.textContent = time;
-  }
-
-  update();
-  setInterval(update, 1000);
-})();
+/* Stagger + hero date/time modules removed — their markup
+   (.stagger-children, #live-date, #live-time, .dash-time) left with the
+   old hero. The care-dashboard clock lives in dashboard.js. */
 
 /* ─── Hero video: pause on reduced motion ───────────────── */
 (function initHeroVideo() {
-  const video = document.querySelector('.hero-video');
+  /* .video-el is the v4 hero's video; .hero-video kept for older markup */
+  const video = document.querySelector('.video-el, .hero-video');
   if (!video) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     video.pause();
+    video.removeAttribute('autoplay');
   }
 })();
 

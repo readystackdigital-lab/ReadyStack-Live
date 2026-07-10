@@ -122,10 +122,10 @@ const marqueeItems = [
   ══════════════════════════════════════════════════════ -->
   <div class="hero-visual">
         <!-- .visual-scroll is the GSAP scroll-parallax target: kept
-             separate from .hero-visual because a stale global rule
-             (`.hero-visual { transform: none !important }` at ≤1024px
-             in public/css/components.css) would otherwise fight the
-             scroll-driven transform on the shared class name. -->
+             separate from .hero-visual so scroll transforms never sit
+             on the panel that global CSS might target by class name
+             (old-hero globals once did exactly that; see layout.css
+             "Hero" note). -->
         <div class="visual-scroll">
           <div class="visual-glow" aria-hidden="true"></div>
 
@@ -218,7 +218,6 @@ const marqueeItems = [
     --hero-text-w: 500px;
     --hero-gap: 56px;
     position: relative;
-    /* beat stale global `#hero` rules (display:flex + padding-top) */
     display: block;
     padding: 0;
     overflow: hidden;
@@ -355,13 +354,12 @@ const marqueeItems = [
   /* ═══════════════════════════════════════════════════════════
      VISUAL — video panel, floating card, connector arrow
   ═══════════════════════════════════════════════════════════ */
-  /* explicit `display: block` + reset cancels a stale global
-     `.hero-visual { display: flex; align-items: center }` rule
-     (components.css) that otherwise flex-shrinks .video-frame to
-     near-zero, since it has no intrinsic content to size from.
-     Reference framing: the panel is absolute, FULL HEIGHT of the
+  /* Reference framing: the panel is absolute, FULL HEIGHT of the
      hero body, flush against the hero's right edge (no right
-     margin), ending at the marquee strip below. */
+     margin), ending at the marquee strip below. The explicit
+     display/width/alignment resets below stay as insurance against
+     global rules landing on this class name again (old-hero globals
+     once flex-shrank .video-frame to ~2px). */
   .hero-visual {
     display: block;
     position: absolute;
@@ -377,10 +375,8 @@ const marqueeItems = [
        drift out of sync with the text column. */
     left: calc(max(28px, (100% - 1280px) / 2) + var(--hero-text-w) + var(--hero-gap));
     right: 0; bottom: calc(clamp(2rem, 6vh, 4rem) + 4.25rem);
-    /* explicit `auto` beats a stale global `.hero-visual { width:100% }`
-       rule (components.css, an older hero version) that otherwise wins
-       by default once this rule stops declaring `width` itself — it
-       would force full width and ignore the left/right math above. */
+    /* explicit `auto` so the browser computes width from left/right —
+       and so any future global `width` on this class name can't win */
     width: auto;
     justify-content: normal; align-items: normal;
   }
@@ -409,6 +405,11 @@ const marqueeItems = [
   .video-el {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
+    /* the playing video is promoted to its own compositor layer, which
+       can skip the parent's border-radius clip while the frame animates
+       (square corners flash outside the curve) — so the video rounds
+       its own layer too instead of relying on ancestor clipping alone */
+    border-radius: inherit;
     object-fit: cover;
     object-position: 50% 42%;
     /* no baseline zoom — widest natural crop (both monitors + desk),
@@ -418,6 +419,7 @@ const marqueeItems = [
   }
   .video-sheen {
     position: absolute; inset: 0;
+    border-radius: inherit;
     background: linear-gradient(200deg, rgba(245,158,11,.14), transparent 40%, rgba(10,12,16,.35) 100%);
     mix-blend-mode: normal;
     pointer-events: none;
@@ -512,7 +514,7 @@ const marqueeItems = [
     /* panel returns to flow: full-width-ish, still bleeding to the
        right viewport edge, keeping the big top-left sweep */
     .hero-visual {
-      position: relative; top: auto; right: auto; bottom: auto;
+      position: relative; top: auto; right: auto; bottom: auto; left: auto;
       width: calc(100% - 60px);
       height: clamp(204px, 32vw, 289px);
       margin: 2.2rem 0 2.4rem auto;

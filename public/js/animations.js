@@ -315,36 +315,11 @@
   });
 })();
 
-/* ─── Ambient Orbs ───────────────────────────────────────── */
-(function initOrbs() {
-  const hero = document.getElementById('hero');
-  if (!hero) return;
-
-  ['orb orb-1', 'orb orb-2'].forEach(cls => {
-    const div = document.createElement('div');
-    div.className = cls;
-    div.setAttribute('aria-hidden', 'true');
-    hero.appendChild(div);
-  });
-})();
-
-/* ─── Hero Visual Parallax ──────────────────────────────── */
-(function initHeroParallax() {
-  const visual = document.querySelector('.hero-visual');
-  if (!visual) return;
-
-  // Wait for entrance animation to finish before taking over transform
-  let ready = false;
-  setTimeout(() => { ready = true; }, 1500);
-
-  window.addEventListener('scroll', () => {
-    if (!ready) return;
-    const sy = window.scrollY;
-    if (sy > window.innerHeight) return;
-    // Image drifts at 8% of scroll speed — text stays fixed, creating depth
-    visual.style.transform = sy > 0 ? `scale(1) translateY(${sy * 0.08}px)` : '';
-  }, { passive: true });
-})();
+/* Ambient orbs + hero visual parallax removed: both belonged to the old
+   hero. The v4 hero (Hero.astro) owns its background layers and drives
+   its own scroll parallax via GSAP on .visual-scroll — the old scroll
+   handler here fought it on .hero-visual (pushing the panel down while
+   GSAP pulled it up) and re-triggered the video's rounded-mask escape. */
 
 /* ─── Scroll Progress Bar ───────────────────────────────── */
 (function initScrollProgress() {

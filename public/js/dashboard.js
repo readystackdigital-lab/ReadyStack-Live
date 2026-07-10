@@ -27,18 +27,5 @@
   setInterval(tick, 1000);
 })();
 
-/* ─── Care Checklist Soft Pulse ──────────────────────────── */
-(function initCareChecklistPulse() {
-  const items = [...document.querySelectorAll('.alert-feed-list .alert-item')];
-  if (!items.length) return;
-
-  let active = 0;
-
-  function update() {
-    items.forEach((item, i) => item.classList.toggle('is-active', i === active));
-    active = (active + 1) % items.length;
-  }
-
-  update();
-  setInterval(update, 2400);
-})();
+/* Care-checklist pulse removed — its .alert-feed-list markup left with
+   the old managed-IT dashboard. */

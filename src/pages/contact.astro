@@ -35,6 +35,25 @@ const services = [
       bookCta={false}
     />
 
+    <!-- Book a Call — Cal.com embedded in-site (no new tab) -->
+    <section id="book" class="section section-darker" aria-labelledby="book-heading">
+      <div class="container-sm">
+        <div class="section-head reveal">
+          <div class="eyebrow eyebrow-light">Book a Call</div>
+          <h2 id="book-heading" class="section-h2 section-h2-light">Pick a time that suits you</h2>
+          <p class="section-subline" style="color:rgba(255,255,255,.6)">A free 30-minute strategy call, no pitch, just a clear plan for your online presence.</p>
+        </div>
+        <div class="cal-embed-wrap reveal">
+          <iframe
+            src={CAL_EMBED}
+            title="Book a free strategy call with ReadyStack Digital"
+            loading="lazy"
+            class="cal-embed"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-tinted" aria-labelledby="contact-heading">
       <div class="container">
         <h2 id="contact-heading" class="sr-only">Contact ReadyStack Digital</h2>
@@ -125,25 +144,6 @@ const services = [
             </div>
           </aside>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- Book a Call — Cal.com embedded in-site (no new tab) -->
-    <section id="book" class="section section-darker" aria-labelledby="book-heading">
-      <div class="container-sm">
-        <div class="section-head reveal">
-          <div class="eyebrow eyebrow-light">Book a Call</div>
-          <h2 id="book-heading" class="section-h2 section-h2-light">Pick a time that suits you</h2>
-          <p class="section-subline" style="color:rgba(255,255,255,.6)">A free 30-minute strategy call, no pitch, just a clear plan for your online presence.</p>
-        </div>
-        <div class="cal-embed-wrap reveal">
-          <iframe
-            src={CAL_EMBED}
-            title="Book a free strategy call with ReadyStack Digital"
-            loading="lazy"
-            class="cal-embed"
-          ></iframe>
         </div>
       </div>
     </section>
