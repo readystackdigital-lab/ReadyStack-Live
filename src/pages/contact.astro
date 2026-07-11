@@ -3,15 +3,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
+import { pricingSummary } from "../data/pricing";
 
 const WHATSAPP_NUMBER = "9779840318084"; // +977 9840318084
-const CAL_EMBED = "https://cal.com/readystack-digital-yyfaab/free-website-strategy-call?embed=true&theme=dark&layout=month_view";
+const ENDPOINT = "https://agent.readystackdigital.com/enquiry";
+const PRICING_SUMMARY = pricingSummary(); // display-ready lines for the branded email
+const CAL_EMBED = "https://cal.com/readystack-digital-yyfaab/free-website-strategy-call?embed=true&layout=month_view"; // theme appended in JS to match site theme
 const services = [
   "Website Design & Development",
   "Business Email Setup",
   "SEO Services",
   "Website Care & Maintenance",
   "Social Media Content",
+  "AI Agent & Reception (24/7 AI receptionist)",
+  "Online Store / E-commerce",
   "A full package (website build + monthly care)",
   "Not sure yet, need advice",
 ];
@@ -35,37 +40,35 @@ const services = [
       bookCta={false}
     />
 
-    <!-- Book a Call — Cal.com embedded in-site (no new tab) -->
-    <section id="book" class="section section-darker" aria-labelledby="book-heading">
-      <div class="container-sm">
-        <div class="section-head reveal">
-          <div class="eyebrow eyebrow-light">Book a Call</div>
-          <h2 id="book-heading" class="section-h2 section-h2-light">Pick a time that suits you</h2>
-          <p class="section-subline" style="color:rgba(255,255,255,.6)">A free 30-minute strategy call, no pitch, just a clear plan for your online presence.</p>
-        </div>
-        <div class="cal-embed-wrap reveal">
-          <iframe
-            src={CAL_EMBED}
-            title="Book a free strategy call with ReadyStack Digital"
-            loading="lazy"
-            class="cal-embed"
-          ></iframe>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-tinted" aria-labelledby="contact-heading">
+    <!-- Enquiry + Book a Call — one card, user picks how to reach us -->
+    <section id="book" class="section section-tinted" aria-labelledby="contact-heading">
       <div class="container">
         <h2 id="contact-heading" class="sr-only">Contact ReadyStack Digital</h2>
         <div class="contact-layout">
 
-          <!-- Form -->
+          <!-- Tabbed card: enquiry form / booking calendar -->
           <div class="contact-card reveal">
+            <div class="contact-tabs" role="tablist" aria-label="How would you like to reach us?">
+              <button type="button" role="tab" id="tab-enquiry" aria-selected="true" aria-controls="panel-enquiry" class="contact-tab">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M4 7.5l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Send an enquiry
+              </button>
+              <button type="button" role="tab" id="tab-book" aria-selected="false" aria-controls="panel-book" class="contact-tab">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                Book a free call
+              </button>
+            </div>
+
+            <div id="panel-enquiry" role="tabpanel" aria-labelledby="tab-enquiry" tabindex="0">
             <div class="eyebrow">Send an enquiry</div>
-            <h3 class="contact-card-title">Get a quote via WhatsApp</h3>
-            <p class="contact-card-sub">Fill this in and we’ll open WhatsApp with your details ready to send, the fastest way to reach us.</p>
+            <h3 class="contact-card-title">Tell us what you need</h3>
+            <p class="contact-card-sub">Fill this in and we’ll get back to you personally, usually the same business day. You’ll also get our full services &amp; pricing straight to your inbox.</p>
 
             <form id="wa-form" class="wa-form" novalidate>
+              <!-- Honeypot: hidden from humans, tempting to bots -->
+              <label class="hp-field" aria-hidden="true">Leave this field empty
+                <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+              </label>
               <div class="wa-row">
                 <div class="wa-field">
                   <label for="wa-name">Name<span aria-hidden="true">*</span></label>
@@ -103,12 +106,38 @@ const services = [
 
               <p class="wa-error" id="wa-error" role="alert" hidden></p>
 
-              <button type="submit" class="btn btn-amber btn-lg btn-full wa-submit">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
-                <span>Send via WhatsApp</span>
-              </button>
-              <p class="wa-fineprint">Opens WhatsApp with your enquiry pre-filled. No data is stored on this site.</p>
+              <p class="wa-ok" id="wa-ok" role="status" hidden>Sent! Check your inbox for our services &amp; pricing. We'll be in touch shortly.</p>
+
+              <div class="wa-ctas">
+                <button type="submit" class="btn btn-amber btn-full wa-submit">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M4 7.5l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>Email my enquiry</span>
+                </button>
+
+                <a href="#book" class="btn btn-outline btn-full">Book a free strategy call</a>
+
+                <button type="button" class="btn btn-outline btn-full wa-quick" id="wa-instead">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.14 6.35 2.14 11.7c0 1.92.58 3.7 1.57 5.2L2 22l5.28-1.64a10.1 10.1 0 0 0 4.76 1.2c5.46 0 9.9-4.35 9.9-9.7S17.5 2 12.04 2Zm5.44 11.87c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.23-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.37-1.95-1.18-.72-.63-1.2-1.42-1.34-1.66-.14-.23-.02-.36.1-.48.11-.1.24-.27.36-.4.12-.14.16-.23.24-.39.08-.16.04-.29-.02-.41-.06-.12-.54-1.28-.74-1.75-.2-.46-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.29-.22.23-.84.8-.84 1.96 0 1.15.86 2.27.98 2.43.12.16 1.7 2.55 4.12 3.58.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.43-.57 1.63-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28Z"/></svg>
+                  <span>Send via WhatsApp instead</span>
+                </button>
+              </div>
+              <p class="wa-fineprint">We'll email your enquiry back to you with our full services &amp; pricing. No spam, no obligation.</p>
             </form>
+            </div>
+
+            <div id="panel-book" role="tabpanel" aria-labelledby="tab-book" tabindex="0" hidden>
+              <div class="eyebrow">Book a Call</div>
+              <h3 class="contact-card-title">Pick a time that suits you</h3>
+              <p class="contact-card-sub">A free 30-minute strategy call, no pitch, just a clear plan for your online presence.</p>
+              <div class="cal-embed-wrap">
+                <iframe
+                  data-src={CAL_EMBED}
+                  title="Book a free strategy call with ReadyStack Digital"
+                  loading="lazy"
+                  class="cal-embed"
+                ></iframe>
+              </div>
+            </div>
           </div>
 
           <!-- Sidebar: book a call + info -->
@@ -151,57 +180,139 @@ const services = [
   <Footer />
 </BaseLayout>
 
-<script define:vars={{ WHATSAPP_NUMBER }}>
+<script define:vars={{ WHATSAPP_NUMBER, ENDPOINT, PRICING_SUMMARY }}>
   (function () {
     const form = document.getElementById("wa-form");
     if (!form) return;
     const errorEl = document.getElementById("wa-error");
+    const okEl = document.getElementById("wa-ok");
+    const submitBtn = form.querySelector(".wa-submit");
+    const submitLabel = submitBtn.querySelector("span");
 
     function val(id) {
       const el = document.getElementById(id);
       return el ? el.value.trim() : "";
     }
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = val("wa-name");
-      const business = val("wa-business");
-      const email = val("wa-email");
-      const phone = val("wa-phone");
-      const service = val("wa-service");
-      const message = val("wa-message");
+    function fields() {
+      return {
+        name: val("wa-name"),
+        business: val("wa-business"),
+        email: val("wa-email"),
+        phone: val("wa-phone"),
+        service: val("wa-service"),
+        message: val("wa-message"),
+      };
+    }
 
+    function validate(f) {
       const missing = [];
-      if (!name) missing.push("name");
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) missing.push("a valid email");
-      if (!service) missing.push("a service");
-
+      if (!f.name) missing.push("name");
+      if (!f.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) missing.push("a valid email");
+      if (!f.service) missing.push("a service");
       if (missing.length) {
-        if (errorEl) {
-          errorEl.textContent = "Please add " + missing.join(", ") + " so we can help you properly.";
-          errorEl.hidden = false;
-        }
-        return;
+        errorEl.textContent = "Please add " + missing.join(", ") + " so we can help you properly.";
+        errorEl.hidden = false;
+        return false;
       }
-      if (errorEl) errorEl.hidden = true;
+      errorEl.hidden = true;
+      return true;
+    }
 
-      const lines = [
-        "New enquiry from the ReadyStack Digital website",
-        "",
-        "Name: " + name,
-        business ? "Business: " + business : null,
-        "Email: " + email,
-        phone ? "Phone: " + phone : null,
-        "Interested in: " + service,
-        message ? "Message: " + message : null,
-      ].filter(Boolean);
+    // Primary: email the enquiry (branded reply with services & pricing).
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const f = fields();
+      if (!validate(f)) return;
+
+      submitBtn.disabled = true;
+      submitLabel.textContent = "Sending…";
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            ...f,
+            company_website: form.elements.company_website.value,
+            pricing: PRICING_SUMMARY,
+            whatsappUrl: "https://wa.me/" + WHATSAPP_NUMBER,
+            pageUrl: window.location.href,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || "Something went wrong. Please try again.");
+        okEl.hidden = false;
+        errorEl.hidden = true;
+        form.reset();
+        submitLabel.textContent = "Email my enquiry";
+      } catch (err) {
+        errorEl.textContent = err instanceof TypeError
+          ? "We couldn't reach the server. Please check your connection or try WhatsApp instead."
+          : (err.message || "We couldn't send that just now. Please try WhatsApp instead.");
+        errorEl.hidden = false;
+        okEl.hidden = true;
+        submitLabel.textContent = "Email my enquiry";
+      }
+      submitBtn.disabled = false;
+    });
+
+    // Secondary: open WhatsApp with whatever's filled in.
+    document.getElementById("wa-instead").addEventListener("click", function () {
+      const f = fields();
+      const lines = f.name || f.service || f.message
+        ? [
+            "New enquiry from the ReadyStack Digital website",
+            "",
+            f.name ? "Name: " + f.name : null,
+            f.business ? "Business: " + f.business : null,
+            f.email ? "Email: " + f.email : null,
+            f.phone ? "Phone: " + f.phone : null,
+            f.service ? "Interested in: " + f.service : null,
+            f.message ? "Message: " + f.message : null,
+          ].filter(Boolean)
+        : ["Hi ReadyStack Digital, I have a quick question about your services."];
 
       const url =
         "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
-
       const win = window.open(url, "_blank", "noopener");
       if (!win) window.location.href = url; // popup-blocked fallback
     });
+  })();
+
+  // ─── Contact tabs (enquiry / book a call) ───
+  (function () {
+    const tabs = { enquiry: document.getElementById("tab-enquiry"), book: document.getElementById("tab-book") };
+    const panels = { enquiry: document.getElementById("panel-enquiry"), book: document.getElementById("panel-book") };
+    if (!tabs.enquiry || !tabs.book) return;
+
+    function activate(which) {
+      for (const key of ["enquiry", "book"]) {
+        const on = key === which;
+        tabs[key].setAttribute("aria-selected", String(on));
+        panels[key].hidden = !on;
+      }
+      if (which === "book") {
+        const iframe = panels.book.querySelector("iframe[data-src]");
+        if (iframe) {
+          const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+          iframe.src = iframe.dataset.src + "&theme=" + theme;
+          iframe.removeAttribute("data-src");
+        }
+      }
+    }
+
+    tabs.enquiry.addEventListener("click", () => activate("enquiry"));
+    tabs.book.addEventListener("click", () => activate("book"));
+
+    // Any link to #book (hero CTA, sidebar card, form CTA, other pages) opens the booking tab
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest && e.target.closest('a[href$="#book"]');
+      if (a) activate("book");
+    });
+    window.addEventListener("hashchange", () => {
+      if (window.location.hash === "#book") activate("book");
+    });
+    if (window.location.hash === "#book") activate("book");
   })();
 </script>
 
@@ -252,8 +363,12 @@ const services = [
     border-color: var(--amber);
     box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
   }
-  .wa-submit { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: var(--space-2); }
+  .wa-ctas { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-2); }
+  .wa-submit { gap: 0.5rem; }
+  .wa-quick { gap: 0.5rem; }
   .wa-error { color: var(--red); font-size: var(--text-sm); background: var(--red-dim); border: 1px solid rgba(239,68,68,.25); border-radius: var(--radius-md); padding: 0.6rem 0.8rem; }
+  .wa-ok { color: #16a34a; font-size: var(--text-sm); background: rgba(22,163,74,.08); border: 1px solid rgba(22,163,74,.25); border-radius: var(--radius-md); padding: 0.6rem 0.8rem; }
+  .hp-field { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .wa-fineprint { font-size: var(--text-xs); color: var(--charcoal-400); text-align: center; }
 
   .contact-aside { display: flex; flex-direction: column; gap: var(--space-5); }
@@ -286,13 +401,47 @@ const services = [
     flex-shrink: 0;
   }
 
+  /* Tabs: enquiry / book a call */
+  .contact-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    background: var(--charcoal-100);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-full);
+    padding: 4px;
+    margin-bottom: var(--space-6);
+  }
+  .contact-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -.01em;
+    color: var(--charcoal-500);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-full);
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    transition: background var(--dur-fast), color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .contact-tab:hover { color: var(--charcoal-800); }
+  .contact-tab[aria-selected="true"] {
+    background: var(--amber);
+    color: var(--charcoal-900);
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+  }
+
   /* Cal.com inline embed */
   .cal-embed-wrap {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--charcoal-200);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    background: var(--charcoal-50);
   }
   .cal-embed {
     width: 100%;
