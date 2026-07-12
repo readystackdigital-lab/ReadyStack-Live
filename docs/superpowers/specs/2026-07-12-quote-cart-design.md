@@ -143,3 +143,25 @@ No automated test infra in this repo. Verify by:
    refresh persistence, tier/care replacement, bundle conflict replacement,
    remove/clear, totals math vs pricing.ts, drawer a11y (Esc, focus), both
    themes, mobile viewport, submit success and failure paths.
+
+## Revision 1 (2026-07-13, owner-approved)
+
+1. **Bundles removed entirely.** Delete the /packages bundles section, `BUNDLES`
+   from pricing.ts, the `bundle` cart item type and all bundle logic/tests, and
+   the drawer's bundle rendering. The cart carries individual items only.
+2. **Site-wide repricing, no price ends in 0:**
+   - Pages: landing 799–1,199 · business 1,799–2,499 · growth 2,799–3,799 · custom (consult)
+   - Add-ons: booking 299 · blog 399 · seo 449 · ai 1,499 + 149/mo · ecom consult
+   - Care: care 99/mo · careplus 149/mo
+   Applied in pricing.ts AND every hardcoded occurrence: Hero.astro trust line,
+   Pricing.astro (homepage), packages.astro (cards, hero sub, FAQs),
+   services.astro (AI blurb), BaseLayout.astro (schema.org offers),
+   CostCalculator.astro (initial bracket placeholder text only — the earlier
+   "do not modify CostCalculator" constraint is amended to permit exactly this
+   one text default; all its live math comes from pricing.ts automatically).
+3. **Homepage packages section reframed** as three growth-stage cards telling
+   the "we grow businesses, not just build websites" story:
+   01 Get Online (landing build, from $799) → 02 Stay Managed & Grow (care from
+   $99/mo, SEO/blog/social) → 03 Automate with AI (AI agent $1,499 + $149/mo,
+   featured). Each card gets an add-to-cart button wired to the existing cart.
+   Hero trust line and section copy updated to match. No em dashes in copy.
