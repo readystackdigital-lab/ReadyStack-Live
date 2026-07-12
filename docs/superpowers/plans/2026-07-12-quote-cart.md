@@ -1220,3 +1220,64 @@ Capture drawer-open screenshots (desktop light + dark, mobile) for the final rep
 ```bash
 git add -A && git commit -m "fix: cart polish from end-to-end verification"
 ```
+
+---
+
+## Revision 1 tasks (2026-07-13): repricing, bundle removal, homepage growth cards
+
+Owner-approved changes (see spec Revision 1): new 9-ending prices site-wide,
+bundles deleted everywhere, homepage packages reframed as growth-stage cards.
+The "do not modify CostCalculator" constraint is amended to permit exactly one
+change: its hardcoded initial bracket placeholder text.
+
+### Task 8: Reprice data and remove bundles from the cart stack
+
+**Files:**
+- Modify: `src/data/pricing.ts` (new prices; delete `Bundle` type + `BUNDLES`)
+- Modify: `src/scripts/cart-core.ts` (remove `'bundle'` from `CartItemType`, delete all bundle branches in `entryFor`/`addItem`/`sanitize`/`resolveItems`/`totals`; drop `saving`/`includes` from `ResolvedItem`)
+- Modify: `src/scripts/cart.ts` (remove `r.includes` usage in submit payload item labels)
+- Modify: `src/components/CartDrawer.astro` (remove bundle rendering: `saving` badge markup, `includes` line, `[data-type="bundle"]` CSS in both light and dark blocks)
+- Modify: `tests/cart-core.test.ts` (delete bundle tests and bundle-consistency test; update totals/resolve expectations to new prices)
+
+**New prices (exact):** pages landing 799/1199 · business 1799/2499 · growth 2799/3799 · custom consult. addons booking 299 · blog 399 · seo 449 · ai 1499 + monthly 149 · ecom consult · email flagOnly. care 99 · careplus 149.
+
+**Updated test expectations:** totals(landing+seo+care) = upfrontMin 1248, upfrontMax 1648, monthly 99. resolveItems: landing 'from $799–$1,199', seo '+$449'. Keep all non-bundle rule tests (page/care replacement, addon idempotence, unknown-id rejection, sanitize, consult flags).
+
+**Verify:** `node --test` all pass · `npx astro check` no new errors beyond the 7 pre-existing · commit `feat: reprice services and remove bundles from cart`.
+
+### Task 9: packages page repricing and bundle section removal
+
+**Files:** Modify `src/pages/packages.astro` only.
+- Delete the entire Bundles `<section>` (aria-labelledby="bundles-heading"), the `BUNDLES`/`PRICING` import + `allEntries`/`labelFor` helpers, and the `.bundle-*` CSS rules.
+- Card prices: "1,000"→"799" · "100"→"99" · "150"→"149" · "1,500"→"1,499". Feature line "$149 / month management" stays.
+- BaseLayout title/description props and PageHero `sub`: replace $1,000→$799 and $100/month→$99/month.
+- FAQ answers: "from $1,000"→"from $799" · "from $100/month"→"from $99/month" · "from $1,500 plus $149/month"→"from $1,499 plus $149/month".
+
+**Verify:** `npx astro check` + `npx astro build`; grep the built /packages HTML for `1,000|1,500|\$100|\$150` (expect no matches in price positions). Commit `feat: reprice packages page and remove bundles section`.
+
+### Task 10: homepage growth-stage packages + hero price line
+
+**Files:** Modify `src/components/Pricing.astro`, `src/components/Hero.astro`.
+
+Hero.astro line ~93: `Websites from $1,000. Managed care from $100/month.` → `Websites from $799. Managed care from $99/month.`
+
+Pricing.astro: keep section id/classes/structure (`pricing-grid`, `pricing-card`, `tier-*`, `pricing-phase-row`) but reframe to three growth stages, each card ending with an add-to-cart button (`data-cart-add`/`data-cart-type`, styled `btn btn-full`, `btn-amber` on the featured card, `btn-outline` otherwise) plus a small secondary link. Copy (verbatim, no em dashes):
+- Section head: eyebrow `Packages`; h2 `More than websites.<br><span class="text-amber">A growth partner for your business.</span>`; subline `Start with a professional website, keep it managed every month, then automate your enquiries with an AI agent trained on your business. Add each step to your quote cart when you are ready.`
+- Phase row: 01 `Get online` → 02 `Stay managed & grow` → 03 `Automate with AI` (three phases; adjust the arrow markup to fit).
+- Card 1 `data-tier="get-online"`: label `Step 01 · Website Build`, name `Get Online`, price `$799 upfront` (from), line `A fast, professional website that explains what you do and turns visitors into enquiries.` Feats: `Custom, mobile-friendly website` / `Contact form with WhatsApp, phone and email buttons` / `Basic SEO and Google Search Console setup` / `Secure HTTPS, hosting and domain connection` / `Launch support`. Button adds `landing`/`page`; secondary link `or compare builds` → /packages.
+- Card 2 `data-tier="managed-care"`: label `Step 02 · Monthly Care`, name `Stay Managed & Grow`, price `$99 /mo`, line `We keep your website secure, updated and visible while you run the business.` Feats: `Hosting, domain and SSL managed` / `Forms and enquiry links tested monthly` / `Basic SEO monitoring and Search Console checks` / `Small monthly updates` / `Option to add blog and social content`. Button adds `care`/`care`; secondary link `or see care plans` → /packages.
+- Card 3 (featured, crown `New · AI Agent`) `data-tier="ai-agent"`: label `Step 03 · AI & Automation`, name `Automate with AI`, price `$1,499 setup`, line `A 24/7 AI receptionist trained on your business that answers questions, captures leads and books calls.` Feats: `Custom-trained on your services and FAQs` / `24/7 instant replies and lead capture` / `Qualifies enquiries and books calls` / `Ongoing training, hosting and monitoring ($149/month)`. Button adds `ai`/`addon`; secondary link `or learn more` → /services.
+
+**Verify:** check/build; homepage renders 3 cards with working add-to-cart. Commit `feat: reframe homepage packages as growth stages with cart buttons`.
+
+### Task 11: site-wide price sweep
+
+**Files:** Modify `src/pages/services.astro` (AI blurb `From $1,500 setup + $149/month` → `From $1,499 setup + $149/month`), `src/layouts/BaseLayout.astro` (schema.org offers: 1000→799, 100→99, 150→149, 1500→1499, and offer description texts `from $1,000`→`from $799`, `from $1,500 plus $149/month`→`from $1,499 plus $149/month`), `src/components/CostCalculator.astro` (ONLY the initial bracket placeholder `$1,000 – $1,400` → `$799 – $1,199`).
+
+Then sweep: `grep -rn "1,000\|1,400\|1,900\|2,600\|2,900\|3,900\|\$1,500\|\$100/\|\$150/\|from \$100\|from \$150" src/ --include="*.astro" --include="*.ts"` excluding `src/content/` and fix any remaining stale price copy (estimate.astro, contact.astro, faqs.astro, how-it-works.astro if hit). Do not touch blog content.
+
+**Verify:** check/build; grep of `dist/` for stale prices comes back clean outside blog content. Commit `feat: apply new pricing across remaining pages and schema`.
+
+### Task 12 (= original Task 7 rerun): end-to-end verification
+
+Original Task 7 steps, adjusted: expected totals for bundle steps are dropped; verify instead landing ($799–$1,199) + seo (+$449) + care ($99/mo) → upfront $1,248 – $1,648, monthly $99/mo; tier/care replacement; consult flow; persistence; submit failure path with WhatsApp fallback; both themes; mobile; homepage growth cards add-to-cart. Screenshots for the final report.
