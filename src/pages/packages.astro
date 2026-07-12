@@ -4,6 +4,10 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaBand from "../components/CtaBand.astro";
+import { BUNDLES, PRICING } from "../data/pricing";
+
+const allEntries = [...PRICING.pages, ...PRICING.addons, ...PRICING.care];
+const labelFor = (id: string) => allEntries.find((e) => e.id === id)?.label ?? id;
 
 const packages = [
   {
@@ -12,6 +16,8 @@ const packages = [
     price: "1,000",
     per: "upfront",
     featured: false,
+    cartId: "landing",
+    cartType: "page",
     blurb: "A clean, professional one-page website to explain your services and generate enquiries.",
     cta: "Start a website build",
     feats: [
@@ -31,6 +37,8 @@ const packages = [
     price: "100",
     per: "/mo",
     featured: true,
+    cartId: "care",
+    cartType: "care",
     blurb: "Keep your website, hosting, domain, forms, SSL and basic SEO managed every month.",
     cta: "Choose Managed Care",
     feats: [
@@ -51,6 +59,8 @@ const packages = [
     price: "150",
     per: "/mo",
     featured: false,
+    cartId: "careplus",
+    cartType: "care",
     blurb: "Everything in Managed Care, plus blog uploads and the option to add social content.",
     cta: "Ask about Care Plus",
     feats: [
@@ -70,6 +80,8 @@ const packages = [
     price: "1,500",
     per: "setup",
     featured: false,
+    cartId: "ai",
+    cartType: "addon",
     blurb: "A 24/7 AI receptionist on your website that answers questions, captures leads and books calls — trained on your business.",
     cta: "Add an AI Agent",
     feats: [
@@ -149,11 +161,43 @@ const faqs = [
                   </li>
                 ))}
               </ul>
-              <a href="/contact" class={`btn btn-full ${p.featured ? "btn-amber" : "btn-outline"}`}>{p.cta}</a>
+              <button type="button" data-cart-add={p.cartId} data-cart-type={p.cartType} class={`btn btn-full ${p.featured ? "btn-amber" : "btn-outline"}`}>Add to cart</button>
+              <a href="/contact" class="pkg-talk">or talk to us first</a>
             </div>
           ))}
         </div>
         <p class="pkg-note reveal">Indicative pricing. Every quote is tailored to your business. You’ll always get a clear, fixed price before we start.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="bundles-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Bundle &amp; save</div>
+          <h2 id="bundles-heading" class="section-h2">Popular combinations, <span class="text-amber">bundled with a saving</span></h2>
+          <p class="section-subline">The combinations most small businesses pick, packaged together with an indicative saving on the upfront cost. One click adds the whole bundle to your quote cart.</p>
+        </div>
+        <div class="bundle-grid">
+          {BUNDLES.map((b, i) => (
+            <div class={`bundle-card reveal ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
+              <div class="bundle-save">Save ${b.saving.toLocaleString("en-AU")}</div>
+              <h3 class="pkg-name">{b.name}</h3>
+              <p class="pkg-blurb">{b.tagline}</p>
+              <ul class="feat-list">
+                {b.includes.map((id) => (
+                  <li>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {labelFor(id)}
+                  </li>
+                ))}
+              </ul>
+              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{b.upfront.toLocaleString("en-AU")}</span><span class="pkg-per">upfront</span></div>
+              {b.monthly > 0 && <p class="bundle-monthly">plus ${b.monthly.toLocaleString("en-AU")}/mo ongoing</p>}
+              <button type="button" data-cart-add={b.id} data-cart-type="bundle" class="btn btn-amber btn-full">Add bundle to cart</button>
+            </div>
+          ))}
+        </div>
+        <p class="pkg-note reveal">Bundle savings are indicative and applied to the upfront cost. Your fixed quote always comes first.</p>
       </div>
     </section>
 
@@ -282,6 +326,29 @@ const faqs = [
   .pkg-feats { margin: var(--space-2) 0 var(--space-2); }
   .pkg-card .btn { margin-top: auto; }
   .pkg-note { text-align: center; max-width: 60ch; margin: var(--space-8) auto 0; font-size: var(--text-sm); color: var(--charcoal-500); }
+  .pkg-talk { display: block; text-align: center; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--charcoal-500); }
+  .pkg-talk:hover { color: var(--amber-600); }
+
+  /* Bundles */
+  .bundle-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
+  .bundle-card {
+    position: relative; display: flex; flex-direction: column; gap: var(--space-4);
+    background: var(--white); border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: var(--radius-xl); padding: var(--space-8) var(--space-6) var(--space-6);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  }
+  .bundle-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(245, 158, 11, 0.14), var(--shadow-md); }
+  .bundle-save {
+    position: absolute; top: -13px; left: var(--space-6);
+    background: linear-gradient(135deg, #FCD34D, var(--amber)); color: #0B0D10;
+    font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs);
+    padding: .35rem .9rem; border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+  }
+  .bundle-monthly { font-size: var(--text-sm); color: var(--charcoal-500); margin-top: calc(var(--space-3) * -1); }
+  .bundle-card .btn { margin-top: auto; }
+  @media (max-width: 980px) { .bundle-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; } }
 
   /* Comparison table */
   .compare-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--charcoal-200); }
