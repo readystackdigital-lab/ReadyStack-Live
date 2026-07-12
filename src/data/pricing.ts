@@ -59,9 +59,3 @@ export function pricingSummary() {
     care: PRICING.care.map((c) => ({ label: c.label, value: `${money(c.monthly!)}/mo` })),
   };
 }
-
-/* Bundles retired 2026-07-13; empty array kept until packages.astro drops its import (Task 9). */
-
-export type Bundle = { id: string; name: string; tagline: string; includes: string[]; upfront: number; monthly: number; saving: number };
-
-export const BUNDLES: Bundle[] = [];

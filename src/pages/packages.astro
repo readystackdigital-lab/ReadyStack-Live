@@ -4,16 +4,11 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import PageHero from "../components/PageHero.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { BUNDLES, PRICING } from "../data/pricing";
-
-const allEntries = [...PRICING.pages, ...PRICING.addons, ...PRICING.care];
-const labelFor = (id: string) => allEntries.find((e) => e.id === id)?.label ?? id;
-
 const packages = [
   {
     name: "Landing Page Website",
     tag: "Website build",
-    price: "1,000",
+    price: "799",
     per: "upfront",
     featured: false,
     cartId: "landing",
@@ -34,7 +29,7 @@ const packages = [
   {
     name: "Managed Website Care",
     tag: "Most popular",
-    price: "100",
+    price: "99",
     per: "/mo",
     featured: true,
     cartId: "care",
@@ -56,7 +51,7 @@ const packages = [
   {
     name: "Website Care Plus",
     tag: "Care + content",
-    price: "150",
+    price: "149",
     per: "/mo",
     featured: false,
     cartId: "careplus",
@@ -77,7 +72,7 @@ const packages = [
   {
     name: "AI Agent & Reception",
     tag: "New · AI",
-    price: "1,500",
+    price: "1,499",
     per: "setup",
     featured: false,
     cartId: "ai",
@@ -111,18 +106,18 @@ const compare = [
 ];
 
 const faqs = [
-  { q: "How does the one-time build and monthly care work?", a: "The website build is a one-time cost (from $1,000). After launch, a monthly care plan (from $100/month) keeps everything managed, secure and online. You can start with a build and add a care plan when you’re ready." },
+  { q: "How does the one-time build and monthly care work?", a: "The website build is a one-time cost (from $799). After launch, a monthly care plan (from $99/month) keeps everything managed, secure and online. You can start with a build and add a care plan when you’re ready." },
   { q: "Is the pricing fixed?", a: "Prices shown are indicative starting points. Final pricing depends on the number of pages and the scope of work. We always give you a clear, fixed quote before any work begins." },
   { q: "Can I change plans later?", a: "Yes. You can move between Managed Website Care and Website Care Plus as your needs change. There are no lock-in contracts." },
   { q: "Is social media content included?", a: "Social and blog content is available as an optional add-on on any plan, and blog uploads are included on Website Care Plus. We tailor the content mix to your business and the platforms your customers use." },
   { q: "Do you write the blog and social content?", a: "Yes. We plan topics, design posts and write captions aligned to your services. You review and approve before anything is published." },
-  { q: "What is the AI Agent and how is it priced?", a: "The AI Agent is a 24/7 AI receptionist built into your website. It answers customer questions instantly, captures leads, qualifies enquiries and books calls — trained on your business. It's a one-time setup from $1,500 plus $149/month for management, training and hosting." },
+  { q: "What is the AI Agent and how is it priced?", a: "The AI Agent is a 24/7 AI receptionist built into your website. It answers customer questions instantly, captures leads, qualifies enquiries and books calls — trained on your business. It's a one-time setup from $1,499 plus $149/month for management, training and hosting." },
 ];
 ---
 
 <BaseLayout
   title="Packages & Pricing: Website Build & Monthly Care | ReadyStack Digital"
-  description="Simple, transparent packages for small businesses: a one-time website build from $1,000, then Managed Website Care from $100/month. Optional SEO, blog and social media content add-ons."
+  description="Simple, transparent packages for small businesses: a one-time website build from $799, then Managed Website Care from $99/month. Optional SEO, blog and social media content add-ons."
 >
   <Header />
   <main id="main-content">
@@ -130,7 +125,7 @@ const faqs = [
       banner="/assets/banners/banner-packages-page.webp"
       eyebrow="Packages"
       title='Simple, transparent <span class="text-amber">website &amp; care</span> packages'
-      sub="Start with a one-time website build from $1,000, then keep everything secure and managed with a monthly care plan from $100/month. Add SEO, blog and social content whenever you’re ready."
+      sub="Start with a one-time website build from $799, then keep everything secure and managed with a monthly care plan from $99/month. Add SEO, blog and social content whenever you’re ready."
       primaryLabel="Get a Quote"
       primaryHref="/estimate"
       secondaryLabel="Compare plans"
@@ -167,37 +162,6 @@ const faqs = [
           ))}
         </div>
         <p class="pkg-note reveal">Indicative pricing. Every quote is tailored to your business. You’ll always get a clear, fixed price before we start.</p>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="bundles-heading">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">Bundle &amp; save</div>
-          <h2 id="bundles-heading" class="section-h2">Popular combinations, <span class="text-amber">bundled with a saving</span></h2>
-          <p class="section-subline">The combinations most small businesses pick, packaged together with an indicative saving on the upfront cost. One click adds the whole bundle to your quote cart.</p>
-        </div>
-        <div class="bundle-grid">
-          {BUNDLES.map((b, i) => (
-            <div class={`bundle-card reveal ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
-              <div class="bundle-save">Save ${b.saving.toLocaleString("en-AU")}</div>
-              <h3 class="pkg-name">{b.name}</h3>
-              <p class="pkg-blurb">{b.tagline}</p>
-              <ul class="feat-list">
-                {b.includes.map((id) => (
-                  <li>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    {labelFor(id)}
-                  </li>
-                ))}
-              </ul>
-              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{b.upfront.toLocaleString("en-AU")}</span><span class="pkg-per">upfront</span></div>
-              {b.monthly > 0 && <p class="bundle-monthly">plus ${b.monthly.toLocaleString("en-AU")}/mo ongoing</p>}
-              <button type="button" data-cart-add={b.id} data-cart-type="bundle" class="btn btn-amber btn-full">Add bundle to cart</button>
-            </div>
-          ))}
-        </div>
-        <p class="pkg-note reveal">Bundle savings are indicative and applied to the upfront cost. Your fixed quote always comes first.</p>
       </div>
     </section>
 
@@ -328,27 +292,6 @@ const faqs = [
   .pkg-note { text-align: center; max-width: 60ch; margin: var(--space-8) auto 0; font-size: var(--text-sm); color: var(--charcoal-500); }
   .pkg-talk { display: block; text-align: center; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--charcoal-500); }
   .pkg-talk:hover { color: var(--amber-600); }
-
-  /* Bundles */
-  .bundle-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
-  .bundle-card {
-    position: relative; display: flex; flex-direction: column; gap: var(--space-4);
-    background: var(--white); border: 1px solid rgba(245, 158, 11, 0.35);
-    border-radius: var(--radius-xl); padding: var(--space-8) var(--space-6) var(--space-6);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
-  }
-  .bundle-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(245, 158, 11, 0.14), var(--shadow-md); }
-  .bundle-save {
-    position: absolute; top: -13px; left: var(--space-6);
-    background: linear-gradient(135deg, #FCD34D, var(--amber)); color: #0B0D10;
-    font-family: var(--font-mono); font-weight: 600; font-size: var(--text-xs);
-    padding: .35rem .9rem; border-radius: 999px;
-    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
-  }
-  .bundle-monthly { font-size: var(--text-sm); color: var(--charcoal-500); margin-top: calc(var(--space-3) * -1); }
-  .bundle-card .btn { margin-top: auto; }
-  @media (max-width: 980px) { .bundle-grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; } }
 
   /* Comparison table */
   .compare-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--charcoal-200); }
