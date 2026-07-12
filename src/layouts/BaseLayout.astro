@@ -1,5 +1,6 @@
 ---
 import CookieConsent from "../components/CookieConsent.astro";
+import CartDrawer from "../components/CartDrawer.astro";
 
 export interface Props {
   title?: string;
@@ -277,6 +278,7 @@ const breadcrumbSchema = {
   <slot />
 
   <CookieConsent />
+  <CartDrawer />
 
   <script src="/js/main.js" is:inline></script>
   <script src="/js/animations.js" is:inline></script>

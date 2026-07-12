@@ -53,6 +53,11 @@ const isActive = (href: string) =>
         <!-- Persistent primary CTA (desktop) -->
         <a href="/estimate" class="btn btn-amber nav-cta">Get a Quote</a>
 
+        <button type="button" class="cart-open" data-cart-open aria-label="Open your quote cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.5a1.5 1.5 0 0 0 1.5-1.1L21 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20.5" r="1.4" fill="currentColor"/><circle cx="17" cy="20.5" r="1.4" fill="currentColor"/></svg>
+          <span class="cart-badge" data-cart-badge hidden>0</span>
+        </button>
+
         <!-- Light / Dark mode toggle (animated switch, 21st.dev pattern) -->
         <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="true" aria-label="Toggle light and dark mode" title="Toggle light / dark mode">
           <span class="theme-toggle-track" aria-hidden="true">
@@ -453,6 +458,39 @@ const isActive = (href: string) =>
   /* ── Mobile: progress line still hugs the bar's bottom edge ─── */
   @media (max-width: 768px) {
     .nav-progress { left: 0; right: 0; bottom: 0; }
+  }
+
+  /* ── Quote cart button ─────────────────────────────────────── */
+  .cart-open {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: background .22s ease, color .22s ease;
+  }
+  .cart-open:hover { background: rgba(245, 158, 11, 0.12); color: #B45309; }
+  .cart-badge {
+    position: absolute;
+    top: 1px;
+    right: -1px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #FCD34D, #F59E0B);
+    color: #0B0D10;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 15px;
+    text-align: center;
   }
 
   /* ── Persistent desktop CTA ────────────────────────────────── */
