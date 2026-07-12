@@ -21,6 +21,18 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   const label  = $('#loader-label');
   if (!loader) return;
 
+  let introSeen = false;
+  try { introSeen = sessionStorage.getItem('rsd-intro-seen') === '1'; } catch (e) {}
+
+  // Already played this session (BaseLayout's inline bootstrap script also
+  // hides #page-loader via CSS before first paint) — drop it instantly and
+  // let the rest of the page's entrance animations (body.loaded) run.
+  if (introSeen) {
+    loader.remove();
+    document.body.classList.add('loaded');
+    return;
+  }
+
   const steps = [
     { pct: 25,  text: 'Preparing website setup…' },
     { pct: 55,  text: 'Checking domain, email and SEO basics…' },
@@ -43,6 +55,7 @@ function lerp(a, b, t) { return a + (b - a) * t; }
     setTimeout(() => {
       loader.classList.add('hidden');
       document.body.classList.add('loaded');
+      try { sessionStorage.setItem('rsd-intro-seen', '1'); } catch (e) {}
       loader.addEventListener('transitionend', () => loader.remove(), { once: true });
     }, 260);
   }

@@ -1,6 +1,6 @@
 ---
 const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
-// Primary nav (desktop). The logo covers "Home".
+// Full nav (mobile hamburger shows all of these). The logo covers "Home".
 const primaryNav = [
   { label: "Services", href: "/services" },
   { label: "Pricing", href: "/packages" },
@@ -10,6 +10,11 @@ const primaryNav = [
   { label: "Social", href: "/social" },
   { label: "Blog", href: "/blog" },
 ];
+// Desktop inline nav is trimmed to the highest-intent items + CTA.
+// FAQs and Social stay reachable via the mobile hamburger only.
+const desktopNav = primaryNav.filter((item) =>
+  ["Services", "Pricing", "How It Works", "Contact", "Blog"].includes(item.label)
+);
 const mobileNav = [
   { label: "Home", href: "/" },
   ...primaryNav,
@@ -33,7 +38,7 @@ const isActive = (href: string) =>
       </a>
 
       <ul class="nav-links" role="list">
-        {primaryNav.map((item) => (
+        {desktopNav.map((item) => (
           <li>
             <a
               href={item.href}

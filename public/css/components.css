@@ -73,6 +73,37 @@
   color: var(--charcoal-900);
 }
 
+/* Secondary text link — pairs with a filled button, needs its own
+   affordance: semibold weight, trailing arrow, underline + arrow
+   shift on hover/focus. Themed for both light and dark in theme.css. */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+  color: var(--charcoal-700);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.link-arrow::after {
+  content: "\2192";
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.link-arrow:hover,
+.link-arrow:focus-visible {
+  color: var(--amber-600);
+  text-decoration: underline;
+}
+.link-arrow:hover::after,
+.link-arrow:focus-visible::after {
+  transform: translateX(2px);
+}
+
 /* Dark section variants */
 .section-dark .btn-outline {
   color: var(--white);

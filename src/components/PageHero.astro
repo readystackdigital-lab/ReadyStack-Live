@@ -42,7 +42,7 @@ const {
     <div class="page-hero-inner reveal">
       {eyebrow && (
         <div class="eyebrow eyebrow-light page-hero-eyebrow">
-          <span class="eyebrow-dot" aria-hidden="true"></span>{eyebrow}
+          <span class="eyebrow-dot" aria-hidden="true"></span><span class="page-hero-eyebrow-text">{eyebrow}</span>
         </div>
       )}
       <h1 id="page-hero-title" class="page-hero-title" set:html={title}></h1>
@@ -67,6 +67,13 @@ const {
   // desktop fine-pointer only; see src/scripts/particle-headline.ts)
   import { particleHeadline } from '../scripts/particle-headline';
   particleHeadline(document.getElementById('page-hero-title'));
+
+  // 21st.dev / HextaUI typewriter-text effect on the eyebrow label
+  import { typewriter } from '../scripts/typewriter';
+  const eyebrowEl = document.querySelector<HTMLElement>('.page-hero-eyebrow-text');
+  if (eyebrowEl) {
+    typewriter(eyebrowEl, [eyebrowEl.textContent ?? ''], { speed: 45, loop: false, startDelay: 250 });
+  }
 </script>
 
 <style>

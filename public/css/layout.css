@@ -678,6 +678,11 @@
   pointer-events: none;
 }
 
+/* Intro already played this session (flag set before first paint by the
+   inline theme-bootstrap script in BaseLayout.astro) — skip it instantly,
+   no flash. */
+html.intro-seen #page-loader { display: none !important; }
+
 .loader-inner {
   display: flex;
   flex-direction: column;

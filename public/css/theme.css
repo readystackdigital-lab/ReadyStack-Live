@@ -148,6 +148,9 @@
 [data-theme="dark"] .btn-outline { border-color: rgba(255, 255, 255, 0.22) !important; color: rgba(255, 255, 255, 0.88) !important; }
 [data-theme="dark"] .btn-outline:hover { border-color: var(--amber) !important; color: #fff !important; background: rgba(245, 158, 11, 0.08) !important; }
 [data-theme="dark"] .btn-ghost { color: rgba(255, 255, 255, 0.85) !important; }
+[data-theme="dark"] .link-arrow { color: rgba(255, 255, 255, 0.85) !important; }
+[data-theme="dark"] .link-arrow:hover,
+[data-theme="dark"] .link-arrow:focus-visible { color: var(--amber-300) !important; }
 
 /* Section heads that weren't already -light */
 [data-theme="dark"] .section-head .section-h2 { color: #fff !important; }

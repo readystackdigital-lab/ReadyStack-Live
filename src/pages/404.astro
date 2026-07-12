@@ -19,7 +19,7 @@ import Footer from "../components/Footer.astro";
       <div class="container">
         <div class="nf-inner">
           <div class="nf-code" aria-hidden="true">404</div>
-          <h1 class="nf-title">This page doesn't exist</h1>
+          <h1 id="nf-title" class="nf-title">This page doesn't exist</h1>
           <p class="nf-sub">
             The link may be old, or the page has moved. Let's get you back on track.
           </p>
@@ -36,6 +36,17 @@ import Footer from "../components/Footer.astro";
   </main>
   <Footer />
 </BaseLayout>
+
+<script>
+  // 21st.dev / HextaUI typewriter-text effect, looping through the 404 headline
+  import { typewriter } from '../scripts/typewriter';
+  typewriter(document.getElementById('nf-title'), ["This page doesn't exist", "Let's get you back on track"], {
+    speed: 70,
+    deleteSpeed: 40,
+    delay: 2000,
+    loop: true,
+  });
+</script>
 
 <style>
   .nf-hero {

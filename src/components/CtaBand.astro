@@ -25,7 +25,7 @@ const {
   <div class="cta-band-glow" aria-hidden="true"></div>
   <div class="container">
     <div class="cta-band-card reveal">
-      {eyebrow && <div class="eyebrow eyebrow-light">{eyebrow}</div>}
+      {eyebrow && <div class="eyebrow eyebrow-light"><span class="cta-band-eyebrow-text">{eyebrow}</span></div>}
       <h2 class="cta-band-title" set:html={heading}></h2>
       {sub && <p class="cta-band-sub">{sub}</p>}
       <div class="cta-band-actions">
@@ -36,6 +36,15 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  // 21st.dev / HextaUI typewriter-text effect on the eyebrow label
+  import { typewriter } from '../scripts/typewriter';
+  const eyebrowEl = document.querySelector<HTMLElement>('.cta-band-eyebrow-text');
+  if (eyebrowEl) {
+    typewriter(eyebrowEl, [eyebrowEl.textContent ?? ''], { speed: 45, loop: false });
+  }
+</script>
 
 <style>
   .cta-band {
