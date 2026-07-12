@@ -1274,11 +1274,11 @@
   margin-top: auto;
 }
 
-.pricing-card[data-tier="website-build"] {
+.pricing-card[data-tier="get-online"] {
   border-color: rgba(16, 185, 129, .18);
 }
 
-.pricing-card[data-tier="care-plus"] {
+.pricing-card[data-tier="ai-agent"] {
   border-color: rgba(245, 158, 11, .24);
 }
 

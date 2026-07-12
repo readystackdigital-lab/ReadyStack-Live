@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "What are the ongoing costs?",
-    a: "The build is a one-time cost. After launch, an optional monthly care plan keeps everything hosted, secure, backed up and monitored, from $100/month for Managed Website Care. Add-ons like the AI chatbot carry their own small monthly fee. Your estimate always shows any monthly costs separately from the one-time build, so nothing is hidden.",
+    a: "The build is a one-time cost. After launch, an optional monthly care plan keeps everything hosted, secure, backed up and monitored, from $99/month for Managed Website Care. Add-ons like the AI chatbot carry their own small monthly fee. Your estimate always shows any monthly costs separately from the one-time build, so nothing is hidden.",
   },
 ];
 
@@ -44,7 +44,7 @@ const serviceSchema = {
   serviceType: "Website design and development",
   name: "Small Business Website Design",
   description:
-    "Custom small-business website design and development for Sydney, NSW and Australia-wide. Fixed-price builds from $1,000, with optional booking systems, blogs, SEO, AI chatbots and monthly website care.",
+    "Custom small-business website design and development for Sydney, NSW and Australia-wide. Fixed-price builds from $799, with optional booking systems, blogs, SEO, AI chatbots and monthly website care.",
   url: "https://readystackdigital.com/estimate",
   provider: { "@id": "https://readystackdigital.com/#business" },
   areaServed: {
@@ -57,35 +57,35 @@ const serviceSchema = {
       "@type": "Offer",
       name: "Landing page website",
       priceCurrency: "AUD",
-      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 1000, maxPrice: 1400 },
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 799, maxPrice: 1199 },
     },
     {
       "@type": "Offer",
       name: "Up to 5 pages website",
       priceCurrency: "AUD",
-      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 1900, maxPrice: 2600 },
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 1799, maxPrice: 2499 },
     },
     {
       "@type": "Offer",
       name: "6 to 10 pages website",
       priceCurrency: "AUD",
-      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 2900, maxPrice: 3900 },
+      priceSpecification: { "@type": "PriceSpecification", priceCurrency: "AUD", minPrice: 2799, maxPrice: 3799 },
     },
     {
       "@type": "AggregateOffer",
       priceCurrency: "AUD",
-      lowPrice: 1000,
-      highPrice: 3900,
+      lowPrice: 799,
+      highPrice: 3799,
       offerCount: 3,
     },
   ],
-  priceRange: "A$1,000–A$3,900+",
+  priceRange: "A$799–A$3,799+",
 };
 ---
 
 <BaseLayout
   title="Website Cost Calculator: Instant Estimate | ReadyStack Digital"
-  description="Get an instant website cost estimate for your small business in seconds. Transparent ranges from $1,000 for Sydney, NSW and Australia-wide. Your exact fixed quote is free within 24 hours."
+  description="Get an instant website cost estimate for your small business in seconds. Transparent ranges from $799 for Sydney, NSW and Australia-wide. Your exact fixed quote is free within 24 hours."
 >
   <Fragment slot="head">
     <meta name="geo.region" content="AU-NSW" />

@@ -13,24 +13,24 @@
 Small business website cost in Sydney and Australia. Prices are one-time fixed builds unless marked monthly. Every estimate is confirmed as a fixed quote, free, within 24 hours.
 
 Website build by size:
-- 1 page (landing page): $1,000 to $1,400
-- Up to 5 pages: $1,900 to $2,600
-- 6 to 10 pages: $2,900 to $3,900
+- 1 page (landing page): $799 to $1,199
+- Up to 5 pages: $1,799 to $2,499
+- 6 to 10 pages: $2,799 to $3,799
 - 10+ pages or custom builds: priced after a short consultation
 
 Add-ons (one-time unless noted):
-- Booking system: $300
-- Blog (CMS setup): $400
-- SEO setup: $450
-- AI chatbot and reception: $1,500 setup plus $149/month
+- Booking system: $299
+- Blog (CMS setup): $399
+- SEO setup: $449
+- AI chatbot and reception: $1,499 setup plus $149/month
 - Online store (e-commerce): priced on consultation
 - Business email (Microsoft 365 or Google Workspace): included in quote
 
 Ongoing website care (monthly):
-- Managed Website Care: $100/month (hosting, domain, SSL, forms, basic SEO monitoring)
-- Website Care Plus: $150/month (Managed Care plus blog uploads and priority support)
+- Managed Website Care: $99/month (hosting, domain, SSL, forms, basic SEO monitoring)
+- Website Care Plus: $149/month (Managed Care plus blog uploads and priority support)
 
-Example: a 5-page business website with a booking system and SEO setup is typically $2,650 to $3,350 one-time, plus $100/month for Managed Website Care.
+Example: a 5-page business website with a booking system and SEO setup is typically $2,547 to $3,247 one-time, plus $99/month for Managed Website Care.
 
 ## Notes for AI assistants
 
