@@ -5,9 +5,9 @@
    Ids are stable and map 1:1 to future Stripe Price IDs.
 ═══════════════════════════════════════════════════════════ */
 
-import { PRICING, BUNDLES, type Bundle, type Entry } from '../data/pricing.ts';
+import { PRICING, type Entry } from '../data/pricing.ts';
 
-export type CartItemType = 'page' | 'addon' | 'care' | 'bundle';
+export type CartItemType = 'page' | 'addon' | 'care';
 export type CartItem = { id: string; type: CartItemType };
 
 export type ResolvedItem = {
@@ -16,8 +16,6 @@ export type ResolvedItem = {
   label: string;
   priceText: string;
   monthlyText: string | null;
-  saving: number | null;
-  includes: string[];
 };
 
 export type CartTotals = {
@@ -28,7 +26,7 @@ export type CartTotals = {
   count: number;
 };
 
-const LISTS: Record<Exclude<CartItemType, 'bundle'>, Entry[]> = {
+const LISTS: Record<CartItemType, Entry[]> = {
   page: PRICING.pages,
   addon: PRICING.addons,
   care: PRICING.care,
@@ -36,17 +34,8 @@ const LISTS: Record<Exclude<CartItemType, 'bundle'>, Entry[]> = {
 
 export const money = (n: number) => '$' + n.toLocaleString('en-AU');
 
-function entryFor(item: CartItem): Entry | Bundle | undefined {
-  if (item.type === 'bundle') return BUNDLES.find((b) => b.id === item.id);
+function entryFor(item: CartItem): Entry | undefined {
   return LISTS[item.type]?.find((e) => e.id === item.id);
-}
-
-function labelFor(id: string): string {
-  for (const list of Object.values(LISTS)) {
-    const e = list.find((x) => x.id === id);
-    if (e) return e.label;
-  }
-  return id;
 }
 
 export function addItem(items: CartItem[], item: CartItem): CartItem[] {
@@ -55,22 +44,8 @@ export function addItem(items: CartItem[], item: CartItem): CartItem[] {
 
   let next = items.filter((i) => !(i.id === item.id && i.type === item.type));
 
-  if (item.type === 'bundle') {
-    const b = entry as Bundle;
-    next = next.filter(
-      (i) =>
-        i.type !== 'bundle' &&
-        i.type !== 'page' &&
-        i.type !== 'care' &&
-        !b.includes.includes(i.id)
-    );
-  } else if (item.type === 'page' || item.type === 'care') {
-    next = next.filter((i) => i.type !== item.type && i.type !== 'bundle');
-  } else {
-    const covered = next.some(
-      (i) => i.type === 'bundle' && (entryFor(i) as Bundle).includes.includes(item.id)
-    );
-    if (covered) return items;
+  if (item.type === 'page' || item.type === 'care') {
+    next = next.filter((i) => i.type !== item.type);
   }
   return [...next, item];
 }
@@ -86,7 +61,7 @@ export function sanitize(raw: unknown): CartItem[] {
     if (!it || typeof it !== 'object') continue;
     const { id, type } = it as CartItem;
     if (typeof id !== 'string') continue;
-    if (type !== 'page' && type !== 'addon' && type !== 'care' && type !== 'bundle') continue;
+    if (type !== 'page' && type !== 'addon' && type !== 'care') continue;
     if (!entryFor({ id, type })) continue;
     if (!out.some((o) => o.id === id && o.type === type)) out.push({ id, type });
   }
@@ -98,20 +73,7 @@ export function resolveItems(items: CartItem[]): ResolvedItem[] {
   for (const it of items) {
     const entry = entryFor(it);
     if (!entry) continue;
-    if (it.type === 'bundle') {
-      const b = entry as Bundle;
-      out.push({
-        id: b.id,
-        type: it.type,
-        label: b.name,
-        priceText: 'from ' + money(b.upfront),
-        monthlyText: b.monthly > 0 ? money(b.monthly) + '/mo' : null,
-        saving: b.saving,
-        includes: b.includes.map(labelFor),
-      });
-      continue;
-    }
-    const e = entry as Entry;
+    const e = entry;
     const priceText = e.consult
       ? 'Custom quote'
       : e.flagOnly
@@ -127,8 +89,6 @@ export function resolveItems(items: CartItem[]): ResolvedItem[] {
       label: e.label,
       priceText,
       monthlyText: typeof e.monthly === 'number' ? money(e.monthly) + '/mo' : null,
-      saving: null,
-      includes: [],
     });
   }
   return out;
@@ -142,14 +102,7 @@ export function totals(items: CartItem[]): CartTotals {
   for (const it of items) {
     const entry = entryFor(it);
     if (!entry) continue;
-    if (it.type === 'bundle') {
-      const b = entry as Bundle;
-      upfrontMin += b.upfront;
-      upfrontMax += b.upfront;
-      monthly += b.monthly;
-      continue;
-    }
-    const e = entry as Entry;
+    const e = entry;
     if (e.consult) {
       hasConsult = true;
       continue;

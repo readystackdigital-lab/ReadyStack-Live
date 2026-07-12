@@ -97,8 +97,7 @@
     itemsEl.innerHTML = resolved.map((r) => `
       <li class="cartd-item" data-type="${r.type}">
         <div class="cartd-item-main">
-          <span class="cartd-item-label">${esc(r.label)}${r.saving ? ` <span class="cartd-save">Save $${r.saving}</span>` : ''}</span>
-          ${r.includes.length ? `<span class="cartd-item-inc">${esc(r.includes.join(' · '))}</span>` : ''}
+          <span class="cartd-item-label">${esc(r.label)}</span>
         </div>
         <div class="cartd-item-meta">
           <span class="cartd-item-price">${esc(r.priceText)}${r.monthlyText ? `<small> +${esc(r.monthlyText)}</small>` : ''}</span>
@@ -226,6 +225,9 @@
     .cartd-overlay, .cartd-panel { transition: none; }
   }
 
+  /* The [hidden] attr must win over the display rules below */
+  .cartd [hidden] { display: none !important; }
+
   .cartd-head { display: flex; align-items: flex-start; justify-content: space-between; }
   .cartd-title { font-family: var(--font-display); font-size: var(--text-xl); font-weight: var(--weight-bold); color: var(--charcoal-900); letter-spacing: -.02em; }
   .cartd-close {
@@ -246,15 +248,8 @@
     padding: var(--space-4);
     background: var(--white);
   }
-  .cartd-item[data-type="bundle"] { border-color: rgba(245, 158, 11, 0.45); background: linear-gradient(160deg, var(--amber-50) 0%, var(--white) 60%); }
   .cartd-item-main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
   .cartd-item-label { font-weight: var(--weight-semibold); color: var(--charcoal-900); font-size: var(--text-sm); }
-  .cartd-save {
-    display: inline-block; margin-left: 4px; padding: 1px 8px; border-radius: 999px;
-    background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #0B0D10;
-    font-family: var(--font-mono); font-size: 10px; font-weight: 600; vertical-align: 2px;
-  }
-  .cartd-item-inc { font-size: var(--text-xs); color: var(--charcoal-500); line-height: 1.5; }
   .cartd-item-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
   .cartd-item-price { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--charcoal-700); white-space: nowrap; }
   .cartd-item-price small { display: block; text-align: right; color: var(--charcoal-500); }
@@ -281,4 +276,37 @@
   .cartd-error { font-size: var(--text-sm); color: #DC2626; }
   .cartd-error a { color: var(--amber-600); }
   .cartd-ok p { font-size: var(--text-sm); color: var(--charcoal-700); line-height: 1.6; }
+
+  /* ══════════ Dark theme overrides (site default) ══════════ */
+  [data-theme="dark"] .cartd-panel {
+    background: #0e1218;
+    border-left-color: rgba(255, 255, 255, 0.10);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+  }
+  [data-theme="dark"] .cartd-title { color: #fff; }
+  [data-theme="dark"] .cartd-close { border-color: rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.72); }
+  [data-theme="dark"] .cartd-close:hover { border-color: var(--amber); color: var(--amber-300); }
+  [data-theme="dark"] .cartd-empty p { color: rgba(255, 255, 255, 0.6); }
+  [data-theme="dark"] .cartd-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.10);
+  }
+  [data-theme="dark"] .cartd-item-label { color: #fff; }
+  [data-theme="dark"] .cartd-item-price,
+  [data-theme="dark"] .cartd-item-price small,
+  [data-theme="dark"] .cartd-remove,
+  [data-theme="dark"] .cartd-row,
+  [data-theme="dark"] .cartd-consult,
+  [data-theme="dark"] .cartd-note,
+  [data-theme="dark"] .cartd-field { color: rgba(255, 255, 255, 0.66); }
+  [data-theme="dark"] .cartd-remove:hover { color: var(--amber-300); }
+  [data-theme="dark"] .cartd-row strong { color: #fff; }
+  [data-theme="dark"] .cartd-totals { border-top-color: rgba(255, 255, 255, 0.10); }
+  [data-theme="dark"] .cartd-field input,
+  [data-theme="dark"] .cartd-field textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+  [data-theme="dark"] .cartd-ok p { color: rgba(255, 255, 255, 0.78); }
 </style>

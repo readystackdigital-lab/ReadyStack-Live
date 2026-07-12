@@ -89,7 +89,7 @@ export async function submitCart(contact: Contact): Promise<void> {
     message: contact.message || '',
     company_website: contact.honeypot || '',
     items: resolved.map((r) => ({
-      label: r.label + (r.includes.length ? ' (' + r.includes.join(', ') + ')' : ''),
+      label: r.label,
       value: r.priceText || r.monthlyText || '',
     })),
     monthlyItems: resolved
