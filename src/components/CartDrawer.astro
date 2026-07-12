@@ -71,6 +71,9 @@
   const form = q<HTMLFormElement>('[data-role="form"]');
   let lastFocus: HTMLElement | null = null;
 
+  const flashHtml = new WeakMap<HTMLElement, string>();
+  const flashTimer = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
+
   function esc(s: string): string {
     const d = document.createElement('div');
     d.textContent = s;
@@ -136,9 +139,13 @@
     if (!el) return;
     if (el.dataset.cartAdd) {
       cart.add({ id: el.dataset.cartAdd, type: el.dataset.cartType as CartItem['type'] });
-      const prev = el.textContent;
+      if (!flashHtml.has(el)) flashHtml.set(el, el.innerHTML);
       el.textContent = 'Added ✓';
-      setTimeout(() => { el.textContent = prev; }, 1200);
+      clearTimeout(flashTimer.get(el));
+      flashTimer.set(el, setTimeout(() => {
+        el.innerHTML = flashHtml.get(el)!;
+        flashHtml.delete(el);
+      }, 1200));
       open();
     } else if (el.hasAttribute('data-cart-open')) {
       open();
