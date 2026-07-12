@@ -36,7 +36,12 @@ function load(): CartItem[] {
 
 function persist(items: CartItem[]): void {
   if (storageOk) {
-    try { localStorage.setItem(KEY, JSON.stringify(items)); } catch {}
+    try {
+      localStorage.setItem(KEY, JSON.stringify(items));
+    } catch {
+      storageOk = false;
+      memoryItems = items;
+    }
   } else {
     memoryItems = items;
   }
