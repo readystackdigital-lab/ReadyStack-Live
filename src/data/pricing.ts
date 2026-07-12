@@ -4,7 +4,7 @@
    contact.astro (enquiry email pricing summary).
 ═══════════════════════════════════════════════════════════ */
 
-type Entry = {
+export type Entry = {
   id: string;
   label: string;
   min?: number;
@@ -59,3 +59,48 @@ export function pricingSummary() {
     care: PRICING.care.map((c) => ({ label: c.label, value: `${money(c.monthly!)}/mo` })),
   };
 }
+
+/* ── Bundles ─────────────────────────────────────────────────
+   Curated packages with an indicative saving on the upfront
+   components. Monthly fees are never discounted. `includes`
+   holds ids from PRICING.pages / addons / care.             */
+
+export type Bundle = {
+  id: string;
+  name: string;
+  tagline: string;
+  includes: string[];
+  upfront: number;
+  monthly: number;
+  saving: number;
+};
+
+export const BUNDLES: Bundle[] = [
+  {
+    id: 'launch',
+    name: 'Launch Ready',
+    tagline: 'Get online fast: a landing page with SEO and monthly care.',
+    includes: ['landing', 'seo', 'care'],
+    upfront: 1300,
+    monthly: 100,
+    saving: 150,
+  },
+  {
+    id: 'growth-engine',
+    name: 'Growth Engine',
+    tagline: 'A full small-business site with SEO, a blog and monthly care.',
+    includes: ['business', 'seo', 'blog', 'care'],
+    upfront: 2475,
+    monthly: 100,
+    saving: 275,
+  },
+  {
+    id: 'ai-front-desk',
+    name: 'AI Front Desk',
+    tagline: 'A full site with booking, a 24/7 AI receptionist and priority care.',
+    includes: ['business', 'seo', 'booking', 'ai', 'careplus'],
+    upfront: 3735,
+    monthly: 299,
+    saving: 415,
+  },
+];
