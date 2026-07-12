@@ -293,8 +293,7 @@ const marqueeItems = [
     line-height: 1.08;
     letter-spacing: -0.045em;
     color: #fff;
-  }
-  #hero .headline-amber {
+  }  #hero .headline-amber {
     color: var(--accent);
     text-shadow: 0 0 46px rgba(245,158,11,.4), 0 0 110px rgba(245,158,11,.15);
   }
@@ -551,18 +550,31 @@ const marqueeItems = [
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import Lenis from 'lenis';
+  import { particleHeadline } from '../scripts/particle-headline';
 
   const hero = document.getElementById('hero');
+
+  // 21st.dev particle-text-canvas effect on the H1 (self-gating —
+  // desktop fine-pointer only; see src/scripts/particle-headline.ts)
+  particleHeadline(hero?.querySelector<HTMLElement>('.hero-headline') ?? null);
 
   if (hero) {
     const fine   = window.matchMedia('(pointer: fine) and (min-width: 901px)');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (fine.matches && !reduce.matches) {
+    // gate on the media query's change event too, not just a one-shot
+    // sample at eval time — a window that loads narrow (or a pointer
+    // that registers late) would otherwise never get motion at all
+    let started = false;
+    const tryStart = () => {
+      if (started || !fine.matches || reduce.matches) return;
+      started = true;
       const start = () => initMotion(hero);
       'requestIdleCallback' in window
         ? (window as any).requestIdleCallback(start, { timeout: 600 })
         : setTimeout(start, 200);
-    }
+    };
+    tryStart();
+    fine.addEventListener('change', tryStart);
   }
 
   function initMotion(hero: HTMLElement) {

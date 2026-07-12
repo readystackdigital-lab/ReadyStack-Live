@@ -62,6 +62,13 @@ const {
   </div>
 </section>
 
+<script>
+  // 21st.dev particle-text-canvas effect on the page title (self-gating —
+  // desktop fine-pointer only; see src/scripts/particle-headline.ts)
+  import { particleHeadline } from '../scripts/particle-headline';
+  particleHeadline(document.getElementById('page-hero-title'));
+</script>
+
 <style>
   .page-hero {
     position: relative;
