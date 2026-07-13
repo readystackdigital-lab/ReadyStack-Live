@@ -118,9 +118,9 @@ const faqSchema = {
 
 <script>
   (function () {
-    const input = document.getElementById("qa-input");
+    const input = document.getElementById("qa-input") as HTMLInputElement | null;
     const filters = Array.from(document.querySelectorAll(".qa-filter"));
-    const items = Array.from(document.querySelectorAll(".qa-item"));
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".qa-item"));
     const empty = document.getElementById("qa-empty");
     if (!items.length) return;
 

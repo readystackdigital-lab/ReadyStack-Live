@@ -14,14 +14,14 @@ const WHATSAPP_NUMBER = '9779840318084';
 const CAL_URL = 'https://cal.com/readystack-digital-yyfaab/free-website-strategy-call';
 const ENDPOINT = 'https://agent.readystackdigital.com/estimate';
 
-const tierHints = {
+const tierHints: Record<string, string> = {
   landing:  'One focused page to explain your offer and capture enquiries.',
   business: 'Home, services, about, contact and one more: the classic small-business site.',
   growth:   'Room for detailed service pages, locations or a small resource section.',
   custom:   'Larger sites, portals or anything bespoke, priced after a quick chat.'
 };
 
-const addonHints = {
+const addonHints: Record<string, string> = {
   booking: 'Let customers pick a time and book online.',
   blog:    'A tidy, editable blog with an easy admin.',
   seo:     'On-page SEO, search-engine setup and indexing.',
@@ -68,7 +68,7 @@ const addonHints = {
                 <span class="calc-card-meta">
                   {p.consult
                     ? <span class="calc-card-price calc-card-consult">Let’s talk</span>
-                    : <span class="calc-card-price">${p.min.toLocaleString('en-AU')}–{p.max.toLocaleString('en-AU')}</span>}
+                    : <span class="calc-card-price">${p.min!.toLocaleString('en-AU')}–{p.max!.toLocaleString('en-AU')}</span>}
                 </span>
                 <span class="calc-check" aria-hidden="true">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
