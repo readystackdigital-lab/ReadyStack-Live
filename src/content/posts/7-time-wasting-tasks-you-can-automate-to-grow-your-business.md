@@ -228,8 +228,8 @@ The businesses that embrace automation today are better positioned to grow tomor
 
 # Ready to Work Smarter?
 
-At **ReadyStack Digital**, we help Australian businesses automate the tasks that consume valuable time.
+At ReadyStack Digital, we help Australian businesses automate the tasks that consume valuable time.
 
 From AI Receptionists and appointment booking to business automation, cloud solutions, and managed IT services, we build practical systems that help your business run more efficiently.
 
-If you're ready to spend less time on repetitive tasks and more time growing your business, **contact ReadyStack Digital today** to discover how automation can work for you.
+If you're ready to spend less time on repetitive tasks and more time growing your business, contact ReadyStack Digital today**** to discover how automation can work for you.
