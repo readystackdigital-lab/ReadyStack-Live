@@ -174,16 +174,7 @@
 }
 
 /* ─── Hero components ────────────────────────────────────── */
-/* Homepage-hero text styles live scoped in src/components/Hero.astro.
-   .eyebrow-dot stays global: PageHero.astro renders it on subpages. */
-.eyebrow-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: pulse-dot 2.4s ease-in-out infinite;
-  flex-shrink: 0;
-}
+/* Homepage-hero text styles live scoped in src/components/Hero.astro. */
 /* ─── Dashboard UI elements ──────────────────────────────── */
 .dash-brand-mark {
   font-family: var(--font-display);

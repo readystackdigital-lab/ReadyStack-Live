@@ -14,4 +14,23 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
+# AI assistants and answer engines (explicit allow so we can be cited)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://readystackdigital.com/sitemap-index.xml

@@ -398,29 +398,6 @@ const isActive = (href: string) =>
     color: #B45309;
   }
 
-  /* ── Status dot — double-pulse ping ring ───────────────────── */
-  .nav-status { position: relative; }
-  .nav-status :global(.status-dot) {
-    position: relative;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--green);
-    flex-shrink: 0;
-  }
-  .nav-status :global(.status-dot)::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: var(--green);
-    animation: status-ping 2.4s cubic-bezier(0, 0, .2, 1) infinite;
-  }
-  @keyframes status-ping {
-    0%   { transform: scale(1);   opacity: .7; }
-    70%, 100% { transform: scale(2.6); opacity: 0; }
-  }
-
   /* ── "Get a Quote" — amber gleam sweep ─────────────────────── */
   #site-header :global(.btn-amber) {
     position: relative;
@@ -451,7 +428,6 @@ const isActive = (href: string) =>
   /* ── Reduced motion: silence the living details ────────────── */
   @media (prefers-reduced-motion: reduce) {
     #site-header :global(#nav) { animation: none !important; }
-    .nav-status :global(.status-dot)::after { animation: none !important; }
     #site-header :global(.btn-amber)::after { animation: none !important; }
   }
 

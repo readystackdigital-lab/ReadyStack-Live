@@ -11,8 +11,8 @@ export interface Props {
 }
 
 const {
-  title = "ReadyStack Digital | Websites, Email, SEO & Social Content for Small Businesses",
-  description = "ReadyStack Digital helps small businesses with websites, business email, SEO, website care, and social media content to build and grow a professional online presence, nationwide.",
+  title = "ReadyStack Digital | Website Design for Small Businesses in Australia",
+  description = "ReadyStack Digital builds and manages websites for small businesses across Australia: web design, business email, SEO, website care and social content, with fixed pricing and no lock-in.",
   ogImage: ogImageProp,
   ogType = "website",
   breadcrumb,
@@ -164,8 +164,8 @@ const breadcrumbSchema = {
     "priceRange": "$$",
     "paymentAccepted": "Bank Transfer, Credit Card",
     "areaServed": {
-      "@type": "Place",
-      "name": "Nationwide"
+      "@type": "Country",
+      "name": "Australia"
     },
     "contactPoint": {
       "@type": "ContactPoint",
@@ -176,7 +176,9 @@ const breadcrumbSchema = {
     },
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61590500618569",
-      "https://www.instagram.com/readystackdigital/"
+      "https://www.instagram.com/readystackdigital/",
+      "https://www.linkedin.com/in/readystack-digital-06728741a/",
+      "https://www.tiktok.com/@readystack.digital"
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
@@ -241,7 +243,7 @@ const breadcrumbSchema = {
     "@id": "https://readystackdigital.com/#website",
     "url": "https://readystackdigital.com/",
     "name": "ReadyStack Digital",
-    "description": "Websites, business email, SEO, website care and social media content for small businesses, nationwide",
+    "description": "Websites, business email, SEO, website care and social media content for small businesses across Australia",
     "publisher": {
       "@id": "https://readystackdigital.com/#business"
     },
@@ -283,6 +285,6 @@ const breadcrumbSchema = {
   <script src="/js/main.js" is:inline></script>
   <script src="/js/animations.js" is:inline></script>
   <script src="/js/dashboard.js" is:inline></script>
-  <script src="https://agent.readystackdigital.com/widget.js" async></script>
+  <script src={import.meta.env.DEV ? "http://localhost:8787/widget.js" : "https://agent.readystackdigital.com/widget.js"} async is:inline></script>
  </body>
 </html>

@@ -60,7 +60,6 @@ const marqueeItems = [
       ══════════════════════════════════════════════════════ -->
       <div class="hero-text">
         <span class="hero-eyebrow">
-          <span class="eyebrow-dot" aria-hidden="true"></span>
           Website • Email • SEO • Care • Social • AI Agent
         </span>
 
@@ -283,9 +282,6 @@ const marqueeItems = [
     color: rgba(255,255,255,.78);
     margin-bottom: clamp(1.1rem, 2vw, 1.6rem);
   }
-  .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: 0 0 auto; animation: eyebrow-pulse 2.4s ease-in-out infinite; }
-  @keyframes eyebrow-pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
-
   #hero .hero-headline {
     margin: 0;
     font-family: var(--font-display);
@@ -533,7 +529,7 @@ const marqueeItems = [
 
   /* ── Reduced motion: static, fully visible ──────────────── */
   @media (prefers-reduced-motion: reduce) {
-    .bg-aurora, .eyebrow-dot, .hero-ctas .btn-amber::after,
+    .bg-aurora, .hero-ctas .btn-amber::after,
     .floating-card, .video-frame, .connector-path { animation: none !important; }
     #hero .hero-headline { clip-path: none !important; }
     #hero .hero-text > *, .video-frame, .floating-card, .connector-path { opacity: 1 !important; }
