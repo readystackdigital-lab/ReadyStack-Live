@@ -5,7 +5,7 @@ excerpt: Three AI assistants, three very different strengths for Australian
   business writing. A practical comparison of output quality, workflow fit,
   pricing, and privacy, without the hype.
 coverImage: /images/posts/ai-comparision.png
-draft: true
+draft: false
 ---
 Every Australian business owner we work with is now paying for at least one AI assistant, and most have no idea whether they picked the right one. The comparison articles out there are mostly benchmark charts and affiliate links, which tells you nothing useful about whether the thing will write a decent client proposal.
 
