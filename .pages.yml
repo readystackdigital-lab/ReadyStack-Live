@@ -34,6 +34,12 @@ content:
         options:
           format: yyyy-MM-dd
         default: ""
+      - name: updatedDate
+        label: Last updated
+        type: date
+        options:
+          format: yyyy-MM-dd
+        description: Optional. Set this when you revise an existing post, it refreshes the date search engines see.
       - name: excerpt
         label: Excerpt
         type: text

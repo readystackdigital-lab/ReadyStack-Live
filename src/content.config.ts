@@ -14,6 +14,13 @@ const posts = defineCollection({
       (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
       z.string(),
     ),
+    // Optional: set when a post is materially revised, so search engines see a
+    // fresh dateModified / sitemap lastmod without faking the published date.
+    updatedDate: z.preprocess(
+      // Pages CMS can write an empty/null value when the field is left blank.
+      (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v || undefined),
+      z.string().optional(),
+    ),
     excerpt: z.string().optional(),
     coverImage: z.string().optional(),
     draft: z.boolean().default(true),

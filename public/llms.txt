@@ -6,7 +6,9 @@
 - Instant cost calculator: https://readystackdigital.com/estimate
 - Packages: https://readystackdigital.com/packages
 - Structured pricing (machine-readable): https://readystackdigital.com/pricing.md
-- Blog: https://readystackdigital.com/blog
+- Blog (new article every week): https://readystackdigital.com/blog
+- Blog RSS feed: https://readystackdigital.com/rss.xml
+- Sitemap: https://readystackdigital.com/sitemap-index.xml
 - Contact: https://readystackdigital.com/contact
 - Email: hello@readystackdigital.com
 

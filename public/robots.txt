@@ -34,3 +34,4 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://readystackdigital.com/sitemap-index.xml
+Sitemap: https://readystackdigital.com/rss.xml

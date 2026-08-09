@@ -11,17 +11,20 @@ export interface Props {
 }
 
 const {
-  title = "ReadyStack Digital | Website Design for Small Businesses in Australia",
-  description = "ReadyStack Digital builds and manages websites for small businesses across Australia: web design, business email, SEO, website care and social content, with fixed pricing and no lock-in.",
+  title = "Small Business Website Design Australia | ReadyStack Digital",
+  description = "Websites, business email, SEO, AI reception and monthly care for small businesses across Australia. Fixed pricing from $799, no lock-in contracts.",
   ogImage: ogImageProp,
   ogType = "website",
   breadcrumb,
 } = Astro.props;
 
 const siteUrl = "https://readystackdigital.com";
-const ogImage = ogImageProp
-  ? (ogImageProp.startsWith("http") ? ogImageProp : `${siteUrl}${ogImageProp}`)
-  : `${siteUrl}/assets/images/hero-dashboard.jpg`;
+// encodeURI: CMS-uploaded filenames can contain spaces, which break og:image.
+const ogImage = encodeURI(
+  ogImageProp
+    ? (ogImageProp.startsWith("http") ? ogImageProp : `${siteUrl}${ogImageProp}`)
+    : `${siteUrl}/assets/images/hero-dashboard.jpg`,
+);
 
 // Per-page canonical + OG URL derived from the current route
 const pathname = Astro.url.pathname.replace(/\/index\.html$/, "/");
@@ -58,7 +61,7 @@ const breadcrumbSchema = {
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en-AU" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <!-- Theme bootstrap (no flash): default dark, honours saved choice -->
@@ -92,6 +95,9 @@ const breadcrumbSchema = {
   <!-- Canonical -->
   <link rel="canonical" href={canonicalURL} />
 
+  <!-- Feed discovery: fresh-content signal for crawlers and readers -->
+  <link rel="alternate" type="application/rss+xml" title="ReadyStack Digital Blog" href="https://readystackdigital.com/rss.xml" />
+
   <!-- Favicon -->
   <link rel="icon" href="/assets/icons/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="/assets/icons/favicon-16.png" type="image/png" sizes="16x16" />
@@ -103,7 +109,7 @@ const breadcrumbSchema = {
 
   <!-- Open Graph -->
   <meta property="og:type" content={ogType} />
-  <meta property="og:locale" content="en" />
+  <meta property="og:locale" content="en_AU" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
@@ -235,21 +241,22 @@ const breadcrumbSchema = {
   }
   </script>
 
-  <!-- Schema: WebSite (enables Sitelinks Searchbox) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://readystackdigital.com/#website",
-    "url": "https://readystackdigital.com/",
-    "name": "ReadyStack Digital",
-    "description": "Websites, business email, SEO, website care and social media content for small businesses across Australia",
-    "publisher": {
-      "@id": "https://readystackdigital.com/#business"
-    },
-    "inLanguage": "en"
-  }
-  </script>
+  <!-- Schema: WebSite. Google reads this for the site name shown above the
+       search result ("ReadyStack Digital" instead of readystackdigital.com),
+       and it only reads it on the homepage, so keep it homepage-only. -->
+  {isHome && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://readystackdigital.com/#website",
+      url: "https://readystackdigital.com/",
+      name: "ReadyStack Digital",
+      alternateName: ["ReadyStack", "ReadyStack Digital Australia"],
+      description: "Websites, business email, SEO, website care and social media content for small businesses across Australia",
+      publisher: { "@id": "https://readystackdigital.com/#business" },
+      inLanguage: "en-AU",
+    })} is:inline />
+  )}
 
   <!-- Schema: BreadcrumbList (per-page) -->
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline />
