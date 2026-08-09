@@ -11,8 +11,11 @@ export interface Props {
 }
 
 const {
-  title = "Small Business Website Design Australia | ReadyStack Digital",
-  description = "Websites, business email, SEO, AI reception and monthly care for small businesses across Australia. Fixed pricing from $799, no lock-in contracts.",
+  // Homepage only (every other page passes its own title). Brand-first because
+  // Google reads the homepage <title> as a candidate for the site name shown
+  // above the search result.
+  title = "ReadyStack Digital | Small Business Websites & AI Reception",
+  description = "ReadyStack Digital builds small business websites and 24/7 AI agents and receptionists across Australia, plus business email, SEO and monthly care. Fixed pricing from $799, no lock-in contracts.",
   ogImage: ogImageProp,
   ogType = "website",
   breadcrumb,
@@ -117,14 +120,14 @@ const breadcrumbSchema = {
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="ReadyStack Digital: Websites, SEO and social content for small businesses" />
+  <meta property="og:image:alt" content="ReadyStack Digital: small business websites, 24/7 AI agents and receptionists, SEO and social content" />
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
-  <meta name="twitter:image:alt" content="ReadyStack Digital: Websites, SEO and social content for small businesses" />
+  <meta name="twitter:image:alt" content="ReadyStack Digital: small business websites, 24/7 AI agents and receptionists, SEO and social content" />
 
   <!-- Fonts: preconnect + preload critical weight -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -164,7 +167,16 @@ const breadcrumbSchema = {
       "url": "https://readystackdigital.com/assets/icons/readystack-icon.svg"
     },
     "image": "https://readystackdigital.com/assets/images/hero-dashboard.jpg",
-    "description": "ReadyStack Digital helps small businesses build, manage and grow a professional online presence: websites, domain setup, hosting, business email, SEO, monthly website care, and social media and blog content for Instagram, Facebook, TikTok and LinkedIn. Nationwide support.",
+    "description": "ReadyStack Digital helps small businesses build, manage and grow a professional online presence: websites, 24/7 AI agents and AI receptionists that answer customer questions, capture leads and book calls, domain setup, hosting, business email, SEO, monthly website care, and social media and blog content for Instagram, Facebook, TikTok and LinkedIn. Nationwide support across Australia.",
+    "knowsAbout": [
+      "AI receptionist",
+      "AI agents for small business",
+      "AI chatbot for websites",
+      "Small business website design",
+      "SEO",
+      "Business email setup",
+      "Website care and hosting"
+    ],
     "telephone": "+61 2 5944 5135",
     "email": "hello@readystackdigital.com",
     "priceRange": "$$",
@@ -252,7 +264,7 @@ const breadcrumbSchema = {
       url: "https://readystackdigital.com/",
       name: "ReadyStack Digital",
       alternateName: ["ReadyStack", "ReadyStack Digital Australia"],
-      description: "Websites, business email, SEO, website care and social media content for small businesses across Australia",
+      description: "Small business websites and 24/7 AI agents and receptionists, plus business email, SEO, website care and social media content, for small businesses across Australia",
       publisher: { "@id": "https://readystackdigital.com/#business" },
       inLanguage: "en-AU",
     })} is:inline />
