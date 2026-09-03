@@ -16,7 +16,7 @@ export type Entry = {
   recommended?: boolean;
 };
 
-export const PRICING: { pages: Entry[]; addons: Entry[]; care: Entry[] } = {
+export const PRICING: { pages: Entry[]; addons: Entry[]; care: Entry[]; ai: Entry[] } = {
   pages: [
     { id: 'landing',  label: '1 page (landing page)', min: 799,  max: 1199 },
     { id: 'business', label: 'Up to 5 pages',         min: 1799, max: 2499 },
@@ -27,13 +27,22 @@ export const PRICING: { pages: Entry[]; addons: Entry[]; care: Entry[] } = {
     { id: 'booking', label: 'Booking system',            price: 299 },
     { id: 'blog',    label: 'Blog (CMS setup)',          price: 399 },
     { id: 'seo',     label: 'SEO setup',                 price: 449 },
-    { id: 'ai',      label: 'AI chatbot & reception',    price: 1499, monthly: 149 },
+    // Calculator-only entry (the estimate scoper renders PRICING.addons).
+    // The cart uses PRICING.ai below, so this never double-counts.
+    { id: 'ai',      label: 'AI Agent (chat + reception)', price: 1499, monthly: 149 },
     { id: 'ecom',    label: 'Online store (e-commerce)', consult: true },
     { id: 'email',   label: 'Business email (M365/Google)', flagOnly: true }
   ],
   care: [
     { id: 'care',     label: 'Managed Website Care', monthly: 99, recommended: true },
     { id: 'careplus', label: 'Website Care Plus',    monthly: 149 }
+  ],
+  // AI Agent tiers. Own list and own cart type so choosing one replaces the
+  // other rather than stacking, the way `page` and `care` already behave.
+  ai: [
+    { id: 'ai-chat',      label: 'AI Agent: Chat',       price: 499,  monthly: 99 },
+    { id: 'ai-reception', label: 'AI Agent: Reception',  price: 1499, monthly: 149, recommended: true },
+    { id: 'ai-complete',  label: 'AI Agent: Complete',   price: 2499, monthly: 249 }
   ]
 };
 

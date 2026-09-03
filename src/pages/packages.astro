@@ -69,23 +69,60 @@ const packages = [
       "Optional social media content add-on",
     ],
   },
+];
+
+const aiTiers = [
   {
-    name: "AI Agent & Reception",
-    tag: "New · AI",
+    id: "ai-chat",
+    name: "AI Agent: Chat",
+    tag: "Entry",
+    price: "499",
+    per: "setup",
+    monthly: "99",
+    featured: false,
+    blurb: "An agent on your website that answers questions the moment someone asks, and takes their details before they click away.",
+    feats: [
+      "Answers on your website 24/7",
+      "Trained on your services, prices and area",
+      "Captures name, number and what they want",
+      "Emails you every enquiry straight away",
+      "Hosting, monitoring and retraining included",
+    ],
+  },
+  {
+    id: "ai-reception",
+    name: "AI Agent: Reception",
+    tag: "Most popular",
     price: "1,499",
     per: "setup",
-    featured: false,
-    cartId: "ai",
-    cartType: "addon",
-    blurb: "A 24/7 AI receptionist on your website that answers questions, captures leads and books calls, trained on your business.",
-    cta: "Add an AI Agent",
+    monthly: "149",
+    featured: true,
+    blurb: "Everything in Chat, and it answers the phone too. The one most businesses take, because most missed work is a missed call.",
     feats: [
-      "Custom-trained on your services & FAQs",
-      "24/7 instant replies & lead capture",
-      "Qualifies enquiries & books calls",
-      "Lives on your website",
-      "Ongoing training, hosting & monitoring",
-      "$149 / month management",
+      "Everything in Chat",
+      "Answers real phone calls, not just website chat",
+      "Sorts the genuine jobs from the tyre-kickers",
+      "Books straight into your calendar",
+      "Hands over to you when it cannot help",
+      "After-hours and weekend answering",
+    ],
+  },
+  {
+    id: "ai-complete",
+    name: "AI Agent: Complete",
+    tag: "Chases the work",
+    price: "2,499",
+    per: "setup",
+    monthly: "249",
+    featured: false,
+    blurb: "Everything in Reception, plus an agent that goes after the work you have already quoted and the reviews you never got round to asking for.",
+    feats: [
+      "Everything in Reception",
+      "Follows up quotes that went quiet",
+      "Asks happy customers for a review",
+      "Reminds customers it is time to rebook",
+      "Monthly report on what it handled",
+      "Tuned with you every month",
     ],
   },
 ];
@@ -111,7 +148,7 @@ const faqs = [
   { q: "Can I change plans later?", a: "Yes. You can move between Managed Website Care and Website Care Plus as your needs change. There are no lock-in contracts." },
   { q: "Is social media content included?", a: "Social and blog content is available as an optional add-on on any plan, and blog uploads are included on Website Care Plus. We tailor the content mix to your business and the platforms your customers use." },
   { q: "Do you write the blog and social content?", a: "Yes. We plan topics, design posts and write captions aligned to your services. You review and approve before anything is published." },
-  { q: "What is the AI Agent and how is it priced?", a: "The AI Agent is a 24/7 AI receptionist built into your website. It answers customer questions instantly, captures leads, qualifies enquiries and books calls, trained on your business. It's a one-time setup from $1,499 plus $149/month for management, training and hosting." },
+  { q: "What is the AI Agent and how is it priced?", a: "There are three levels. Chat answers on your website from $499 setup plus $99/month. Reception adds real phone answering and calendar booking from $1,499 setup plus $149/month, and is the one most businesses take. Complete adds quote follow-ups and review requests from $2,499 setup plus $249/month. All three include hosting, monitoring and retraining." },
 ];
 ---
 
@@ -162,6 +199,40 @@ const faqs = [
           ))}
         </div>
         <p class="pkg-note reveal">Indicative pricing. Every quote is tailored to your business. You’ll always get a clear, fixed price before we start.</p>
+      </div>
+    </section>
+
+    <section id="ai-agent" class="section" aria-labelledby="ai-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">AI Agent</div>
+          <h2 id="ai-heading" class="section-h2">Stop losing work to a missed call</h2>
+          <p class="section-subline">An AI agent trained on your business, answering while you are on a job, driving or asleep. Three levels, depending on how much you want it to do. Every one includes hosting, monitoring and retraining, and there are no lock-in contracts.</p>
+        </div>
+
+        <div class="pkg-grid">
+          {aiTiers.map((t, i) => (
+            <div class={`pkg-card reveal ${t.featured ? "pkg-featured" : ""} ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
+              {t.featured && <div class="pkg-badge">★ Most popular</div>}
+              <div class="pkg-tag">{t.tag}</div>
+              <h3 class="pkg-name">{t.name}</h3>
+              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{t.price}</span><span class="pkg-per">{t.per}</span></div>
+              <p class="pkg-monthly">plus ${t.monthly}/month to run it</p>
+              <p class="pkg-blurb">{t.blurb}</p>
+              <ul class="feat-list pkg-feats">
+                {t.feats.map((f) => (
+                  <li>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke={t.featured ? "#F59E0B" : "#10B981"} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button type="button" data-cart-add={t.id} data-cart-type="ai" class={`btn btn-full ${t.featured ? "btn-amber" : "btn-outline"}`}>Add to cart</button>
+              <a href="/contact" class="pkg-talk">or talk to us first</a>
+            </div>
+          ))}
+        </div>
+        <p class="pkg-note reveal">Every tier includes hosting, monitoring and monthly retraining. No lock-in contract, and you can move between tiers as the business changes.</p>
       </div>
     </section>
 
@@ -287,6 +358,8 @@ const faqs = [
   .pkg-num { font-family: var(--font-display); font-size: 2.6rem; font-weight: var(--weight-bold); line-height: 1; letter-spacing: -.03em; }
   .pkg-per { font-size: var(--text-sm); color: var(--charcoal-500); }
   .pkg-blurb { font-size: var(--text-sm); color: var(--charcoal-500); line-height: 1.6; }
+  .pkg-monthly { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--amber-700); margin: calc(var(--space-1) * -1) 0 var(--space-2); }
+  :global([data-theme="dark"]) .pkg-monthly { color: var(--amber-300); }
   .pkg-feats { margin: var(--space-2) 0 var(--space-2); }
   .pkg-card .btn { margin-top: auto; }
   .pkg-note { text-align: center; max-width: 60ch; margin: var(--space-8) auto 0; font-size: var(--text-sm); color: var(--charcoal-500); }

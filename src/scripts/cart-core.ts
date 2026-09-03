@@ -7,7 +7,7 @@
 
 import { PRICING, type Entry } from '../data/pricing.ts';
 
-export type CartItemType = 'page' | 'addon' | 'care';
+export type CartItemType = 'page' | 'addon' | 'care' | 'ai';
 export type CartItem = { id: string; type: CartItemType };
 
 export type ResolvedItem = {
@@ -30,6 +30,7 @@ const LISTS: Record<CartItemType, Entry[]> = {
   page: PRICING.pages,
   addon: PRICING.addons,
   care: PRICING.care,
+  ai: PRICING.ai,
 };
 
 export const money = (n: number) => '$' + n.toLocaleString('en-AU');
@@ -44,7 +45,8 @@ export function addItem(items: CartItem[], item: CartItem): CartItem[] {
 
   let next = items.filter((i) => !(i.id === item.id && i.type === item.type));
 
-  if (item.type === 'page' || item.type === 'care') {
+  // one build, one care plan, one AI tier: picking another replaces it
+  if (item.type === 'page' || item.type === 'care' || item.type === 'ai') {
     next = next.filter((i) => i.type !== item.type);
   }
   return [...next, item];
@@ -61,7 +63,7 @@ export function sanitize(raw: unknown): CartItem[] {
     if (!it || typeof it !== 'object') continue;
     const { id, type } = it as CartItem;
     if (typeof id !== 'string') continue;
-    if (type !== 'page' && type !== 'addon' && type !== 'care') continue;
+    if (type !== 'page' && type !== 'addon' && type !== 'care' && type !== 'ai') continue;
     if (!entryFor({ id, type })) continue;
     if (!out.some((o) => o.id === id && o.type === type)) out.push({ id, type });
   }
