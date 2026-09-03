@@ -43,7 +43,7 @@ export const PRICING: { pages: Entry[]; addons: Entry[]; care: Entry[]; ai: Entr
     // flagOnly renders as "Included in quote": Chat has no setup fee when we
     // build the site, only the monthly. consult on Custom keeps it out of the
     // totals and trips the "priced after a chat" note in the cart.
-    { id: 'ai-chat',      label: 'AI Agent: Chat',      flagOnly: true, monthly: 99 },
+    { id: 'ai-chat',      label: 'AI Agent: Chat',      flagOnly: true, monthly: 149 },
     { id: 'ai-reception', label: 'AI Agent: Reception', price: 1499, monthly: 149, recommended: true },
     { id: 'ai-custom',    label: 'AI Agent: Custom',    consult: true }
   ]

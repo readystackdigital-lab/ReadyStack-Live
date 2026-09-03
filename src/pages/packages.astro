@@ -9,64 +9,20 @@ const packages = [
     name: "Landing Page Website",
     tag: "Website build",
     price: "799",
-    per: "upfront",
-    featured: false,
+    sub: "one-time build, then $99/month to manage it",
+    featured: true,
     cartId: "landing",
     cartType: "page",
-    blurb: "A clean one-page site that explains what you do and gets people enquiring. The fastest way to look established online.",
-    cta: "Start a website build",
+    blurb: "A one-page site that explains what you do and gets people enquiring, with an AI chat agent answering on it from the day it goes live.",
     feats: [
-      "Custom landing page website",
-      "Mobile-friendly design",
-      "Contact form plus WhatsApp, phone and email buttons",
-      "Basic SEO setup",
-      "Secure connection so browsers mark you safe",
-      "Hosting and domain connected for you",
+      "Custom one-page website",
+      "Fast on every phone",
+      "Contact form plus call, WhatsApp and email buttons",
+      "Free AI chat agent included",
       "Registered with Google so you can be found",
+      "Hosting, domain and security certificate set up",
       "Launch support",
-    ],
-  },
-  {
-    name: "Managed Website Care",
-    tag: "Most popular",
-    price: "99",
-    per: "/mo",
-    featured: true,
-    cartId: "care",
-    cartType: "care",
-    blurb: "We keep it fast, secure and showing up on Google, and fix things before you notice them. Nothing lands on your plate.",
-    cta: "Choose Managed Care",
-    feats: [
-      "Website hosting management",
-      "Domain checked so the site never drops offline",
-      "Security certificate kept valid",
-      "Enquiry forms tested so nothing gets lost",
-      "Call, WhatsApp and email buttons checked",
-      "Search visibility watched each month",
-      "Google reports checked for problems",
-      "Small monthly updates",
-      "Security checked every month",
-    ],
-  },
-  {
-    name: "Website Care Plus",
-    tag: "Care + content",
-    price: "149",
-    per: "/mo",
-    featured: false,
-    cartId: "careplus",
-    cartType: "care",
-    blurb: "Everything in Managed Care, plus fresh blog posts going up each month so you keep climbing in search.",
-    cta: "Ask about Care Plus",
-    feats: [
-      "Everything in Managed Website Care",
-      "Extra monthly support",
-      "One client-supplied blog upload / month",
-      "Blog formatting",
-      "SEO title & meta setup for blog posts",
-      "Priority support",
-      "Option to add professional business email",
-      "Optional social media content add-on",
+      "Monthly care keeps it fast, secure and updated",
     ],
   },
 ];
@@ -77,8 +33,7 @@ const aiTiers = [
     name: "AI Agent: Chat",
     tag: "Free with your website",
     priceWord: "Free",
-    per: "with any website build",
-    monthly: "99",
+    sub: "with any website build, then $149/month",
     featured: false,
     blurb: "Every website we build comes with an agent already on it, answering questions about your business and services the moment someone asks.",
     feats: [
@@ -95,8 +50,7 @@ const aiTiers = [
     name: "AI Agent: Reception",
     tag: "Most popular",
     price: "1,499",
-    per: "setup",
-    monthly: "149",
+    sub: "one-time setup, then $149/month",
     featured: true,
     blurb: "Everything in Chat, and it answers the phone too. The one most businesses take, because most missed work is a missed call.",
     feats: [
@@ -112,11 +66,10 @@ const aiTiers = [
     id: "ai-custom",
     name: "AI Agent: Custom",
     tag: "Built around your business",
-    priceWord: "Let’s talk",
-    per: "priced after a chat",
-    monthly: null,
+    priceWord: "Let\u2019s talk",
+    sub: "priced once we scope it with you",
     featured: false,
-    blurb: "Some jobs need more than answering. Tell us what keeps slipping through and we will build an agent for it, then price it once we both know the scope.",
+    blurb: "Some jobs need more than answering. Tell us what keeps slipping through and we will build an agent for it.",
     feats: [
       "Chases quotes that went quiet",
       "Asks happy customers for a review",
@@ -124,7 +77,6 @@ const aiTiers = [
       "Cuts no-shows with appointment reminders",
       "Follows up unpaid invoices",
       "Routes enquiries across locations or trades",
-      "Or something else entirely, just ask",
     ],
   },
 ];
@@ -150,7 +102,7 @@ const faqs = [
   { q: "Can I change plans later?", a: "Yes. You can move between Managed Website Care and Website Care Plus as your needs change. There are no lock-in contracts." },
   { q: "Is social media content included?", a: "Social and blog content is available as an optional add-on on any plan, and blog uploads are included on Website Care Plus. We tailor the content mix to your business and the platforms your customers use." },
   { q: "Do you write the blog and social content?", a: "Yes. We plan topics, design posts and write captions aligned to your services. You review and approve before anything is published." },
-  { q: "What is the AI Agent and how is it priced?", a: "There are three levels. Chat is free when we build your website, with $99/month to run it, and answers questions about your business and services. Reception adds real phone answering and calendar booking, at $1,499 setup plus $149/month, and is the one most businesses take. Custom is for agents built around a specific job, like chasing quiet quotes or cutting no-shows, and is priced once we have talked through the scope." },
+  { q: "What is the AI Agent and how is it priced?", a: "There are three levels. Chat is free when we build your website, with $149/month to run it, and answers questions about your business and services. Reception adds real phone answering and calendar booking, at $1,499 setup plus $149/month, and is the one most businesses take. Custom is for agents built around a specific job, like chasing quiet quotes or cutting no-shows, and is priced once we have talked through the scope." },
 ];
 ---
 
@@ -175,17 +127,18 @@ const faqs = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">Choose your plan</div>
-          <h2 id="pkg-heading" class="section-h2">Three plans. Pick where you start.</h2>
-          <p class="section-subline">No lock-in contracts. Move between plans whenever the business changes.</p>
+          <h2 id="pkg-heading" class="section-h2">Start with a website that brings work in</h2>
+          <p class="section-subline">One-time build, then a monthly plan that keeps it fast, secure and visible. No lock-in contracts. Need more than one page? The estimate tool prices any size in seconds.</p>
         </div>
 
-        <div class="pkg-grid">
-          {packages.map((p, i) => (
-            <div class={`pkg-card reveal ${p.featured ? "pkg-featured" : ""} ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
-              {p.featured && <div class="pkg-badge">★ Recommended</div>}
+        <div class="pkg-grid pkg-grid-single">
+          {packages.map((p) => (
+            <div class={`pkg-card reveal ${p.featured ? "pkg-featured" : ""}`}>
+              {p.featured && <div class="pkg-badge">★ Where most people start</div>}
               <div class="pkg-tag">{p.tag}</div>
               <h3 class="pkg-name">{p.name}</h3>
-              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{p.price}</span><span class="pkg-per">{p.per}</span></div>
+              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{p.price}</span></div>
+              <p class="pkg-monthly">{p.sub}</p>
               <p class="pkg-blurb">{p.blurb}</p>
               <ul class="feat-list pkg-feats">
                 {p.feats.map((f) => (
@@ -220,10 +173,10 @@ const faqs = [
               <h3 class="pkg-name">{t.name}</h3>
               <div class="pkg-price">
                 {t.price
-                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{t.price}</span><span class="pkg-per">{t.per}</span></Fragment>
-                  : <Fragment><span class="pkg-num pkg-num-word">{t.priceWord}</span><span class="pkg-per">{t.per}</span></Fragment>}
+                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{t.price}</span></Fragment>
+                  : <span class="pkg-num pkg-num-word">{t.priceWord}</span>}
               </div>
-              {t.monthly && <p class="pkg-monthly">plus ${t.monthly}/month to run it</p>}
+              <p class="pkg-monthly">{t.sub}</p>
               <p class="pkg-blurb">{t.blurb}</p>
               <ul class="feat-list pkg-feats">
                 {t.feats.map((f) => (
@@ -246,16 +199,17 @@ const faqs = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">Compare</div>
-          <h2 id="compare-heading" class="section-h2">What you get in each plan</h2>
+          <h2 id="compare-heading" class="section-h2">What the build covers, and what monthly care adds</h2>
+          <p class="section-subline">The build is one-time. After launch, Managed Care at $99/month keeps everything running, and Care Plus at $149/month adds a monthly blog post to keep you climbing in search.</p>
         </div>
         <div class="compare-wrap reveal">
           <table class="compare-table">
             <thead>
               <tr>
                 <th scope="col">Feature</th>
-                <th scope="col">Landing Page</th>
-                <th scope="col" class="col-featured">Managed Care</th>
-                <th scope="col">Care Plus</th>
+                <th scope="col">Build<span class="th-price">one-time</span></th>
+                <th scope="col" class="col-featured">Managed Care<span class="th-price">$99/mo</span></th>
+                <th scope="col">Care Plus<span class="th-price">$149/mo</span></th>
               </tr>
             </thead>
             <tbody>
@@ -315,20 +269,26 @@ const faqs = [
 </BaseLayout>
 
 <style>
+  /* Was repeat(4) from when there were four plan cards, which left an empty
+     column beside every three-card row. */
   .pkg-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-5);
-    align-items: start;
+    align-items: stretch;
   }
+  .pkg-grid-single { grid-template-columns: minmax(0, 460px); justify-content: center; }
   @media (max-width: 1100px) {
     .pkg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
+    .pkg-grid-single { grid-template-columns: minmax(0, 460px); }
   }
   .pkg-card {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+    /* pushes the CTA to the bottom so buttons line up across uneven cards */
+    justify-content: flex-start;
     background: var(--white);
     border: 1px solid var(--charcoal-200);
     border-radius: var(--radius-xl);
@@ -358,19 +318,20 @@ const faqs = [
   }
   .pkg-tag { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .1em; color: var(--amber-600); }
   .pkg-name { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--charcoal-900); letter-spacing: -.02em; }
-  .pkg-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px; color: var(--charcoal-900); }
+  .pkg-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px; min-height: 2.6rem; color: var(--charcoal-900); }
   .pkg-from { font-size: var(--text-xs); color: var(--charcoal-500); margin-right: 4px; }
   .pkg-sign { font-size: var(--text-lg); font-weight: var(--weight-semibold); }
   .pkg-num { font-family: var(--font-display); font-size: 2.6rem; font-weight: var(--weight-bold); line-height: 1; letter-spacing: -.03em; }
   .pkg-per { font-size: var(--text-sm); color: var(--charcoal-500); }
   .pkg-blurb { font-size: var(--text-sm); color: var(--charcoal-500); line-height: 1.6; }
-  .pkg-monthly { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--amber-700); margin: calc(var(--space-1) * -1) 0 var(--space-2); }
+  .pkg-monthly { font-family: var(--font-mono); font-size: var(--text-xs); line-height: 1.5; min-height: 2.25em; color: var(--amber-700); margin: calc(var(--space-1) * -1) 0 var(--space-2); }
   /* "Free" and "Let’s talk" need to sit at a readable size, not the $-figure scale */
-  .pkg-num-word { font-size: 1.9rem; }
-  /* word prices need breathing room the $-figure does not */
-  .pkg-num-word + .pkg-per { margin-left: 6px; }
+  /* "Free" and "Let\u2019s talk" sit slightly smaller than a $-figure but on the
+     same baseline, so the row height matches across cards */
+  .pkg-num-word { font-size: 2.1rem; }
   :global([data-theme="dark"]) .pkg-monthly { color: var(--amber-300); }
-  .pkg-feats { margin: var(--space-2) 0 var(--space-2); }
+  /* auto bottom margin pushes the CTA down so buttons align across cards */
+  .pkg-feats { margin: var(--space-2) 0 auto; }
   .pkg-card .btn { margin-top: auto; }
   .pkg-note { text-align: center; max-width: 60ch; margin: var(--space-8) auto 0; font-size: var(--text-sm); color: var(--charcoal-500); }
   .pkg-talk { display: block; text-align: center; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--charcoal-500); }
@@ -384,6 +345,8 @@ const faqs = [
   .compare-table tbody th[scope="row"] { text-align: left; font-weight: var(--weight-medium); color: var(--charcoal-700); }
   .compare-table .col-featured { background: rgba(245, 158, 11, 0.06); }
   .compare-table thead .col-featured { color: var(--amber-700); }
+  .th-price { display: block; font-family: var(--font-mono); font-size: var(--text-xs); font-weight: var(--weight-regular, 400); color: var(--charcoal-500); margin-top: 2px; }
+  :global([data-theme="dark"]) .th-price { color: rgba(255,255,255,.6); }
   :global([data-theme="dark"]) .compare-table thead .col-featured { color: var(--amber-300); }
   .compare-table td svg { display: inline-block; vertical-align: middle; }
   .cell-no { color: var(--charcoal-300); }
