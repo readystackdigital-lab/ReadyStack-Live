@@ -1,6 +1,8 @@
-# Pricing — ReadyStack Digital
+# Pricing: ReadyStack Digital
 
-ReadyStack Digital builds and manages websites for small businesses across Australia. Every estimate is confirmed as a free, fixed quote within 24 hours.
+ReadyStack Digital builds and manages websites for small businesses across Australia, rebuilds slow or outdated ones, and deploys 24/7 AI receptionists that answer calls and enquiries. Every estimate is confirmed as a free, fixed quote within 24 hours.
+
+Website rebuilds are priced the same as new builds, by page count.
 
 ## Website build (one-time, AUD)
 
@@ -14,14 +16,14 @@ ReadyStack Digital builds and manages websites for small businesses across Austr
 - Booking system: $299
 - Blog (CMS setup): $399
 - SEO setup: $449
-- AI chatbot and reception: $1,499 setup + $149/month
+- AI receptionist and AI agents: $1,499 setup + $149/month (answers website chat and phone calls, qualifies enquiries, books appointments, after-hours answering, follow-ups)
 - Online store (e-commerce): priced on consultation
 - Business email (Microsoft 365 or Google Workspace): included in quote
 
 ## Ongoing website care (monthly, AUD, no lock-in contract)
 
-- Managed Website Care: $99/month — hosting, domain, SSL, forms, basic SEO monitoring
-- Website Care Plus: $149/month — Managed Care plus blog uploads and priority support
+- Managed Website Care: $99/month (hosting, domain, security certificate, enquiry forms tested, search visibility monitored)
+- Website Care Plus: $149/month (Managed Care plus monthly blog posts and priority support)
 
 ## Example
 

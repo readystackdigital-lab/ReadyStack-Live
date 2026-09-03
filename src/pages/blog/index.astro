@@ -49,7 +49,7 @@ const blogSchema = {
 
 <BaseLayout
   title="Small Business Website & SEO Blog | ReadyStack Digital"
-  description="Practical, jargon-free guides on websites, SEO, business email, AI and security for small businesses in Australia. New articles every week."
+  description="Plain-English guides on websites, getting found on Google, AI receptionists and business email for Australian small businesses. New articles every week."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} is:inline />
@@ -60,8 +60,8 @@ const blogSchema = {
     <PageHero
       banner="/assets/banners/banner-blog-page.webp"
       eyebrow="Blog"
-      title='Insights to grow your <span class="text-amber">online presence</span>'
-      sub="Practical, jargon-free guides on websites, SEO, business email, security and social content for small businesses."
+      title='Practical advice for <span class="text-amber">growing your business</span>'
+      sub="Plain-English guides on getting online, getting found, and turning more enquiries into paying customers. Written for people who run a business, not a website."
       primaryLabel="Book a Discovery Call"
       primaryHref="/contact"
       secondaryLabel="View Packages"
@@ -73,7 +73,7 @@ const blogSchema = {
         <div class="section-head reveal">
           <div class="eyebrow">Latest Articles</div>
           <h2 id="blog-heading" class="section-h2">From the ReadyStack journal</h2>
-          <p class="section-subline">Tips, walkthroughs and updates to help your business stay visible and secure online.</p>
+          <p class="section-subline">Tips and walkthroughs to help you get found, look credible, and stop losing work you could have won.</p>
         </div>
 
         {posts.length === 0 ? (
@@ -110,8 +110,8 @@ const blogSchema = {
     </section>
 
     <CtaBand
-      heading='Ready to grow your <span class="text-amber">online presence</span>?'
-      sub="Let's build a fast, secure website and a content plan that keeps your business visible."
+      heading='Ready to put this to <span class="text-amber">work in your business?</span>'
+      sub="We'll get you online, get you found, and make sure the enquiries actually reach you."
       primaryLabel="Book a Discovery Call"
       primaryHref="/contact"
     />

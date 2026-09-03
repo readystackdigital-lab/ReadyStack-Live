@@ -10,29 +10,30 @@ const ENDPOINT = "https://agent.readystackdigital.com/enquiry";
 const PRICING_SUMMARY = pricingSummary(); // display-ready lines for the branded email
 const CAL_EMBED = "https://cal.com/readystack-digital-yyfaab/free-website-strategy-call?embed=true&layout=month_view"; // theme appended in JS to match site theme
 const services = [
-  "Website Design & Development",
-  "Business Email Setup",
-  "SEO Services",
-  "Website Care & Maintenance",
-  "Social Media Content",
-  "AI Agent & Reception (24/7 AI receptionist)",
-  "Online Store / E-commerce",
-  "A full package (website build + monthly care)",
-  "Not sure yet, need advice",
+  "AI Receptionist (never miss a call)",
+  "A new website",
+  "Rebuild my existing website",
+  "Business email setup",
+  "Get found on Google",
+  "Monthly website care",
+  "Social media content",
+  "Online store / e-commerce",
+  "The lot (website plus monthly care)",
+  "Not sure yet, I need advice",
 ];
 ---
 
 <BaseLayout
-  title="Get a Quote or Book a Call | ReadyStack Digital"
-  description="Talk to ReadyStack Digital about websites, business email, SEO, care and content. Send an enquiry or book a free strategy call. Support Australia-wide."
+  title="Get a Free Quote or Book a Call | ReadyStack Digital"
+  description="Talk to ReadyStack Digital about a new website, rebuilding an old one, or an AI receptionist that answers every call. Send an enquiry or book a free call. Australia-wide."
 >
   <Header />
   <main id="main-content">
     <PageHero
       banner="/assets/banners/banner-contact-page.webp"
       eyebrow="Contact"
-      title='Let’s build your <span class="text-amber">online presence</span>'
-      sub="Tell us a little about your business and we’ll get straight back to you. Prefer to talk? Book a free, no-pressure strategy call."
+      title='Let’s get your business <span class="text-amber">winning more work</span>'
+      sub="Tell us what you do and what is not working online right now. We’ll come back with a fixed price, usually the same business day. Prefer to talk it through? Book a free call."
       primaryLabel="Book a Free Call"
       primaryHref="#book"
       secondaryLabel="Call us"
@@ -62,7 +63,7 @@ const services = [
             <div id="panel-enquiry" role="tabpanel" aria-labelledby="tab-enquiry" tabindex="0">
             <div class="eyebrow">Send an enquiry</div>
             <h3 class="contact-card-title">Tell us what you need</h3>
-            <p class="contact-card-sub">Fill this in and we’ll get back to you personally, usually the same business day. You’ll also get our full services &amp; pricing straight to your inbox.</p>
+            <p class="contact-card-sub">Fill this in and a real person gets back to you, usually the same business day. We’ll send our full services and pricing to your inbox at the same time.</p>
 
             <form id="wa-form" class="wa-form" novalidate>
               <!-- Honeypot: hidden from humans, tempting to bots -->
@@ -121,14 +122,14 @@ const services = [
                   <span>Send via WhatsApp instead</span>
                 </button>
               </div>
-              <p class="wa-fineprint">We'll email your enquiry back to you with our full services &amp; pricing. No spam, no obligation.</p>
+              <p class="wa-fineprint">We'll email you our full services and pricing straight away. No spam, no obligation.</p>
             </form>
             </div>
 
             <div id="panel-book" role="tabpanel" aria-labelledby="tab-book" tabindex="0" hidden>
               <div class="eyebrow">Book a Call</div>
               <h3 class="contact-card-title">Pick a time that suits you</h3>
-              <p class="contact-card-sub">A free 30-minute strategy call, no pitch, just a clear plan for your online presence.</p>
+              <p class="contact-card-sub">A free 30 minutes, no pitch. Just a straight look at where your enquiries are leaking and what to do about it.</p>
               <div class="cal-embed-wrap">
                 <iframe
                   data-src={CAL_EMBED}
@@ -146,7 +147,7 @@ const services = [
             <div class="info-card book-card reveal">
               <div class="eyebrow eyebrow-light">Prefer to talk?</div>
               <h3 class="info-title">Book a free 30-min strategy call</h3>
-              <p class="info-text">A relaxed, no-pressure chat about your business and how we can help you grow online.</p>
+              <p class="info-text">A relaxed chat about your business and the simplest way to get more work coming in.</p>
               <a href="#book" class="btn btn-amber btn-full">Book a Call</a>
             </div>
 
@@ -170,7 +171,7 @@ const services = [
 
             <div class="info-card area-card reveal reveal-delay-2">
               <h3 class="info-title">Service area</h3>
-              <p class="info-text"><strong class="text-amber">Nationwide.</strong> We support small businesses right across the whole country, remotely and reliably.</p>
+              <p class="info-text"><strong class="text-amber">Australia-wide.</strong> We look after small businesses right across the country, remotely and reliably.</p>
             </div>
           </aside>
 
