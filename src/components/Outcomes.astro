@@ -63,12 +63,15 @@
     gap: clamp(1rem, 2.4vw, 1.75rem);
   }
   .outcome {
+    box-shadow: var(--nm-raised);
+    transition: box-shadow var(--dur-base) var(--ease-out);
     padding: clamp(1.6rem, 2.6vw, 2.25rem);
     border: 1px solid rgba(255,255,255,.1);
     border-radius: 20px;
     background: rgba(255,255,255,.035);
     transition: border-color .25s ease, transform .25s ease, background .25s ease;
   }
+  .outcome:hover { box-shadow: var(--nm-raised-lg); }
   .outcome:hover { border-color: rgba(245,158,11,.3); transform: translateY(-3px); background: rgba(245,158,11,.04); }
   .outcome-ico {
     display: inline-flex; align-items: center; justify-content: center;

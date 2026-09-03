@@ -96,12 +96,14 @@ const services = [
   .svc-overview-grid > :first-child { grid-column: 1 / -1; }
 
   .svc-tile {
+    box-shadow: var(--nm-raised);
     display: flex; align-items: center; gap: 1.1rem;
     padding: clamp(1.25rem, 2vw, 1.6rem);
     border: 1px solid rgba(255,255,255,.1); border-radius: 18px;
     background: rgba(255,255,255,.035); text-decoration: none;
     transition: border-color .25s ease, transform .25s ease, background .25s ease;
   }
+  .svc-tile:hover { box-shadow: var(--nm-raised-lg); }
   .svc-tile:hover { border-color: rgba(245,158,11,.35); transform: translateY(-2px); background: rgba(245,158,11,.05); }
   .svc-tile-ico {
     flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;

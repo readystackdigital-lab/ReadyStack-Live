@@ -56,11 +56,15 @@
   background: transparent;
   color: var(--charcoal-900);
   border-color: var(--charcoal-300);
+  box-shadow: var(--nm-raised);
 }
 .btn-outline:hover {
   background: var(--charcoal-50);
   border-color: var(--charcoal-400);
+  box-shadow: var(--nm-raised-lg);
 }
+/* pressed state is where soft UI actually communicates something */
+.btn-outline:active { box-shadow: var(--nm-pressed); }
 
 /* Ghost (text-only) */
 .btn-ghost {
@@ -927,6 +931,7 @@
 
 /* ─── FAQ Accordion ──────────────────────────────────────── */
 .faq-item {
+  box-shadow: var(--nm-raised);
   border-bottom: 1px solid var(--charcoal-200);
 }
 
@@ -1287,7 +1292,7 @@
   border-radius: var(--radius-xl);
   background: var(--white);
   border: 1px solid rgba(24, 29, 38, .1);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--nm-raised);
   padding: var(--space-6);
   overflow: hidden;
   transition: transform var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);

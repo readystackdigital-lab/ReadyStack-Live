@@ -140,7 +140,7 @@ const blogSchema = {
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     background: #fff;
-    box-shadow: 0 12px 30px rgba(15, 15, 16, 0.08);
+    box-shadow: var(--nm-raised);
     overflow: hidden;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
@@ -223,7 +223,7 @@ const blogSchema = {
   :global([data-theme="dark"]) .blog-card {
     border-color: var(--border-dark);
     background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+    box-shadow: var(--nm-raised);
   }
   :global([data-theme="dark"]) .blog-card:hover {
     border-color: rgba(245, 158, 11, 0.35);

@@ -354,6 +354,7 @@ const services = [
     border-radius: var(--radius-md);
     padding: 0.75rem 0.9rem;
     width: 100%;
+    box-shadow: var(--nm-inset);
     transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
   }
   .wa-field textarea { resize: vertical; min-height: 110px; }
@@ -363,7 +364,7 @@ const services = [
     outline: none;
     background: var(--white);
     border-color: var(--amber);
-    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.12);
+    box-shadow: var(--nm-inset), 0 0 0 4px rgba(245, 158, 11, 0.18);
   }
   .wa-ctas { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-2); }
   .wa-submit { gap: 0.5rem; }
@@ -379,7 +380,7 @@ const services = [
     border: 1px solid var(--charcoal-200);
     border-radius: var(--radius-xl);
     padding: var(--space-6);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--nm-raised);
   }
   .book-card {
     background: linear-gradient(160deg, #14171d, #0B0D10);

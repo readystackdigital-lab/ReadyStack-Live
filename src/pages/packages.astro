@@ -311,14 +311,16 @@ const faqs = [
     gap: var(--space-4);
     /* pushes the CTA to the bottom so buttons line up across uneven cards */
     justify-content: flex-start;
+    transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
     background: var(--white);
     border: 1px solid var(--charcoal-200);
     border-radius: var(--radius-xl);
     padding: var(--space-8) var(--space-6) var(--space-6);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--nm-raised);
     transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
   }
   .pkg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(245,158,11,.34); }
+  .pkg-card:hover { box-shadow: var(--nm-raised-lg); transform: translateY(-2px); }
   .pkg-featured {
     border-color: rgba(245, 158, 11, 0.45);
     box-shadow: 0 24px 60px rgba(245, 158, 11, 0.14), var(--shadow-md);

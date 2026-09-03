@@ -294,7 +294,9 @@ const marqueeItems = [
     text-shadow: 0 0 46px rgba(245,158,11,.4), 0 0 110px rgba(245,158,11,.15);
   }
   #hero .headline-outline {
-    color: rgba(255,255,255,.08); -webkit-text-stroke: 1.2px rgba(255,255,255,.6);
+    color: rgba(255, 255, 255, .78);
+    -webkit-text-stroke: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .10), 0 8px 26px rgba(0, 0, 0, .55);
   }
 
   #hero .hero-sub {
@@ -440,7 +442,7 @@ const marqueeItems = [
     padding: 1rem 1.15rem;
     border-radius: 20px;
     background: var(--cream);
-    box-shadow: 0 26px 50px -16px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.03);
+    box-shadow: 0 26px 50px -16px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.03), inset 0 1px 0 rgba(255,255,255,.9), inset 0 -2px 6px rgba(28,28,30,.06);
     text-decoration: none;
     transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s ease;
   }

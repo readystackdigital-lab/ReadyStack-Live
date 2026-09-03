@@ -7,6 +7,26 @@
 ═══════════════════════════════════════════════════════════ */
 
 :root { color-scheme: dark; }
+
+/* ─── Soft UI surfaces, dark ───────────────────────────────────
+   On dark the highlight is a whisper and the shadow does the work:
+   a hard white top-left edge reads as plastic. Values are tuned
+   against the #0e1218 section ground. */
+[data-theme="dark"] {
+  --nm-raised:
+    -6px -6px 16px rgba(255, 255, 255, .030),
+     8px  8px 22px rgba(0, 0, 0, .55);
+  --nm-raised-lg:
+    -10px -10px 30px rgba(255, 255, 255, .035),
+     16px  16px 40px rgba(0, 0, 0, .62);
+  --nm-inset:
+    inset  3px  3px 8px rgba(0, 0, 0, .55),
+    inset -3px -3px 8px rgba(255, 255, 255, .028);
+  --nm-pressed:
+    inset  2px  2px 6px rgba(0, 0, 0, .5),
+    inset -2px -2px 6px rgba(255, 255, 255, .022);
+  --nm-edge: rgba(255, 255, 255, .07);
+}
 [data-theme="light"] { color-scheme: light; }
 
 /* ─── Base surface + text ─────────────────────────────────── */
@@ -77,7 +97,7 @@
 [data-theme="dark"] .wf-card {
   background: rgba(255, 255, 255, 0.04) !important;
   border-color: rgba(255, 255, 255, 0.10) !important;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35) !important;
+  box-shadow: var(--nm-raised) !important;
 }
 [data-theme="dark"] .svc-card-hot,
 [data-theme="dark"] .pkg-featured {

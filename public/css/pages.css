@@ -153,12 +153,15 @@
   display: block;
   width: 54px;
   height: 28px;
+  /* the track reads as a channel cut into the bar, the thumb sits proud of it */
+  box-shadow: var(--nm-inset);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.10);
   border: 1px solid rgba(255, 255, 255, 0.20);
   transition: background 0.25s, border-color 0.25s;
 }
 .theme-toggle:hover .theme-toggle-track { border-color: rgba(245, 158, 11, 0.55); }
+.theme-toggle-thumb { box-shadow: var(--nm-raised); }
 .theme-toggle:focus-visible .theme-toggle-track { outline: 2px solid var(--amber); outline-offset: 3px; }
 [data-theme="dark"] .theme-toggle-track { background: rgba(0, 0, 0, 0.35); }
 
