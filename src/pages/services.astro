@@ -10,73 +10,73 @@ import { PRICING } from "../data/pricing";
 const categories = [
   {
     tier: "Build",
-    title: "Website Design & Development",
-    desc: "Fast, mobile-friendly websites that explain your services, build trust and generate enquiries.",
-    items: ["Business websites", "Landing pages", "Local business sites", "Performance optimization"],
+    title: "Website Design & Rebuilds",
+    desc: "A fast, professional website that explains what you do and turns visitors into enquiries. Already have one that is slow or dated? We rebuild it.",
+    items: ["New business websites", "Rebuilds of slow or outdated sites", "Landing pages", "Built to load fast on phones"],
     icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>`,
     cart: null,
     tierPicker: true,
   },
   {
-    tier: "Email",
-    title: "Business Email Setup",
-    desc: "Professional, domain-based email that makes your business look established and trustworthy.",
-    items: ["Professional email (info@yourdomain.com)", "Domain email & Microsoft 365", "MX, SPF, DKIM & DMARC setup", "Ongoing setup & support"],
-    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
-    cart: { id: "email", type: "addon" },
+    tier: "AI Agent",
+    title: "AI Receptionist & AI Agents",
+    desc: "Answers every call and message around the clock, takes the details and books the job into your calendar. From $1,499 setup plus $149/month.",
+    items: ["Answers calls and chat 24/7", "Qualifies the enquiry and flags urgent jobs", "Books appointments into your calendar", "Follows up quotes that went quiet", "Trained on your services, pricing and area"],
+    icon: `<rect x="4" y="6" width="18" height="13" rx="4" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M9 19l-2 3 5-3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12.5" r="1.3" fill="#F59E0B"/><circle cx="16" cy="12.5" r="1.3" fill="#F59E0B"/><path d="M13 3v3M11.4 4.2l3.2 1.6M14.6 4.2l-3.2 1.6" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>`,
+    cart: { id: "ai", type: "addon" },
     tierPicker: false,
   },
   {
     tier: "SEO",
-    title: "SEO Services",
-    desc: "Practical search optimization that helps the right local customers find your business.",
-    items: ["Local SEO", "On-page SEO", "Technical SEO", "Google Business Profile optimization"],
+    title: "Get Found on Google",
+    desc: "The groundwork that puts you in front of local customers at the moment they search for what you do.",
+    items: ["Local search setup", "Page titles and structure done right", "Google Business Profile", "Google Search Console"],
     icon: `<path d="M4 19V7a2 2 0 012-2h14a2 2 0 012 2v12" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/><path d="M7 15l3-3 3 2 5-6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h20" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>`,
     cart: { id: "seo", type: "addon" },
     tierPicker: false,
   },
   {
     tier: "Care",
-    title: "Website Care & Maintenance",
-    desc: "Keep your website secure, fast and online with hands-off monthly management.",
-    items: ["Security updates", "Backups", "Uptime & SSL monitoring", "Performance checks"],
+    title: "Monthly Website Care",
+    desc: "We keep it fast, secure and online so it keeps bringing work in, and you never have to think about it.",
+    items: ["Updates and backups", "Uptime and security monitoring", "Speed checks", "Small changes when you need them"],
     icon: `<path d="M13 2L3 7v6C3 18.75 7.5 24 13 25.5 18.5 24 23 18.75 23 13V7L13 2z" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M9.5 13l2.5 2.5 4.5-4.5" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
     cart: { id: "care", type: "care" },
     tierPicker: false,
   },
   {
-    tier: "Social",
-    title: "Social Media Content",
-    desc: "Consistent, branded content that keeps your business visible and professional online.",
-    items: ["Facebook content", "Instagram content", "TikTok content", "LinkedIn content", "Content strategy & planning"],
-    icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>`,
-    cart: null,
+    tier: "Email",
+    title: "Business Email Setup",
+    desc: "Email at your own domain, like info@yourbusiness.com.au, set up so your quotes and replies reach the inbox instead of spam.",
+    items: ["Email at your own domain", "Microsoft 365 or Google Workspace", "Set up to land in the inbox", "Ongoing support"],
+    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+    cart: { id: "email", type: "addon" },
     tierPicker: false,
   },
   {
-    tier: "AI Agent",
-    title: "AI Agent & Reception",
-    desc: "A 24/7 AI receptionist on your website that answers questions, captures leads and books calls, trained on your business. From $1,499 setup + $149/month.",
-    items: ["Custom-trained on your business", "24/7 instant replies & lead capture", "Qualifies enquiries & books calls", "Ongoing training & monitoring"],
-    icon: `<rect x="4" y="6" width="18" height="13" rx="4" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M9 19l-2 3 5-3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12.5" r="1.3" fill="#F59E0B"/><circle cx="16" cy="12.5" r="1.3" fill="#F59E0B"/><path d="M13 3v3M11.4 4.2l3.2 1.6M14.6 4.2l-3.2 1.6" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>`,
-    cart: { id: "ai", type: "addon" },
+    tier: "Social",
+    title: "Social Media Content",
+    desc: "Branded posts and blogs that keep you visible between jobs, without you having to think about what to post.",
+    items: ["Facebook and Instagram", "TikTok", "LinkedIn", "Planned a month at a time"],
+    icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>`,
+    cart: null,
     tierPicker: false,
   },
 ];
 
 const whyChoose = [
-  { t: "One partner, every piece", d: "Website, email, SEO, care and content handled in one place, with no juggling multiple vendors." },
-  { t: "Built for small business", d: "Practical scope and clear pricing designed for small businesses, not enterprise budgets." },
-  { t: "Secure by default", d: "HTTPS, SSL, DNS checks and lightweight setups that reduce plugin and login risk." },
-  { t: "No lock-in contracts", d: "Stay because the work is good, not because you're trapped in a long contract." },
-  { t: "Nationwide support", d: "Friendly, jargon-free support for businesses across the whole country." },
-  { t: "SEO from day one", d: "Every website ships with proper SEO foundations and Search Console setup." },
+  { t: "One person to call", d: "Website, email, Google, care and your AI receptionist all handled in one place. No chasing three different vendors." },
+  { t: "Built for small business", d: "Clear scope and clear prices, sized for a small business rather than an enterprise budget." },
+  { t: "Nothing for you to maintain", d: "No plugins to update, no logins to remember. We handle the technical side and keep it out of your way." },
+  { t: "No lock-in contracts", d: "Stay because the work brings you customers, not because you are stuck in a contract." },
+  { t: "Support across Australia", d: "Plain-English help from people who answer, wherever your business is." },
+  { t: "Found on Google from day one", d: "Every site launches with the search groundwork already done, not sold to you later as an extra." },
 ];
 ---
 
 <BaseLayout
-  title="Website Design & SEO Services | ReadyStack Digital"
-  description="Website design and development, business email setup, SEO, website care and social content for small businesses across Australia. Fixed pricing, no lock-in."
+  title="Website Design, Rebuilds & AI Reception | ReadyStack Digital"
+  description="Fast websites and rebuilds for Australian small businesses, plus 24/7 AI receptionists, business email, Google setup and monthly care. Clear pricing, no lock-in."
 >
   <Header />
   <main id="main-content">
@@ -84,8 +84,8 @@ const whyChoose = [
       banner="/assets/banners/banner-services-page.webp"
       eyebrow="Our Services"
       title='Everything your business needs to <span class="text-amber">grow online</span>'
-      sub="From your website and business email to SEO, monthly care and branded social content. ReadyStack Digital handles the full online presence so you can focus on your business."
-      primaryLabel="Get a Quote"
+      sub="A website that brings in enquiries, an AI receptionist that answers them, and the Google, email and monthly care that keeps it all working. You get on with the job."
+      primaryLabel="Get My Free Quote"
       primaryHref="/estimate"
       secondaryLabel="View Packages"
       secondaryHref="/packages"
@@ -95,8 +95,8 @@ const whyChoose = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">What We Do</div>
-          <h2 id="svc-cats-heading" class="section-h2">Five service areas, one joined-up online presence</h2>
-          <p class="section-subline">Pick what you need now and add the rest as you grow. Everything is designed to work together.</p>
+          <h2 id="svc-cats-heading" class="section-h2">Everything that brings work in, in one place</h2>
+          <p class="section-subline">Take what you need now and add the rest as you grow. Every piece is built to work with the others.</p>
         </div>
 
         <div class="svc-detail-grid">
@@ -120,7 +120,7 @@ const whyChoose = [
               </ul>
               {c.tierPicker ? (
                 <div class="svc-detail-cta svc-tiers">
-                  <div class="svc-tiers-label">Add a website build to your quote cart:</div>
+                  <div class="svc-tiers-label">How many pages do you need?</div>
                   <div class="svc-tiers-row">
                     {PRICING.pages.map((p) => (
                       <button type="button" data-cart-add={p.id} data-cart-type="page" class="svc-tier-chip">{p.label}</button>
@@ -145,8 +145,8 @@ const whyChoose = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">Why ReadyStack</div>
-          <h2 id="why-heading" class="section-h2">Why local businesses choose ReadyStack Digital</h2>
-          <p class="section-subline">Premium results without the agency overhead: practical, secure and built around your goals.</p>
+          <h2 id="why-heading" class="section-h2">Why local businesses stay with us</h2>
+          <p class="section-subline">Agency-quality work without the agency overhead, priced and scoped for a small business.</p>
         </div>
         <div class="why-grid">
           {whyChoose.map((w, i) => (
@@ -176,7 +176,7 @@ const whyChoose = [
     <CtaBand
       heading='Not sure which services you need? <span class="text-amber">Let’s map it out.</span>'
       sub="Tell us about your business and we’ll recommend the right mix of website, email, SEO, care and content, with clear, honest pricing."
-      primaryLabel="Get a Quote"
+      primaryLabel="Get My Free Quote"
       primaryHref="/estimate"
       secondaryLabel="Book a Call"
     />

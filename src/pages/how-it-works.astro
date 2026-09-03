@@ -6,25 +6,25 @@ import PageHero from "../components/PageHero.astro";
 import CtaBand from "../components/CtaBand.astro";
 
 const steps = [
-  { n: "01", tag: "Step 1", title: "Discovery Call", desc: "A relaxed, no-pressure chat about your business, goals, customers and current online presence.", out: "Goals & fit confirmed" },
-  { n: "02", tag: "Step 2", title: "Business Analysis", desc: "We review your services, audience and competitors, then map the right mix of website, SEO and content.", out: "Strategy mapped" },
-  { n: "03", tag: "Step 3", title: "Website Setup", desc: "We design and build a fast, mobile-friendly, SEO-ready website that explains your services and drives enquiries.", out: "Website built" },
-  { n: "04", tag: "Step 4", title: "Email & SEO Configuration", desc: "We connect your domain, set up professional business email, and configure SEO foundations and Search Console.", out: "Email & SEO live" },
-  { n: "05", tag: "Step 5", title: "Social Content Creation", desc: "We plan and create branded content for Instagram, Facebook, TikTok and LinkedIn, plus SEO blog posts.", out: "Content rolling" },
-  { n: "06", tag: "Ongoing", title: "Monthly Support & Growth", desc: "We keep everything secure, updated and visible with ongoing care, SEO monitoring and fresh content.", out: "Ongoing growth" },
+  { n: "01", tag: "Step 1", title: "A quick chat", desc: "A relaxed 30 minutes about your business, your customers, and what is not working online right now. No pressure and no jargon.", out: "We understand your business" },
+  { n: "02", tag: "Step 2", title: "We map what you need", desc: "We look at what you offer, who you are up against and where your enquiries come from, then recommend the smallest thing that will actually work.", out: "Clear plan and price" },
+  { n: "03", tag: "Step 3", title: "We build your website", desc: "A new site, or a rebuild of the one you have. Fast to load, easy to read on a phone, and written to turn a visitor into an enquiry.", out: "Website ready" },
+  { n: "04", tag: "Step 4", title: "We get you found and reachable", desc: "Domain connected, business email set up so your quotes reach the inbox, and the Google groundwork done so local customers can find you.", out: "Live and searchable" },
+  { n: "05", tag: "Step 5", title: "Your AI receptionist goes live", desc: "We train it on your services, prices and service area. Then it starts answering calls and messages, sorting the real enquiries, and booking jobs into your calendar.", out: "Answering 24/7" },
+  { n: "06", tag: "Ongoing", title: "We keep it earning", desc: "Monthly care, updates and monitoring, plus social and blog content if you want it, so the site keeps bringing work in and you never have to think about it.", out: "Work keeps coming in" },
 ];
 
 const trust = [
-  { v: "Nationwide", l: "Support for small businesses across the whole country" },
-  { v: "No lock-in", l: "Stay because it works, not because you’re stuck" },
-  { v: "Secure by default", l: "HTTPS, SSL, backups & monitoring as standard" },
-  { v: "SEO included", l: "Proper search foundations from day one" },
+  { v: "Australia-wide", l: "Support for small businesses right across the country" },
+  { v: "No lock-in", l: "Stay because it works, not because you are stuck" },
+  { v: "Nothing to maintain", l: "No plugins, no logins, no admin left on your plate" },
+  { v: "Found on Google", l: "Search groundwork included from day one" },
 ];
 ---
 
 <BaseLayout
-  title="How We Build Your Website | ReadyStack Digital"
-  description="Our process, from discovery call and business analysis to website build, email and SEO setup, launch, and ongoing monthly care for Australian businesses."
+  title="How It Works: Getting Your Business Online | ReadyStack Digital"
+  description="How we get an Australian small business online: a chat, a plan, a website built or rebuilt, Google and email set up, an AI receptionist answering, then monthly care."
 >
   <Header />
   <main id="main-content">
@@ -32,7 +32,7 @@ const trust = [
       banner="/assets/banners/banner-howitworks-page.webp"
       eyebrow="How It Works"
       title='From first call to <span class="text-amber">ongoing growth</span>'
-      sub="A clear, proven process that takes your business from idea to a professional online presence, and keeps it growing month after month."
+      sub="Six clear steps that take you from a first conversation to a website that brings in enquiries and an AI receptionist that answers them. You approve every step."
       primaryLabel="Book a Discovery Call"
       primaryHref="/contact"
       secondaryLabel="View Packages"
@@ -43,8 +43,8 @@ const trust = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">The Process</div>
-          <h2 id="process-heading" class="section-h2">Six steps to a stronger online presence</h2>
-          <p class="section-subline">Every step is collaborative: you review and approve as we go. No surprises, no jargon.</p>
+          <h2 id="process-heading" class="section-h2">Six steps from first call to more enquiries</h2>
+          <p class="section-subline">You review and approve as we go. No surprises, no jargon, and nothing starts until you have a fixed price.</p>
         </div>
 
         <ol class="timeline">
@@ -70,7 +70,7 @@ const trust = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow eyebrow-light">Why it works</div>
-          <h2 id="trust-heading" class="section-h2 section-h2-light">Built on trust, not lock-in</h2>
+          <h2 id="trust-heading" class="section-h2 section-h2-light">Built on results, not lock-in</h2>
         </div>
         <div class="trust-grid">
           {trust.map((t, i) => (
@@ -85,10 +85,10 @@ const trust = [
 
     <CtaBand
       heading='Let’s start with a <span class="text-amber">discovery call.</span>'
-      sub="No pressure, no jargon, just a clear conversation about your business and how we can help you grow online."
+      sub="No pressure and no jargon. Just a straight conversation about your business and the simplest way to get more work coming in."
       primaryLabel="Book a Call"
       primaryHref="/contact"
-      secondaryLabel="Get a Quote"
+      secondaryLabel="Get My Free Quote"
       secondaryHref="/estimate"
       bookCta={false}
     />

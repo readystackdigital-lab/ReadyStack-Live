@@ -8,32 +8,45 @@
 const services = [
   {
     name: "AI Receptionist",
-    line: "A 24/7 agent on your site that answers questions, captures leads and books calls.",
-    href: "/packages#ai-agent",
+    line: "Answers every call and message, 24/7, takes the details and books the job straight into your calendar.",
+    href: "#ai-agent",
     icon: `<rect x="4" y="6" width="18" height="13" rx="4" stroke="#F59E0B" stroke-width="1.5"/><path d="M9 19l-2 3 5-3" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12.5" r="1.3" fill="#F59E0B"/><circle cx="16" cy="12.5" r="1.3" fill="#F59E0B"/>`,
+    tag: "Popular",
+  },
+  {
+    name: "AI Agents for Business",
+    line: "Quote qualifying, appointment booking, after-hours answering and follow-ups, trained on how your business actually works.",
+    href: "#ai-agent",
+    icon: `<circle cx="13" cy="6" r="2.6" stroke="#F59E0B" stroke-width="1.5"/><circle cx="6" cy="18.5" r="2.6" stroke="#F59E0B" stroke-width="1.5"/><circle cx="20" cy="18.5" r="2.6" stroke="#F59E0B" stroke-width="1.5"/><path d="M11.5 8.2 7.6 16M14.5 8.2 18.4 16M8.6 18.5h8.8" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>`,
     tag: "New",
   },
   {
-    name: "Website Development",
-    line: "Fast, mobile-friendly websites built to explain your services and generate enquiries.",
+    name: "Website Launch",
+    line: "A fast, professional website that explains what you do and turns visitors into enquiries.",
     href: "/services",
     icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.5"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>`,
   },
   {
-    name: "Business Email",
-    line: "Professional email at your domain, configured with SPF, DKIM and DMARC done right.",
+    name: "Website Refresh",
+    line: "Slow, dated, or just not bringing in work any more? We rebuild it to load fast and look right on every phone.",
     href: "/services",
-    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.5"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+    icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.5"/><path d="M3 9h20" stroke="#F59E0B" stroke-width="1.5"/><path d="M16 14.6a3.2 3.2 0 1 1-1.1-2.4" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M15.6 10.4v2.3h-2.3" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
   },
   {
-    name: "SEO Foundations",
-    line: "Titles, meta, sitemap, structure and Search Console, set up to help Google find you.",
+    name: "Get Found on Google",
+    line: "The groundwork that puts you in front of local customers at the moment they search for what you do.",
     href: "/services",
     icon: `<path d="M4 19V7a2 2 0 012-2h14a2 2 0 012 2v12" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/><path d="M7 15l3-3 3 2 5-6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h20" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>`,
   },
   {
+    name: "Business Email",
+    line: "Professional email at your own domain that lands in the inbox instead of the spam folder.",
+    href: "/services",
+    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.5"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
     name: "Social Content",
-    line: "Consistent, branded posts and blogs for Instagram, Facebook, TikTok and LinkedIn.",
+    line: "Branded posts and blogs for Instagram, Facebook, TikTok and LinkedIn, written and scheduled for you.",
     href: "/social",
     icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.5"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.5"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>`,
   },
@@ -42,10 +55,10 @@ const services = [
 <section id="services" class="section section-tinted" aria-labelledby="services-heading">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">Everything you need, in one place</div>
+      <div class="eyebrow">What we do</div>
       <h2 id="services-heading" class="section-h2">
-        One specialist for your<br>
-        <span class="text-amber">whole online presence.</span>
+        Everything you need to get online<br>
+        <span class="text-amber">and keep the work coming in.</span>
       </h2>
     </div>
 
@@ -67,7 +80,7 @@ const services = [
     </div>
 
     <p class="svc-overview-note reveal">
-      Plus domain &amp; hosting setup, contact forms and secure monthly care.
+      Plus domain and hosting setup, contact forms, and monthly care that keeps it all running.
       <a href="/services">See all services →</a>
     </p>
   </div>

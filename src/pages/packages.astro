@@ -13,16 +13,16 @@ const packages = [
     featured: false,
     cartId: "landing",
     cartType: "page",
-    blurb: "A clean, professional one-page website to explain your services and generate enquiries.",
+    blurb: "A clean one-page site that explains what you do and gets people enquiring. The fastest way to look established online.",
     cta: "Start a website build",
     feats: [
       "Custom landing page website",
       "Mobile-friendly design",
-      "Contact form + WhatsApp, phone & email buttons",
+      "Contact form plus WhatsApp, phone and email buttons",
       "Basic SEO setup",
-      "Secure HTTPS setup",
-      "Hosting setup & domain connection",
-      "Google Search Console setup",
+      "Secure connection so browsers mark you safe",
+      "Hosting and domain connected for you",
+      "Registered with Google so you can be found",
       "Launch support",
     ],
   },
@@ -34,18 +34,18 @@ const packages = [
     featured: true,
     cartId: "care",
     cartType: "care",
-    blurb: "Keep your website, hosting, domain, forms, SSL and basic SEO managed every month.",
+    blurb: "We keep it fast, secure and showing up on Google, and fix things before you notice them. Nothing lands on your plate.",
     cta: "Choose Managed Care",
     feats: [
       "Website hosting management",
-      "Domain & DNS checks",
-      "SSL monitoring",
-      "Contact form testing",
-      "WhatsApp, phone & email link checks",
-      "Basic SEO monitoring",
-      "Google Search Console checks",
+      "Domain checked so the site never drops offline",
+      "Security certificate kept valid",
+      "Enquiry forms tested so nothing gets lost",
+      "Call, WhatsApp and email buttons checked",
+      "Search visibility watched each month",
+      "Google reports checked for problems",
       "Small monthly updates",
-      "Basic security checks",
+      "Security checked every month",
     ],
   },
   {
@@ -56,7 +56,7 @@ const packages = [
     featured: false,
     cartId: "careplus",
     cartType: "care",
-    blurb: "Everything in Managed Care, plus blog uploads and the option to add social content.",
+    blurb: "Everything in Managed Care, plus fresh blog posts going up each month so you keep climbing in search.",
     cta: "Ask about Care Plus",
     feats: [
       "Everything in Managed Website Care",
@@ -95,7 +95,7 @@ const compare = [
   { f: "Custom website build", v: [true, false, false] },
   { f: "Mobile-friendly + contact forms", v: [true, false, false] },
   { f: "Hosting & SSL monitoring", v: ["Setup", true, true] },
-  { f: "Domain & DNS checks", v: ["Setup", true, true] },
+  { f: "Domain checked so the site never drops offline", v: ["Setup", true, true] },
   { f: "Basic SEO + Search Console", v: [true, true, true] },
   { f: "Small monthly updates", v: [false, true, true] },
   { f: "Monthly blog upload", v: [false, false, true] },
@@ -116,16 +116,16 @@ const faqs = [
 ---
 
 <BaseLayout
-  title="Website Pricing & Packages Australia | ReadyStack Digital"
-  description="Transparent website pricing for Australian small businesses: builds from $799 one-time, then Managed Website Care from $99/month, plus SEO and content add-ons."
+  title="Website & AI Receptionist Pricing Australia | ReadyStack Digital"
+  description="Clear pricing for Australian small businesses. Websites and rebuilds from $799, monthly care from $99, and a 24/7 AI receptionist from $1,499 setup plus $149/month."
 >
   <Header />
   <main id="main-content">
     <PageHero
       banner="/assets/banners/banner-packages-page.webp"
       eyebrow="Packages"
-      title='Simple, transparent <span class="text-amber">website &amp; care</span> packages'
-      sub="Start with a one-time website build from $799, then keep everything secure and managed with a monthly care plan from $99/month. Add SEO, blog and social content whenever you’re ready."
+      title='Clear prices for getting online <span class="text-amber">and staying booked</span>'
+      sub="A website from $799, monthly care from $99, and an AI receptionist that answers every call from $149/month. Take one, take all three, and change your mind whenever you like."
       primaryLabel="Get a Quote"
       primaryHref="/estimate"
       secondaryLabel="Compare plans"
@@ -136,8 +136,8 @@ const faqs = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">Choose your plan</div>
-          <h2 id="pkg-heading" class="section-h2">Three plans. One trusted partner.</h2>
-          <p class="section-subline">No lock-in contracts. Move between plans anytime as your business grows.</p>
+          <h2 id="pkg-heading" class="section-h2">Three plans. Pick where you start.</h2>
+          <p class="section-subline">No lock-in contracts. Move between plans whenever the business changes.</p>
         </div>
 
         <div class="pkg-grid">
@@ -169,7 +169,7 @@ const faqs = [
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">Compare</div>
-          <h2 id="compare-heading" class="section-h2">What’s included in each plan</h2>
+          <h2 id="compare-heading" class="section-h2">What you get in each plan</h2>
         </div>
         <div class="compare-wrap reveal">
           <table class="compare-table">
@@ -190,7 +190,7 @@ const faqs = [
                       {cell === true ? (
                         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-label="Included"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                       ) : cell === false ? (
-                        <span class="cell-no" aria-label="Not included">—</span>
+                        <span class="cell-no" role="img" aria-label="Not included">–</span>
                       ) : (
                         <span class="cell-text">{cell}</span>
                       )}
@@ -228,7 +228,7 @@ const faqs = [
 
     <CtaBand
       heading='Ready to pick a plan? <span class="text-amber">Get your tailored quote.</span>'
-      sub="Tell us where your business is now and we’ll recommend the right plan, with a clear, fixed price and no pressure."
+      sub="Tell us where your business is now and we’ll point you at the right plan, with a fixed price up front and no pressure to take the rest."
       primaryLabel="Get a Quote"
       primaryHref="/estimate"
       secondaryLabel="Book a Call"

@@ -7,6 +7,7 @@ import CtaBand from "../components/CtaBand.astro";
 
 const cats = [
   { id: "general", label: "General" },
+  { id: "ai", label: "AI Reception" },
   { id: "website", label: "Website" },
   { id: "seo", label: "SEO" },
   { id: "email", label: "Email" },
@@ -15,9 +16,16 @@ const cats = [
 ];
 
 const faqs = [
-  { cat: "general", q: "What is ReadyStack Digital?", a: "ReadyStack Digital is an online-presence partner for small businesses. We build and manage your website, business email, SEO, monthly care and branded social media content, all in one place." },
+  { cat: "general", q: "What is ReadyStack Digital?", a: "ReadyStack Digital gets Australian small businesses online and keeps the work coming in. We build websites, rebuild slow or outdated ones, set up your business email and Google presence, and add an AI receptionist that answers calls and enquiries around the clock." },
   { cat: "general", q: "Who do you work with?", a: "Small businesses everywhere: service providers, consultants, trades, clinics, restaurants, recruitment and more: any business that needs a professional, trustworthy online presence." },
   { cat: "general", q: "Are there lock-in contracts?", a: "No. Our monthly plans are month-to-month. You stay because the work is good, not because you’re locked in." },
+
+  { cat: "ai", q: "What is an AI receptionist?", a: "It is an assistant that answers your calls and website messages when you cannot. It knows your services, prices and area, answers the customer\u2019s question, takes their details, and books the job into your calendar. It works at 2am and on public holidays." },
+  { cat: "ai", q: "How much does an AI receptionist cost?", a: "$1,499 to set up and train it on your business, then $149 per month to run, monitor and keep improving it. That is a fraction of what a part-time receptionist costs, and it never takes a day off." },
+  { cat: "ai", q: "Does it answer phone calls or just website chat?", a: "Both. It handles chat on your website and takes real phone calls, so an enquiry gets answered whether the customer types or rings." },
+  { cat: "ai", q: "What happens if it cannot answer something?", a: "It stops guessing and hands over. You get the customer\u2019s name, number and what they wanted, straight away by email, so you can call back with the full picture instead of a missed-call notification." },
+  { cat: "ai", q: "What is it trained on?", a: "Your services, pricing, service area, opening hours and the questions your customers actually ask. We build that from your website and a short conversation with you, then keep tuning it as you tell us what to change." },
+  { cat: "ai", q: "Do I need a website to get an AI receptionist?", a: "A website is the usual home for it, and most businesses start there. If you already have a site you are happy with, we can add the AI receptionist to it on its own." },
 
   { cat: "website", q: "Who builds websites for small businesses in Australia?", a: "ReadyStack Digital builds and manages websites for small businesses across Australia, from one-page landing sites to full multi-page builds, with fixed pricing, no lock-in contracts, and everything (hosting, email, SEO and ongoing care) handled in one place." },
   { cat: "website", q: "How much does a small business website cost in Australia?", a: "A one-page landing site starts from $799, a site of up to 5 pages runs $1,799–$2,499, and larger 6–10 page builds are $2,799–$3,799. Ongoing Managed Website Care starts from $99/month. See the full breakdown on our Packages page or get an instant estimate." },
@@ -26,22 +34,22 @@ const faqs = [
   { cat: "website", q: "Will my website be mobile-friendly and fast?", a: "Yes. Every site is built mobile-first, optimised for performance, and tested across devices so it loads quickly and looks great everywhere." },
   { cat: "website", q: "Can you redesign my existing website?", a: "Yes. We can rebuild or refresh an existing site, keep what’s working, improve the rest, and connect your domain, email and SEO cleanly." },
 
-  { cat: "seo", q: "Is SEO included?", a: "Every website includes SEO foundations: page titles, meta descriptions, sitemap, heading structure, image alt text and Google Search Console setup. Ongoing on-page and local SEO are included on Growth and Premium plans." },
+  { cat: "seo", q: "Is SEO included?", a: "Every website includes SEO foundations: page titles, meta descriptions, sitemap, heading structure, image alt text and Google Search Console setup. Ongoing search monitoring is included with Managed Website Care, and Website Care Plus adds monthly blog posts to keep you climbing." },
   { cat: "seo", q: "Do you do local SEO and Google Business Profile?", a: "Yes. We optimise your Google Business Profile and local signals so nearby customers can find you in search and maps." },
   { cat: "seo", q: "How long until I see SEO results?", a: "SEO is a steady build. Foundational improvements help immediately, while local ranking gains typically appear over a few months of consistent on-page work and content." },
 
   { cat: "email", q: "Can you set up business email?", a: "Yes. We set up professional, domain-based email such as info@yourbusiness.com.au and configure it so it’s reliable and secure." },
   { cat: "email", q: "Do you support Microsoft 365 or Google Workspace?", a: "Yes. We can set up and connect Microsoft 365 or Google Workspace, or a simpler mailbox option if that suits your business better." },
-  { cat: "email", q: "What about email deliverability (SPF, DKIM, DMARC)?", a: "We configure the required DNS records (MX, SPF, DKIM and DMARC) so your email is authenticated and lands in inboxes, not spam." },
+  { cat: "email", q: "What about email deliverability (SPF, DKIM, DMARC)?", a: "Yes. We set up the records that prove an email really came from you, so your quotes and replies land in the inbox instead of the spam folder. For the technically minded, that is MX, SPF, DKIM and DMARC." },
 
   { cat: "social", q: "Which platforms do you cover?", a: "Instagram, Facebook, TikTok and LinkedIn, plus SEO blog posts. We focus on the platforms where your customers actually spend time." },
   { cat: "social", q: "Do you write the captions and design the posts?", a: "Yes. We plan topics, design branded posts and write clear, on-brand captions aligned with your services and goals." },
-  { cat: "social", q: "How many posts do I get per month?", a: "It depends on your plan: typically 8 posts/month on Growth and 16 on Premium, plus blog content. We tailor the mix to your business." },
+  { cat: "social", q: "How many posts do I get per month?", a: "It depends on the plan you choose. We agree the number with you up front so you know exactly what you are getting each month, and we can change it as the business grows." },
   { cat: "social", q: "Do I approve content before it’s published?", a: "Always. You review everything in one place and approve before anything goes live. Nothing is posted without your sign-off." },
 
   { cat: "support", q: "What does monthly care include?", a: "Hosting management, domain and DNS checks, SSL monitoring, backups, contact-form testing, basic SEO monitoring, Search Console checks and small updates, with more included on higher plans." },
   { cat: "support", q: "How do I request changes?", a: "Just email us. Small updates are included in your plan; larger work is quoted clearly up front before anything begins." },
-  { cat: "support", q: "What are your support response times?", a: "We aim to respond within one business day, with priority response for Growth and Premium plans." },
+  { cat: "support", q: "What are your support response times?", a: "We aim to reply within one business day, and sooner for anything that is stopping enquiries reaching you." },
   { cat: "support", q: "Can I cancel anytime?", a: "Yes. Plans are month-to-month with no lock-in. You own your domain and content." },
 ];
 
@@ -58,8 +66,8 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Website & SEO FAQs | ReadyStack Digital"
-  description="Answers on websites, SEO, business email, social content, pricing, timelines and monthly support for small businesses in Australia."
+  title="Websites, AI Reception & Pricing FAQs | ReadyStack Digital"
+  description="Straight answers on website costs and timelines, rebuilding an outdated site, how an AI receptionist works, business email, SEO and monthly care for Australian small businesses."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
