@@ -30,6 +30,7 @@ export const PRICING: { pages: Entry[]; addons: Entry[]; care: Entry[]; ai: Entr
     // Calculator-only entry (the estimate scoper renders PRICING.addons).
     // The cart uses PRICING.ai below, so this never double-counts.
     { id: 'ai',      label: 'AI Agent (chat + reception)', price: 1499, monthly: 149 },
+    { id: 'content', label: 'Blog & social content (monthly)', consult: true },
     { id: 'ecom',    label: 'Online store (e-commerce)', consult: true },
     { id: 'email',   label: 'Business email (M365/Google)', flagOnly: true }
   ],

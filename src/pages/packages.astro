@@ -25,6 +25,24 @@ const packages = [
       "Monthly care keeps it fast, secure and updated",
     ],
   },
+  {
+    name: "Blog & Social Content",
+    tag: "Stay visible",
+    priceWord: "Let\u2019s talk",
+    sub: "priced on how much you need each month",
+    featured: false,
+    cartId: "content",
+    cartType: "addon",
+    blurb: "A website brings people in once. Regular posts keep you in front of them between jobs, so you are the business they remember when they finally need one.",
+    feats: [
+      "Branded posts for Instagram, Facebook, TikTok and LinkedIn",
+      "Blog posts written to help you get found on Google",
+      "Topics planned around what your customers actually ask",
+      "Written, designed and scheduled for you",
+      "You approve everything before it goes out",
+      "Scale it up or down as the year gets busy",
+    ],
+  },
 ];
 
 const aiTiers = [
@@ -128,16 +146,20 @@ const faqs = [
         <div class="section-head reveal">
           <div class="eyebrow">Choose your plan</div>
           <h2 id="pkg-heading" class="section-h2">Start with a website that brings work in</h2>
-          <p class="section-subline">One-time build, then a monthly plan that keeps it fast, secure and visible. No lock-in contracts. Need more than one page? The estimate tool prices any size in seconds.</p>
+          <p class="section-subline">One-time build, then a monthly plan that keeps it fast, secure and visible. Add content when you want to stay in front of people between jobs. No lock-in contracts, and the estimate tool prices any number of pages in seconds.</p>
         </div>
 
-        <div class="pkg-grid pkg-grid-single">
+        <div class="pkg-grid pkg-grid-duo">
           {packages.map((p) => (
             <div class={`pkg-card reveal ${p.featured ? "pkg-featured" : ""}`}>
               {p.featured && <div class="pkg-badge">★ Where most people start</div>}
               <div class="pkg-tag">{p.tag}</div>
               <h3 class="pkg-name">{p.name}</h3>
-              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{p.price}</span></div>
+              <div class="pkg-price">
+                {p.price
+                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{p.price}</span></Fragment>
+                  : <span class="pkg-num pkg-num-word">{p.priceWord}</span>}
+              </div>
               <p class="pkg-monthly">{p.sub}</p>
               <p class="pkg-blurb">{p.blurb}</p>
               <ul class="feat-list pkg-feats">
@@ -277,10 +299,10 @@ const faqs = [
     gap: var(--space-5);
     align-items: stretch;
   }
-  .pkg-grid-single { grid-template-columns: minmax(0, 460px); justify-content: center; }
+  .pkg-grid-duo { grid-template-columns: repeat(2, minmax(0, 420px)); justify-content: center; }
   @media (max-width: 1100px) {
     .pkg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
-    .pkg-grid-single { grid-template-columns: minmax(0, 460px); }
+    .pkg-grid-duo { grid-template-columns: repeat(2, minmax(0, 420px)); }
   }
   .pkg-card {
     position: relative;

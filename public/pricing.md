@@ -19,6 +19,7 @@ Website rebuilds are priced the same as new builds, by page count.
 - AI Agent: Chat: no setup fee with any website build, $149/month to run (answers questions about the business and its services on the website)
 - AI Agent: Reception: $1,499 setup + $149/month (adds real phone answering, qualifying and calendar booking) [most popular]
 - AI Agent: Custom: priced after a consultation (agents built for a specific job, e.g. chasing quiet quotes, review requests, rebooking reminders, appointment reminders, invoice follow-ups, multi-location routing)
+- Blog and social media content (monthly): priced on consultation, based on how many posts per month
 - Online store (e-commerce): priced on consultation
 - Business email (Microsoft 365 or Google Workspace): included in quote
 

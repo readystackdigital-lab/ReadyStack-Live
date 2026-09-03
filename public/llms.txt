@@ -29,6 +29,7 @@ Add-ons (one-time unless noted):
 - AI Agent: Chat: no setup fee with a website build, $149/month to run
 - AI Agent: Reception: $1,499 setup plus $149/month (most popular)
 - AI Agent: Custom: priced after a consultation
+- Blog and social media content (monthly): priced on consultation, based on volume
 - Online store (e-commerce): priced on consultation
 - Business email (Microsoft 365 or Google Workspace): included in quote
 
