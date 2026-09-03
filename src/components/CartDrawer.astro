@@ -109,7 +109,7 @@
       ? (t.upfrontMin === t.upfrontMax
           ? 'from $' + t.upfrontMin.toLocaleString('en-AU')
           : '$' + t.upfrontMin.toLocaleString('en-AU') + ' – $' + t.upfrontMax.toLocaleString('en-AU'))
-      : 'Custom quote';
+      : t.hasConsult ? 'Custom quote' : 'Included in quote';
     q('[data-role="upfront"]').textContent = upfront;
     q('[data-role="monthly-row"]').hidden = t.monthly === 0;
     q('[data-role="monthly"]').textContent = '$' + t.monthly.toLocaleString('en-AU') + '/mo';

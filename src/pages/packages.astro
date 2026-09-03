@@ -75,17 +75,18 @@ const aiTiers = [
   {
     id: "ai-chat",
     name: "AI Agent: Chat",
-    tag: "Entry",
-    price: "499",
-    per: "setup",
+    tag: "Free with your website",
+    priceWord: "Free",
+    per: "with any website build",
     monthly: "99",
     featured: false,
-    blurb: "An agent on your website that answers questions the moment someone asks, and takes their details before they click away.",
+    blurb: "Every website we build comes with an agent already on it, answering questions about your business and services the moment someone asks.",
     feats: [
-      "Answers on your website 24/7",
-      "Trained on your services, prices and area",
-      "Captures name, number and what they want",
-      "Emails you every enquiry straight away",
+      "No setup fee when we build your site",
+      "Answers questions about your business and services",
+      "Knows your pricing, hours and service area",
+      "Takes the enquiry when someone is ready",
+      "Emails you the details straight away",
       "Hosting, monitoring and retraining included",
     ],
   },
@@ -108,21 +109,22 @@ const aiTiers = [
     ],
   },
   {
-    id: "ai-complete",
-    name: "AI Agent: Complete",
-    tag: "Chases the work",
-    price: "2,499",
-    per: "setup",
-    monthly: "249",
+    id: "ai-custom",
+    name: "AI Agent: Custom",
+    tag: "Built around your business",
+    priceWord: "Let’s talk",
+    per: "priced after a chat",
+    monthly: null,
     featured: false,
-    blurb: "Everything in Reception, plus an agent that goes after the work you have already quoted and the reviews you never got round to asking for.",
+    blurb: "Some jobs need more than answering. Tell us what keeps slipping through and we will build an agent for it, then price it once we both know the scope.",
     feats: [
-      "Everything in Reception",
-      "Follows up quotes that went quiet",
+      "Chases quotes that went quiet",
       "Asks happy customers for a review",
-      "Reminds customers it is time to rebook",
-      "Monthly report on what it handled",
-      "Tuned with you every month",
+      "Reminds people when it is time to rebook",
+      "Cuts no-shows with appointment reminders",
+      "Follows up unpaid invoices",
+      "Routes enquiries across locations or trades",
+      "Or something else entirely, just ask",
     ],
   },
 ];
@@ -148,7 +150,7 @@ const faqs = [
   { q: "Can I change plans later?", a: "Yes. You can move between Managed Website Care and Website Care Plus as your needs change. There are no lock-in contracts." },
   { q: "Is social media content included?", a: "Social and blog content is available as an optional add-on on any plan, and blog uploads are included on Website Care Plus. We tailor the content mix to your business and the platforms your customers use." },
   { q: "Do you write the blog and social content?", a: "Yes. We plan topics, design posts and write captions aligned to your services. You review and approve before anything is published." },
-  { q: "What is the AI Agent and how is it priced?", a: "There are three levels. Chat answers on your website from $499 setup plus $99/month. Reception adds real phone answering and calendar booking from $1,499 setup plus $149/month, and is the one most businesses take. Complete adds quote follow-ups and review requests from $2,499 setup plus $249/month. All three include hosting, monitoring and retraining." },
+  { q: "What is the AI Agent and how is it priced?", a: "There are three levels. Chat is free when we build your website, with $99/month to run it, and answers questions about your business and services. Reception adds real phone answering and calendar booking, at $1,499 setup plus $149/month, and is the one most businesses take. Custom is for agents built around a specific job, like chasing quiet quotes or cutting no-shows, and is priced once we have talked through the scope." },
 ];
 ---
 
@@ -207,7 +209,7 @@ const faqs = [
         <div class="section-head reveal">
           <div class="eyebrow">AI Agent</div>
           <h2 id="ai-heading" class="section-h2">Stop losing work to a missed call</h2>
-          <p class="section-subline">An AI agent trained on your business, answering while you are on a job, driving or asleep. Three levels, depending on how much you want it to do. Every one includes hosting, monitoring and retraining, and there are no lock-in contracts.</p>
+          <p class="section-subline">An AI agent trained on your business, answering while you are on a job, driving or asleep. Every website we build comes with one included. Move up when you want it answering the phone, or building something specific for your business.</p>
         </div>
 
         <div class="pkg-grid">
@@ -216,8 +218,12 @@ const faqs = [
               {t.featured && <div class="pkg-badge">★ Most popular</div>}
               <div class="pkg-tag">{t.tag}</div>
               <h3 class="pkg-name">{t.name}</h3>
-              <div class="pkg-price"><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{t.price}</span><span class="pkg-per">{t.per}</span></div>
-              <p class="pkg-monthly">plus ${t.monthly}/month to run it</p>
+              <div class="pkg-price">
+                {t.price
+                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{t.price}</span><span class="pkg-per">{t.per}</span></Fragment>
+                  : <Fragment><span class="pkg-num pkg-num-word">{t.priceWord}</span><span class="pkg-per">{t.per}</span></Fragment>}
+              </div>
+              {t.monthly && <p class="pkg-monthly">plus ${t.monthly}/month to run it</p>}
               <p class="pkg-blurb">{t.blurb}</p>
               <ul class="feat-list pkg-feats">
                 {t.feats.map((f) => (
@@ -352,13 +358,17 @@ const faqs = [
   }
   .pkg-tag { font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .1em; color: var(--amber-600); }
   .pkg-name { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--charcoal-900); letter-spacing: -.02em; }
-  .pkg-price { display: flex; align-items: baseline; gap: 2px; color: var(--charcoal-900); }
+  .pkg-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px; color: var(--charcoal-900); }
   .pkg-from { font-size: var(--text-xs); color: var(--charcoal-500); margin-right: 4px; }
   .pkg-sign { font-size: var(--text-lg); font-weight: var(--weight-semibold); }
   .pkg-num { font-family: var(--font-display); font-size: 2.6rem; font-weight: var(--weight-bold); line-height: 1; letter-spacing: -.03em; }
   .pkg-per { font-size: var(--text-sm); color: var(--charcoal-500); }
   .pkg-blurb { font-size: var(--text-sm); color: var(--charcoal-500); line-height: 1.6; }
   .pkg-monthly { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--amber-700); margin: calc(var(--space-1) * -1) 0 var(--space-2); }
+  /* "Free" and "Let’s talk" need to sit at a readable size, not the $-figure scale */
+  .pkg-num-word { font-size: 1.9rem; }
+  /* word prices need breathing room the $-figure does not */
+  .pkg-num-word + .pkg-per { margin-left: 6px; }
   :global([data-theme="dark"]) .pkg-monthly { color: var(--amber-300); }
   .pkg-feats { margin: var(--space-2) 0 var(--space-2); }
   .pkg-card .btn { margin-top: auto; }

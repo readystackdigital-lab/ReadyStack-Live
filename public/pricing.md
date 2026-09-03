@@ -16,9 +16,9 @@ Website rebuilds are priced the same as new builds, by page count.
 - Booking system: $299
 - Blog (CMS setup): $399
 - SEO setup: $449
-- AI Agent: Chat: $499 setup + $99/month (answers on your website, captures leads)
+- AI Agent: Chat: no setup fee with any website build, $99/month to run (answers questions about the business and its services on the website)
 - AI Agent: Reception: $1,499 setup + $149/month (adds real phone answering, qualifying and calendar booking) [most popular]
-- AI Agent: Complete: $2,499 setup + $249/month (adds quote follow-ups, review requests and rebooking reminders)
+- AI Agent: Custom: priced after a consultation (agents built for a specific job, e.g. chasing quiet quotes, review requests, rebooking reminders, appointment reminders, invoice follow-ups, multi-location routing)
 - Online store (e-commerce): priced on consultation
 - Business email (Microsoft 365 or Google Workspace): included in quote
 
