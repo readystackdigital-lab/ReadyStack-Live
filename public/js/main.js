@@ -14,6 +14,9 @@ const on = (el, ev, fn, opts) => el?.addEventListener(ev, fn, opts);
 
 function lerp(a, b, t) { return a + (b - a) * t; }
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const scrollBehavior = () => (reducedMotion.matches ? 'auto' : 'smooth');
+
 /* ─── Page Loader ────────────────────────────────────────── */
 (function initLoader() {
   const loader = $('#page-loader');
@@ -66,7 +69,7 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 /* ─── Custom Cursor ──────────────────────────────────────── */
 (function initCursor() {
   const cursor = $('#cursor');
-  if (!cursor || window.matchMedia('(hover: none)').matches) return;
+  if (!cursor || window.matchMedia('(hover: none)').matches || reducedMotion.matches) return;
 
   const dot  = cursor.querySelector('.cursor-dot');
   const ring = cursor.querySelector('.cursor-ring');
@@ -155,6 +158,9 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 })();
 
 /* ─── Smooth Scroll ──────────────────────────────────────── */
+/* preventDefault() here also cancels the browser's native focus move, so
+   every in-page jump (the skip link included) has to re-home focus itself,
+   otherwise keyboard and screen-reader users stay parked in the nav. */
 (function initSmoothScroll() {
   on(document, 'click', e => {
     const anchor = e.target.closest('a[href^="#"]');
@@ -171,14 +177,19 @@ function lerp(a, b, t) { return a + (b - a) * t; }
       ? 0
       : target.getBoundingClientRect().top + window.scrollY - navH;
 
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top, behavior: scrollBehavior() });
+
+    if (target !== document.documentElement) {
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    }
   });
 })();
 
 /* ─── Magnetic Buttons ───────────────────────────────────── */
 (function initMagnetic() {
   const magnets = $$('.magnetic');
-  if (!magnets.length || window.matchMedia('(hover: none)').matches) return;
+  if (!magnets.length || window.matchMedia('(hover: none)').matches || reducedMotion.matches) return;
 
   magnets.forEach(el => {
     on(el, 'mousemove', e => {
@@ -247,7 +258,7 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 /* ─── Hover tilt on current cards ────────────────────────── */
 (function initTilt() {
   const cards = $$('.pricing-card, .presence-card');
-  if (!cards.length || window.matchMedia('(hover: none)').matches) return;
+  if (!cards.length || window.matchMedia('(hover: none)').matches || reducedMotion.matches) return;
 
   const STRENGTH = 5;
 
@@ -322,6 +333,6 @@ function lerp(a, b, t) { return a + (b - a) * t; }
   }, { passive: true });
 
   btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: scrollBehavior() });
   });
 })();

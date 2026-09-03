@@ -15,6 +15,10 @@
   --amber-300: #FCD34D;
   --amber: #F59E0B;
   --amber-600: #D97706;
+  /* amber text on the light theme's surfaces: --amber is 2.15:1 and --amber-600
+     2.77:1 on white; #B45309 clears white but only hits 4.1:1 on the tinted
+     sections. This clears 4.5:1 on every light surface the site uses. */
+  --amber-700: #A0480A;
   --amber-800: #92400E;
 
   --charcoal-50: #F9FAFB;
@@ -22,7 +26,7 @@
   --charcoal-200: #E5E7EB;
   --charcoal-300: #D1D5DB;
   --charcoal-400: #9CA3AF;
-  --charcoal-500: #6B7280;
+  --charcoal-500: #5F6672; /* was #6B7280: only 4.2:1 on the tinted sections */
   --charcoal-600: #4B5563;
   --charcoal-700: #374151;
   --charcoal-800: #2D2D30;
@@ -31,6 +35,8 @@
 
   /* Semantic colours */
   --green: #10B981;
+  /* --green as text is 2.2:1 on light surfaces; this clears AA */
+  --green-700: #047857;
   --green-dim: rgba(16, 185, 129, .12);
   --red: #EF4444;
   --red-dim: rgba(239, 68, 68, .12);
@@ -243,7 +249,7 @@ p {
   font-weight: var(--weight-medium);
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-700);
   margin-bottom: var(--space-4);
 }
 

@@ -300,7 +300,8 @@ const faqs = [
   .compare-table thead th { font-family: var(--font-display); font-weight: var(--weight-bold); color: var(--charcoal-900); font-size: var(--text-base); background: var(--charcoal-50); }
   .compare-table tbody th[scope="row"] { text-align: left; font-weight: var(--weight-medium); color: var(--charcoal-700); }
   .compare-table .col-featured { background: rgba(245, 158, 11, 0.06); }
-  .compare-table thead .col-featured { color: var(--amber-600); }
+  .compare-table thead .col-featured { color: var(--amber-700); }
+  :global([data-theme="dark"]) .compare-table thead .col-featured { color: var(--amber-300); }
   .compare-table td svg { display: inline-block; vertical-align: middle; }
   .cell-no { color: var(--charcoal-300); }
   .cell-text { font-weight: var(--weight-medium); color: var(--charcoal-700); }

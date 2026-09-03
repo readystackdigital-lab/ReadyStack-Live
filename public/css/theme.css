@@ -52,7 +52,16 @@
 [data-theme="dark"] .tier-line,
 [data-theme="dark"] .about-stat-lbl,
 [data-theme="dark"] .body-copy,
+/* .pkg-talk/.tier-talk kept the light-theme --charcoal-500, which only
+   reached 3.88:1 on the dark cards. */
+[data-theme="dark"] .pkg-talk,
+[data-theme="dark"] .tier-talk,
+[data-theme="dark"] .svc-talk,
+[data-theme="dark"] .svc-tiers-label,
 [data-theme="dark"] .qa-empty { color: rgba(255, 255, 255, 0.60) !important; }
+
+/* Eyebrows go back to full amber once the surface behind them is dark. */
+[data-theme="dark"] .eyebrow { color: var(--amber); }
 
 /* ─── Cards & surfaces ────────────────────────────────────── */
 [data-theme="dark"] .svc-card,
@@ -139,7 +148,7 @@
   color: #fff !important;
 }
 [data-theme="dark"] .wa-field label { color: rgba(255, 255, 255, 0.78) !important; }
-[data-theme="dark"] .wa-fineprint { color: rgba(255, 255, 255, 0.4) !important; }
+[data-theme="dark"] .wa-fineprint { color: rgba(255, 255, 255, 0.55) !important; }
 [data-theme="dark"] .info-list li,
 [data-theme="dark"] .info-list a { color: rgba(255, 255, 255, 0.8) !important; }
 [data-theme="dark"] .info-list a:hover { color: var(--amber-300) !important; }
@@ -239,3 +248,33 @@
   border-bottom: 1px solid var(--charcoal-100);
 }
 [data-theme="light"] .mobile-link:hover { color: var(--amber); }
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME — text colours that need more contrast than the
+   brand fills provide. --amber reads 2.15:1 and --amber-600
+   2.77:1 as text on the light theme's surfaces, and
+   --charcoal-400 only 2.2:1; all of them are fine as fills and
+   fine on the dark theme, so they are restated here as text
+   colours rather than changed at the token source.
+   ═══════════════════════════════════════════════════════════ */
+[data-theme="light"] {
+  --charcoal-400: #5F6672;
+}
+
+[data-theme="light"] .text-amber,
+[data-theme="light"] .blog-card-date,
+[data-theme="light"] .blog-card-cta,
+[data-theme="light"] .offer-kicker,
+[data-theme="light"] .offer-card .svc-desc a,
+[data-theme="light"] .svc-overview-note a,
+[data-theme="light"] .tl-tag,
+[data-theme="light"] .pkg-tag,
+[data-theme="light"] .wf-num,
+[data-theme="light"] .calc-est-kicker,
+[data-theme="light"] .calc-legend-k,
+[data-theme="light"] .calc-card-price.calc-card-consult,
+[data-theme="light"] .sample-table th {
+  color: var(--amber-700) !important;
+}
+
+[data-theme="light"] .tl-out { color: var(--green-700) !important; }

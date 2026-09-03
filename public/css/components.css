@@ -219,7 +219,7 @@
 .dash-clock {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: rgba(255,255,255,.4);
+  color: rgba(255,255,255,.55);
   letter-spacing: .08em;
 }
 /* Panel header */
@@ -234,7 +234,7 @@
   font-family: var(--font-mono);
   font-size: .65rem;
   font-weight: var(--weight-medium);
-  color: rgba(255,255,255,.35);
+  color: rgba(255,255,255,.6);
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -274,7 +274,7 @@
 .score-placeholder small {
   font-family: var(--font-mono);
   font-size: 0.62rem;
-  color: rgba(255,255,255,.45);
+  color: rgba(255,255,255,.55);
 }
 /* Metric card */
 .metric-icon-wrap {
@@ -813,9 +813,9 @@
 }
 
 .pricing-featured .tier-line { color: rgba(255,255,255,.5); }
-.pricing-featured .tier-label { color: rgba(255,255,255,.4); }
-.pricing-featured .price-sign { color: rgba(255,255,255,.4); }
-.pricing-featured .price-per  { color: rgba(255,255,255,.4); }
+.pricing-featured .tier-label { color: rgba(255,255,255,.6); }
+.pricing-featured .price-sign { color: rgba(255,255,255,.6); }
+.pricing-featured .price-per  { color: rgba(255,255,255,.6); }
 
 .tier-feats {
   display: flex;
@@ -861,7 +861,7 @@
 .pricing-phase-arrow {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: var(--charcoal-400);
+  color: var(--charcoal-500);
   white-space: nowrap;
   text-align: center;
 }
@@ -1016,7 +1016,7 @@
 /* ─── Footer components ──────────────────────────────────── */
 .footer-tagline {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,.4);
+  color: rgba(255,255,255,.55);
   max-width: 32ch;
   line-height: 1.6;
 }
@@ -1024,14 +1024,14 @@
 .footer-trust-chips span {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  color: rgba(255,255,255,.4);
+  color: rgba(255,255,255,.55);
   background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.08);
   border-radius: var(--radius-full);
   padding: .25rem .65rem;
 }
 
-.footer-col h4 {
+.footer-col h3 {
   font-family: var(--font-display);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
@@ -1042,7 +1042,7 @@
 
 .footer-col a {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,.4);
+  color: rgba(255,255,255,.55);
   transition: color var(--dur-fast);
   line-height: 1;
 }
@@ -1051,12 +1051,12 @@
 
 .footer-copy {
   font-size: var(--text-xs);
-  color: rgba(255,255,255,.45);
+  color: rgba(255,255,255,.55);
 }
 
 .footer-legal a {
   font-size: var(--text-xs);
-  color: rgba(255,255,255,.45);
+  color: rgba(255,255,255,.55);
   transition: color var(--dur-fast);
 }
 

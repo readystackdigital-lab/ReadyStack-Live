@@ -63,11 +63,14 @@ function run(h1: HTMLElement, fine: MediaQueryList) {
   let particles: P[] = [];
   let W = 0, H = 0;
   let mx = -9999, my = -9999;
-  let raf = 0, visible = true, active = false;
+  // armed: the canvas owns the rendering. painted: a real frame exists, so it
+  // is safe to make the DOM glyphs transparent. Handing the glyphs over before
+  // the first paint is what turns an H1 invisible when rAF never runs (hidden
+  // tab, starved compositor) or when a frame throws.
+  let raf = 0, visible = true, armed = false, painted = false;
 
   // on: glyphs transparent, canvas renders. off: full restore (mobile).
   const setActive = (on: boolean) => {
-    active = on;
     for (const el of [h1, ...h1.querySelectorAll<HTMLElement>('*')]) {
       if (el === canvas) continue;
       el.style.color = on ? 'transparent' : '';
@@ -149,29 +152,40 @@ function run(h1: HTMLElement, fine: MediaQueryList) {
         });
       }
     }
-    setActive(true);
+    armed = particles.length > 0;
+    painted = false;
   };
 
   const tick = () => {
     raf = requestAnimationFrame(tick);
-    if (!visible || !active) return;
-    ctx!.clearRect(0, 0, W, H);
-    const R2 = RADIUS * RADIUS;
-    for (const p of particles) {
-      const dx = p.x - mx, dy = p.y - my;
-      const d2 = dx * dx + dy * dy;
-      if (d2 < R2) {
-        const d = Math.sqrt(d2) || 1;
-        const f = (RADIUS - d) / RADIUS;
-        p.vx += (dx / d) * f * PUSH;
-        p.vy += (dy / d) * f * PUSH;
+    if (!visible || !armed) return;
+    try {
+      ctx!.clearRect(0, 0, W, H);
+      const R2 = RADIUS * RADIUS;
+      for (const p of particles) {
+        const dx = p.x - mx, dy = p.y - my;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < R2) {
+          const d = Math.sqrt(d2) || 1;
+          const f = (RADIUS - d) / RADIUS;
+          p.vx += (dx / d) * f * PUSH;
+          p.vy += (dy / d) * f * PUSH;
+        }
+        p.vx = (p.vx + (p.hx - p.x) * RETURN) * FRICTION;
+        p.vy = (p.vy + (p.hy - p.y) * RETURN) * FRICTION;
+        p.x += p.vx;
+        p.y += p.vy;
+        ctx!.fillStyle = p.c;
+        ctx!.fillRect(p.x, p.y, DOT, DOT);
       }
-      p.vx = (p.vx + (p.hx - p.x) * RETURN) * FRICTION;
-      p.vy = (p.vy + (p.hy - p.y) * RETURN) * FRICTION;
-      p.x += p.vx;
-      p.y += p.vy;
-      ctx!.fillStyle = p.c;
-      ctx!.fillRect(p.x, p.y, DOT, DOT);
+    } catch {
+      armed = false;
+      setActive(false); // give the heading back rather than leave it blank
+      return;
+    }
+    if (!painted) {
+      painted = true;
+      setActive(true);
     }
   };
 
@@ -188,7 +202,7 @@ function run(h1: HTMLElement, fine: MediaQueryList) {
     clearTimeout(resizeT);
     resizeT = window.setTimeout(() => {
       if (fine.matches) build();
-      else setActive(false);
+      else { armed = false; setActive(false); }
     }, 200);
   };
 

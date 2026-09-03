@@ -101,7 +101,7 @@
         </div>
         <div class="cartd-item-meta">
           <span class="cartd-item-price">${esc(r.priceText)}${r.monthlyText ? `<small> +${esc(r.monthlyText)}</small>` : ''}</span>
-          <button type="button" class="cartd-remove" data-cart-remove="${r.id}" aria-label="Remove ${esc(r.label)}">Remove</button>
+          <button type="button" class="cartd-remove" data-cart-remove="${esc(r.id)}" aria-label="Remove ${esc(r.label)}">Remove</button>
         </div>
       </li>`).join('');
 
@@ -121,14 +121,19 @@
     q<HTMLElement>('[data-role="ok"]').hidden = true;
     form.hidden = cart.getTotals().count === 0;
     root.setAttribute('data-open', 'true');
+    panel.inert = false;
     document.body.style.overflow = 'hidden';
     panel.focus();
   }
   function close(): void {
     root.setAttribute('data-open', 'false');
+    // off-screen is not out of the tab order: without inert the drawer's
+    // inputs stayed reachable by keyboard behind the page.
+    panel.inert = true;
     document.body.style.overflow = '';
     lastFocus?.focus();
   }
+  panel.inert = true;
 
   // Global delegation: add buttons, open triggers, remove buttons, close
   document.addEventListener('click', (e) => {
@@ -239,7 +244,7 @@
   .cartd-close:hover { border-color: var(--amber); color: var(--amber-600); }
 
   .cartd-empty p { font-size: var(--text-sm); color: var(--charcoal-500); line-height: 1.6; }
-  .cartd-empty a { color: var(--amber-600); }
+  .cartd-empty a { color: var(--amber-700); }
 
   .cartd-items { display: flex; flex-direction: column; gap: var(--space-3); }
   .cartd-item {
@@ -274,7 +279,7 @@
   }
   .cartd-field input:focus, .cartd-field textarea:focus { outline: 2px solid var(--amber); outline-offset: 1px; border-color: var(--amber); }
   .cartd-error { font-size: var(--text-sm); color: #DC2626; }
-  .cartd-error a { color: var(--amber-600); }
+  .cartd-error a { color: var(--amber-700); }
   .cartd-ok p { font-size: var(--text-sm); color: var(--charcoal-700); line-height: 1.6; }
 
   /* ══════════ Dark theme overrides (site default) ══════════ */

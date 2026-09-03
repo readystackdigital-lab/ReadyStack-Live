@@ -394,8 +394,10 @@ const isActive = (href: string) =>
     transform: scale(1);
     background: rgba(245, 158, 11, 0.12);
   }
+  /* amber-300, not amber-700: on the dark nav #B45309 only reached 4.18:1.
+     Light theme overrides this back to charcoal-900 in theme.css. */
   #site-header :global(.nav-link.active) {
-    color: #B45309;
+    color: var(--amber-300, #FCD34D);
   }
 
   /* ── "Get a Quote" — amber gleam sweep ─────────────────────── */
