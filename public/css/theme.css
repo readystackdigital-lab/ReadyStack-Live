@@ -297,4 +297,9 @@
   color: var(--amber-700) !important;
 }
 
+/* The page hero keeps its dark panel in both themes, so its amber words keep
+   the brand fill — the light-surface override above would put dark rust on
+   near-black, and would feed that colour to the particle-headline sampler. */
+[data-theme="light"] .page-hero-title .text-amber { color: var(--amber) !important; }
+
 [data-theme="light"] .tl-out { color: var(--green-700) !important; }

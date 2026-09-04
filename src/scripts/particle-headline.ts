@@ -70,13 +70,26 @@ function run(h1: HTMLElement, fine: MediaQueryList) {
   let raf = 0, visible = true, armed = false, painted = false;
 
   // on: glyphs transparent, canvas renders. off: full restore (mobile).
+  // Plain inline styles are not enough to silence the DOM glyphs: theme
+  // rules hit hero words with !important ([data-theme="light"] .text-amber)
+  // and win, and a transparent glyph still paints its own text-shadow
+  // (#hero .headline-amber's glow). Either one leaves a second copy of the
+  // heading showing through the particles, so hide all of it at !important.
+  const HIDDEN: [string, string][] = [
+    ['color', 'transparent'],
+    ['-webkit-text-stroke-color', 'transparent'],
+    ['-webkit-text-fill-color', 'transparent'],
+    ['text-shadow', 'none'],
+    ['animation', 'none'],
+    ['clip-path', 'none'],
+  ];
   const setActive = (on: boolean) => {
     for (const el of [h1, ...h1.querySelectorAll<HTMLElement>('*')]) {
       if (el === canvas) continue;
-      el.style.color = on ? 'transparent' : '';
-      el.style.webkitTextStrokeColor = on ? 'transparent' : '';
-      el.style.animation = on ? 'none' : '';
-      el.style.clipPath = on ? 'none' : '';
+      for (const [prop, value] of HIDDEN) {
+        if (on) el.style.setProperty(prop, value, 'important');
+        else el.style.removeProperty(prop);
+      }
     }
     canvas.style.display = on ? 'block' : 'none';
   };
