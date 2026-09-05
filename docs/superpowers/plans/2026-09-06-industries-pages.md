@@ -6,7 +6,7 @@
 
 **Architecture:** One data file (`src/data/industries.ts`) drives one dynamic Astro route (`src/pages/industries/[slug].astro`) plus an index page. The `Header.astro` mega-menu is generalised from a hardcoded `label === "Services"` check to a data-driven `menu` property so both dropdowns share one code path. No new dependencies.
 
-**Tech Stack:** Astro 6 (static output), vanilla TypeScript, scoped CSS using the site's existing custom properties, Node `node --test` for unit tests.
+**Tech Stack:** Astro 6 (static output), vanilla TypeScript, scoped CSS using the site's existing custom properties, Node `node --test` for unit tests (run it with no path argument; the directory form `node --test tests/` fails on Node 26 in this repo).
 
 **Spec:** `docs/superpowers/specs/2026-09-06-industries-pages-design.md`
 
@@ -25,7 +25,7 @@ Every task's requirements implicitly include this section.
 - **Positioning:** get online, win customers, never miss a call.
 - **Dark theme is the site default.** Any new card-like class MUST be added to the `[data-theme="dark"]` selector list in `public/css/theme.css` or it will render as a white card on a dark page. This is not optional and is the single most likely defect in this build.
 - **Astro scoped CSS fails silently.** One invalid declaration in a `<style>` block kills every rule after it in that block. If styles go missing, suspect this before anything else.
-- **Verification commands:** `npx astro check`, `node --test tests/`, `npx astro build`.
+- **Verification commands:** `npx astro check`, `node --test`, `npx astro build`. Run `node --test` with **no path argument**: the directory form `node --test tests/` fails on Node 26 in this repo. A single file (`node --test tests/industries.test.ts`) does work.
 
 ## Deliberate deviations from the spec
 
@@ -1038,7 +1038,7 @@ Expected: seven `<loc>` entries, `/industries` plus the six slugs.
 
 - [ ] **Step 3: Run the full check suite**
 
-Run: `node --test tests/ && npx astro check && npx astro build`
+Run: `node --test && npx astro check && npx astro build`
 Expected: all tests pass, 0 type errors, build succeeds.
 
 - [ ] **Step 4: Browser verification, desktop widths**
@@ -1070,7 +1070,7 @@ git commit -m "feat: sitemap crawl-budget tiers for industries routes"
 
 ## Done when
 
-- `node --test tests/ && npx astro check && npx astro build` is clean.
+- `node --test && npx astro check && npx astro build` is clean.
 - Seven new routes build, each with its own title, description and schema.
 - Both mega-menus work on hover, keyboard and Escape.
 - Light and dark both render correctly on the index and all six detail pages.
