@@ -145,8 +145,12 @@ Nav arrays updated: `primaryNav`, `desktopNav` (the allow-list array), and
 
 **Known risk:** desktop nav goes from five items to six plus the Get a Quote CTA.
 This must be verified in the browser at 900px, 1024px and 1280px before the work
-is called done. If it crowds, the fallback is dropping Blog from `desktopNav`
-(it stays in the mobile menu and footer), not shrinking type.
+is called done.
+
+Owner decision (2026-09-06): **no nav item is dropped in this build.** Blog stays
+in the desktop bar. If the verification step shows crowding, report it with
+screenshots at the affected widths and let the owner decide what gives. Do not
+silently remove a nav item, and do not shrink type to force a fit.
 
 ## Sitemap
 
