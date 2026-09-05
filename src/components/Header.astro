@@ -19,6 +19,22 @@ const mobileNav = [
   { label: "Home", href: "/" },
   ...primaryNav,
 ];
+// Services mega-menu. Icons + slugs mirror the cards on /services so the
+// dropdown and the page read as one system.
+const serviceMenu = [
+  { label: "Website Design & Rebuilds", href: "/services#build", blurb: "Fast sites that turn visitors into enquiries",
+    icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>` },
+  { label: "AI Receptionist & Custom AI Agents", href: "/services#ai", blurb: "Answers every call, automates the repeat work",
+    icon: `<rect x="4" y="6" width="18" height="13" rx="4" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M9 19l-2 3 5-3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12.5" r="1.3" fill="#F59E0B"/><circle cx="16" cy="12.5" r="1.3" fill="#F59E0B"/><path d="M13 3v3M11.4 4.2l3.2 1.6M14.6 4.2l-3.2 1.6" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>` },
+  { label: "Get Found on Google and in AI", href: "/services#seo", blurb: "Google, ChatGPT and Perplexity point to you",
+    icon: `<path d="M4 19V7a2 2 0 012-2h14a2 2 0 012 2v12" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/><path d="M7 15l3-3 3 2 5-6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h20" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>` },
+  { label: "Monthly Website Care", href: "/services#care", blurb: "Updates, backups and uptime, handled",
+    icon: `<path d="M13 2L3 7v6C3 18.75 7.5 24 13 25.5 18.5 24 23 18.75 23 13V7L13 2z" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M9.5 13l2.5 2.5 4.5-4.5" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>` },
+  { label: "Business Email Setup", href: "/services#email", blurb: "Email at your domain that lands in the inbox",
+    icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>` },
+  { label: "Social Media Content", href: "/services#social", blurb: "Branded posts that keep you visible",
+    icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>` },
+];
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
 ---
@@ -39,12 +55,44 @@ const isActive = (href: string) =>
 
       <ul class="nav-links" role="list">
         {desktopNav.map((item) => (
-          <li>
+          <li class:list={["nav-item", { "has-mega": item.label === "Services" }]}>
             <a
               href={item.href}
               class:list={["nav-link", { active: isActive(item.href) }]}
               aria-current={isActive(item.href) ? "page" : undefined}
-            >{item.label}</a>
+              aria-haspopup={item.label === "Services" ? "true" : undefined}
+            >
+              {item.label}
+              {item.label === "Services" && (
+                <svg class="nav-caret" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              )}
+            </a>
+
+            {item.label === "Services" && (
+              <div class="mega">
+                <div class="mega-panel">
+                  <span class="mega-sheen" aria-hidden="true"></span>
+                  <div class="mega-grid" role="group" aria-label="Services">
+                    {serviceMenu.map((svc, i) => (
+                      <a href={svc.href} class="mega-item" style={`--i:${i}`}>
+                        <span class="mega-ico" aria-hidden="true">
+                          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" set:html={svc.icon}></svg>
+                        </span>
+                        <span class="mega-copy">
+                          <span class="mega-title">{svc.label}</span>
+                          <span class="mega-blurb">{svc.blurb}</span>
+                        </span>
+                        <svg class="mega-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </a>
+                    ))}
+                  </div>
+                  <div class="mega-foot">
+                    <a href="/services" class="mega-all">See all services</a>
+                    <a href="/estimate" class="mega-cta">Get a Quote</a>
+                  </div>
+                </div>
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -484,4 +532,261 @@ const isActive = (href: string) =>
   @media (max-width: 900px) {
     #site-header .nav-cta { display: none; }
   }
+
+  /* ══ Services mega-menu ═══════════════════════════════════════
+     Hover / focus driven, no JS beyond Escape-to-close. The panel
+     unfolds from the nav's lower edge (clip-path + spring), an amber
+     sheen sweeps across once, then the six cards stagger in. */
+
+  .nav-item {
+    position: relative;
+    align-self: stretch;          /* li spans the full nav height, so the */
+    display: flex;                /* panel hangs off the bar, not the link, */
+    align-items: center;          /* and there is no dead gap to cross */
+  }
+
+  /* The global sheet sets .nav-link and svg to display:block, which drops the
+     caret onto its own line. Make this one link a flex row instead. */
+  .has-mega .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .nav-caret {
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-fast);
+  }
+  .has-mega:hover .nav-caret,
+  .has-mega:focus-within .nav-caret { transform: rotate(180deg); opacity: 1; }
+
+  .mega {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 60;
+    padding-top: 18px;            /* transparent hover bridge under the bar */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-out), visibility 0s linear 220ms;
+  }
+  .has-mega:focus-within > .mega { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+  @media (hover: hover) {
+    .has-mega:hover > .mega { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+  }
+
+  .mega-panel {
+    position: relative;
+    overflow: hidden;
+    width: min(720px, calc(100vw - 32px));
+    padding: 12px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(13, 17, 23, 0.94);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    box-shadow:
+      0 28px 64px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(245, 158, 11, 0.08) inset;
+    transform-origin: top center;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.975);
+    clip-path: inset(0 0 46% 0);
+    transition:
+      opacity 180ms var(--ease-out),
+      transform 420ms var(--ease-spring),
+      clip-path 440ms var(--ease-out);
+  }
+  .has-mega:focus-within .mega-panel,
+  .has-mega:hover .mega-panel {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0);
+  }
+
+  /* One-shot amber sheen across the panel as it opens */
+  .mega-sheen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    opacity: 0;
+    pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(245, 158, 11, 0.14), transparent);
+  }
+  .has-mega:hover .mega-sheen,
+  .has-mega:focus-within .mega-sheen { animation: mega-sweep 900ms var(--ease-out) 140ms 1; }
+  @keyframes mega-sweep {
+    0%   { opacity: 0; transform: translateX(-120%); }
+    30%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(320%); }
+  }
+
+  .mega-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .mega-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 260ms var(--ease-out),
+      transform 380ms var(--ease-spring),
+      background var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .has-mega:hover .mega-item,
+  .has-mega:focus-within .mega-item {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(90ms + var(--i) * 45ms), calc(90ms + var(--i) * 45ms), 0s, 0s;
+  }
+
+  .mega-item:hover,
+  .mega-item:focus-visible {
+    background: rgba(245, 158, 11, 0.09);
+    border-color: rgba(245, 158, 11, 0.3);
+  }
+
+  .mega-ico {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(245, 158, 11, 0.22);
+    background: rgba(245, 158, 11, 0.08);
+    transition: transform var(--dur-base) var(--ease-spring), background var(--dur-fast), border-color var(--dur-fast);
+  }
+  .mega-item:hover .mega-ico,
+  .mega-item:focus-visible .mega-ico {
+    transform: rotate(-5deg) scale(1.07);
+    background: rgba(245, 158, 11, 0.16);
+    border-color: rgba(245, 158, 11, 0.48);
+  }
+
+  .mega-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+  .mega-title {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: var(--weight-semibold);
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.94);
+    transition: color var(--dur-fast);
+  }
+  .mega-item:hover .mega-title,
+  .mega-item:focus-visible .mega-title { color: var(--amber); }
+
+  .mega-blurb {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  .mega-arrow {
+    flex-shrink: 0;
+    margin-left: auto;
+    color: var(--amber);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--dur-fast), transform var(--dur-base) var(--ease-out);
+  }
+  .mega-item:hover .mega-arrow,
+  .mega-item:focus-visible .mega-arrow { opacity: 1; transform: translateX(0); }
+
+  .mega-foot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: 10px;
+    padding: 10px 10px 2px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 260ms var(--ease-out), transform 380ms var(--ease-spring);
+  }
+  .has-mega:hover .mega-foot,
+  .has-mega:focus-within .mega-foot { opacity: 1; transform: none; transition-delay: 350ms; }
+
+  .mega-all {
+    font-size: 0.8125rem;
+    font-weight: var(--weight-medium);
+    color: rgba(255, 255, 255, 0.62);
+    text-decoration: none;
+    transition: color var(--dur-fast);
+  }
+  .mega-all:hover { color: var(--amber); }
+
+  .mega-cta {
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    background: rgba(245, 158, 11, 0.12);
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    font-weight: var(--weight-semibold);
+    color: var(--amber);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
+  }
+  .mega-cta:hover { background: rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.7); transform: translateY(-1px); }
+
+  /* ── Light theme ─────────────────────────────────────────── */
+  :global([data-theme="light"]) .mega-panel {
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(28, 28, 30, 0.09);
+    box-shadow: 0 28px 64px rgba(28, 28, 30, 0.16), 0 0 0 1px rgba(245, 158, 11, 0.06) inset;
+  }
+  :global([data-theme="light"]) .mega-title { color: var(--charcoal-900); }
+  :global([data-theme="light"]) .mega-blurb { color: var(--charcoal-600); }
+  :global([data-theme="light"]) .mega-all   { color: var(--charcoal-600); }
+  :global([data-theme="light"]) .mega-all:hover { color: var(--amber-600); }
+  :global([data-theme="light"]) .mega-cta   { color: var(--amber-700); }
+  :global([data-theme="light"]) .mega-foot  { border-top-color: rgba(28, 28, 30, 0.09); }
+  :global([data-theme="light"]) .mega-item:hover .mega-title,
+  :global([data-theme="light"]) .mega-item:focus-visible .mega-title { color: var(--amber-600); }
+
+  /* ── Below the desktop nav breakpoint the mobile menu takes over ── */
+  @media (max-width: 900px) {
+    .mega, .nav-caret { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mega-panel, .mega-item, .mega-foot, .mega-ico, .mega-arrow, .nav-caret {
+      transition-duration: 1ms !important;
+      transition-delay: 0s !important;
+    }
+    .mega-panel { transform: none; clip-path: inset(0); }
+    .mega-item, .mega-foot { transform: none; }
+    .mega-sheen { animation: none !important; }
+  }
 </style>
+
+<!-- Services mega-menu: Escape closes it for keyboard users -->
+<script is:inline>
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!document.querySelector('.has-mega:focus-within')) return;
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  });
+</script>
