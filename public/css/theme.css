@@ -89,6 +89,7 @@
 [data-theme="dark"] .ind-pain,
 [data-theme="dark"] .ind-svc,
 [data-theme="dark"] .ind-faq,
+[data-theme="dark"] .ind-card,
 [data-theme="dark"] .offer-card,
 [data-theme="dark"] .pricing-card,
 [data-theme="dark"] .pkg-card,
@@ -226,6 +227,12 @@
 [data-theme="dark"] .ind-svc-d,
 [data-theme="dark"] .ind-faq-a { color: rgba(255, 255, 255, 0.60) !important; }
 [data-theme="dark"] .ind-scenario-body { color: rgba(255, 255, 255, 0.82) !important; }
+
+/* Industries index (/industries) — page-scoped styles use charcoal-900/600/500 */
+[data-theme="dark"] .ind-card-t { color: rgba(255, 255, 255, 0.94) !important; }
+[data-theme="dark"] .ind-card-p,
+[data-theme="dark"] .ind-card-trades { color: rgba(255, 255, 255, 0.60) !important; }
+[data-theme="dark"] .ind-card-go { color: var(--amber) !important; }
 
 /* Light-mode: ensure the dark-section text stays light (no change needed),
    and keep the page heroes/cta bands dark in BOTH themes (already hard dark). */
