@@ -86,6 +86,9 @@
 /* ─── Cards & surfaces ────────────────────────────────────── */
 [data-theme="dark"] .svc-card,
 [data-theme="dark"] .svc-detail,
+[data-theme="dark"] .ind-pain,
+[data-theme="dark"] .ind-svc,
+[data-theme="dark"] .ind-faq,
 [data-theme="dark"] .offer-card,
 [data-theme="dark"] .pricing-card,
 [data-theme="dark"] .pkg-card,
@@ -214,6 +217,15 @@
 /* FAQs page Q&A — page-scoped styles use charcoal-900/600 */
 [data-theme="dark"] .qa-q      { color: #fff !important; }
 [data-theme="dark"] .qa-a p    { color: rgba(255, 255, 255, 0.7) !important; }
+
+/* Per-industry pages (/industries/<slug>) — page-scoped styles use charcoal-900/600/800 */
+[data-theme="dark"] .ind-pain-t,
+[data-theme="dark"] .ind-svc-t,
+[data-theme="dark"] .ind-faq-q { color: rgba(255, 255, 255, 0.94) !important; }
+[data-theme="dark"] .ind-pain-d,
+[data-theme="dark"] .ind-svc-d,
+[data-theme="dark"] .ind-faq-a { color: rgba(255, 255, 255, 0.60) !important; }
+[data-theme="dark"] .ind-scenario-body { color: rgba(255, 255, 255, 0.82) !important; }
 
 /* Light-mode: ensure the dark-section text stays light (no change needed),
    and keep the page heroes/cta bands dark in BOTH themes (already hard dark). */

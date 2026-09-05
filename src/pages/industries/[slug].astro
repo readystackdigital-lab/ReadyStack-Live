@@ -1,0 +1,255 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { INDUSTRIES, type Industry } from "../../data/industries";
+
+export const getStaticPaths = (() =>
+  INDUSTRIES.map((industry) => ({
+    params: { slug: industry.slug },
+    props: { industry },
+  }))) satisfies GetStaticPaths;
+
+const { industry } = Astro.props as { industry: Industry };
+
+const siteUrl = "https://readystackdigital.com";
+const pageUrl = `${siteUrl}/industries/${industry.slug}`;
+
+// FAQPage: the primary lever for being quoted by ChatGPT and Perplexity.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: industry.faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `${industry.name} websites and AI reception`,
+  serviceType: industry.name,
+  url: pageUrl,
+  provider: { "@id": `${siteUrl}/#business` },
+  areaServed: { "@type": "Country", name: "Australia" },
+  audience: {
+    "@type": "BusinessAudience",
+    name: industry.name,
+    description: industry.trades.join(", "),
+  },
+};
+
+// Explicit crumbs: BaseLayout's auto-derivation would flatten the nested path
+// into a single crumb.
+const breadcrumb = [
+  { name: "Home", path: "/" },
+  { name: "Industries", path: "/industries" },
+  { name: industry.name, path: `/industries/${industry.slug}` },
+];
+---
+
+<BaseLayout
+  title={industry.metaTitle}
+  description={industry.metaDescription}
+  breadcrumb={breadcrumb}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} is:inline />
+  </Fragment>
+
+  <Header />
+  <main id="main-content">
+    <PageHero
+      eyebrow={industry.name}
+      title={industry.heroTitle}
+      sub={industry.heroSub}
+      primaryLabel="Get My Free Quote"
+      primaryHref="/estimate"
+      secondaryLabel="Book a Call"
+      secondaryHref="/contact"
+    />
+
+    <section class="section" aria-labelledby="ind-problem-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Sound familiar</div>
+          <h2 id="ind-problem-heading" class="section-h2">Where the work leaks out</h2>
+        </div>
+        <div class="ind-pain-grid">
+          {industry.painPoints.map((p) => (
+            <article class="ind-pain reveal">
+              <h3 class="ind-pain-t">{p.t}</h3>
+              <p class="ind-pain-d">{p.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" aria-labelledby="ind-scenario-heading">
+      <div class="container">
+        <div class="ind-scenario reveal">
+          <div class="eyebrow">{industry.scenario.heading}</div>
+          <h2 id="ind-scenario-heading" class="ind-scenario-body">{industry.scenario.body}</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="ind-services-heading">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">What we build</div>
+          <h2 id="ind-services-heading" class="section-h2">Built around how you actually work</h2>
+        </div>
+        <div class="ind-svc-grid">
+          {industry.services.map((s) => (
+            <article class="ind-svc reveal">
+              <h3 class="ind-svc-t">{s.t}</h3>
+              <p class="ind-svc-d">{s.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" aria-labelledby="ind-faq-heading">
+      <div class="container-sm">
+        <div class="section-head reveal">
+          <div class="eyebrow">Questions</div>
+          <h2 id="ind-faq-heading" class="section-h2">What {industry.navLabel.toLowerCase()} ask us</h2>
+        </div>
+        <div class="ind-faqs reveal">
+          {industry.faqs.map((f) => (
+            <details class="ind-faq">
+              <summary class="ind-faq-q">
+                <span>{f.q}</span>
+                <svg class="ind-faq-chev" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <p class="ind-faq-a">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      eyebrow="Ready when you are"
+      heading={`Let's get your ${industry.navLabel.toLowerCase()} business winning more work`}
+      sub="Tell us what you need and we will come back with a fixed price. No obligation, no lock-in."
+      primaryLabel="Get My Free Quote"
+      primaryHref="/estimate"
+      secondaryLabel="Talk to us"
+      secondaryHref="/contact"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .ind-pain-grid,
+  .ind-svc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .ind-pain,
+  .ind-svc {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-xl);
+    background: var(--white);
+    box-shadow: var(--nm-raised);
+    transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .ind-pain:hover,
+  .ind-svc:hover {
+    border-color: var(--amber);
+    transform: translateY(-3px);
+  }
+
+  .ind-pain-t,
+  .ind-svc-t {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: var(--weight-semibold);
+    line-height: 1.3;
+    color: var(--charcoal-900);
+  }
+  .ind-pain-d,
+  .ind-svc-d {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--charcoal-600);
+  }
+
+  .ind-scenario {
+    max-width: 62ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .ind-scenario-body {
+    margin-top: var(--space-3);
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+    font-weight: var(--weight-light);
+    line-height: 1.55;
+    color: var(--charcoal-800);
+  }
+
+  .ind-faqs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .ind-faq {
+    border: 1px solid var(--charcoal-200);
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    padding: var(--space-4) var(--space-5);
+  }
+  .ind-faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: var(--weight-medium);
+    color: var(--charcoal-900);
+  }
+  .ind-faq-q::-webkit-details-marker { display: none; }
+  .ind-faq-chev {
+    flex-shrink: 0;
+    color: var(--amber);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .ind-faq[open] .ind-faq-chev { transform: rotate(180deg); }
+  .ind-faq-a {
+    margin-top: var(--space-3);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--charcoal-600);
+  }
+
+  @media (max-width: 860px) {
+    .ind-pain-grid,
+    .ind-svc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ind-pain, .ind-svc, .ind-faq-chev { transition: none; }
+    .ind-pain:hover, .ind-svc:hover { transform: none; }
+  }
+</style>
