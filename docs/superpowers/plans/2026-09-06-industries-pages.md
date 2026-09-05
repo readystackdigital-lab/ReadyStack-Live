@@ -615,6 +615,19 @@ In `public/css/theme.css`, find the selector list containing `[data-theme="dark"
 [data-theme="dark"] .ind-faq,
 ```
 
+Then, near the other `[data-theme="dark"]` text rules in the same file, add the
+text colours for this page. Without these the copy renders dark-on-dark:
+
+```css
+[data-theme="dark"] .ind-pain-t,
+[data-theme="dark"] .ind-svc-t,
+[data-theme="dark"] .ind-faq-q { color: rgba(255, 255, 255, 0.94) !important; }
+[data-theme="dark"] .ind-pain-d,
+[data-theme="dark"] .ind-svc-d,
+[data-theme="dark"] .ind-faq-a { color: rgba(255, 255, 255, 0.60) !important; }
+[data-theme="dark"] .ind-scenario-body { color: rgba(255, 255, 255, 0.82) !important; }
+```
+
 - [ ] **Step 3: Build and confirm all six routes are generated**
 
 Run:
@@ -837,20 +850,13 @@ In `public/css/theme.css`, in the same selector list edited in Task 3, add:
 [data-theme="dark"] .ind-card,
 ```
 
-Then confirm the amber link colour still reads on dark. In the same file, near the other `[data-theme="dark"]` text rules, add:
+Then, near the other `[data-theme="dark"]` text rules, add the card's text colours:
 
 ```css
 [data-theme="dark"] .ind-card-t { color: rgba(255, 255, 255, 0.94) !important; }
 [data-theme="dark"] .ind-card-p,
 [data-theme="dark"] .ind-card-trades { color: rgba(255, 255, 255, 0.60) !important; }
 [data-theme="dark"] .ind-card-go { color: var(--amber) !important; }
-[data-theme="dark"] .ind-pain-t,
-[data-theme="dark"] .ind-svc-t { color: rgba(255, 255, 255, 0.94) !important; }
-[data-theme="dark"] .ind-pain-d,
-[data-theme="dark"] .ind-svc-d,
-[data-theme="dark"] .ind-faq-a { color: rgba(255, 255, 255, 0.60) !important; }
-[data-theme="dark"] .ind-faq-q { color: rgba(255, 255, 255, 0.94) !important; }
-[data-theme="dark"] .ind-scenario-body { color: rgba(255, 255, 255, 0.82) !important; }
 ```
 
 - [ ] **Step 3: Build and confirm the index renders with six links**
@@ -911,8 +917,15 @@ const industryMenu = INDUSTRIES.map((i) => ({
 
 Replace the `primaryNav`, `desktopNav` and `mobileNav` declarations with:
 
+Declare the item types first, immediately above `primaryNav`. Without an explicit
+annotation TypeScript infers a union from the mixed array literal, and `item.menu`
+then fails `npx astro check` with "Property 'menu' does not exist".
+
 ```ts
-const primaryNav = [
+type MegaEntry = { label: string; href: string; blurb: string; icon: string };
+type NavItem = { label: string; href: string; menu?: MegaEntry[] };
+
+const primaryNav: NavItem[] = [
   { label: "Services", href: "/services", menu: serviceMenu },
   { label: "Industries", href: "/industries", menu: industryMenu },
   { label: "Pricing", href: "/packages" },
