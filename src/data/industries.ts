@@ -74,9 +74,9 @@ export const INDUSTRIES: Industry[] = [
     cardPromise: 'Physios, chiros and dentists: fill the gaps no-shows leave and give your front desk back to the people standing at it.',
     icon: `<rect x="5" y="4" width="16" height="19" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M10 3.5h6a1 1 0 011 1V7H9V4.5a1 1 0 011-1z" stroke="#F59E0B" stroke-width="1.3" fill="rgba(245,158,11,.08)" stroke-linejoin="round"/><path d="M13 11.5v6.5M9.8 14.8h6.4" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>`,
     metaTitle: 'AI Reception & Websites for Clinics | ReadyStack',
-    metaDescription: 'Websites and 24/7 AI reception for Australian physios, chiros, dentists and psychologists. Fewer no-shows and a front desk free for patients.',
+    metaDescription: 'A gap left by a no-show cannot be sold twice. AI reception, reminders and after-hours booking for Australian physios, chiros, dentists and psychologists.',
     heroTitle: 'Fewer no-shows, and a front desk that is <span class="text-amber">free again</span>',
-    heroSub: 'Your reception is one person. Between arrivals, rebookings and the phone, something has to give. We build the site patients judge you on and the agent that answers while your team is with someone.',
+    heroSub: 'Your reception is one person, and the phone rings anyway. An agent picks up mid consult, reminders go out the night before, and the site keeps taking bookings long after you have locked up.',
     painPoints: [
       { t: 'The gap where a booking used to be', d: 'A late cancellation on a Thursday afternoon is clinic time you cannot sell twice. Ringing down a waitlist between patients is the job nobody has time for, so the room sits empty and the practitioner does paperwork.' },
       { t: 'Your receptionist is on hold, not on the desk', d: 'One caller moving an appointment can hold up the front desk while three patients wait to be checked in. Everything that keeps the day running stops for the phone.' },
@@ -110,9 +110,9 @@ export const INDUSTRIES: Industry[] = [
     cardPromise: 'Hair salons, day spas and nail technicians: take the booking without putting the client down.',
     icon: `<circle cx="7.5" cy="19" r="2.6" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="18.5" cy="19" r="2.6" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M9.2 16.9L19.5 4.5M16.8 16.9L6.5 4.5" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/><circle cx="13" cy="13.2" r="1.1" fill="#F59E0B"/>`,
     metaTitle: 'Salon & Spa Websites With 24/7 Booking | ReadyStack',
-    metaDescription: 'Websites and 24/7 AI booking for Australian hair salons, day spas, massage therapists and nail technicians. Fill cancellations, answer late-night DMs.',
+    metaDescription: 'Booked out and cannot pick up? We answer the phone, the chat and the late DMs for Australian hair salons, day spas and nail technicians, and fill the gaps.',
     heroTitle: 'Bookings that keep coming while your <span class="text-amber">hands are full</span>',
-    heroSub: 'You are on the floor for nine hours. We build the site clients book from and the agent that answers the phone, the chat and the enquiries that arrive long after you have swept up.',
+    heroSub: 'Nine hours on the floor and the enquiries do not stop for any of it. The phone, the website chat and the message that lands at eleven at night all get answered, priced and booked before you finish the blow-dry.',
     painPoints: [
       { t: 'The phone goes while you are mid colour', d: 'You cannot stop halfway through a foil to take a booking. It rings out, the caller tries the salon two doors down, and you never find out it happened.' },
       { t: 'The enquiry that came in at 11pm', d: 'A lot of the questions you get arrive after close, on Instagram, asking what a balayage costs and how long it takes. By the time you are at the basin the next morning they have booked somewhere that replied.' },
@@ -179,7 +179,7 @@ export const INDUSTRIES: Industry[] = [
     cardPromise: 'Sales agents and property managers: be the one who answers first, including at ten on a Saturday night.',
     icon: `<path d="M3.5 12.4L13 4l9.5 8.4" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 11.6V21a1 1 0 001 1h12a1 1 0 001-1v-9.4" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)" stroke-linejoin="round"/><path d="M10.8 22v-5.4a2.2 2.2 0 014.4 0V22" stroke="#F59E0B" stroke-width="1.4" stroke-linejoin="round"/>`,
     metaTitle: 'AI Reception for Real Estate Agencies | ReadyStack',
-    metaDescription: 'Websites and 24/7 AI reception for Australian sales agents, property managers and strata managers. Catch appraisals and after-hours maintenance.',
+    metaDescription: 'Appraisals at eleven on a Saturday, maintenance at nine at night: an AI receptionist that answers both, for Australian sales agents and property managers.',
     heroTitle: 'The agency that answers first wins the <span class="text-amber">listing</span>',
     heroSub: 'Saturday morning is opens, Saturday afternoon is paperwork, and the appraisal enquiry that came in at eleven goes to whoever rings back first. We make sure that is you.',
     painPoints: [
@@ -214,7 +214,7 @@ export const INDUSTRIES: Industry[] = [
     metaTitle: 'Websites & AI Intake for Professional Firms | ReadyStack',
     metaDescription: 'Websites, search visibility and AI intake for Australian accountants, lawyers, bookkeepers and mortgage brokers. Look established, keep billing.',
     heroTitle: 'Look as established as you <span class="text-amber">already are</span>',
-    heroSub: 'Clients decide whether to trust you before they ever ring. We build the website that carries that decision, and the intake agent that answers so your billable hours stay billable.',
+    heroSub: 'Most of the decision is made before the phone rings. Your website has to win that part on its own, and an intake agent takes it from there, qualifying the matter and booking it while you are still in a meeting.',
     painPoints: [
       { t: 'You look smaller than you are', d: 'A twelve year old firm with three partners and a site built on a free template reads as a side business. The prospect who was referred to you checks anyway, and the check is where you lose them.' },
       { t: 'Intake calls land in the middle of billable work', d: 'A new enquiry is always worth taking, and it always arrives two hours into a return or a day before a filing deadline. Answering costs you the thread. Not answering costs you the client.' },
