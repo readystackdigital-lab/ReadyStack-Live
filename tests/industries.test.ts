@@ -10,6 +10,7 @@ const allText = (i: Industry): string[] => [
   ...i.painPoints.flatMap((p) => [p.t, p.d]),
   ...i.services.flatMap((s) => [s.t, s.d]),
   ...i.faqs.flatMap((f) => [f.q, f.a]),
+  ...i.questions,
 ];
 
 test('every slug is unique', () => {
@@ -49,6 +50,18 @@ test('each industry has 3 to 5 pain points', () => {
   for (const i of INDUSTRIES) {
     assert.ok(i.painPoints.length >= 3 && i.painPoints.length <= 5,
       `${i.slug} has ${i.painPoints.length} pain points`);
+  }
+});
+
+test('each industry has 8 to 12 marquee questions that fit a chip', () => {
+  for (const i of INDUSTRIES) {
+    assert.ok(i.questions.length >= 8 && i.questions.length <= 12,
+      `${i.slug} has ${i.questions.length} questions`);
+    // The problem marquee splits these across three rows, and a chip that
+    // wraps breaks the row rhythm.
+    for (const q of i.questions) {
+      assert.ok(q.length <= 56, `${i.slug} question is ${q.length} chars: ${q}`);
+    }
   }
 });
 

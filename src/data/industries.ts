@@ -12,6 +12,14 @@
    failure mode this whole section exists to avoid.
 ═══════════════════════════════════════════════════════════ */
 
+/* Glyph shown at the top of each problem-grid cell. A small shared set,
+   reused across industries: 24 pain points do not need 24 drawings, and a
+   repeated glyph across two industries reads as a shared symptom, not a slip.
+   Rendered from GLYPHS in pages/industries/[slug].astro. */
+export type PainGlyph =
+  | 'missed-call' | 'after-hours' | 'silence' | 'rank' | 'stale'
+  | 'empty-slot' | 'price' | 'credibility' | 'surge';
+
 export type Industry = {
   slug: string;
   name: string;
@@ -23,7 +31,8 @@ export type Industry = {
   metaDescription: string;   // <= 160 chars
   heroTitle: string;         // may contain <span class="text-amber">
   heroSub: string;
-  painPoints: { t: string; d: string }[];   // 3 to 5
+  painPoints: { t: string; d: string; g: PainGlyph }[];   // 3 to 5
+  questions: string[];       // 8 to 12 short worries, scrolled above the problem grid
   scenario: { heading: string; body: string };
   services: { t: string; d: string }[];     // 3 to 5, chosen and ordered for this industry
   faqs: { q: string; a: string }[];         // 3 to 5
@@ -43,10 +52,22 @@ export const INDUSTRIES: Industry[] = [
     heroTitle: 'Websites and AI reception for <span class="text-amber">tradies</span>',
     heroSub: 'You cannot answer the phone with your hands full. We build the website that gets you found and the AI receptionist that picks up while you are on the tools.',
     painPoints: [
-      { t: 'The phone rings while you are under a sink', d: 'Every missed call is a customer who rings the next name on the list. You find out hours later, and by then the job is gone.' },
-      { t: 'Quotes go out and go quiet', d: 'You send the number, the customer goes cold, and chasing it up is the job that never gets done at the end of a long day.' },
-      { t: 'A competitor turns up above you', d: 'Someone searching for an emergency plumber in Sydney or a sparky in Brisbane picks from the first few results. If you are not there, you are not in the running.' },
-      { t: 'Your online presence is a Facebook page from 2019', d: 'Customers checking whether you are legitimate find a stale page, no pricing and no way to book. Plenty of them stop right there.' },
+      { t: 'The phone rings while you are under a sink', d: 'Every missed call is a customer who rings the next name on the list. You find out hours later, and by then the job is gone.', g: 'missed-call' },
+      { t: 'Quotes go out and go quiet', d: 'You send the number, the customer goes cold, and chasing it up is the job that never gets done at the end of a long day.', g: 'silence' },
+      { t: 'A competitor turns up above you', d: 'Someone searching for an emergency plumber in Sydney or a sparky in Brisbane picks from the first few results. If you are not there, you are not in the running.', g: 'rank' },
+      { t: 'Your online presence is a Facebook page from 2019', d: 'Customers checking whether you are legitimate find a stale page, no pricing and no way to book. Plenty of them stop right there.', g: 'stale' },
+    ],
+    questions: [
+      'Who answers when I am on the tools?',
+      'How many jobs did I miss this week?',
+      'Why do my quotes go quiet?',
+      'Why is my competitor above me on Google?',
+      'Do I need more than a Facebook page?',
+      'How do customers check I am licensed?',
+      'What does a proper trade website cost?',
+      'Can a customer book me without ringing?',
+      'Why am I invisible in my own suburb?',
+      'How do I look bigger than a one man band?',
     ],
     scenario: {
       heading: 'A Tuesday, 6:40pm',
@@ -78,9 +99,21 @@ export const INDUSTRIES: Industry[] = [
     heroTitle: 'Fewer no-shows, and a front desk that is <span class="text-amber">free again</span>',
     heroSub: 'Your reception is one person, and the phone rings anyway. An agent picks up mid consult, reminders go out the night before, and the site keeps taking bookings long after you have locked up.',
     painPoints: [
-      { t: 'The gap where a booking used to be', d: 'A late cancellation on a Thursday afternoon is clinic time you cannot sell twice. Ringing down a waitlist between patients is the job nobody has time for, so the room sits empty and the practitioner does paperwork.' },
-      { t: 'Your receptionist is on hold, not on the desk', d: 'One caller moving an appointment can hold up the front desk while three patients wait to be checked in. Everything that keeps the day running stops for the phone.' },
-      { t: 'People book clinics at nine at night', d: 'A back that has been getting worse all week does not wait for business hours. If a Melbourne physio down the road takes that booking online at nine at night and you take a message at nine the next morning, the patient is already theirs.' },
+      { t: 'The gap where a booking used to be', d: 'A late cancellation on a Thursday afternoon is clinic time you cannot sell twice. Ringing down a waitlist between patients is the job nobody has time for, so the room sits empty and the practitioner does paperwork.', g: 'empty-slot' },
+      { t: 'Your receptionist is on hold, not on the desk', d: 'One caller moving an appointment can hold up the front desk while three patients wait to be checked in. Everything that keeps the day running stops for the phone.', g: 'missed-call' },
+      { t: 'People book clinics at nine at night', d: 'A back that has been getting worse all week does not wait for business hours. If a Melbourne physio down the road takes that booking online at nine at night and you take a message at nine the next morning, the patient is already theirs.', g: 'after-hours' },
+    ],
+    questions: [
+      'Who answers when reception is with a patient?',
+      'How many bookings did that hold music cost me?',
+      'Can patients book at nine at night?',
+      'How do I fill a last minute cancellation?',
+      'Why do people choose the clinic down the road?',
+      'Is my booking system putting patients off?',
+      'How do new patients find my clinic?',
+      'What can I say online without breaking AHPRA rules?',
+      'How do I cut the no show rate?',
+      'Does my site work on a phone?',
     ],
     scenario: {
       heading: 'A Thursday, 8:15pm',
@@ -114,11 +147,23 @@ export const INDUSTRIES: Industry[] = [
     heroTitle: 'Bookings that keep coming while your <span class="text-amber">hands are full</span>',
     heroSub: 'Nine hours on the floor and the enquiries do not stop for any of it. The phone, the website chat and the message that lands at eleven at night all get answered, priced and booked before you finish the blow-dry.',
     painPoints: [
-      { t: 'The phone goes while you are mid colour', d: 'You cannot stop halfway through a foil to take a booking. It rings out, the caller tries the salon two doors down, and you never find out it happened.' },
-      { t: 'The enquiry that came in at 11pm', d: 'A lot of the questions you get arrive after close, on Instagram, asking what a balayage costs and how long it takes. By the time you are at the basin the next morning they have booked somewhere that replied.' },
-      { t: 'A cancellation at 9am leaves a hole at 11', d: 'One text saying they cannot make it and there is a two hour hole in the middle of the day. Filling it means ringing regulars between clients, which is exactly when you have no hands free.' },
-      { t: 'The grid has not moved in six weeks', d: 'People look at your feed before they book, and a quiet account reads as a quiet salon. Shooting and posting properly is real work, and it is the first thing dropped when the day runs long.' },
-      { t: 'Nobody can find what anything costs', d: 'Someone new looking for a day spa in Brisbane wants to know what a 60 minute massage runs to before they call. If your prices live in a link tree or nowhere at all, they keep scrolling.' },
+      { t: 'The phone goes while you are mid colour', d: 'You cannot stop halfway through a foil to take a booking. It rings out, the caller tries the salon two doors down, and you never find out it happened.', g: 'missed-call' },
+      { t: 'The enquiry that came in at 11pm', d: 'A lot of the questions you get arrive after close, on Instagram, asking what a balayage costs and how long it takes. By the time you are at the basin the next morning they have booked somewhere that replied.', g: 'after-hours' },
+      { t: 'A cancellation at 9am leaves a hole at 11', d: 'One text saying they cannot make it and there is a two hour hole in the middle of the day. Filling it means ringing regulars between clients, which is exactly when you have no hands free.', g: 'empty-slot' },
+      { t: 'The grid has not moved in six weeks', d: 'People look at your feed before they book, and a quiet account reads as a quiet salon. Shooting and posting properly is real work, and it is the first thing dropped when the day runs long.', g: 'stale' },
+      { t: 'Nobody can find what anything costs', d: 'Someone new looking for a day spa in Brisbane wants to know what a 60 minute massage runs to before they call. If your prices live in a link tree or nowhere at all, they keep scrolling.', g: 'price' },
+    ],
+    questions: [
+      'Who answers while I am mid colour?',
+      'What happens to the 11pm enquiry?',
+      'How do I fill a 9am cancellation?',
+      'Why has my grid not moved in weeks?',
+      'Where do clients find my price list?',
+      'Can someone book without messaging me?',
+      'How do I stop double bookings?',
+      'Why do new clients never come back?',
+      'How do I show my best work?',
+      'Do I need a site if I have Instagram?',
     ],
     scenario: {
       heading: 'A Sunday, 10:20pm',
@@ -149,10 +194,22 @@ export const INDUSTRIES: Industry[] = [
     heroTitle: 'Keep the feed alive and the functions <span class="text-amber">booked</span>',
     heroSub: 'The best enquiry of the week lands mid service and nobody sees it until Monday. We keep you visible, keep the menu readable, and keep the enquiries answered while the pass is on.',
     painPoints: [
-      { t: 'The function enquiry lands mid service', d: 'A table of thirty for a birthday in three weeks is the best email you will get all week, and it arrives at quarter past seven on a Friday. By the time it is opened on Monday the organiser has booked the venue that answered on Saturday.' },
-      { t: 'Your menu is a photo of a PDF', d: 'Somebody standing on the footpath cannot pinch and zoom their way through it, and they cannot tell whether you do anything gluten free. They walk to the next window and read that one instead.' },
-      { t: 'You are invisible to the person a block away', d: 'Most people choose where to eat by searching from wherever they are standing. Old hours, three photos and a menu link that goes nowhere keeps you out of that decision no matter how good the food is.' },
-      { t: 'The last post was a Christmas special', d: 'A feed that stopped in December reads as a venue that might have closed. Keeping it moving means shooting and writing on a day you are already short one on the floor.' },
+      { t: 'The function enquiry lands mid service', d: 'A table of thirty for a birthday in three weeks is the best email you will get all week, and it arrives at quarter past seven on a Friday. By the time it is opened on Monday the organiser has booked the venue that answered on Saturday.', g: 'missed-call' },
+      { t: 'Your menu is a photo of a PDF', d: 'Somebody standing on the footpath cannot pinch and zoom their way through it, and they cannot tell whether you do anything gluten free. They walk to the next window and read that one instead.', g: 'price' },
+      { t: 'You are invisible to the person a block away', d: 'Most people choose where to eat by searching from wherever they are standing. Old hours, three photos and a menu link that goes nowhere keeps you out of that decision no matter how good the food is.', g: 'rank' },
+      { t: 'The last post was a Christmas special', d: 'A feed that stopped in December reads as a venue that might have closed. Keeping it moving means shooting and writing on a day you are already short one on the floor.', g: 'stale' },
+    ],
+    questions: [
+      'Who takes the function enquiry mid service?',
+      'Can people read my menu on a phone?',
+      'Why does the cafe up the road come up first?',
+      'How do I take bookings without a phone call?',
+      'When did I last post anything?',
+      'How do I fill a quiet Tuesday?',
+      'Do people know we do catering?',
+      'Where do my Google reviews come from?',
+      'Is my menu even up to date online?',
+      'How do I get found by someone walking past?',
     ],
     scenario: {
       heading: 'A Friday, 7:15pm',
@@ -183,9 +240,21 @@ export const INDUSTRIES: Industry[] = [
     heroTitle: 'The agency that answers first wins the <span class="text-amber">listing</span>',
     heroSub: 'Saturday morning is opens, Saturday afternoon is paperwork, and the appraisal enquiry that came in at eleven goes to whoever rings back first. We make sure that is you.',
     painPoints: [
-      { t: 'Every enquiry lands while you are standing at an open', d: 'Ten until one on a Saturday is when buyers ring, and it is the exact window you spend holding a folder open at a front door. The calls stack up and the callbacks start on Sunday night.' },
-      { t: 'Maintenance does not keep office hours', d: 'A hot water system goes in a rental at nine at night. The tenant rings the office, hits a message bank, rings again at seven the next morning angry, and the owner hears about it from the tenant before they hear about it from you.' },
-      { t: 'An appraisal goes to whoever replies first', d: 'An owner in Perth watching the neighbours sell contacts three agencies on a Sunday night. Two of them ring back Monday afternoon. The one that answered within the hour has the appraisal booked, and the other two are pitching against a decision already made.' },
+      { t: 'Every enquiry lands while you are standing at an open', d: 'Ten until one on a Saturday is when buyers ring, and it is the exact window you spend holding a folder open at a front door. The calls stack up and the callbacks start on Sunday night.', g: 'missed-call' },
+      { t: 'Maintenance does not keep office hours', d: 'A hot water system goes in a rental at nine at night. The tenant rings the office, hits a message bank, rings again at seven the next morning angry, and the owner hears about it from the tenant before they hear about it from you.', g: 'after-hours' },
+      { t: 'An appraisal goes to whoever replies first', d: 'An owner in Perth watching the neighbours sell contacts three agencies on a Sunday night. Two of them ring back Monday afternoon. The one that answered within the hour has the appraisal booked, and the other two are pitching against a decision already made.', g: 'rank' },
+    ],
+    questions: [
+      'Who answers while I am at an open?',
+      'How many appraisals went to whoever replied first?',
+      'What happens to a burst pipe at midnight?',
+      'How do owners find me instead of the big brand?',
+      'Can a landlord log a repair without ringing?',
+      'Why does my competitor rank above me?',
+      'How do I look established without a shopfront?',
+      'Where do my rental enquiries actually go?',
+      'How do I follow up every appraisal lead?',
+      'Does my site show the suburbs I cover?',
     ],
     scenario: {
       heading: 'A Saturday, 11:05am',
@@ -216,11 +285,23 @@ export const INDUSTRIES: Industry[] = [
     heroTitle: 'Look as established as you <span class="text-amber">already are</span>',
     heroSub: 'Most of the decision is made before the phone rings. Your website has to win that part on its own, and an intake agent takes it from there, qualifying the matter and booking it while you are still in a meeting.',
     painPoints: [
-      { t: 'You look smaller than you are', d: 'A twelve year old firm with three partners and a site built on a free template reads as a side business. The prospect who was referred to you checks anyway, and the check is where you lose them.' },
-      { t: 'Intake calls land in the middle of billable work', d: 'A new enquiry is always worth taking, and it always arrives two hours into a return or a day before a filing deadline. Answering costs you the thread. Not answering costs you the client.' },
-      { t: 'Tax time outruns the phone', d: 'For a few weeks a year the enquiries come in faster than anyone can pick up, and almost every one is a first contact from somebody who will simply ring the next firm on the list.' },
-      { t: 'The enquiry form asks for everything and gets nothing', d: 'Nine fields, a captcha and no sign of what happens next. People who would have spent two minutes on the phone with you abandon the form instead, and you never know they were there.' },
-      { t: 'Referrals look you up before they call', d: 'Whoever sent them has done the selling for you. What decides it is what they find when they search your name at ten on a Sunday, and for a lot of firms that is one profile page and a phone number.' },
+      { t: 'You look smaller than you are', d: 'A twelve year old firm with three partners and a site built on a free template reads as a side business. The prospect who was referred to you checks anyway, and the check is where you lose them.', g: 'credibility' },
+      { t: 'Intake calls land in the middle of billable work', d: 'A new enquiry is always worth taking, and it always arrives two hours into a return or a day before a filing deadline. Answering costs you the thread. Not answering costs you the client.', g: 'missed-call' },
+      { t: 'Tax time outruns the phone', d: 'For a few weeks a year the enquiries come in faster than anyone can pick up, and almost every one is a first contact from somebody who will simply ring the next firm on the list.', g: 'surge' },
+      { t: 'The enquiry form asks for everything and gets nothing', d: 'Nine fields, a captcha and no sign of what happens next. People who would have spent two minutes on the phone with you abandon the form instead, and you never know they were there.', g: 'silence' },
+      { t: 'Referrals look you up before they call', d: 'Whoever sent them has done the selling for you. What decides it is what they find when they search your name at ten on a Sunday, and for a lot of firms that is one profile page and a phone number.', g: 'rank' },
+    ],
+    questions: [
+      'Do I look smaller than I actually am?',
+      'Who answers while I am with a client?',
+      'How do I survive the tax time phone spike?',
+      'Why does nobody finish my enquiry form?',
+      'What do referrals see when they look me up?',
+      'How do I qualify a lead before the first call?',
+      'Should I publish my fees?',
+      'How do I compete with a national firm?',
+      'Can clients book a consult themselves?',
+      'Is my site winning me any work?',
     ],
     scenario: {
       heading: 'A Wednesday in July, 7:50pm',

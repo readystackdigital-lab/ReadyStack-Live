@@ -86,7 +86,6 @@
 /* ─── Cards & surfaces ────────────────────────────────────── */
 [data-theme="dark"] .svc-card,
 [data-theme="dark"] .svc-detail,
-[data-theme="dark"] .ind-pain,
 [data-theme="dark"] .ind-svc,
 [data-theme="dark"] .ind-faq,
 [data-theme="dark"] .ind-card,
@@ -227,6 +226,19 @@
 [data-theme="dark"] .ind-svc-d,
 [data-theme="dark"] .ind-faq-a { color: rgba(255, 255, 255, 0.60) !important; }
 [data-theme="dark"] .ind-scenario-body { color: rgba(255, 255, 255, 0.82) !important; }
+
+/* Problem section (adapted from cnippet.dev "vercep-feature-1"): dashed rules
+   on the page ground, amber-tinted question chips, muted glyphs. Page-scoped
+   light values live in pages/industries/[slug].astro. */
+/* html[...] not [...]: Astro scopes the page rule to .ind-problem[data-astro-cid],
+   which ties this on specificity, and the component <style> is injected after
+   this sheet. The type selector breaks the tie without !important. */
+html[data-theme="dark"] .ind-problem {
+  --ind-rule: rgba(255, 255, 255, 0.16);
+  --ind-chip-bg: rgba(245, 158, 11, 0.13);
+  --ind-chip-fg: rgba(255, 255, 255, 0.74);
+  --ind-glyph: rgba(245, 158, 11, 0.85);
+}
 
 /* Industries index (/industries) — page-scoped styles use charcoal-900/600/500 */
 [data-theme="dark"] .ind-card-t { color: rgba(255, 255, 255, 0.94) !important; }

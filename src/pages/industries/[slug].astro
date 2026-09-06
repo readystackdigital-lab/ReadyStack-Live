@@ -5,7 +5,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import PageHero from "../../components/PageHero.astro";
 import CtaBand from "../../components/CtaBand.astro";
-import { INDUSTRIES, type Industry } from "../../data/industries";
+import { INDUSTRIES, type Industry, type PainGlyph } from "../../data/industries";
 
 export const getStaticPaths = (() =>
   INDUSTRIES.map((industry) => ({
@@ -14,6 +14,26 @@ export const getStaticPaths = (() =>
   }))) satisfies GetStaticPaths;
 
 const { industry } = Astro.props as { industry: Industry };
+
+// Problem-grid glyphs. 24x24, currentColor, so one drawing serves the amber
+// active state and the muted idle state in both themes.
+const GLYPHS: Record<PainGlyph, string> = {
+  "missed-call": `<path d="M3.8 5.2a1.6 1.6 0 0 1 1.6-1.4h2.3a1 1 0 0 1 1 .8l.7 3a1 1 0 0 1-.5 1.1l-1.6.9a12 12 0 0 0 5.1 5.1l.9-1.6a1 1 0 0 1 1.1-.5l3 .7a1 1 0 0 1 .8 1v2.3a1.6 1.6 0 0 1-1.7 1.6A15 15 0 0 1 3.8 5.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M15.5 3.5 21 9M21 3.5 15.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`,
+  "after-hours": `<circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 7.2V12l3.2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.4 3.4a3.4 3.4 0 0 0 3 3 3.4 3.4 0 0 1-3 1.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  silence: `<path d="M3.5 6.4A2.4 2.4 0 0 1 6 4h12a2.4 2.4 0 0 1 2.5 2.4v7A2.4 2.4 0 0 1 18 15.8h-6.2L7 19.4v-3.6H6a2.4 2.4 0 0 1-2.5-2.4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M9 10h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".45"/>`,
+  rank: `<path d="M4 20V13h4v7M10 20V8h4v12M16 20v-4.5h4V20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M3 20h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 9.5 9 5l3.5 2.6L20 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".45"/>`,
+  stale: `<rect x="3.5" y="4.8" width="17" height="15.7" rx="2.4" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M3.5 9.6h17M8 3.2v3.2M16 3.2v3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="m9.5 13.8 5 4.2M14.5 13.8l-5 4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>`,
+  "empty-slot": `<rect x="3.5" y="4.8" width="17" height="15.7" rx="2.4" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M3.5 9.6h17M8 3.2v3.2M16 3.2v3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="7" y="12.5" width="10" height="4.6" rx="1.2" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.4 2.2" fill="none"/>`,
+  price: `<path d="M20.3 12.4 12.4 20.3a1.7 1.7 0 0 1-2.4 0l-6.2-6.2a1.7 1.7 0 0 1-.5-1.3l.4-5.6a1.7 1.7 0 0 1 1.6-1.6l5.6-.4a1.7 1.7 0 0 1 1.3.5l6.2 6.2a1.7 1.7 0 0 1 0 2.4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M8.3 7.6a.9.9 0 1 0 0 .1" stroke="currentColor" stroke-width="1.5"/><path d="M12.2 12.1a1.5 1.5 0 1 1 2 1.4c-.6.2-1 .7-1 1.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none"/>`,
+  credibility: `<path d="M12 2.8 4 6.2v5.6c0 4.6 3.4 8.7 8 9.8 4.6-1.1 8-5.2 8-9.8V6.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M9 11.8h6M9 15h3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>`,
+  surge: `<path d="M3 20h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 16.5c2.6 0 3.4-4 5.5-4s2.6 4 4.8 4 3.2-7.5 5.7-7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M17.4 4.4 20.6 6l-1.4 3.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+};
+
+// Three marquee rows, as in the reference. Each row is rendered twice so the
+// CSS loop can translate a full copy width and meet itself seamlessly.
+const qs = industry.questions;
+const cut = Math.ceil(qs.length / 3);
+const qRows = [qs.slice(0, cut), qs.slice(cut, cut * 2), qs.slice(cut * 2)];
 
 const siteUrl = "https://readystackdigital.com";
 const pageUrl = `${siteUrl}/industries/${industry.slug}`;
@@ -75,17 +95,42 @@ const breadcrumb = [
       secondaryHref="/contact"
     />
 
-    <section class="section" aria-labelledby="ind-problem-heading">
+    <section class="section ind-problem" aria-labelledby="ind-problem-heading">
       <div class="container">
-        <div class="section-head reveal">
+        <div class="section-head ind-problem-head reveal">
           <div class="eyebrow">Sound familiar</div>
           <h2 id="ind-problem-heading" class="section-h2">Where the work leaks out</h2>
+          <p class="section-subline">
+            These are the questions we hear from {industry.trades[0]} and {industry.trades[1]}
+            every week. Every one of them is a job that nearly got away.
+          </p>
         </div>
-        <div class="ind-pain-grid">
+      </div>
+
+      <!-- The worries, scrolling. A decorative restatement of the mood the grid
+           below spells out properly, so it is hidden from assistive tech rather
+           than read as three rows of disembodied questions. -->
+      <div class="ind-marquee" aria-hidden="true">
+        {qRows.map((row, r) => (
+          <div class="ind-mq-row">
+            <div class="ind-mq-track" style={`--dur:${[46, 53, 43][r]}s`} data-reverse={r === 1 ? "" : undefined}>
+              {[...row, ...row].map((q) => <span class="ind-mq-chip">{q}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="container">
+        <div class="ind-pain-grid" style={`--n:${industry.painPoints.length}`}>
           {industry.painPoints.map((p) => (
             <article class="ind-pain reveal">
-              <h3 class="ind-pain-t">{p.t}</h3>
-              <p class="ind-pain-d">{p.d}</p>
+              <span class="ind-pain-ico" aria-hidden="true">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" set:html={GLYPHS[p.g]}></svg>
+              </span>
+              <div class="ind-pain-copy">
+                <h3 class="ind-pain-t">{p.t}</h3>
+                <p class="ind-pain-d">{p.d}</p>
+              </div>
             </article>
           ))}
         </div>
@@ -152,14 +197,12 @@ const breadcrumb = [
 </BaseLayout>
 
 <style>
-  .ind-pain-grid,
   .ind-svc-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-5);
   }
 
-  .ind-pain,
   .ind-svc {
     display: flex;
     flex-direction: column;
@@ -171,16 +214,13 @@ const breadcrumb = [
     box-shadow: var(--nm-raised);
     transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
   }
-  .ind-pain:hover,
   .ind-svc:hover {
     border-color: var(--amber);
     transform: translateY(-3px);
   }
 
-  .ind-pain:last-child:nth-child(odd),
   .ind-svc:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
-  .ind-pain-t,
   .ind-svc-t {
     font-family: var(--font-display);
     font-size: 1.0625rem;
@@ -188,7 +228,6 @@ const breadcrumb = [
     line-height: 1.3;
     color: var(--charcoal-900);
   }
-  .ind-pain-d,
   .ind-svc-d {
     font-size: 0.9375rem;
     line-height: 1.6;
@@ -258,13 +297,131 @@ const breadcrumb = [
     color: var(--charcoal-600);
   }
 
+
+  /* ══ Problem section ═══════════════════════════════════════
+     Adapted from "vercep-feature-1" (cnippet.dev, 21st.dev): a centred head,
+     three marquee rows carrying the audience's own questions, then a grid
+     ruled with dashed lines where every cell is a glyph, a deliberate gap,
+     and the copy sitting at the foot. Palette and type are this site's, not
+     the reference's warm yellow. Dark values live in theme.css. */
+
+  .ind-problem {
+    --ind-rule: rgba(28, 28, 30, 0.16);
+    --ind-chip-bg: #FBEBC8;
+    --ind-chip-fg: var(--charcoal-700);
+    --ind-glyph: var(--amber-700);
+  }
+
+  .ind-problem-head { margin-bottom: var(--space-5); }
+
+  /* ── Question marquee ─────────────────────────────────────
+     Full bleed, so it sits outside .container. Each row holds its questions
+     twice and the loop translates exactly half the track, which is why the
+     track carries a trailing gap: without it the halves are a gap apart and
+     the seam jumps once per cycle. */
+  .ind-marquee {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: var(--space-7);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  }
+  .ind-mq-row { overflow: hidden; }
+  .ind-mq-track {
+    display: flex;
+    gap: 9px;
+    padding-right: 9px;
+    width: max-content;
+    animation: ind-mq var(--dur, 46s) linear infinite;
+  }
+  .ind-mq-track[data-reverse] { animation-direction: reverse; }
+  @keyframes ind-mq { to { transform: translateX(-50%); } }
+
+  .ind-mq-chip {
+    flex: none;
+    padding: 7px 13px;
+    border-radius: 0;                  /* the reference's square tags, against a site of pills */
+    background: var(--ind-chip-bg);
+    color: var(--ind-chip-fg);
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  /* ── Dashed problem grid ──────────────────────────────────
+     One row on desktop, however many pain points the industry has (3 to 5),
+     with the type stepping down as the columns narrow. */
+  .ind-pain-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+    border-top: 1px dashed var(--ind-rule);
+  }
+
+  .ind-pain {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-5) var(--space-5) var(--space-6);
+  }
+  .ind-pain + .ind-pain { border-left: 1px dashed var(--ind-rule); }
+
+  .ind-pain-ico {
+    display: block;
+    color: var(--ind-glyph);
+    /* The reference's long drop from glyph to copy is the whole gesture: the
+       cell reads as a held pause, not a tight card. */
+    margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .ind-pain-ico svg { display: block; }
+
+  .ind-pain-copy { margin-top: auto; }
+
+  .ind-pain-t {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 0.55rem + 1.05vw, 1.5rem);
+    font-weight: var(--weight-semibold);
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    color: var(--charcoal-900);
+  }
+  .ind-pain-d {
+    margin-top: var(--space-3);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--charcoal-600);
+  }
+  /* Five across is tight; give that layout a smaller headline. */
+  .ind-pain-grid[style*="--n:5"] .ind-pain-t { font-size: clamp(1.0625rem, 0.5rem + 0.85vw, 1.3125rem); }
+
+  /* Once the row wraps, every cell closes with a rule, which reads as a ladder
+     and sidesteps the "which cells are in the last row" arithmetic (that gets
+     it wrong for an odd count in two columns). Left rules must be cancelled
+     through .ind-pain + .ind-pain, not .ind-pain: the sibling selector above
+     outranks a bare class and would otherwise keep painting them. */
+  @media (max-width: 1080px) {
+    .ind-pain-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ind-pain { border-bottom: 1px dashed var(--ind-rule); }
+    .ind-pain + .ind-pain { border-left: 1px dashed var(--ind-rule); }
+    /* Must repeat the sibling combinator: Astro scopes every compound, so
+       `.ind-pain + .ind-pain` carries two [data-astro-cid] and outranks a
+       plain `.ind-pain:nth-child(odd)`, which would leave a stray rule down
+       the left of every wrapped row. */
+    .ind-pain + .ind-pain:nth-child(odd) { border-left: 0; }
+  }
+  @media (max-width: 700px) {
+    .ind-pain-grid { grid-template-columns: 1fr; }
+    .ind-pain + .ind-pain { border-left: 0; }
+    .ind-pain-ico { margin-bottom: var(--space-5); }
+  }
+
   @media (max-width: 860px) {
-    .ind-pain-grid,
     .ind-svc-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ind-pain, .ind-svc, .ind-faq-chev { transition: none; }
-    .ind-pain:hover, .ind-svc:hover { transform: none; }
+    .ind-svc, .ind-faq-chev { transition: none; }
+    .ind-svc:hover { transform: none; }
+    .ind-mq-track { animation: none; }
   }
 </style>
