@@ -48,10 +48,11 @@ const primaryNav: NavItem[] = [
 const desktopNav = primaryNav.filter((item) =>
   ["Services", "Industries", "Pricing", "How It Works", "Contact", "Blog"].includes(item.label)
 );
-const mobileNav = [
-  { label: "Home", href: "/" },
-  ...primaryNav,
-];
+// The sticky mobile tab bar (MobileTabBar.astro) carries Home, Services,
+// Industries, Pricing and Contact permanently, so the drawer holds only the
+// remainder. Nine links made it 559px tall on an 812px viewport; this is four.
+const tabBarLabels = new Set(["Services", "Industries", "Pricing", "Contact"]);
+const mobileNav = primaryNav.filter((item) => !tabBarLabels.has(item.label));
 
 const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(href + "/");

@@ -1,6 +1,7 @@
 ---
 import CookieConsent from "../components/CookieConsent.astro";
 import CartDrawer from "../components/CartDrawer.astro";
+import MobileTabBar from "../components/MobileTabBar.astro";
 
 export interface Props {
   title?: string;
@@ -310,6 +311,7 @@ const breadcrumbSchema = {
 
   <CookieConsent />
   <CartDrawer />
+  <MobileTabBar />
 
   <script src="/js/main.js" is:inline></script>
   <script src="/js/animations.js" is:inline></script>

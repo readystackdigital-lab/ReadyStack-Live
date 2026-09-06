@@ -1,0 +1,279 @@
+---
+/* ═══════════════════════════════════════════════════════════
+   MobileTabBar.astro — sticky bottom nav for phones/tablets.
+
+   Adapted from the "Expandable Tabs" pattern (Victor Welander,
+   21st.dev): a pill of icon-only tabs where the selected one
+   expands to icon + label. The reference is React + framer-motion;
+   this is the same motion in pure CSS (grid-template-columns
+   0fr → 1fr on a spring curve), so it ships zero JavaScript.
+
+   Selection is the current route, so there is no open/close state
+   to manage and no click-outside handler to collapse.
+
+   MUST render as a direct child of <body>. #site-header is fixed
+   AND transformed, which makes position:fixed descendants resolve
+   against the header instead of the viewport (that is why
+   #mobile-menu rides up with the bar on scroll).
+═══════════════════════════════════════════════════════════ */
+
+const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
+
+type Tab = { label: string; href: string; icon: string };
+
+// Five highest-intent destinations. The separator splits "browse"
+// from "get in touch", mirroring the reference's tab grouping.
+// Everything else (How It Works, FAQs, Social, Blog) stays in the
+// header's hamburger, which is trimmed to exactly that remainder.
+const browse: Tab[] = [
+  {
+    label: "Home", href: "/",
+    icon: `<path d="M3.5 10.6 12 3.8l8.5 6.8V20a1 1 0 0 1-1 1h-4.6v-6H9.1v6H4.5a1 1 0 0 1-1-1v-9.4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/>`,
+  },
+  {
+    label: "Services", href: "/services",
+    icon: `<path d="M12 3 3.2 7.4 12 11.8l8.8-4.4L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/><path d="M3.2 12.2 12 16.6l8.8-4.4M3.2 16.8 12 21.2l8.8-4.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>`,
+  },
+  {
+    label: "Industries", href: "/industries",
+    icon: `<path d="M2.8 21h18.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M6 21V6.6a1 1 0 0 1 .62-.93l5-2a1 1 0 0 1 1.38.93V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/><path d="M13 11.4l4.4 1.76a1 1 0 0 1 .6.93V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/>`,
+  },
+  {
+    label: "Pricing", href: "/packages",
+    icon: `<path d="M20.4 12.6 12.6 20.4a1.8 1.8 0 0 1-2.55 0l-6.45-6.45a1.8 1.8 0 0 1-.52-1.4l.38-5.72a1.8 1.8 0 0 1 1.68-1.68l5.72-.38a1.8 1.8 0 0 1 1.4.52l6.45 6.45a1.8 1.8 0 0 1 0 2.55Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/><circle cx="8.7" cy="8.7" r="1.55" stroke="currentColor" stroke-width="1.6" fill="none"/>`,
+  },
+];
+
+const reach: Tab[] = [
+  {
+    label: "Contact", href: "/contact",
+    icon: `<path d="M20.8 11.6a7.9 7.9 0 0 1-8.4 7.9 8.6 8.6 0 0 1-3.55-.72L4.2 20.4l1.42-4.15A7.9 7.9 0 0 1 4.6 11.6 7.9 7.9 0 0 1 12.7 3.7a7.9 7.9 0 0 1 8.1 7.9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none"/>`,
+  },
+];
+
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+---
+
+<nav id="mobile-tabs" aria-label="Primary mobile navigation">
+  <ul class="mtabs-bar" role="list">
+    {browse.map((t) => (
+      <li>
+        <a href={t.href} class="mtab" aria-current={isActive(t.href) ? "page" : undefined}>
+          <svg class="mtab-ico" width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true" set:html={t.icon}></svg>
+          <span class="mtab-label"><span>{t.label}</span></span>
+        </a>
+      </li>
+    ))}
+
+    <li class="mtab-sep" aria-hidden="true"></li>
+
+    {reach.map((t) => (
+      <li>
+        <a href={t.href} class="mtab" aria-current={isActive(t.href) ? "page" : undefined}>
+          <svg class="mtab-ico" width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true" set:html={t.icon}></svg>
+          <span class="mtab-label"><span>{t.label}</span></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style is:global>
+  /* Hidden until the desktop nav collapses. 900px is the breakpoint that
+     already hides .nav-links and shows the hamburger (layout.css), so the
+     bar and the drawer swap in together and there is never a gap where
+     neither carries the primary links. */
+  #mobile-tabs { display: none; }
+
+  @media (max-width: 900px) {
+    :root {
+      /* Pill (54px) + its bottom inset (12px) + breathing room.
+         Every other bottom-anchored element offsets from this. */
+      --mtabs-clear: 76px;
+    }
+
+    #mobile-tabs {
+      display: block;
+      position: fixed;
+      left: 50%;
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 860;                       /* over .floating-contact-actions (850), under #cart-drawer (1200) */
+      /* width:auto on a fixed box with left:50% shrink-to-fits against the
+         remaining half-viewport, which squeezes the expanded label. Size to
+         content instead and let max-width handle genuinely narrow phones. */
+      width: max-content;
+      max-width: calc(100vw - 24px);
+    }
+
+    .mtabs-bar {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin: 0;
+      padding: 5px 6px;
+      list-style: none;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(13, 17, 23, 0.86);
+      backdrop-filter: blur(26px) saturate(180%);
+      -webkit-backdrop-filter: blur(26px) saturate(180%);
+      box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(245, 158, 11, 0.07) inset;
+    }
+
+    .mtabs-bar > li { display: flex; min-width: 0; }
+
+    .mtab-sep {
+      width: 1px;
+      height: 22px;
+      margin: 0 4px;
+      flex: none;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 1px;
+    }
+
+    .mtab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      min-width: 44px;                    /* 44x44 touch target */
+      min-height: 44px;
+      padding: 0 11px;
+      border-radius: var(--radius-full);
+      color: rgba(255, 255, 255, 0.62);
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition:
+        color var(--dur-base) var(--ease-out),
+        background var(--dur-base) var(--ease-out),
+        gap 420ms var(--ease-spring);
+    }
+
+    .mtab-ico { flex: none; display: block; }
+
+    /* The expansion. grid 0fr → 1fr is the CSS equivalent of framer-motion's
+       animate-to-auto-width, and it springs on the site's own easing curve. */
+    .mtab-label {
+      display: grid;
+      grid-template-columns: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-columns 420ms var(--ease-spring),
+        opacity 200ms var(--ease-out);
+    }
+
+    .mtab-label > span {
+      overflow: hidden;
+      min-width: 0;
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* Selected = the current route. Also fires on :active so a tap reads as
+       expansion immediately, before the next page paints. */
+    .mtab[aria-current="page"],
+    .mtab:active {
+      gap: 7px;
+      color: var(--amber);
+      background: rgba(245, 158, 11, 0.15);
+    }
+
+    .mtab[aria-current="page"] .mtab-label,
+    .mtab:active .mtab-label {
+      grid-template-columns: 1fr;
+      opacity: 1;
+    }
+
+    .mtab:focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 2px;
+    }
+
+    /* ─── Light theme ─────────────────────────────────────── */
+    [data-theme="light"] .mtabs-bar {
+      border-color: rgba(28, 28, 30, 0.10);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 16px 40px rgba(28, 28, 30, 0.18);
+    }
+    [data-theme="light"] .mtab-sep { background: rgba(28, 28, 30, 0.14); }
+    [data-theme="light"] .mtab { color: var(--charcoal-600); }
+    [data-theme="light"] .mtab[aria-current="page"],
+    [data-theme="light"] .mtab:active {
+      color: var(--amber-700);            /* --amber is only 2.15:1 on white */
+      background: rgba(245, 158, 11, 0.16);
+    }
+
+    /* ─── Very narrow phones (≤360px) ──────────────────────
+       At 320px the longest label ("Industries") overruns by ~7px.
+       The 44px touch target is the floor and stays, so the space
+       comes off the icon and the type instead. */
+    @media (max-width: 360px) {
+      #mobile-tabs { max-width: calc(100vw - 16px); }
+      .mtabs-bar { gap: 1px; padding: 5px 4px; }
+      .mtab { padding: 0 8px; }
+      .mtab-sep { margin: 0; }
+      .mtab-ico { width: 19px; height: 19px; }
+      .mtab-label > span { font-size: 0.6875rem; }
+    }
+
+    /* ─── Clear the bottom lane ───────────────────────────────
+       Emma (#rs-stack-root, bottom:22px right:22px) and the pill
+       overlap horizontally on any phone, so the widget lifts above
+       it. html> raises specificity over the widget's own runtime
+       <style>, which lands after this sheet. */
+    html > body > #rs-stack-root {
+      bottom: calc(var(--mtabs-clear) + 10px + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Below 480px the widget re-anchors its OWN launcher to the bottom centre
+       (#rs-stack-bubble becomes position:fixed; left:50%; bottom:16px), which
+       is exactly the lane the pill now owns. Moving #rs-stack-root cannot fix
+       that, because the bubble is its own fixed box and is not laid out by the
+       root at all. Send it back to the right edge and lift it clear. The
+       widget's hover/active rules bake translateX(-50%) into their transforms,
+       so those have to be restated too or the button jumps left on touch.
+       Scoped to the widget's own 480px breakpoint on purpose: above it the
+       bubble is position:relative, where a bottom offset would stack on top
+       of the root's and shove the launcher into #back-to-top. */
+    @media (max-width: 480px) {
+      html > body > #rs-stack-root > #rs-stack-bubble {
+        left: auto;
+        right: 12px;
+        bottom: calc(var(--mtabs-clear) + 10px + env(safe-area-inset-bottom, 0px));
+        transform: none;
+      }
+      html > body > #rs-stack-root > #rs-stack-bubble:hover { transform: translateY(-2px); }
+      html > body > #rs-stack-root > #rs-stack-bubble:active { transform: scale(0.985); }
+    }
+
+    .floating-contact-actions {
+      bottom: calc(var(--mtabs-clear) + 10px + env(safe-area-inset-bottom, 0px));
+    }
+
+    #back-to-top {
+      bottom: calc(var(--mtabs-clear) + 76px + env(safe-area-inset-bottom, 0px));
+    }
+
+    #rs-cookie {
+      bottom: calc(var(--mtabs-clear) + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* Keep the footer's last row off the pill. Padding goes on #footer
+       rather than body so no strip of body gradient shows below it. */
+    #footer {
+      padding-bottom: calc(var(--mtabs-clear) + 16px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  @media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+    .mtab, .mtab-label { transition: none; }
+  }
+</style>
