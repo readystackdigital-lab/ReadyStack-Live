@@ -95,8 +95,8 @@ const breadcrumb = [
     <section class="section section-tinted" aria-labelledby="ind-scenario-heading">
       <div class="container">
         <div class="ind-scenario reveal">
-          <div class="eyebrow">{industry.scenario.heading}</div>
-          <h2 id="ind-scenario-heading" class="ind-scenario-body">{industry.scenario.body}</h2>
+          <h2 id="ind-scenario-heading" class="eyebrow ind-scenario-eyebrow">{industry.scenario.heading}</h2>
+          <p class="ind-scenario-body">{industry.scenario.body}</p>
         </div>
       </div>
     </section>
@@ -200,12 +200,24 @@ const breadcrumb = [
     margin-inline: auto;
     text-align: center;
   }
+  /* .eyebrow is styled for a <div>; on this <h2> the global h1-h6 rule
+     (public/css/base.css) still sets line-height: 1.1 because .eyebrow
+     never declares its own. Restore the inherited value (1.65, from
+     body) so promoting this label to a real heading doesn't shrink its
+     line box and pull the paragraph below it upward. */
+  .ind-scenario-eyebrow {
+    line-height: inherit;
+  }
   .ind-scenario-body {
     margin-top: var(--space-3);
     font-family: var(--font-display);
     font-size: clamp(1.125rem, 2.2vw, 1.5rem);
     font-weight: var(--weight-light);
     line-height: 1.55;
+    /* Was an <h2>, which picked up letter-spacing: -.02em from the global
+       h1-h6 rule; now a <p>, which that rule no longer touches. Declared
+       explicitly so the narrative keeps its previous tracking. */
+    letter-spacing: -.02em;
     color: var(--charcoal-800);
   }
 
