@@ -105,6 +105,26 @@ const isActive = (href: string) =>
          content instead and let max-width handle genuinely narrow phones. */
       width: max-content;
       max-width: calc(100vw - 24px);
+
+      /* Held back until the visitor has scrolled or touched something, so the
+         first view of a page is not part-covered by navigation. Any transform
+         here has to keep the translateX(-50%) that centres the bar.
+         visibility (not just opacity) so the links stay out of the tab order
+         and off screen readers while the bar is down. */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(calc(100% + 20px));
+      transition:
+        opacity 240ms var(--ease-out),
+        transform 420ms var(--ease-spring),
+        visibility 0s linear 240ms;
+    }
+
+    #mobile-tabs.is-revealed {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      transition-delay: 0s;
     }
 
     .mtabs-bar {
@@ -275,5 +295,44 @@ const isActive = (href: string) =>
 
   @media (max-width: 900px) and (prefers-reduced-motion: reduce) {
     .mtab, .mtab-label { transition: none; }
+    /* Still gated on interaction, it just appears rather than sliding up. */
+    #mobile-tabs { transition: none; }
   }
 </style>
+
+<script is:inline>
+  /* Reveal the bar on the first scroll or interaction, then stop listening.
+     It never hides again: this is a first-impression gate, not a scroll-away
+     bar. The bottom clearance other fixed elements reserve (--mtabs-clear)
+     is deliberately NOT gated with it, so Emma and the footer do not jump
+     when the bar arrives. */
+  (function () {
+    var bar = document.getElementById("mobile-tabs");
+    if (!bar) return;
+
+    function reveal() {
+      bar.classList.add("is-revealed");
+      events.forEach(function (name) {
+        window.removeEventListener(name, reveal);
+      });
+    }
+
+    // Reloaded or deep-linked partway down the page: the scroll already happened.
+    function revealIfScrolled() {
+      if (window.scrollY > 0) {
+        reveal();
+        return true;
+      }
+      return false;
+    }
+
+    var events = ["scroll", "pointerdown", "touchstart", "keydown", "focusin"];
+    if (revealIfScrolled()) return;
+
+    events.forEach(function (name) {
+      window.addEventListener(name, reveal, { passive: true, once: true });
+    });
+    // Browsers restore scroll position after parse without always firing scroll.
+    window.addEventListener("load", revealIfScrolled, { once: true });
+  })();
+</script>
