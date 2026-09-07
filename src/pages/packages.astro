@@ -11,6 +11,7 @@ const packages = [
     price: "799",
     sub: "one-time build, then $99/month to manage it",
     featured: true,
+    badge: "★ Where most people start",
     cartId: "landing",
     cartType: "page",
     blurb: "A one-page site that explains what you do and gets people enquiring, with an AI chat agent answering on it from the day it goes live.",
@@ -53,6 +54,8 @@ const aiTiers = [
     priceWord: "Free",
     sub: "with any website build, then $149/month",
     featured: false,
+    cartId: "ai-chat",
+    cartType: "ai",
     blurb: "Every website we build comes with an agent already on it, answering questions about your business and services the moment someone asks.",
     feats: [
       "No setup fee when we build your site",
@@ -70,6 +73,9 @@ const aiTiers = [
     price: "1,499",
     sub: "one-time setup, then $149/month",
     featured: true,
+    badge: "★ Most popular",
+    cartId: "ai-reception",
+    cartType: "ai",
     blurb: "Everything in Chat, and it answers the phone too. The one most businesses take, because most missed work is a missed call.",
     feats: [
       "Everything in Chat",
@@ -87,6 +93,8 @@ const aiTiers = [
     priceWord: "Let\u2019s talk",
     sub: "priced once we scope it with you",
     featured: false,
+    cartId: "ai-custom",
+    cartType: "ai",
     blurb: "Some jobs need more than answering. Tell us what keeps slipping through and we will build an agent for it.",
     feats: [
       "Chases quotes that went quiet",
@@ -98,6 +106,12 @@ const aiTiers = [
     ],
   },
 ];
+
+/* Card order on this page, reshuffled: the ways in sit together up top
+   (a free chat agent, a website, or an agent built for one job), and the
+   step-up plus the add-on sit below. Both grids render the same card. */
+const startHere = [aiTiers[0], packages[0], aiTiers[2]];
+const alsoAvailable = [aiTiers[1], packages[1]];
 
 const compare = [
   { f: "Plan type", v: ["One-time build", "Monthly", "Monthly"] },
@@ -141,36 +155,40 @@ const faqs = [
       secondaryHref="#compare"
     />
 
-    <section class="section section-tinted" aria-labelledby="pkg-heading">
+    <!-- Ways in: a free chat agent, a website, or an agent built for one job.
+         Carries id="ai-agent" because /packages#ai-agent is linked from the
+         hero and the homepage pricing band, and all three AI tiers read in
+         order from here down. -->
+    <section id="ai-agent" class="section section-tinted" aria-labelledby="pkg-heading">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">Choose your plan</div>
-          <h2 id="pkg-heading" class="section-h2">Start with a website that brings work in</h2>
-          <p class="section-subline">One-time build, then a monthly plan that keeps it fast, secure and visible. Add content when you want to stay in front of people between jobs. No lock-in contracts, and the estimate tool prices any number of pages in seconds.</p>
+          <div class="eyebrow">Start here</div>
+          <h2 id="pkg-heading" class="section-h2">Three ways to get moving</h2>
+          <p class="section-subline">A chat agent free with any build, a website from $799, or an agent built around the one job that keeps slipping. Take one, or take all three. No lock-in contracts, and the estimate tool prices any number of pages in seconds.</p>
         </div>
 
-        <div class="pkg-grid pkg-grid-duo">
-          {packages.map((p) => (
-            <div class={`pkg-card reveal ${p.featured ? "pkg-featured" : ""}`}>
-              {p.featured && <div class="pkg-badge">★ Where most people start</div>}
-              <div class="pkg-tag">{p.tag}</div>
-              <h3 class="pkg-name">{p.name}</h3>
+        <div class="pkg-grid">
+          {startHere.map((c, i) => (
+            <div class={`pkg-card reveal ${c.featured ? "pkg-featured" : ""} ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
+              {c.badge && <div class="pkg-badge">{c.badge}</div>}
+              <div class="pkg-tag">{c.tag}</div>
+              <h3 class="pkg-name">{c.name}</h3>
               <div class="pkg-price">
-                {p.price
-                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{p.price}</span></Fragment>
-                  : <span class="pkg-num pkg-num-word">{p.priceWord}</span>}
+                {c.price
+                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{c.price}</span></Fragment>
+                  : <span class="pkg-num pkg-num-word">{c.priceWord}</span>}
               </div>
-              <p class="pkg-monthly">{p.sub}</p>
-              <p class="pkg-blurb">{p.blurb}</p>
+              <p class="pkg-monthly">{c.sub}</p>
+              <p class="pkg-blurb">{c.blurb}</p>
               <ul class="feat-list pkg-feats">
-                {p.feats.map((f) => (
+                {c.feats.map((f) => (
                   <li>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke={p.featured ? "#F59E0B" : "#10B981"} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke={c.featured ? "#F59E0B" : "#10B981"} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     {f}
                   </li>
                 ))}
               </ul>
-              <button type="button" data-cart-add={p.cartId} data-cart-type={p.cartType} class={`btn btn-full ${p.featured ? "btn-amber" : "btn-outline"}`}>Add to cart</button>
+              <button type="button" data-cart-add={c.cartId} data-cart-type={c.cartType} class={`btn btn-full ${c.featured ? "btn-amber" : "btn-outline"}`}>Add to cart</button>
               <a href="/contact" class="pkg-talk">or talk to us first</a>
             </div>
           ))}
@@ -179,41 +197,41 @@ const faqs = [
       </div>
     </section>
 
-    <section id="ai-agent" class="section" aria-labelledby="ai-heading">
+    <section class="section" aria-labelledby="more-heading">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">AI Agent</div>
-          <h2 id="ai-heading" class="section-h2">Stop losing work to a missed call</h2>
-          <p class="section-subline">An AI agent trained on your business, answering while you are on a job, driving or asleep. Every website we build comes with one included. Move up when you want it answering the phone, or building something specific for your business.</p>
+          <div class="eyebrow">Step up and add on</div>
+          <h2 id="more-heading" class="section-h2">Answer every call, and stay visible between jobs</h2>
+          <p class="section-subline">Reception is where most businesses land once the site is live, because most missed work is a missed call. Content keeps you in front of people in between.</p>
         </div>
 
-        <div class="pkg-grid">
-          {aiTiers.map((t, i) => (
-            <div class={`pkg-card reveal ${t.featured ? "pkg-featured" : ""} ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
-              {t.featured && <div class="pkg-badge">★ Most popular</div>}
-              <div class="pkg-tag">{t.tag}</div>
-              <h3 class="pkg-name">{t.name}</h3>
+        <div class="pkg-grid pkg-grid-duo">
+          {alsoAvailable.map((c, i) => (
+            <div class={`pkg-card reveal ${c.featured ? "pkg-featured" : ""} ${i === 1 ? "reveal-delay-1" : i === 2 ? "reveal-delay-2" : ""}`}>
+              {c.badge && <div class="pkg-badge">{c.badge}</div>}
+              <div class="pkg-tag">{c.tag}</div>
+              <h3 class="pkg-name">{c.name}</h3>
               <div class="pkg-price">
-                {t.price
-                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{t.price}</span></Fragment>
-                  : <span class="pkg-num pkg-num-word">{t.priceWord}</span>}
+                {c.price
+                  ? <Fragment><span class="pkg-from">from</span><span class="pkg-sign">$</span><span class="pkg-num">{c.price}</span></Fragment>
+                  : <span class="pkg-num pkg-num-word">{c.priceWord}</span>}
               </div>
-              <p class="pkg-monthly">{t.sub}</p>
-              <p class="pkg-blurb">{t.blurb}</p>
+              <p class="pkg-monthly">{c.sub}</p>
+              <p class="pkg-blurb">{c.blurb}</p>
               <ul class="feat-list pkg-feats">
-                {t.feats.map((f) => (
+                {c.feats.map((f) => (
                   <li>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke={t.featured ? "#F59E0B" : "#10B981"} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8l3.5 3.5 7.5-7.5" stroke={c.featured ? "#F59E0B" : "#10B981"} stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     {f}
                   </li>
                 ))}
               </ul>
-              <button type="button" data-cart-add={t.id} data-cart-type="ai" class={`btn btn-full ${t.featured ? "btn-amber" : "btn-outline"}`}>Add to cart</button>
+              <button type="button" data-cart-add={c.cartId} data-cart-type={c.cartType} class={`btn btn-full ${c.featured ? "btn-amber" : "btn-outline"}`}>Add to cart</button>
               <a href="/contact" class="pkg-talk">or talk to us first</a>
             </div>
           ))}
         </div>
-        <p class="pkg-note reveal">Every tier includes hosting, monitoring and monthly retraining. No lock-in contract, and you can move between tiers as the business changes.</p>
+        <p class="pkg-note reveal">Every AI tier includes hosting, monitoring and monthly retraining. No lock-in contract, and you can move between tiers as the business changes.</p>
       </div>
     </section>
 
