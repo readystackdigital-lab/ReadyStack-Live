@@ -313,6 +313,7 @@ html[data-theme="dark"] .ind-problem {
 }
 
 [data-theme="light"] .text-amber,
+[data-theme="light"] .ind-card-go,
 [data-theme="light"] .blog-card-date,
 [data-theme="light"] .blog-card-cta,
 [data-theme="light"] .offer-kicker,
@@ -331,6 +332,7 @@ html[data-theme="dark"] .ind-problem {
 /* The page hero keeps its dark panel in both themes, so its amber words keep
    the brand fill — the light-surface override above would put dark rust on
    near-black, and would feed that colour to the particle-headline sampler. */
-[data-theme="light"] .page-hero-title .text-amber { color: var(--amber) !important; }
+[data-theme="light"] .page-hero-title .text-amber,
+[data-theme="light"] .cta-band-title .text-amber { color: var(--amber) !important; }
 
 [data-theme="light"] .tl-out { color: var(--green-700) !important; }

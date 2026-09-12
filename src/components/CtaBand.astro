@@ -32,7 +32,7 @@ const {
         <a href={primaryHref} class="btn btn-amber btn-lg">{primaryLabel}</a>
         <a href={secondaryHref} class="btn btn-page-ghost btn-lg">{secondaryLabel}</a>
       </div>
-      <p class="cta-band-trust">Australia-wide · No lock-in contracts · Plain-English support</p>
+      <p class="cta-band-trust"><span>Australia-wide</span> <span>No lock-in contracts</span> <span>Plain-English support</span></p>
     </div>
   </div>
 </section>
@@ -100,8 +100,12 @@ const {
     margin-top: clamp(1.5rem, 3vw, 2rem);
   }
   .cta-band-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 1.5rem;
     margin-top: 1.25rem;
     font-size: var(--text-sm);
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.55);
   }
 </style>

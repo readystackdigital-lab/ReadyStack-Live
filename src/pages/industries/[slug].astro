@@ -269,10 +269,12 @@ const breadcrumb = [
     border: 1px solid var(--charcoal-200);
     border-radius: var(--radius-lg);
     background: var(--white);
-    padding: var(--space-4) var(--space-5);
   }
+  /* Padding lives on the summary, not the card: the summary is the only
+     part <details> makes clickable, and at 26px it was a thin strip. */
   .ind-faq-q {
     display: flex;
+    padding: var(--space-4) var(--space-5);
     align-items: center;
     justify-content: space-between;
     gap: var(--space-4);
@@ -291,7 +293,7 @@ const breadcrumb = [
   }
   .ind-faq[open] .ind-faq-chev { transform: rotate(180deg); }
   .ind-faq-a {
-    margin-top: var(--space-3);
+    padding: 0 var(--space-5) var(--space-4);
     font-size: 0.9375rem;
     line-height: 1.65;
     color: var(--charcoal-600);
@@ -392,7 +394,16 @@ const breadcrumb = [
     color: var(--charcoal-600);
   }
   /* Five across is tight; give that layout a smaller headline. */
-  .ind-pain-grid[style*="--n:5"] .ind-pain-t { font-size: clamp(1.0625rem, 0.5rem + 0.85vw, 1.3125rem); }
+  @media (min-width: 1281px) {
+    .ind-pain-grid[style*="--n:5"] .ind-pain-t { font-size: clamp(1.0625rem, 0.5rem + 0.85vw, 1.3125rem); }
+  }
+  /* Five across only earns its width above 1280px: below that the copy ran
+     to 8 to 11 lines in a 160px column. Same ladder rules as the 1080 block. */
+  @media (max-width: 1280px) {
+    .ind-pain-grid[style*="--n:5"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ind-pain-grid[style*="--n:5"] .ind-pain { border-bottom: 1px dashed var(--ind-rule); }
+    .ind-pain-grid[style*="--n:5"] .ind-pain + .ind-pain:nth-child(odd) { border-left: 0; }
+  }
 
   /* Once the row wraps, every cell closes with a rule, which reads as a ladder
      and sidesteps the "which cells are in the last row" arithmetic (that gets

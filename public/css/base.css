@@ -59,9 +59,10 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Fluid type scale */
-  --text-xs: clamp(.7rem, .65rem + .25vw, .75rem);
-  --text-sm: clamp(.8rem, .75rem + .25vw, .875rem);
-  --text-base: clamp(.9rem, .85rem + .25vw, 1rem);
+  /* Fixed at the small end: phones need the full size, not 90% of it. */
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
   --text-md: clamp(1rem, .9rem + .5vw, 1.125rem);
   --text-lg: clamp(1.1rem, .95rem + .75vw, 1.25rem);
   --text-xl: clamp(1.2rem, 1rem + 1vw, 1.5rem);
