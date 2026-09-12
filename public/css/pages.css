@@ -87,8 +87,9 @@
 /* Hide the "Australia-wide" status pill once space gets tight */
 @media (max-width: 1300px) { .nav-status { display: none; } }
 
-/* Collapse to the mobile menu before the inline links can crowd the CTAs */
-@media (max-width: 1140px) {
+/* Collapse to the mobile menu before the inline links can crowd the CTAs.
+   1180, not 1140: the six link icons added ~85px to the row. */
+@media (max-width: 1180px) {
   .nav-links { display: none !important; }
   .nav-status { display: none !important; }
 
@@ -134,8 +135,10 @@
 .mobile-link:hover { color: var(--amber); }
 
 /* Hover/active pill behind links (overrides Header.astro light pill) */
-#site-header .nav-link::before { background: rgba(255, 255, 255, 0.07) !important; }
-#site-header .nav-link.active::before { background: rgba(245, 158, 11, 0.16) !important; }
+/* --ico is set inline on each link (Header.astro), so the pill tints to that
+   destination's hue. The rgba fallbacks are the pre-icon greys and amber. */
+#site-header .nav-link::before { background: color-mix(in srgb, var(--ico, #fff) 12%, transparent) !important; }
+#site-header .nav-link.active::before { background: color-mix(in srgb, var(--ico, #F59E0B) 18%, transparent) !important; }
 #site-header .nav-logo:hover .logo-adc { color: var(--amber-300) !important; }
 
 /* ─── Light / Dark theme toggle (animated switch) ─────────── */
