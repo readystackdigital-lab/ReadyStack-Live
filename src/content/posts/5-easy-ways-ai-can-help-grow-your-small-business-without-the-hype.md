@@ -5,7 +5,7 @@ updatedDate: 2026-09-26
 excerpt: Most AI advice for small business is either overwhelming or oversold.
   Here are five practical, low-effort ways Australian small businesses are
   actually using AI to save time and win more work.
-coverImage: /images/posts/how-ai-help-business.png
+coverImage: /images/posts/how-ai-help-business.webp
 draft: false
 ---
 Every second article about AI and small business is either breathless hype or a wall of tools you'll never have time to learn. Neither helps a busy owner who just wants to know: what can this actually do for me this week, without a big project or a steep learning curve?

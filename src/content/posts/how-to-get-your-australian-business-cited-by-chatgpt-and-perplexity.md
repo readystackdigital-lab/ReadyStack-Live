@@ -5,7 +5,7 @@ updatedDate: 2026-09-05
 excerpt: More Australians are asking AI assistants for recommendations instead
   of searching Google. Here's the practical, technical foundation that makes
   your business the one ChatGPT, Perplexity, and Google AI Overviews cite.
-coverImage: /images/posts/get-citedby-ai.png
+coverImage: /images/posts/get-citedby-ai.webp
 draft: false
 ---
 Someone in Sydney needs a conveyancer. Two years ago they typed "conveyancer near me" into Google and scrolled the results. Today, a growing number of them open ChatGPT or Perplexity and ask "who's a good conveyancer in the Inner West?" and act on the two or three names the AI gives back.

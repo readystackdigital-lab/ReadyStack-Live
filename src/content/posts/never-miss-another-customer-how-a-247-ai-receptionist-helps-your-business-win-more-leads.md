@@ -4,7 +4,7 @@ title: "Never Miss Another Customer: How a 24/7 AI Receptionist Helps Your
 publishedDate: 2026-07-12
 excerpt: Every missed call is a decision your customer makes - whether to keep
   waiting or contact someone else.
-coverImage: /images/posts/ai-receptionist.png
+coverImage: /images/posts/ai-receptionist.webp
 draft: false
 ---
 # Never Miss Another Customer: How a 24/7 AI Receptionist Helps Your Business Win More Leads

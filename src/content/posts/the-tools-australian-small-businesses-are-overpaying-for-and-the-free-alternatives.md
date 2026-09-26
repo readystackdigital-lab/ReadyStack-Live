@@ -6,7 +6,7 @@ updatedDate: 2026-08-15
 excerpt: A practical audit of the software subscriptions draining Australian SMB
   budgets, which free alternatives genuinely work, and which ones are false
   economy that will cost you more than the subscription.
-coverImage: /images/posts/overpaying-tools.png
+coverImage: /images/posts/overpaying-tools.webp
 draft: false
 ---
 The average Australian small business is running somewhere between eight and twenty software subscriptions, and most owners couldn't list them all from memory. That's the real problem. Not any single overpriced tool, but the accumulation of $15 and $30 and $49 a month charges that nobody ever revisits.

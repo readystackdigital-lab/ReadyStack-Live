@@ -5,7 +5,7 @@ updatedDate: 2026-08-22
 excerpt: Most Australian small business websites are still designed on a desktop
   and checked on a phone as an afterthought. Here's how to tell if yours works
   on mobile, and the fixes that matter most.
-coverImage: /images/posts/mobile-friendly-banner.png
+coverImage: /images/posts/mobile-friendly-banner.webp
 draft: false
 ---
 Most of the people looking at your website right now are holding a phone. For a typical Australian professional services business, mobile traffic sits somewhere between 55% and 70% of all visits, and for anything people search for on the go (a plumber, a physio, a cafe, a lawyer they need today) it's often higher.

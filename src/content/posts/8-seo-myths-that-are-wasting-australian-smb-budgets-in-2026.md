@@ -4,7 +4,7 @@ publishedDate: 2026-08-01
 excerpt: Australian small businesses lose thousands on SEO every year to
   outdated advice and predatory agencies. Here are the eight most expensive
   myths, and what actually works instead.
-coverImage: /images/posts/seo-myth-banner.png
+coverImage: /images/posts/seo-myth-banner.webp
 draft: false
 ---
 Australian small businesses spend hundreds of millions on SEO every year, and a large share of it produces nothing measurable. The problem isn't that SEO doesn't work. The problem is that most of what SMBs are sold as SEO is either outdated, incomplete, or actively harmful.

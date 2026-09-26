@@ -5,7 +5,7 @@ updatedDate: 2026-09-12
 excerpt: No-shows quietly drain thousands from Australian clinics and salons
   every year. Here's how moving bookings online, with reminders and deposits,
   reduces them, and what to look for in a booking system.
-coverImage: /images/posts/online-booking.png
+coverImage: /images/posts/online-booking.webp
 draft: false
 ---
 Every clinic and salon owner knows the feeling. A gap in the day where someone was meant to be. A chair or a treatment room sitting empty, staff paid regardless, and a client who could have taken that slot turned away last week because you were "fully booked".

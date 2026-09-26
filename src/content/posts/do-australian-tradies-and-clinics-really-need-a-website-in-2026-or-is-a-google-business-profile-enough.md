@@ -5,7 +5,7 @@ publishedDate: 2026-07-25
 excerpt: An honest look at when a Google Business Profile is enough for a trade
   or clinic business in Australia, and the point where going without a website
   starts costing you real work.
-coverImage: /images/posts/au-businesses-google:website.png
+coverImage: /images/posts/au-businesses-google-website.webp
 draft: false
 ---
 Most web designers won't admit this, but for a lot of trades and clinics a Google Business Profile really is doing most of the heavy lifting. If you're a solo plumber booked out three weeks in advance on word of mouth and a steady run of "near me" searches, a website is not the thing standing between you and more money.

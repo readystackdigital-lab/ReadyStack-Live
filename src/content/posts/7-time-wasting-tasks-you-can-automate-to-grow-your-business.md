@@ -7,7 +7,7 @@ excerpt: >-
 
   The more time spent on repetitive administration, the less time available for
   serving customers and growing the business.
-coverImage: /images/posts/blog-automation.png
+coverImage: /images/posts/blog-automation.webp
 draft: false
 ---
 # 7 Time-Wasting Tasks You Can Automate to Grow Your Business

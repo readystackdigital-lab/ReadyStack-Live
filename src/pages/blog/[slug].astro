@@ -1,4 +1,5 @@
 ---
+import { existsSync } from "node:fs";
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -36,11 +37,14 @@ const description = clip(
     .replace(/\s+/g, " ")
     .trim(),
 );
+// LinkedIn's crawler still skips WebP og:images, so shares use the cover's
+// JPEG twin when one sits beside it.
+const jpegTwin = post.data.coverImage?.replace(/\.webp$/i, ".jpg");
+const shareImage =
+  jpegTwin && existsSync(`public${jpegTwin}`) ? jpegTwin : post.data.coverImage;
 const ogImageAbs = encodeURI(
-  post.data.coverImage
-    ? (post.data.coverImage.startsWith("http")
-        ? post.data.coverImage
-        : `${siteUrl}${post.data.coverImage}`)
+  shareImage
+    ? (shareImage.startsWith("http") ? shareImage : `${siteUrl}${shareImage}`)
     : `${siteUrl}/assets/images/hero-dashboard.jpg`,
 );
 
@@ -76,7 +80,7 @@ const pageTitle =
 <BaseLayout
   title={pageTitle}
   description={description}
-  ogImage={post.data.coverImage}
+  ogImage={shareImage}
   ogType="article"
   breadcrumb={[
     { name: "Home", path: "/" },
