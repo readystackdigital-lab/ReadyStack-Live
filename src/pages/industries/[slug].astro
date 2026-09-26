@@ -36,7 +36,7 @@ const cut = Math.ceil(qs.length / 3);
 const qRows = [qs.slice(0, cut), qs.slice(cut, cut * 2), qs.slice(cut * 2)];
 
 const siteUrl = "https://readystackdigital.com";
-const pageUrl = `${siteUrl}/industries/${industry.slug}`;
+const pageUrl = `${siteUrl}/industries/${industry.slug}/`;
 
 // FAQPage: the primary lever for being quoted by ChatGPT and Perplexity.
 const faqSchema = {
@@ -68,8 +68,8 @@ const serviceSchema = {
 // into a single crumb.
 const breadcrumb = [
   { name: "Home", path: "/" },
-  { name: "Industries", path: "/industries" },
-  { name: industry.name, path: `/industries/${industry.slug}` },
+  { name: "Industries", path: "/industries/" },
+  { name: industry.name, path: `/industries/${industry.slug}/` },
 ];
 ---
 
@@ -90,9 +90,9 @@ const breadcrumb = [
       title={industry.heroTitle}
       sub={industry.heroSub}
       primaryLabel="Get My Free Quote"
-      primaryHref="/estimate"
+      primaryHref="/estimate/"
       secondaryLabel="Book a Call"
-      secondaryHref="/contact"
+      secondaryHref="/contact/"
     />
 
     <section class="section ind-problem" aria-labelledby="ind-problem-heading">
@@ -188,9 +188,9 @@ const breadcrumb = [
       heading={`Let's get your ${industry.navLabel.toLowerCase()} business winning more work`}
       sub="Tell us what you need and we will come back with a fixed price. No obligation, no lock-in."
       primaryLabel="Get My Free Quote"
-      primaryHref="/estimate"
+      primaryHref="/estimate/"
       secondaryLabel="Talk to us"
-      secondaryHref="/contact"
+      secondaryHref="/contact/"
     />
   </main>
   <Footer />

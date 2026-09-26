@@ -7,7 +7,7 @@ import { glob } from 'astro/loaders';
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
   schema: z.object({
-    title: z.string(),
+    title: z.string().trim(),
     // YAML parses unquoted dates (e.g. 2026-06-05) into Date objects, and
     // Keystatic writes them unquoted — normalise back to a YYYY-MM-DD string.
     publishedDate: z.preprocess(

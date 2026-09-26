@@ -1,11 +1,10 @@
 ---
-title: The Tools Australian Small Businesses Are Overpaying For (And the Free
-  Alternatives)
+title: Free Software Alternatives for Australian Small Businesses
 publishedDate: 2026-08-15
 updatedDate: 2026-08-15
-excerpt: A practical audit of the software subscriptions draining Australian SMB
-  budgets, which free alternatives genuinely work, and which ones are false
-  economy that will cost you more than the subscription.
+excerpt: Which software subscriptions have free alternatives that genuinely
+  work for Australian small businesses, and which free options end up costing
+  you more.
 coverImage: /images/posts/overpaying-tools.webp
 draft: false
 ---

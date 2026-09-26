@@ -16,13 +16,13 @@ const itemListSchema = {
     "@type": "ListItem",
     position: idx + 1,
     name: i.name,
-    url: `${siteUrl}/industries/${i.slug}`,
+    url: `${siteUrl}/industries/${i.slug}/`,
   })),
 };
 
 const breadcrumb = [
   { name: "Home", path: "/" },
-  { name: "Industries", path: "/industries" },
+  { name: "Industries", path: "/industries/" },
 ];
 ---
 
@@ -42,9 +42,9 @@ const breadcrumb = [
       title='Built for the way <span class="text-amber">your trade</span> actually works'
       sub="A cafe and a physio clinic do not lose customers the same way. Pick your industry and see what we would build, and what it would cost."
       primaryLabel="Get My Free Quote"
-      primaryHref="/estimate"
+      primaryHref="/estimate/"
       secondaryLabel="See All Services"
-      secondaryHref="/services"
+      secondaryHref="/services/"
     />
 
     <section class="section section-tinted" aria-labelledby="ind-index-heading">
@@ -57,7 +57,7 @@ const breadcrumb = [
 
         <div class="ind-card-grid">
           {INDUSTRIES.map((i) => (
-            <a href={`/industries/${i.slug}`} class="ind-card reveal">
+            <a href={`/industries/${i.slug}/`} class="ind-card reveal">
               <span class="ind-card-ico" aria-hidden="true">
                 <svg width="26" height="26" viewBox="0 0 26 26" fill="none" set:html={i.icon}></svg>
               </span>
@@ -79,9 +79,9 @@ const breadcrumb = [
       heading="We work with plenty of businesses that are not on this page"
       sub="If your trade is not here, it does not mean we cannot help. Tell us what you do and we will tell you straight whether we are a fit."
       primaryLabel="Get My Free Quote"
-      primaryHref="/estimate"
+      primaryHref="/estimate/"
       secondaryLabel="Talk to us"
-      secondaryHref="/contact"
+      secondaryHref="/contact/"
     />
   </main>
   <Footer />

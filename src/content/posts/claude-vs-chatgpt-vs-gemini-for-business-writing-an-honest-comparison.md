@@ -1,9 +1,9 @@
 ---
-title: "Claude vs ChatGPT vs Gemini for Business Writing: An Honest Comparison"
+title: "Claude vs ChatGPT vs Gemini for Business Writing (2026)"
 publishedDate: 2026-08-09
-excerpt: Three AI assistants, three very different strengths for Australian
-  business writing. A practical comparison of output quality, workflow fit,
-  pricing, and privacy, without the hype.
+excerpt: We use all three daily on real client work. An honest comparison of
+  writing quality, workflow fit, pricing in AUD and privacy for Australian
+  businesses.
 coverImage: /images/posts/ai-comparision.webp
 draft: false
 ---

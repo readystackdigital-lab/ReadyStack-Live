@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    industries.ts — single source of truth for the Industries
-   index (/industries) and the per-industry pages
+   index (/industries/) and the per-industry pages
    (/industries/<slug>). Data only, no markup.
 
    Copy rules are enforced by tests/industries.test.ts:
@@ -47,9 +47,9 @@ export const INDUSTRIES: Industry[] = [
     trades: ['plumbers', 'electricians', 'builders', 'carpenters', 'landscapers'],
     cardPromise: 'Plumbers, electricians and builders: stop losing jobs to the calls you cannot take.',
     icon: `<path d="M5 20l7-7" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/><path d="M14.5 4.5a4.5 4.5 0 016 6l-3-1-2-2-1-3z" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)" stroke-linejoin="round"/><path d="M4 21.5l1.5-1.5-1-1L3 20.5a1 1 0 001 1z" stroke="#F59E0B" stroke-width="1.4" stroke-linejoin="round"/><path d="M15 15l6 6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>`,
-    metaTitle: 'Websites & AI Reception for Tradies | ReadyStack',
-    metaDescription: 'Websites and 24/7 AI reception for Australian plumbers, electricians, builders and carpenters. Never miss a job while you are on the tools. From $799.',
-    heroTitle: 'Websites and AI reception for <span class="text-amber">tradies</span>',
+    metaTitle: 'Websites & 24/7 Answering Service for Tradies | ReadyStack',
+    metaDescription: 'Websites and a 24/7 AI receptionist for Australian plumbers, electricians, builders and carpenters. Never miss a job while you are on the tools. From $799.',
+    heroTitle: 'Websites and an AI receptionist for <span class="text-amber">tradies</span>',
     heroSub: 'You cannot answer the phone with your hands full. We build the website that gets you found and the AI receptionist that picks up while you are on the tools.',
     painPoints: [
       { t: 'The phone rings while you are under a sink', d: 'Every missed call is a customer who rings the next name on the list. You find out hours later, and by then the job is gone.', g: 'missed-call' },
@@ -81,6 +81,7 @@ export const INDUSTRIES: Industry[] = [
     ],
     faqs: [
       { q: 'Do I need a website if all my work comes from word of mouth?', a: 'Word of mouth still ends in a search. Someone gets your name from a mate, then looks you up before they ring. A website is what turns that check into a call instead of a second opinion. It is also what Google and AI assistants read when someone asks for a tradie in your area.' },
+      { q: 'Is this the same as an answering service for tradies?', a: 'It covers the same ground and goes further. A message service takes a name and a number. The AI receptionist answers around the clock, knows your trade, your area and your call-out fee, books the job into your calendar and emails you the details the moment the call ends.' },
       { q: 'Can the AI receptionist quote a price?', a: 'It can give the ranges you tell it to give, like a call-out fee or a starting price for common jobs. It will not invent a number for work it has not seen. For anything that needs your eyes, it takes the details and books you in.' },
       { q: 'What happens if I am on site and cannot call back straight away?', a: 'You get the customer name, number, address and what they need, by email, the moment the call ends. Nothing sits in a voicemail box waiting for you. When you do ring back you already know the job.' },
       { q: 'How quickly can I be online?', a: 'A one-page site for a solo trade is usually ready to review inside a week. Larger builds run one to three weeks depending on how fast we get your photos and details.' },
@@ -94,10 +95,10 @@ export const INDUSTRIES: Industry[] = [
     trades: ['physios', 'chiros', 'dentists', 'podiatrists', 'psychologists'],
     cardPromise: 'Physios, chiros and dentists: fill the gaps no-shows leave and give your front desk back to the people standing at it.',
     icon: `<rect x="5" y="4" width="16" height="19" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M10 3.5h6a1 1 0 011 1V7H9V4.5a1 1 0 011-1z" stroke="#F59E0B" stroke-width="1.3" fill="rgba(245,158,11,.08)" stroke-linejoin="round"/><path d="M13 11.5v6.5M9.8 14.8h6.4" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round"/>`,
-    metaTitle: 'AI Reception & Websites for Clinics | ReadyStack',
-    metaDescription: 'A gap left by a no-show cannot be sold twice. AI reception, reminders and after-hours booking for Australian physios, chiros, dentists and psychologists.',
+    metaTitle: 'AI Receptionist for Medical & Health Clinics | ReadyStack',
+    metaDescription: 'A gap left by a no-show cannot be sold twice. An AI receptionist, reminders and after-hours booking for Australian medical, physio and dental clinics.',
     heroTitle: 'Fewer no-shows, and a front desk that is <span class="text-amber">free again</span>',
-    heroSub: 'Your reception is one person, and the phone rings anyway. An agent picks up mid consult, reminders go out the night before, and the site keeps taking bookings long after you have locked up.',
+    heroSub: 'Your reception is one person, and the phone rings anyway. An AI receptionist picks up mid consult, reminders go out the night before, and the site keeps taking bookings long after you have locked up.',
     painPoints: [
       { t: 'The gap where a booking used to be', d: 'A late cancellation on a Thursday afternoon is clinic time you cannot sell twice. Ringing down a waitlist between patients is the job nobody has time for, so the room sits empty and the practitioner does paperwork.', g: 'empty-slot' },
       { t: 'Your receptionist is on hold, not on the desk', d: 'One caller moving an appointment can hold up the front desk while three patients wait to be checked in. Everything that keeps the day running stops for the phone.', g: 'missed-call' },
@@ -120,7 +121,7 @@ export const INDUSTRIES: Industry[] = [
       body: 'A patient in Adelaide gets home from work with a shoulder that has been getting worse since Monday and searches for a physio near her. She lands on your site, reads that you treat shoulders, and asks whether there is anything before the weekend. The agent offers Friday at 7:30am from the times your clinic has open, takes her name and number, asks whether she has been in before, and books her. Your practice manager unlocks the door at seven and the appointment is already in the diary. Nobody rang anybody back.',
     },
     services: [
-      { t: 'An agent that answers while you are with a patient', d: 'It picks up every call, including the ones that land mid consult, and handles the rebookings, the fee questions and the where do I park questions your front desk answers all day.' },
+      { t: 'An AI receptionist that answers while you are with a patient', d: 'It picks up every call, including the ones that land mid consult, and handles the rebookings, the fee questions and the where do I park questions your front desk answers all day.' },
       { t: 'Reminders and waitlist calls that keep the diary full', d: 'A custom agent runs the confirmations your front desk never gets to, gives patients a way to reschedule rather than simply not arrive, and starts working the waitlist the moment a slot frees up.' },
       { t: 'Booking that stays open after hours', d: 'Patients book from your site at any hour, on a phone, without an account and without waiting for someone to be free to answer.' },
       { t: 'A website that reads like a clinic', d: 'Your practitioners and their registrations, the conditions you actually treat, your fees and rebates, and where to park. Built to load fast, because most of your patients arrive on a phone.' },
@@ -235,8 +236,8 @@ export const INDUSTRIES: Industry[] = [
     trades: ['sales agents', 'property managers', 'strata managers'],
     cardPromise: 'Sales agents and property managers: be the one who answers first, including at ten on a Saturday night.',
     icon: `<path d="M3.5 12.4L13 4l9.5 8.4" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 11.6V21a1 1 0 001 1h12a1 1 0 001-1v-9.4" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)" stroke-linejoin="round"/><path d="M10.8 22v-5.4a2.2 2.2 0 014.4 0V22" stroke="#F59E0B" stroke-width="1.4" stroke-linejoin="round"/>`,
-    metaTitle: 'AI Reception for Real Estate Agencies | ReadyStack',
-    metaDescription: 'Appraisals at eleven on a Saturday, maintenance at nine at night: an AI receptionist that answers both, for Australian sales agents and property managers.',
+    metaTitle: 'Real Estate AI Receptionist & Answering Service | ReadyStack',
+    metaDescription: 'Appraisals at eleven on a Saturday, maintenance at nine at night: an AI receptionist and answering service for Australian agents and property managers.',
     heroTitle: 'The agency that answers first wins the <span class="text-amber">listing</span>',
     heroSub: 'Saturday morning is opens, Saturday afternoon is paperwork, and the appraisal enquiry that came in at eleven goes to whoever rings back first. We make sure that is you.',
     painPoints: [
@@ -261,11 +262,12 @@ export const INDUSTRIES: Industry[] = [
       body: 'You are at an open home in Sydney with eleven groups through the door and your phone on silent in your jacket. A vendor two suburbs over, who has just watched the place across the road sell, rings the office number to ask what hers would go for. The agent picks up, takes the address, asks how many bedrooms and whether she has a timeframe, explains how your appraisals work, and books her for Tuesday at 4pm. You read the summary in the car between opens and ring her back already knowing the street.',
     },
     services: [
-      { t: 'An agent that answers when the office cannot', d: 'Nights, weekends and the middle of an open. It answers buyer questions on a listing, takes appraisal enquiries with the address and the timeframe, and logs a maintenance report with the property, the tenant and how urgent it is, then sends each one to the right person.' },
+      { t: 'An AI receptionist that answers when the office cannot', d: 'Nights, weekends and the middle of an open. It answers buyer questions on a listing, takes appraisal enquiries with the address and the timeframe, and logs a maintenance report with the property, the tenant and how urgent it is, then sends each one to the right person.' },
       { t: 'A website that is yours, not the portal', d: 'Your listings, your team and the record of what you have actually sold, so an owner comparing agencies lands on you instead of a portal page that lists your competitors down the side of it.' },
       { t: 'Found on Google and in AI answers', d: 'Suburb by suburb, the areas you genuinely sell in each get a page of their own, a Google Business Profile that is filled in rather than claimed and forgotten, and enough readable detail about the agency that an assistant asked for a property manager in Brisbane has your name to hand over.' },
     ],
     faqs: [
+      { q: 'How is this different from a real estate answering service?', a: 'An answering service takes a message and passes it on. This works like a virtual receptionist who knows the agency: it can talk through a current listing, book an appraisal and log a maintenance job with how urgent it is, at any hour, then send the right person a written summary.' },
       { q: 'What does the agent do with an urgent maintenance call at midnight?', a: 'It takes the property address, the tenant name and number and what has happened, then follows the rule you set. For a burst pipe or no hot water that usually means messaging the property manager on call immediately and telling the tenant who is coming and roughly when. For anything that can wait until Monday it logs the job, and the tenant goes to bed knowing it has been logged instead of wondering.' },
       { q: 'Can it put a price on a property?', a: 'Not a valuation, and you would not want it to. It can repeat the advertised price or range on a current listing because that is already published. For anything else it takes the details and books the appraisal. Putting a number on a home is your job, and it is the whole reason they rang.' },
       { q: 'Head office supplies our website. Can you still help?', a: 'Yes. Plenty of agencies are stuck on a franchise site they are not allowed to change. The agent sits on top of whatever you have, and we can build the pages the corporate template never gives you, like real suburb pages and a property management page that actually sells the service.' },

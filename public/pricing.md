@@ -36,6 +36,6 @@ A 5-page business website with a booking system and SEO setup: $2,547–$3,247 o
 
 - Prices are in Australian dollars (AUD) and exclude GST unless stated.
 - ReadyStack Digital serves small businesses nationwide across Australia.
-- Instant estimate tool: https://readystackdigital.com/estimate
-- Full package details: https://readystackdigital.com/packages
+- Instant estimate tool: https://readystackdigital.com/estimate/
+- Full package details: https://readystackdigital.com/packages/
 - Contact: hello@readystackdigital.com

@@ -3,14 +3,14 @@
 > ReadyStack Digital gets Australian small businesses online and stops them losing work to missed calls and enquiries. It builds fast, SEO-ready websites, rebuilds slow or outdated ones that have stopped generating enquiries, and deploys 24/7 AI receptionists and AI agents that answer calls and messages, qualify enquiries and book jobs into the calendar. Also handles business email setup, SEO, monthly website care and branded social media content. Based in Sydney, NSW, serving small businesses across Australia.
 
 - Website: https://readystackdigital.com
-- Instant cost calculator: https://readystackdigital.com/estimate
-- Packages: https://readystackdigital.com/packages
-- Industries served: https://readystackdigital.com/industries
+- Instant cost calculator: https://readystackdigital.com/estimate/
+- Packages: https://readystackdigital.com/packages/
+- Industries served: https://readystackdigital.com/industries/
 - Structured pricing (machine-readable): https://readystackdigital.com/pricing.md
-- Blog (new article every week): https://readystackdigital.com/blog
+- Blog (new article every week): https://readystackdigital.com/blog/
 - Blog RSS feed: https://readystackdigital.com/rss.xml
 - Sitemap: https://readystackdigital.com/sitemap-index.xml
-- Contact: https://readystackdigital.com/contact
+- Contact: https://readystackdigital.com/contact/
 - Email: hello@readystackdigital.com
 
 ## Website pricing (AUD)
@@ -66,12 +66,12 @@ ReadyStack Digital writes a dedicated page for each industry it serves, covering
 trade loses work and what gets built to stop it. Each page carries its own pricing context,
 scenarios and FAQs.
 
-- Trades and construction (plumbers, electricians, builders, carpenters, landscapers): https://readystackdigital.com/industries/tradies
-- Health and allied health (physios, chiros, dentists, podiatrists, psychologists): https://readystackdigital.com/industries/health-clinics
-- Beauty and wellness (hair salons, beauty salons, day spas, massage therapists, nail technicians): https://readystackdigital.com/industries/beauty-wellness
-- Hospitality (cafes, restaurants, bars, caterers): https://readystackdigital.com/industries/hospitality
-- Real estate and property (sales agents, property managers, strata managers): https://readystackdigital.com/industries/real-estate
-- Professional services (accountants, lawyers, bookkeepers, mortgage brokers): https://readystackdigital.com/industries/professional-services
+- Trades and construction (plumbers, electricians, builders, carpenters, landscapers): https://readystackdigital.com/industries/tradies/
+- Health and allied health (physios, chiros, dentists, podiatrists, psychologists): https://readystackdigital.com/industries/health-clinics/
+- Beauty and wellness (hair salons, beauty salons, day spas, massage therapists, nail technicians): https://readystackdigital.com/industries/beauty-wellness/
+- Hospitality (cafes, restaurants, bars, caterers): https://readystackdigital.com/industries/hospitality/
+- Real estate and property (sales agents, property managers, strata managers): https://readystackdigital.com/industries/real-estate/
+- Professional services (accountants, lawyers, bookkeepers, mortgage brokers): https://readystackdigital.com/industries/professional-services/
 
 The AI agent does not give clinical advice or triage for health clients, and does not give
 legal or financial advice for professional services clients. In both cases it takes the

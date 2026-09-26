@@ -11,12 +11,11 @@ export async function GET(context) {
     description:
       'Practical guides on websites, SEO, business email, security and social content for small businesses in Australia.',
     site: context.site,
-    trailingSlash: false,
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.excerpt,
       pubDate: new Date(post.data.publishedDate),
-      link: `/blog/${post.id}`,
+      link: `/blog/${post.id}/`,
     })),
     customData: '<language>en-au</language>',
   });

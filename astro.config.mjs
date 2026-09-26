@@ -22,8 +22,11 @@ for (const file of fs.readdirSync(POSTS_DIR)) {
 
 const newestPost = [...postDates.values()].sort().pop();
 
+// Legal pages are noindex (LegalLayout), so they stay out of the sitemap.
+const NOINDEX = new Set(['/privacy', '/terms', '/acceptable-use']);
+
 /** @type {Record<string, [number, ChangeFreqEnum]>} */
-// Crawl-budget tiers: conversion pages first, legal boilerplate last.
+// Crawl-budget tiers: conversion pages first.
 const TIERS = {
   '/': [1.0, ChangeFreqEnum.WEEKLY],
   '/estimate': [0.9, ChangeFreqEnum.MONTHLY],
@@ -41,9 +44,6 @@ const TIERS = {
   '/how-it-works': [0.7, ChangeFreqEnum.MONTHLY],
   '/faqs': [0.7, ChangeFreqEnum.MONTHLY],
   '/social': [0.7, ChangeFreqEnum.MONTHLY],
-  '/privacy': [0.2, ChangeFreqEnum.YEARLY],
-  '/terms': [0.2, ChangeFreqEnum.YEARLY],
-  '/acceptable-use': [0.2, ChangeFreqEnum.YEARLY],
 };
 
 // Pages CMS writes "Heading 1" as a Markdown H1, so post bodies arrive with the
@@ -63,15 +63,33 @@ function fixBodyHeadings() {
   };
 }
 
+// CMS posts link to pages as "/contact" or "https://readystackdigital.com/estimate",
+// which Cloudflare Pages 308s to the trailing-slash URL the sitemap and canonical
+// tags use. Point them at that URL directly.
+function canonicalLinks() {
+  /** @param {{ type: string, url?: string, children?: any[] }} node */
+  const walk = (node) => {
+    if (node.type === 'link' && node.url) {
+      node.url = node.url.replace(
+        /^(?:https:\/\/(?:www\.)?readystackdigital\.com)?(\/[\w/-]*[\w-])(?=$|[?#])/,
+        '$1/',
+      );
+    }
+    node.children?.forEach(walk);
+  };
+  return walk;
+}
+
 export default defineConfig({
   site: 'https://readystackdigital.com',
   output: 'static',
   trailingSlash: 'ignore',
   markdown: {
-    remarkPlugins: [fixBodyHeadings],
+    remarkPlugins: [fixBodyHeadings, canonicalLinks],
   },
   integrations: [
     sitemap({
+      filter: (page) => !NOINDEX.has(new URL(page).pathname.replace(/\/$/, '')),
       serialize(item) {
         const route = new URL(item.url).pathname.replace(/\/$/, '') || '/';
 

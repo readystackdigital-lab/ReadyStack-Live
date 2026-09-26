@@ -16,7 +16,7 @@ const {
   title,
   sub,
   primaryLabel = "Get a Quote",
-  primaryHref = "/contact",
+  primaryHref = "/contact/",
   secondaryLabel,
   secondaryHref,
   bookCta = false,
@@ -54,7 +54,7 @@ const {
             <a href={primaryHref} class="btn btn-amber btn-lg">{primaryLabel}</a>
           )}
           {secondaryLabel && (
-            <a href={secondaryHref ?? "/contact"} class="btn btn-page-ghost btn-lg">{secondaryLabel}</a>
+            <a href={secondaryHref ?? "/contact/"} class="btn btn-page-ghost btn-lg">{secondaryLabel}</a>
           )}
         </div>
       )}

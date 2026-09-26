@@ -26,9 +26,9 @@ const siteUrl = "https://readystackdigital.com";
 const blogSchema = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "@id": `${siteUrl}/blog#blog`,
+  "@id": `${siteUrl}/blog/#blog`,
   name: "ReadyStack Digital Blog",
-  url: `${siteUrl}/blog`,
+  url: `${siteUrl}/blog/`,
   description:
     "Practical guides on websites, SEO, business email, AI and security for small businesses in Australia.",
   inLanguage: "en-AU",
@@ -37,7 +37,7 @@ const blogSchema = {
     "@type": "BlogPosting",
     headline: post.data.title,
     description: post.data.excerpt,
-    url: `${siteUrl}/blog/${post.id}`,
+    url: `${siteUrl}/blog/${post.id}/`,
     datePublished: post.data.publishedDate,
     dateModified: post.data.updatedDate ?? post.data.publishedDate,
     ...(post.data.coverImage
@@ -63,9 +63,9 @@ const blogSchema = {
       title='Practical advice for <span class="text-amber">growing your business</span>'
       sub="Plain-English guides on getting online, getting found, and turning more enquiries into paying customers. Written for people who run a business, not a website."
       primaryLabel="Book a Discovery Call"
-      primaryHref="/contact"
+      primaryHref="/contact/"
       secondaryLabel="View Packages"
-      secondaryHref="/packages"
+      secondaryHref="/packages/"
     />
 
     <section class="section" aria-labelledby="blog-heading">
@@ -82,7 +82,7 @@ const blogSchema = {
           <ul class="blog-grid">
             {posts.map((post, i) => (
               <li class={`blog-card reveal ${i % 3 === 1 ? "reveal-delay-1" : i % 3 === 2 ? "reveal-delay-2" : ""}`}>
-                <a class="blog-card-link" href={`/blog/${post.id}`}>
+                <a class="blog-card-link" href={`/blog/${post.id}/`}>
                   {post.data.coverImage && (
                     <div class="blog-card-media">
                       <img src={post.data.coverImage} alt="" loading="lazy" />
@@ -113,7 +113,7 @@ const blogSchema = {
       heading='Ready to put this to <span class="text-amber">work in your business?</span>'
       sub="We'll get you online, get you found, and make sure the enquiries actually reach you."
       primaryLabel="Book a Discovery Call"
-      primaryHref="/contact"
+      primaryHref="/contact/"
     />
   </main>
   <Footer />

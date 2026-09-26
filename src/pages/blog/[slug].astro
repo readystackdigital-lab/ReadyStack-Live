@@ -27,7 +27,7 @@ const fmtDate = (d: string) =>
 
 // SEO: absolute URLs + Article (BlogPosting) structured data
 const siteUrl = "https://readystackdigital.com";
-const postUrl = `${siteUrl}/blog/${post.id}`;
+const postUrl = `${siteUrl}/blog/${post.id}/`;
 // Excerpts double as the meta description, so clip to what Google shows.
 const clip = (s: string, max = 155) =>
   s.length <= max ? s : `${s.slice(0, s.lastIndexOf(" ", max - 1))}…`;
@@ -84,8 +84,8 @@ const pageTitle =
   ogType="article"
   breadcrumb={[
     { name: "Home", path: "/" },
-    { name: "Blog", path: "/blog" },
-    { name: post.data.title, path: `/blog/${post.id}` },
+    { name: "Blog", path: "/blog/" },
+    { name: post.data.title, path: `/blog/${post.id}/` },
   ]}
 >
   <Fragment slot="head">
@@ -104,7 +104,7 @@ const pageTitle =
         <div class="post-hero-grid" aria-hidden="true"></div>
         <div class="container">
           <div class="post-hero-inner reveal">
-            <a class="post-back" href="/blog">
+            <a class="post-back" href="/blog/">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               All articles
             </a>
@@ -137,7 +137,7 @@ const pageTitle =
       heading='Want results like this for <span class="text-amber">your business</span>?'
       sub="Book a free discovery call and we'll map the right website, SEO and content plan for you."
       primaryLabel="Book a Discovery Call"
-      primaryHref="/contact"
+      primaryHref="/contact/"
     />
   </main>
   <Footer />

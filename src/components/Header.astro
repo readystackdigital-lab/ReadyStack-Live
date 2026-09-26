@@ -7,17 +7,17 @@ const path = (Astro.url.pathname.replace(/\/+$/, "") || "/");
 // Services mega-menu. Icons + slugs mirror the cards on /services so the
 // dropdown and the page read as one system.
 const serviceMenu = [
-  { label: "Website Design & Rebuilds", href: "/services#build", blurb: "Fast sites that turn visitors into enquiries",
+  { label: "Website Design & Rebuilds", href: "/services/#build", blurb: "Fast sites that turn visitors into enquiries",
     icon: `<rect x="3" y="5" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M3 9h20M8 22h10M13 19v3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>` },
-  { label: "AI Receptionist & Custom AI Agents", href: "/services#ai", blurb: "Answers every call, automates the repeat work",
+  { label: "AI Receptionist & Custom AI Agents", href: "/services/#ai", blurb: "Answers every call, automates the repeat work",
     icon: `<rect x="4" y="6" width="18" height="13" rx="4" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M9 19l-2 3 5-3" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12.5" r="1.3" fill="#F59E0B"/><circle cx="16" cy="12.5" r="1.3" fill="#F59E0B"/><path d="M13 3v3M11.4 4.2l3.2 1.6M14.6 4.2l-3.2 1.6" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round"/>` },
-  { label: "Get Found on Google and in AI", href: "/services#seo", blurb: "Google, ChatGPT and Perplexity point to you",
+  { label: "Get Found on Google and in AI", href: "/services/#seo", blurb: "Google, ChatGPT and Perplexity point to you",
     icon: `<path d="M4 19V7a2 2 0 012-2h14a2 2 0 012 2v12" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/><path d="M7 15l3-3 3 2 5-6" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 21h20" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>` },
-  { label: "Monthly Website Care", href: "/services#care", blurb: "Updates, backups and uptime, handled",
+  { label: "Monthly Website Care", href: "/services/#care", blurb: "Updates, backups and uptime, handled",
     icon: `<path d="M13 2L3 7v6C3 18.75 7.5 24 13 25.5 18.5 24 23 18.75 23 13V7L13 2z" stroke="#F59E0B" stroke-width="1.4" fill="rgba(245,158,11,.08)"/><path d="M9.5 13l2.5 2.5 4.5-4.5" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>` },
-  { label: "Business Email Setup", href: "/services#email", blurb: "Email at your domain that lands in the inbox",
+  { label: "Business Email Setup", href: "/services/#email", blurb: "Email at your domain that lands in the inbox",
     icon: `<rect x="3" y="6" width="20" height="14" rx="3" stroke="#F59E0B" stroke-width="1.4" fill="none"/><path d="M4 8l9 7 9-7" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>` },
-  { label: "Social Media Content", href: "/services#social", blurb: "Branded posts that keep you visible",
+  { label: "Social Media Content", href: "/services/#social", blurb: "Branded posts that keep you visible",
     icon: `<rect x="3.5" y="3.5" width="19" height="19" rx="5" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="13" cy="13" r="4.2" stroke="#F59E0B" stroke-width="1.4" fill="none"/><circle cx="18.2" cy="7.8" r="1.3" fill="#F59E0B"/>` },
 ];
 
@@ -25,7 +25,7 @@ const serviceMenu = [
 // so the dropdown can never drift from the pages.
 const industryMenu = INDUSTRIES.map((i) => ({
   label: i.navLabel,
-  href: `/industries/${i.slug}`,
+  href: `/industries/${i.slug}/`,
   blurb: i.trades.slice(0, 3).join(", "),
   icon: i.icon,
 }));
@@ -35,14 +35,14 @@ type MegaEntry = { label: string; href: string; blurb: string; icon: string };
 type NavItem = { label: string; href: string; icon: NavIconKey; menu?: MegaEntry[] };
 
 const primaryNav: NavItem[] = [
-  { label: "Services", href: "/services", icon: "services", menu: serviceMenu },
-  { label: "Industries", href: "/industries", icon: "industries", menu: industryMenu },
-  { label: "Pricing", href: "/packages", icon: "pricing" },
-  { label: "How It Works", href: "/how-it-works", icon: "howItWorks" },
-  { label: "FAQs", href: "/faqs", icon: "faqs" },
-  { label: "Contact", href: "/contact", icon: "contact" },
-  { label: "Social", href: "/social", icon: "social" },
-  { label: "Blog", href: "/blog", icon: "blog" },
+  { label: "Services", href: "/services/", icon: "services", menu: serviceMenu },
+  { label: "Industries", href: "/industries/", icon: "industries", menu: industryMenu },
+  { label: "Pricing", href: "/packages/", icon: "pricing" },
+  { label: "How It Works", href: "/how-it-works/", icon: "howItWorks" },
+  { label: "FAQs", href: "/faqs/", icon: "faqs" },
+  { label: "Contact", href: "/contact/", icon: "contact" },
+  { label: "Social", href: "/social/", icon: "social" },
+  { label: "Blog", href: "/blog/", icon: "blog" },
 ];
 // Each link carries its own hue as custom properties; the pill, the icon and
 // the glow all read them, so a destination's colour is set in exactly one place.
@@ -59,8 +59,10 @@ const desktopNav = primaryNav.filter((item) =>
 const tabBarLabels = new Set(["Services", "Industries", "Pricing", "Contact"]);
 const mobileNav = primaryNav.filter((item) => !tabBarLabels.has(item.label));
 
-const isActive = (href: string) =>
-  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+const isActive = (href: string) => {
+  const h = href.replace(/\/+$/, "") || "/";
+  return h === "/" ? path === "/" : path === h || path.startsWith(h + "/");
+};
 ---
 
 <header id="site-header">
@@ -116,7 +118,7 @@ const isActive = (href: string) =>
                     <a href={item.href} class="mega-all">
                       {item.label === "Services" ? "See all services" : "See all industries"}
                     </a>
-                    <a href="/estimate" class="mega-cta">Get a Quote</a>
+                    <a href="/estimate/" class="mega-cta">Get a Quote</a>
                   </div>
                 </div>
               </div>
@@ -127,7 +129,7 @@ const isActive = (href: string) =>
 
       <div class="nav-actions">
         <!-- Persistent primary CTA (desktop) -->
-        <a href="/estimate" class="btn btn-amber nav-cta">Get a Quote</a>
+        <a href="/estimate/" class="btn btn-amber nav-cta">Get a Quote</a>
 
         <button type="button" class="cart-open" data-cart-open aria-label="Open your quote cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.2h8.5a1.5 1.5 0 0 0 1.5-1.1L21 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20.5" r="1.4" fill="currentColor"/><circle cx="17" cy="20.5" r="1.4" fill="currentColor"/></svg>
@@ -177,7 +179,7 @@ const isActive = (href: string) =>
           ))}
         </ul>
       </nav>
-      <a href="/estimate" class="btn btn-amber btn-full">Get a Quote</a>
+      <a href="/estimate/" class="btn btn-amber btn-full">Get a Quote</a>
     </div>
   </div>
 </header>

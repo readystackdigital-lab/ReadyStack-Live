@@ -33,28 +33,30 @@ const browse: Tab[] = [
     icon: NAV_ICONS.home.paths,
   },
   {
-    label: "Services", href: "/services",
+    label: "Services", href: "/services/",
     icon: NAV_ICONS.services.paths,
   },
   {
-    label: "Industries", href: "/industries",
+    label: "Industries", href: "/industries/",
     icon: NAV_ICONS.industries.paths,
   },
   {
-    label: "Pricing", href: "/packages",
+    label: "Pricing", href: "/packages/",
     icon: NAV_ICONS.pricing.paths,
   },
 ];
 
 const reach: Tab[] = [
   {
-    label: "Contact", href: "/contact",
+    label: "Contact", href: "/contact/",
     icon: NAV_ICONS.contact.paths,
   },
 ];
 
-const isActive = (href: string) =>
-  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+const isActive = (href: string) => {
+  const h = href.replace(/\/+$/, "") || "/";
+  return h === "/" ? path === "/" : path === h || path.startsWith(h + "/");
+};
 ---
 
 <nav id="mobile-tabs" aria-label="Primary mobile navigation">
